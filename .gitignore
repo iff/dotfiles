@@ -1,0 +1,7 @@
+*.db
+*.lock
+*.pyc
+tags
+tags-ja
+yank.txt_v2.txt
+.netrwhist

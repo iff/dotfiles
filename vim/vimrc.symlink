@@ -1,0 +1,470 @@
+" .vimrc
+" Author: Yves Ineichen
+
+" first the disabled features due to security concerns
+set modelines=0
+"let g:secure_modelines_verbose=0    " securemodelines vimscript
+"let g:secure_modelines_modelines=15 " 15 available modelines
+
+" ---------------------------------------------------------------------------
+" Vundle
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#rc()
+
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'airblade/vim-gitgutter'
+Bundle 'chriskempson/base16-vim'
+Bundle 'digitaltoad/vim-jade'
+Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
+Bundle 'groenewege/vim-less'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'leafgarland/typescript-vim'
+Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'rodjek/vim-puppet'
+Bundle 'scrooloose/syntastic'
+Bundle 'sjl/gundo.vim'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'wavded/vim-stylus'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'int3/vim-extradite'
+Bundle 'sjl/splice.vim'
+Bundle 'vim-scripts/YankRing.vim'
+Bundle 'jpalardy/vim-slime'
+Bundle 'scrooloose/nerdcommenter'
+
+"Bundle 'ervandew/supertab'
+"narrow
+"nerdtree
+"L9
+
+
+" ---------------------------------------------------------------------------
+" basic options
+
+filetype plugin indent on
+set autoindent smartindent    " auto/smart indent
+set expandtab                 " expand tabs to spaces
+set smarttab                  " tab and backspace are smart
+set tabstop=4                 " 4 spaces
+set shiftwidth=4              " 4 spaces
+set scrolloff=3               " keep at least 3 lines above/below
+set sidescrolloff=5           " keep at least 5 lines left/right
+set backspace=indent,eol,start
+set tw=78                     " default textwidth is a max of 78
+set list                      " enable custom list chars
+set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
+set fillchars=diff:⣿,vert:│
+set showbreak=↪               " show breaks
+set colorcolumn=+1
+"set formatprg=par\ -w80rq
+"set formatoptions+=t
+
+set encoding=utf-8
+set hidden
+"set nonumber
+"set norelativenumber
+set undofile
+set undoreload=10000
+set shell=/bin/zsh
+set matchtime=3
+set splitbelow
+set splitright
+set autowrite
+set shiftround
+set title
+set spellfile=~/.vim/custom-dictionary.utf-8.add
+
+set ruler                     " show the line number on the bar
+set more                      " use more prompt
+set autoread                  " watch for file changes
+set number                    " line numbers
+set nohidden                  " close the buffer when I close a tab
+set noautowrite               " don't automagically write on :next
+set lazyredraw                " don't redraw when don't have to
+set showmode                  " show mode on last line
+set showcmd                   " Show us the command we're typing
+set nocompatible              " vim, not vi
+set showfulltag               " show full completion tags
+set noerrorbells              " no error bells please
+set linebreak
+set cmdheight=2               " command line two lines high
+set undolevels=1000           " 1000 undos
+set updatecount=100           " switch every 100 chars
+"set complete=.,w,b,u,U,t,i,d  " do lots of scanning on tab completion
+set ttyfast                   " we have a fast terminal
+set foldmethod=syntax         " fold on syntax automagically, always
+set foldcolumn=3              " 3 lines of column for fold showing, always
+set whichwrap+=<,>,h,l        " backspaces and cursor keys wrap to
+set magic                     " Enable the "magic"
+set visualbell t_vb=          " Disable ALL bells
+set cursorline                " show the cursor line
+set matchpairs+=<:>           " add < and > to match pairs
+set t_Co=256
+set virtualedit+=block
+set laststatus=2
+
+" Time out on key codes but not mappings.
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
+
+let mapleader = ","
+let maplocalleader=','        " all my macros start with ,
+
+
+" ---------------------------------------------------------------------------
+"  configurations for vim or gvim only
+
+syntax on
+if !has("gui_running")
+    set background=dark
+    colorscheme base16-ocean
+    let g:AutoClosePreservDotReg=0
+else
+    colorscheme molokai
+
+    set guifont=Deja\ Vu\ Sans\ Mono\ 9.
+
+    set guioptions-=T        " no toolbar
+    set guioptions-=m        " no menubar
+    set guioptions-=l        " no left scrollbar
+    set guioptions-=L        " no left scrollbar
+    set guioptions-=r        " no right scrollbar
+    set guioptions-=R        " no right scrollbar
+    set clipboard=unnamed
+endif
+
+
+" ---------------------------------------------------------------------------
+" Settings for yankring
+
+let g:yankring_history_dir="~/.vim/"
+let g:yankring_history_file=".yank.txt"
+
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+    omap <expr> L YRMapsExpression("", "$")
+    omap <expr> H YRMapsExpression("", "^")
+endfunction
+
+
+" ---------------------------------------------------------------------------
+" Bindings for Narrow/Widen
+
+"map <LocalLeader>N :Narrow<cr>
+"map <LocalLeader>W :Widen<cr>
+
+
+" ---------------------------------------------------------------------------
+"  searching
+
+" Use sane regexes.
+nnoremap / /\v
+vnoremap / /\v
+
+set incsearch                 " incremental search
+set ignorecase                " search ignoring case
+set smartcase                 " Ignore case when searching lowercase
+set hlsearch                  " highlight the search
+set showmatch                 " show matching bracket
+"set diffopt=filler,iwhite     " ignore all whitespace and sync
+set gdefault                  " automatically use /g with search & replace
+
+" Clear matches
+noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+
+" Open a Quickfix window for the last search.
+nnoremap <silent> <leader>? :execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>
+
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.luac                           " Lua byte code
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.orig                           " Merge resolution files
+" ---------------------------------------------------------------------------
+
+
+" ---------------------------------------------------------------------------
+"  mouse stuff
+
+"set mouse=a                  " mouse support in all modes
+set mousehide                 " hide the mouse when typing
+" this makes the mouse paste a block of text without formatting it
+" (good for code)
+map <MouseMiddle> <esc>"*p
+" ---------------------------------------------------------------------------
+
+" ---------------------------------------------------------------------------
+"  backup options
+set nobackup
+set nowritebackup
+set noswapfile
+
+
+" ---------------------------------------------------------------------------
+" spelling...
+
+if v:version >= 700
+
+  setlocal spell spelllang=en_us
+  nmap <LocalLeader>ss :set spell!<CR>
+
+endif
+" default to no spelling
+set nospell
+set dictionary=/usr/share/dict/words
+
+
+" ---------------------------------------------------------------------------
+" some useful mappings
+
+" toggle list mode
+nmap <LocalLeader>tl :set list!<cr>
+" toggle paste mode
+nmap <LocalLeader>pp :set paste!<cr>
+" change directory to that of current file
+nmap <LocalLeader>cd :cd%:p:h<cr>
+" change local directory to that of current file
+nmap <LocalLeader>lcd :lcd%:p:h<cr>
+" correct type-o's on exit
+nmap q: :q
+" save and build
+nmap <LocalLeader>wm  :w<cr>:make<cr>
+" ,tt will toggle taglist on and off
+nmap <LocalLeader>tt :Tlist<cr>
+" When I'm pretty sure that the first suggestion is correct
+map <LocalLeader>r 1z=
+" q: sucks
+nmap q: :q
+" If I forgot to sudo vim a file, do that with :w!!
+cmap w!! %!sudo tee > /dev/null %
+" Fix the # at the start of the line
+inoremap # X<BS>#
+" When I forget I'm in Insert mode, how often do you type 'jj' anyway?:
+imap jj <Esc>
+
+nnoremap <leader>q gqip
+nnoremap <leader>v V']
+
+" undo tree (gundo)
+nnoremap <F5> :GundoToggle<CR>
+
+" run pdflatex on currently open file
+nmap <LocalLeader>pl :!pdflatex %<cr><cr>
+
+" vimrc editing. Automatically reload the file after saving it.
+" Because there is no point in editing the file and *not* reloading
+" it, right?
+nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
+autocmd! bufwritepost .vimrc source %
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+" <m-j> and <m-k> to drag lines in any mode
+noremap ∆ :m+<CR>
+noremap ˚ :m-2<CR>
+inoremap ∆ <Esc>:m+<CR>
+inoremap ˚ <Esc>:m-2<CR>
+vnoremap ∆ :m'>+<CR>gv
+vnoremap ˚ :m-2<CR>gv
+
+
+" ---------------------------------------------------------------------------
+" Syntastic
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['html'] }
+let g:syntastic_check_on_open=1
+
+
+" ---------------------------------------------------------------------------
+" Gist
+let g:gist_post_private = 1
+
+
+" ---------------------------------------------------------------------------
+" Ctrl-P
+
+let g:ctrlp_dont_split = 'NERD_tree_2'
+let g:ctrlp_jump_to_buffer = 0
+let g:ctrlp_map = '<leader>,'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_match_window_reversed = 1
+let g:ctrlp_max_height = 20
+let g:ctrlp_extensions = ['tag']
+let g:ctrlp_open_new_file = 'v'
+
+let g:ctrlp_prompt_mappings = {
+\ 'PrtSelectMove("j")':   ['<c-j>', '<down>', '<s-tab>'],
+\ 'PrtSelectMove("k")':   ['<c-k>', '<up>', '<tab>'],
+\ 'PrtHistory(-1)':       ['<c-n>'],
+\ 'PrtHistory(1)':        ['<c-p>'],
+\ 'ToggleFocus()':        ['<c-tab>'],
+\ }
+
+let ctrlp_filter_greps = "".
+    \ "egrep -iv '\\.(" .
+    \ "jar|class|swp|swo|log|so|o|pyc|jpe?g|png|gif|mo|po" .
+    \ ")$' | " .
+    \ "egrep -v '^(\\./)?(" .
+    \ "deploy/|lib/|classes/|libs/|deploy/vendor/|.git/|.hg/|.svn/|.*migrations/" .
+    \ ")'"
+
+let my_ctrlp_user_command = "" .
+    \ "find %s '(' -type f -or -type l ')' -maxdepth 15 -not -path '*/\\.*/*' | " .
+    \ ctrlp_filter_greps
+
+let my_ctrlp_git_command = "" .
+    \ "cd %s && git ls-files | " .
+    \ ctrlp_filter_greps
+
+let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
+
+nnoremap <leader>. :CtrlPTag<cr>
+" ---------------------------------------------------------------------------
+
+
+" ---------------------------------------------------------------------------
+" folding
+set foldlevelstart=0
+
+" Space to toggle folds.
+nnoremap <Space> za
+vnoremap <Space> za
+nmap <LocalLeader>fo  :%foldopen!<cr>
+nmap <LocalLeader>fc  :%foldclose!<cr>
+
+"nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+
+" Make zO recursively open whatever top level fold we're in, no matter where the
+" cursor happens to be.
+nnoremap zO zCzO
+
+function! MyFoldText() " {{{
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction " }}}
+set foldtext=MyFoldText()
+
+
+" ---------------------------------------------------------------------------
+" Powerline
+
+let g:Powerline_symbols = 'fancy'
+let g:Powerline_cache_enabled = 1
+
+
+" ---------------------------------------------------------------------------
+" NERDTree
+
+noremap  <F2> :NERDTreeToggle<cr>
+inoremap <F2> <esc>:NERDTreeToggle<cr>
+
+augroup ps_nerdtree
+    au!
+
+    au Filetype nerdtree setlocal nolist
+    au Filetype nerdtree nnoremap <buffer> K :q<cr>
+augroup END
+
+let NERDTreeHighlightCursorline = 1
+let NERDTreeIgnore = ['.vim$', '\~$', '.*\.pyc$',
+                    \ 'xapian_index', '.*.pid',
+                    \ '.*\.o$', 'db.db', 'tags.bak']
+
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+
+" ---------------------------------------------------------------------------
+" Fugitive
+
+nnoremap <leader>gd :Gdiff<cr>
+nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gw :Gwrite<cr>
+nnoremap <leader>ga :Gadd<cr>
+nnoremap <leader>gb :Gblame<cr>
+nnoremap <leader>gco :Gcheckout<cr>
+nnoremap <leader>gci :Gcommit<cr>
+nnoremap <leader>gm :Gmove<cr>
+nnoremap <leader>gr :Gremove<cr>
+"nnoremap <leader>gl :Shell git l19<cr>:wincmd \|<cr>
+
+augroup ft_fugitive
+    au!
+
+    au BufNewFile,BufRead .git/index setlocal nolist
+augroup END
+
+" "Hub"
+nnoremap <leader>H :Gbrowse<cr>
+vnoremap <leader>H :Gbrowse<cr>
+
+
+" ---------------------------------------------------------------------------
+" tabs
+map <LocalLeader>tc :tabnew %<cr>    " create a new tab
+map <LocalLeader>td :tabclose<cr>    " close a tab
+map <LocalLeader>tn :tabnext<cr>     " next tab
+map <silent><A-Right> :tabnext<cr>   " next tab
+map <LocalLeader>tp :tabprev<cr>     " previous tab
+map <silent><A-Left> :tabprev<cr>    " previous tab
+map <LocalLeader>tm :tabmove         " move a tab to a new location
+
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+" strip all whitespaces at save
+autocmd BufWritePre * :%s/\s\+$//e
+
+" improve editing TeX files
+autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
+
+au BufNewFile,BufRead *.md setlocal filetype=markdown
+au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
+au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
+au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
+
+
+" ---------------------------------------------------------------------------
+" Functions
+
+" Compile current coffee script buffer to javascript and open in new vsplit
+function! CoffeeToJS()
+    let res=expand('%')
+    exe 'vnew | r !coffee -p ' . res
+    set ft=javascript
+endfunc
+map <LocalLeader>cj :call CoffeeToJS()<cr>
+

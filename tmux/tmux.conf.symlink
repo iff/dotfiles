@@ -1,0 +1,46 @@
+unbind C-b
+set -g prefix `
+
+# Set term color properly
+set -g default-terminal "screen-256color"
+
+# set status bar to utf8
+set -g status-utf8 on
+
+# Solarized Dark
+set -g status-bg black
+set -g status-fg blue
+set-window-option -g window-status-current-fg white
+
+# Solarized Light
+# set -g status-bg white
+# set -g status-fg brightyellow
+# set-window-option -g window-status-current-fg black
+
+# hostname color
+set -g status-left '#[fg=green]#H'
+
+# right status and color
+set -g status-right '#[fg=yellow]%A %v %l:%M %p'
+
+# confirm before killing a window or the server
+bind-key k confirm kill-window
+bind-key K confirm kill-server
+
+# scrollback buffer n lines
+set -g history-limit 5000
+
+# quick make
+bind '~' command-prompt "split-window -h 'cd %%; exec make | vim -'"
+
+# Fix tmux copy bug
+#set-option -g default-command "reattach-to-user-namespace -l $(basename $SHELL)"
+
+# Reload the file with Prefix r.
+bind r source-file ~/.tmux.conf
+
+# Load local configuration
+source-file ~/.tmux.conf.local
+
+# Load "vim-ish" configuration
+source-file ~/.tmux.conf.vim

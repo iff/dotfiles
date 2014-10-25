@@ -115,6 +115,21 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 let mapleader = ","
 let maplocalleader=','        " all my macros start with ,
 
+" strip all whitespaces at save
+autocmd BufWritePre * :%s/\s\+$//e
+
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+" improve editing TeX files
+autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
+
+" Use <localleader>1/2/3 to add headings.
+au BufNewFile,BufRead *.md setlocal filetype=markdown
+au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
+au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
+au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
+
 
 " ---------------------------------------------------------------------------
 "  configurations for vim or gvim only
@@ -428,12 +443,6 @@ map <silent><A-Right> :tabnext<cr>   " next tab
 map <LocalLeader>tp :tabprev<cr>     " previous tab
 map <silent><A-Left> :tabprev<cr>    " previous tab
 map <LocalLeader>tm :tabmove         " move a tab to a new location
-
-" strip all whitespaces at save
-autocmd BufWritePre * :%s/\s\+$//e
-
-" improve editing TeX files
-autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
 
 " ---------------------------------------------------------------------------
 " Functions

@@ -24,9 +24,6 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'leafgarland/typescript-vim'
 Bundle 'mattn/gist-vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'rodjek/vim-puppet'
-Bundle 'scrooloose/syntastic'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
@@ -69,7 +66,7 @@ set encoding=utf-8
 set hidden
 "set nonumber
 "set norelativenumber
-set undofile
+"set undofile
 set undoreload=10000
 set shell=/bin/zsh
 set matchtime=3
@@ -98,7 +95,6 @@ set undolevels=1000           " 1000 undos
 set updatecount=100           " switch every 100 chars
 set ttyfast                   " we have a fast terminal
 set foldmethod=syntax         " fold on syntax automagically, always
-set foldcolumn=3              " 3 lines of column for fold showing, always
 set whichwrap+=<,>,h,l        " backspaces and cursor keys wrap to
 set magic                     " Enable the "magic"
 set visualbell t_vb=          " Disable ALL bells
@@ -289,14 +285,6 @@ vnoremap ˚ :m-2<CR>gv
 
 
 " ---------------------------------------------------------------------------
-" Syntastic
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['html'] }
-let g:syntastic_check_on_open=1
-
-
-" ---------------------------------------------------------------------------
 " Gist
 let g:gist_post_private = 1
 
@@ -441,21 +429,11 @@ map <LocalLeader>tp :tabprev<cr>     " previous tab
 map <silent><A-Left> :tabprev<cr>    " previous tab
 map <LocalLeader>tm :tabmove         " move a tab to a new location
 
-
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
-
 " strip all whitespaces at save
 autocmd BufWritePre * :%s/\s\+$//e
 
 " improve editing TeX files
 autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
-
-au BufNewFile,BufRead *.md setlocal filetype=markdown
-au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
-au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
-au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
-
 
 " ---------------------------------------------------------------------------
 " Functions

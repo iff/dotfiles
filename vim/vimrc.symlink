@@ -35,6 +35,8 @@ Bundle 'vim-scripts/YankRing.vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
+Bundle 'ryanss/vim-hackernews'
+Bundle 'derekwyatt/vim-scala'
 
 "narrow
 "nerdtree

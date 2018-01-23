@@ -37,6 +37,7 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
 Bundle 'ryanss/vim-hackernews'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'easymotion/vim-easymotion'
 
 "narrow
 "nerdtree

@@ -7,10 +7,3 @@ alias 'ls-l=ls -l'
 alias 'md=mkdir -p'
 alias '..=cd ..'
 alias '...=cd ../..'
-
-# ssh
-alias 'gow=ssh -YCA root@iff.io'
-
-# mpicxx wrappers
-alias 'mpicxx-clang=OMPI_CXX=clang++ mpicxx'
-alias 'mpicxx-gcc=OMPI_CXX=g++ mpicxx'

@@ -16,7 +16,6 @@ call vundle#rc()
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chriskempson/base16-vim'
-Bundle 'digitaltoad/vim-jade'
 Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'groenewege/vim-less'
@@ -28,16 +27,15 @@ Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-surround'
 Bundle 'wavded/vim-stylus'
-Bundle 'Valloric/YouCompleteMe'
 Bundle 'int3/vim-extradite'
 Bundle 'sjl/splice.vim'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'jpalardy/vim-slime'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
-Bundle 'ryanss/vim-hackernews'
-Bundle 'derekwyatt/vim-scala'
 Bundle 'easymotion/vim-easymotion'
+Bundle 'majutsushi/tagbar'
+Bundle 'davidhalter/jedi-vim'
 
 "narrow
 "nerdtree
@@ -171,10 +169,9 @@ endfunction
 
 
 " ---------------------------------------------------------------------------
-" Bindings for Narrow/Widen
+" Settings for jedi
 
-"map <LocalLeader>N :Narrow<cr>
-"map <LocalLeader>W :Widen<cr>
+let g:jedi#use_splits_not_buffers = "right"
 
 
 " ---------------------------------------------------------------------------
@@ -312,7 +309,7 @@ let g:gist_post_private = 1
 
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_jump_to_buffer = 0
-let g:ctrlp_map = '<leader>,'
+let g:ctrlp_map = '<leader>.'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_max_height = 20
@@ -345,7 +342,7 @@ let my_ctrlp_git_command = "" .
 
 let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
 
-nnoremap <leader>. :CtrlPTag<cr>
+"nnoremap <leader>. :CtrlPTag<cr>
 " ---------------------------------------------------------------------------
 
 

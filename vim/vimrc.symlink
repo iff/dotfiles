@@ -305,6 +305,31 @@ let g:gist_post_private = 1
 
 
 " ---------------------------------------------------------------------------
+" Tagbar
+
+nmap <leader>\ :TagbarToggle<CR>
+
+
+" ---------------------------------------------------------------------------
+" Settings for yankring
+
+let g:yankring_history_dir="~/.vim/"
+let g:yankring_history_file=".yank.txt"
+
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+    omap <expr> L YRMapsExpression("", "$")
+    omap <expr> H YRMapsExpression("", "^")
+endfunction
+
+
+" ---------------------------------------------------------------------------
+" Settings for jedi
+
+let g:jedi#use_splits_not_buffers = "right"
+
+
+" ---------------------------------------------------------------------------
 " Ctrl-P
 
 let g:ctrlp_dont_split = 'NERD_tree_2'

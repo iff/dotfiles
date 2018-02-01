@@ -162,6 +162,7 @@ endif
 " Settings for Easymotion
 
 nmap s <Plug>(easymotion-overwin-f)
+map <Leader>' <Plug>(easymotion-prefix)
 
 
 " ---------------------------------------------------------------------------

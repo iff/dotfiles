@@ -35,8 +35,9 @@ Bundle 'easymotion/vim-easymotion'
 Bundle 'majutsushi/tagbar'
 Bundle 'davidhalter/jedi-vim'
 
-"narrow
-"L9
+"TODO: try
+"Bundle 'vim-syntastic/syntastic'
+"Bundle 'FooSoft/vim-argwrap'
 
 
 " ---------------------------------------------------------------------------
@@ -354,7 +355,7 @@ let g:jedi#use_splits_not_buffers = "right"
 
 let g:ctrlp_dont_split = 'NERD_tree_2'
 let g:ctrlp_jump_to_buffer = 0
-let g:ctrlp_map = '<leader>.'
+let g:ctrlp_map = '<leader>,'
 let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_match_window_reversed = 1
 let g:ctrlp_max_height = 20

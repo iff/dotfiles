@@ -38,6 +38,13 @@ setopt complete_aliases
 
 bindkey '^R' history-incremental-search-backward
 
+# use the directory stack for normal cd commands
+setopt auto_pushd
+# invert +/- for the directory stack (so "cd -2" jumps to the second last dir)
+setopt pushd_minus
+# ignore duplicates on the directory stack
+setopt pushd_ignore_dups
+
 # try vim mode for zle
 bindkey -v
 export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)

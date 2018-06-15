@@ -7,13 +7,14 @@ import XMonad.Layout.NoBorders
 import XMonad.Layout.GridVariants as GV
 import XMonad.Util.CustomKeys
 import XMonad.Util.Scratchpad
+import XMonad.Actions.CycleWS
 
 main = xmonad defaultConfig
     { modMask = mod4Mask
     , handleEventHook = fullscreenEventHook
     , terminal = "urxvt"
     , normalBorderColor = "gray30"
-    , focusedBorderColor = "#dc9656"
+    , focusedBorderColor = "#0198E1"
     , borderWidth = 1
     , manageHook = myManageHook <+> manageScratchPad
     , layoutHook = myLayoutHook
@@ -34,6 +35,7 @@ main = xmonad defaultConfig
             , ((modm .|. shiftMask,   xK_minus), sendMessage $ GV.IncMasterCols (-1))
             , ((modm .|. controlMask, xK_equal), sendMessage $ GV.IncMasterRows 1)
             , ((modm .|. controlMask, xK_minus), sendMessage $ GV.IncMasterRows (-1))
+            , ((modm .|. controlMask, xK_r), swapNextScreen) -- swap screens
             , ((mod4Mask, xK_f), scratchPad)
             ]
             where
@@ -48,8 +50,7 @@ myLayoutHook = smartBorders $ avoidStruts $ tiled ||| Mirror tiled ||| columns |
 
 -- find class name with xprop | grep CLASS
 myManageHook = composeAll
-        [ floatC "MPlayer"
-        , floatC "Gimp"
+        [ floatC "Gimp"
         ]
     where moveToC c w = className =? c --> doF (W.shift w)
           moveToT t w = title     =? t --> doF (W.shift w)

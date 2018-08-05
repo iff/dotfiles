@@ -1,38 +1,14 @@
-autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
+autoload -Uz colors && colors
+autoload -Uz vcs_info
 
-git_branch() {
-  echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
-}
-
-git_dirty() {
-  st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
-  if [[ $st == "" ]]
-  then
-    echo ""
-  else
-    if [[ $st == "nothing to commit (working directory clean)" ]]
-    then
-      echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
-    else
-      echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
-    fi
-  fi
-}
-
-git_prompt_info () {
- ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
-# echo "(%{\e[0;33m%}${ref#refs/heads/}%{\e[0m%})"
- echo "${ref#refs/heads/}"
-}
-
-unpushed () {
-  /usr/bin/git cherry -v @{upstream} 2>/dev/null
-}
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
 
 need_push () {
-  if [[ $(unpushed) == "" ]]
+  up=$(/usr/bin/git cherry -v @{upstream} 2>/dev/null) || return
+  if [[ $up == "" ]]
   then
     echo " "
   else
@@ -40,48 +16,22 @@ need_push () {
   fi
 }
 
-sec_up() {
-  if $(which /usr/lib/update-notifier/apt-check &> /dev/null)
-  then
-    #num=$(/usr/lib/update-notifier/apt-check 2>&1 | cut -d ';' -f 2)
-    #if [ $num != 0 ]
-    #then
-    #  echo "$num"
-    #else
-    #  echo ""
-    #fi
-    echo ""
-  else
-    echo ""
-  fi
-}
-
-bat_status() {
-  s=""
-  charging=$(cat /sys/class/power_supply/AC/online 2>&1)
-  if [ $charging != 0 ]
-  then
-    s="⚡"
-  fi
-  if [ -d /sys/class/power_supply/BAT0 ]
-  then
-    percent=$(cat /sys/class/power_supply/BAT0/capacity 2>&1)
-    echo "[${s}${percent}%%]"
-  else
-    echo ""
-  fi
-}
-
 directory_name(){
   echo "%{$fg_bold[cyan]%}%1/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n%{$fg_bold[yellow]%}%n%{$reset_color%} in $(directory_name) $(git_dirty)$(need_push)\n› '
-set_prompt () {
-  export RPROMPT="%{$fg_bold[red]%}$(sec_up) $(bat_status) %{$fg_bold[cyan]%}%T%{$reset_color%}"
-}
+export PROMPT=$'\n%{$fg_bold[yellow]%}%n%{$reset_color%} in $(directory_name) ${vcs_info_msg_0_}$(need_push)\n› '
 
 precmd() {
   title "zsh" "%m" "%55<...<%~"
+
+  if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+    zstyle ':vcs_info:git*' formats 'on %F{green}%b%f%u%c'
+  } else {
+    zstyle ':vcs_info:git*' formats 'on %F{red}%b%f%u%c'
+  }
+
+  vcs_info
+
   set_prompt
 }

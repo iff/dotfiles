@@ -24,6 +24,7 @@ Bundle 'leafgarland/typescript-vim'
 Bundle 'mattn/gist-vim'
 Bundle 'sjl/gundo.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-surround'
 Bundle 'int3/vim-extradite'
 Bundle 'sjl/splice.vim'
@@ -34,25 +35,23 @@ Bundle 'ervandew/supertab'
 Bundle 'easymotion/vim-easymotion'
 Bundle 'majutsushi/tagbar'
 Bundle 'davidhalter/jedi-vim'
+Bundle 'vim-syntastic/syntastic'
 
 "TODO: try
-"Bundle 'vim-syntastic/syntastic'
 "Bundle 'FooSoft/vim-argwrap'
-
 
 " ---------------------------------------------------------------------------
 " basic options
 
 filetype plugin indent on
 set autoindent smartindent    " auto/smart indent
-set expandtab                 " expand tabs to spaces
-set smarttab                  " tab and backspace are smart
-set tabstop=4                 " 4 spaces
-set shiftwidth=4              " 4 spaces
+set tabstop=4
+set softtabstop=4
+set noexpandtab
+set copyindent
 set scrolloff=3               " keep at least 3 lines above/below
 set sidescrolloff=5           " keep at least 5 lines left/right
 set backspace=indent,eol,start
-set tw=78                     " default textwidth is a max of 78
 set list                      " enable custom list chars
 set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
 set fillchars=diff:⣿,vert:│
@@ -62,8 +61,9 @@ let &showbreak = '  ↪'           " show breaks
 set nowrap
 
 set colorcolumn=+1
+"set tw=78                     " default textwidth is a max of 78
 "set formatprg=par\ -w80rq
-"set formatoptions+=t
+set formatoptions-=t
 
 set encoding=utf-8
 set hidden
@@ -84,7 +84,6 @@ set ruler                     " show the line number on the bar
 set more                      " use more prompt
 set autoread                  " watch for file changes
 set nohidden                  " close the buffer when I close a tab
-set noautowrite               " don't automagically write on :next
 set lazyredraw                " don't redraw when don't have to
 set showmode                  " show mode on last line
 set showcmd                   " Show us the command we're typing
@@ -96,7 +95,8 @@ set cmdheight=2               " command line two lines high
 set undolevels=1000           " 1000 undos
 set updatecount=100           " switch every 100 chars
 set ttyfast                   " we have a fast terminal
-set foldmethod=syntax         " fold on syntax automagically, always
+"set foldmethod=syntax         " fold on syntax automagically, always
+set foldmethod=manual         " only manual folding
 set whichwrap+=<,>,h,l        " backspaces and cursor keys wrap to
 set magic                     " Enable the "magic"
 set visualbell t_vb=          " Disable ALL bells
@@ -129,6 +129,8 @@ au FocusLost * :wa
 
 " improve editing TeX files
 autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
+" less spacy for Python files
+autocmd Bufread,BufNewFile  *.py setlocal tabstop=2 shiftwidth=2
 
 " Use <localleader>1/2/3 to add headings.
 au BufNewFile,BufRead *.md setlocal filetype=markdown
@@ -136,28 +138,10 @@ au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
 au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
 au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
 
-
-" ---------------------------------------------------------------------------
-"  configurations for vim or gvim only
-
 syntax on
-if !has("gui_running")
-    set background=dark
-    colorscheme base16-ocean
-    let g:AutoClosePreservDotReg=0
-else
-    colorscheme molokai
-
-    set guifont=Deja\ Vu\ Sans\ Mono\ 9.
-
-    set guioptions-=T        " no toolbar
-    set guioptions-=m        " no menubar
-    set guioptions-=l        " no left scrollbar
-    set guioptions-=L        " no left scrollbar
-    set guioptions-=r        " no right scrollbar
-    set guioptions-=R        " no right scrollbar
-    set clipboard=unnamed
-endif
+set background=dark
+colorscheme base16-ocean
+let g:AutoClosePreservDotReg=0
 
 
 " ---------------------------------------------------------------------------
@@ -212,7 +196,6 @@ set ignorecase                " search ignoring case
 set smartcase                 " Ignore case when searching lowercase
 set hlsearch                  " highlight the search
 set showmatch                 " show matching bracket
-"set diffopt=filler,iwhite     " ignore all whitespace and sync
 set gdefault                  " automatically use /g with search & replace
 
 " Clear matches
@@ -233,7 +216,6 @@ set wildignore+=*.DS_Store                       " OSX bullshit
 set wildignore+=*.luac                           " Lua byte code
 set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
-" ---------------------------------------------------------------------------
 
 
 " ---------------------------------------------------------------------------
@@ -244,7 +226,7 @@ set mousehide                 " hide the mouse when typing
 " this makes the mouse paste a block of text without formatting it
 " (good for code)
 map <MouseMiddle> <esc>"*p
-" ---------------------------------------------------------------------------
+
 
 " ---------------------------------------------------------------------------
 "  backup options
@@ -268,6 +250,35 @@ set nospell
 set dictionary=/usr/share/dict/words
 
 
+
+" ---------------------------------------------------------------------------
+" Settings for Easymotion
+
+nmap s <Plug>(easymotion-overwin-f)
+map <Leader>' <Plug>(easymotion-prefix)
+
+
+" ---------------------------------------------------------------------------
+" Settings for jedi
+
+"let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = "2"
+
+let g:jedi#goto_command = ''
+nmap ,dd :call jedi#goto()<cr>zt " not sure if that is
+nmap ,dt :tab split<cr>,dd
+nmap ,ds <c-w>s,dd
+nmap ,dv <c-w>v,dd
+nmap ,dp <c-w>} " alternative for preview on tag
+
+
+" ---------------------------------------------------------------------------
+" Settings for Tagbar
+
+nmap <leader>\ :TagbarToggle<CR>
+
+
 " ---------------------------------------------------------------------------
 " some useful mappings
 
@@ -288,8 +299,6 @@ nmap <LocalLeader>wm  :w<cr>:make<cr>
 nmap <LocalLeader>tt :Tlist<cr>
 " When I'm pretty sure that the first suggestion is correct
 map <LocalLeader>r 1z=
-" q: sucks
-nmap q: :q
 " If I forgot to sudo vim a file, do that with :w!!
 "FIXME
 "cmap w!! %!sudo tee > /dev/null %
@@ -346,13 +355,19 @@ endfunction
 
 
 " ---------------------------------------------------------------------------
-" Settings for jedi
-
-let g:jedi#use_splits_not_buffers = "right"
-
-
-" ---------------------------------------------------------------------------
 " Ctrl-P
+
+let g:ctrlp_working_path_mode = 0 " always base off initial working folder
+let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
+"let g:ctrlp_jump_to_buffer = 0
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_match_current_file = 1 " match files even when it's the current file
+let g:ctrlp_map = '<leader>,'
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>t :CtrlPBufTag<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
@@ -397,8 +412,6 @@ let my_ctrlp_git_command = "" .
     \ ctrlp_filter_greps
 
 let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command]
-
-" ---------------------------------------------------------------------------
 
 
 " ---------------------------------------------------------------------------
@@ -468,14 +481,40 @@ vnoremap <leader>H :Gbrowse<cr>
 
 
 " ---------------------------------------------------------------------------
+" Syntastic
+" sudo -H pip install flake8
+" flake8 syntax python 2 vs 3 is decided when installing flake8
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+" from marcin
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_quiet_messages = { "type": "style" } " remove all style warnings
+"let g:syntastic_python_flake8_args='--ignore=E501,E225,E251,E231,W191'
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+" from me
+let g:syntastic_auto_jump = 1
+let g:syntastic_mode_map = {"mode":"passive"}
+nmap <leader>sc :w<cr>:SyntasticCheck<cr>
+nmap <leader>sr :SyntasticReset<cr>
+nmap ]l :lnext<CR>
+nmap [l :lprev<CR>
+
+
+" ---------------------------------------------------------------------------
 " tabs
 map <LocalLeader>tc :tabnew %<cr>    " create a new tab
 map <LocalLeader>td :tabclose<cr>    " close a tab
 map <LocalLeader>tn :tabnext<cr>     " next tab
-map <silent><A-Right> :tabnext<cr>   " next tab
 map <LocalLeader>tp :tabprev<cr>     " previous tab
-map <silent><A-Left> :tabprev<cr>    " previous tab
 map <LocalLeader>tm :tabmove         " move a tab to a new location
+
 
 " ---------------------------------------------------------------------------
 " Functions

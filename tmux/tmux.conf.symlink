@@ -12,7 +12,7 @@ set -g focus-events on
 set -g default-terminal "screen-256color"
 
 # set status bar to utf8
-set -g status-utf8 on
+# set -g status-utf8 on # removed in V2.6?
 
 # Solarized Dark
 set -g status-bg black

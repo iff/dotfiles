@@ -1,0 +1,50 @@
+{
+    // Enables font ligatures
+    "workbench.colorTheme": "Ocean Dark Extended",
+
+    "editor.fontFamily":  ["Ubuntu Mono", "Monoid  HalfTight"], 
+    "editor.fontSize": 12,
+    "editor.fontLigatures": true,
+    "editor.lineNumbers": "off",
+
+    // Insert spaces when pressing Tab. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
+    "editor.insertSpaces": false,
+
+    "[python]": {
+        "editor.tabSize": 2,
+    },
+
+    // Show 80 character ruler
+    "editor.rulers": [80],
+
+    "vim.easymotion": true,
+    "vim.leader": ",",
+    "vim.hlsearch": true,
+    "vim.visualstar": true,
+    "vim.insertModeKeyBindings": [
+        {
+          "before": ["j", "j"],
+          "after": ["<Esc>"]
+        }
+    ],
+
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<leader>", "P"],
+            "commands": [
+                "workbench.action.showCommands",
+            ],
+        },
+        {
+            "before": ["<leader>", "p"],
+            "commands": [
+                "workbench.action.quickOpen",
+            ]
+        }
+    ],
+
+    "python.autoComplete.addBrackets": true,
+    "python.autoComplete.preloadModules": [
+        "numpy",
+    ],
+}

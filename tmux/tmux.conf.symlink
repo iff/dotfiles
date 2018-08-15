@@ -8,35 +8,21 @@ set-window-option -g pane-base-index 1
 # forward focus events
 set -g focus-events on
 
+# scrollback buffer n lines
+set -g history-limit 5000
+
+# make sure that escape works sensibly
+set -sg escape-time 0
+
 # Set term color properly
-set -g default-terminal "screen-256color"
-
-# set status bar to utf8
-# set -g status-utf8 on # removed in V2.6?
-
-# Solarized Dark
-set -g status-bg black
-set -g status-fg blue
-set-window-option -g window-status-current-fg white
-
-# hostname color
-#set -g status-left '#[fg=green]#H'
+#set -g default-terminal "screen-256color"
 
 # confirm before killing a window or the server
 bind-key k confirm kill-window
 bind-key K confirm kill-server
 
-# scrollback buffer n lines
-set -g history-limit 5000
-
 # quick make
 bind '~' command-prompt "split-window -h 'cd %%; exec make | vim -'"
-
-# fix paths for new windows
-bind c new-window -c "#{pane_current_path}"
-
-# Fix tmux copy bug
-#set-option -g default-command "reattach-to-user-namespace -l $(basename $SHELL)"
 
 # Reload the file with Prefix r.
 bind r source-file ~/.tmux.conf
@@ -45,24 +31,46 @@ set -g status-position top
 set -g status-left-length 32
 set -g status-right-length 150
 
-set -g status-fg blue
-set -g status-bg black
-set -g window-status-activity-attr bold
-set -g pane-border-fg brightgreen
-set -g pane-active-border-fg brightgreen
-set -g message-fg yellow
-set -g message-bg black
-set -g message-attr bold
+#set-option -g default-terminal tmux-256color
 
-set -g status-left '#[fg=brightwhite,bg=blue,bold] #S #[fg=blue,bg=brightyellow,nobold]#[fg=blue,bg=brightyellow,bold] #(whoami) #[fg=brightyellow,bg=black,nobold] '
-set -g window-status-format "#[fg=yellow,bg=black] #I #W "
-set -g window-status-current-format "#[fg=black,bg=yellow] #[fg=black,bg=yellow,noreverse,bold] #I  #W #[fg=yellow,bg=black,nobold] "
+set-option -g status-bg "#2b303b" # base01
+set-option -g status-fg "#a7adba" # base04
+set-option -g status-attr default
 
-# right status and color
-set -g status-right '#[fg=yellow]%A %m/%d %l:%M %p'
+# default window title colors
+set-window-option -g window-status-bg default
+set-window-option -g window-status-fg "#a7adba" # base04
 
-# make sure that escape works sensibly
-set -sg escape-time 0
+# active window title colors
+set-window-option -g window-status-current-bg "#8fa1b3" #default
+set-window-option -g window-status-current-fg "#c0c5ce" # base05
+
+# pane border
+set-option -g pane-border-fg "#2b303b" # base01
+set-option -g pane-active-border-fg "#4f5b66" # base02
+
+# message text
+set-option -g message-bg "#2b303b" # base01
+set-option -g message-fg "#c0c5ce" # base05
+
+# pane number display
+set-option -g display-panes-active-colour "#a3be8c" # base0B
+set-option -g display-panes-colour "#2b303b" #"#ebcb8b" # base0A
+
+# clock
+set-window-option -g clock-mode-colour "#a3be8c" #base0B
+
+# bell
+set-window-option -g window-status-bell-style fg="#2b303b",bg="#bf616a"
+
+# status bar
+set -g status-left ' #S  '
+set -g window-status-format ' #I/#[fg=colour255]#W '
+set -g window-status-current-format ' #I/#[fg=colour250]#W '
+set -g status-right '%A %m/%d %l:%M %p'
+
+# fix paths for new windows
+bind c new-window -c "#{pane_current_path}"
 
 # Splitting panes.
 bind | split-window -h -c "#{pane_current_path}"

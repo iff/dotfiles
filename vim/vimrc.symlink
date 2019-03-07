@@ -16,6 +16,7 @@ call vundle#rc()
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'airblade/vim-gitgutter'
 Bundle 'chriskempson/base16-vim'
+Bundle 'morhetz/gruvbox'
 Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'kchmck/vim-coffee-script'
@@ -140,7 +141,8 @@ au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
 
 syntax on
 set background=dark
-colorscheme base16-ocean
+"colorscheme base16-ocean
+colorscheme gruvbox
 let g:AutoClosePreservDotReg=0
 
 

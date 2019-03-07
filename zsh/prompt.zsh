@@ -22,7 +22,7 @@ directory_name(){
 
 export PROMPT=$'
 %(?,,%F{red}%?%f)
-%K{10}%F{cyan}%n%f in $(directory_name) ${vcs_info_msg_0_}$(need_push)%F{yellow}%T%f %(1j,%F{red}%j&%f,) %E%k
+%F{cyan}%n%f in $(directory_name) ${vcs_info_msg_0_}$(need_push)%F{yellow}%T%f %(1j,%F{red}%j&%f,) %E
 › '
 
 precmd() {

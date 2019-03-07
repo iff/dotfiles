@@ -1,13 +1,12 @@
 /* See LICENSE file for copyright and license details. */
-#include "selfrestart.c"
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 0;        /* 0 means no bar */
+static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "monospace:size=8" };
+static const char dmenufont[]       = "monospace:size=8";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -30,8 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	//{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
-	{"vlc",       NULL,      NULL,        ~0,           1,           -1},
+	{ "vlc",      NULL,       NULL,       ~0,           1,           -1 },
 };
 
 /* layout(s) */
@@ -50,6 +48,11 @@ void getSymbol_null(char * target, size_t length) {
 void getSymbol_monocle(char * target, size_t length) {
 	snprintf(target, length, "[M]");
 }
+
+void self_restart(const Arg *arg) {
+	execl("/usr/local/bin/dwm", "/usr/local/bin/dwm");
+}
+
 
 static const Layout layouts[] = {
 	/* { getSymbol function, arrange function } */
@@ -76,14 +79,13 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *lockcmd[] = { "slock", NULL };
 static const char *scrotcmd[] = { "scrot", NULL };
-// kudos dk
 static const char *spotifyPreviousCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Previous", NULL };
 static const char *spotifyPlayPauseCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.PlayPause", NULL };
 static const char *spotifyNextCmd[] = { "dbus-send", "--type=method_call", "--dest=org.mpris.MediaPlayer2.spotify", "/org/mpris/MediaPlayer2", "org.mpris.MediaPlayer2.Player.Next", NULL };
 static const char *pavuDownCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
 static const char *pavuMuteCmd[] = { "/usr/bin/pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
 static const char *pavuUpCmd[] = { "/usr/bin/pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
-static const char *chromeCmd[] = { "/usr/bin/google-chrome", "--force-device-scale-factor=1.5", NULL };
+static const char *chromeCmd[] = { "/usr/bin/google-chrome", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -138,7 +140,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_F14,    spawn,          {.v = pavuMuteCmd} },
 	{ MODKEY,                       XK_F15,    spawn,          {.v = pavuUpCmd} },
 	{ MODKEY,                       XK_o,      spawn,          {.v = chromeCmd} },
-	// { MODKEY|ShiftMask,             XK_r,      reload,         {0} },
 	{ MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
 };
 

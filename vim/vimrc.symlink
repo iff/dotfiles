@@ -13,33 +13,28 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'airblade/vim-gitgutter'
-Bundle 'chriskempson/base16-vim'
-Bundle 'morhetz/gruvbox'
 Bundle 'gmarik/vundle'
+Bundle 'morhetz/gruvbox'
 Bundle 'godlygeek/tabular'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'kien/ctrlp.vim'
 Bundle 'leafgarland/typescript-vim'
-Bundle 'mattn/gist-vim'
 Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-airline'
 Bundle 'tpope/vim-sleuth'
 Bundle 'tpope/vim-surround'
-Bundle 'int3/vim-extradite'
-Bundle 'sjl/splice.vim'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'jpalardy/vim-slime'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'ervandew/supertab'
 Bundle 'easymotion/vim-easymotion'
-Bundle 'majutsushi/tagbar'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'vim-syntastic/syntastic'
 
-"TODO: try
-"Bundle 'FooSoft/vim-argwrap'
+" Git plugins
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-rhubarb'
+Bundle 'int3/vim-extradite'
+Bundle 'junkblocker/patchreview-vim'
+
 
 " ---------------------------------------------------------------------------
 " basic options
@@ -58,19 +53,18 @@ set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
 set fillchars=diff:⣿,vert:│
 
 set breakindent               " visually breaks lines using the same indentation
-let &showbreak = '  ↪'           " show breaks
+let &showbreak = '  ↪'        " show breaks
 set nowrap
 
 set colorcolumn=+1
-"set tw=78                     " default textwidth is a max of 78
-"set formatprg=par\ -w80rq
 set formatoptions-=t
+set formatoptions+=j " delete comment character when joining commented lines
+
+set viminfo^=!
 
 set encoding=utf-8
 set hidden
 set nonumber
-"set norelativenumber
-"set undofile
 set undoreload=10000
 set shell=/bin/zsh
 set matchtime=3
@@ -96,7 +90,6 @@ set cmdheight=2               " command line two lines high
 set undolevels=1000           " 1000 undos
 set updatecount=100           " switch every 100 chars
 set ttyfast                   " we have a fast terminal
-"set foldmethod=syntax         " fold on syntax automagically, always
 set foldmethod=manual         " only manual folding
 set whichwrap+=<,>,h,l        " backspaces and cursor keys wrap to
 set magic                     " Enable the "magic"
@@ -141,49 +134,8 @@ au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
 
 syntax on
 set background=dark
-"colorscheme base16-ocean
 colorscheme gruvbox
 let g:AutoClosePreservDotReg=0
-
-
-" ---------------------------------------------------------------------------
-" Settings for Easymotion
-
-nmap s <Plug>(easymotion-overwin-f)
-map <Leader>' <Plug>(easymotion-prefix)
-
-
-" ---------------------------------------------------------------------------
-" Settings for yankring
-
-let g:yankring_history_dir="~/.vim/"
-let g:yankring_history_file=".yank.txt"
-
-function! YRRunAfterMaps()
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-    omap <expr> L YRMapsExpression("", "$")
-    omap <expr> H YRMapsExpression("", "^")
-endfunction
-
-
-" ---------------------------------------------------------------------------
-" Settings for jedi
-
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = "2"
-
-let g:jedi#goto_command = ''
-nmap ,dd :call jedi#goto()<cr>zt " not sure if that is
-nmap ,dt :tab split<cr>,dd
-nmap ,ds <c-w>s,dd
-nmap ,dv <c-w>v,dd
-nmap ,dp <c-w>} " alternative for preview on tag
-
-" ---------------------------------------------------------------------------
-" Settings for Tagbar
-
-nmap <leader>\ :TagbarToggle<CR>
 
 
 " ---------------------------------------------------------------------------
@@ -223,11 +175,9 @@ set wildignore+=*.orig                           " Merge resolution files
 " ---------------------------------------------------------------------------
 "  mouse stuff
 
-"set mouse=a                  " mouse support in all modes
 set mousehide                 " hide the mouse when typing
-" this makes the mouse paste a block of text without formatting it
+map <MouseMiddle> <esc>"*p    " this makes the mouse paste a block of text without formatting it
 " (good for code)
-map <MouseMiddle> <esc>"*p
 
 
 " ---------------------------------------------------------------------------
@@ -252,6 +202,38 @@ set nospell
 set dictionary=/usr/share/dict/words
 
 
+" ---------------------------------------------------------------------------
+" tabs
+map <LocalLeader>tc :tabnew %<cr>    " create a new tab
+map <LocalLeader>td :tabclose<cr>    " close a tab
+map <LocalLeader>tn :tabnext<cr>     " next tab
+map <LocalLeader>tp :tabprev<cr>     " previous tab
+map <LocalLeader>tm :tabmove         " move a tab to a new location
+
+
+" ---------------------------------------------------------------------------
+" some useful mappings
+
+map ,ww :set wrap!<cr> " toggle wrapping (on or off)
+nmap <LocalLeader>tl :set list!<cr>   " toggle list mode
+nmap <LocalLeader>pp :set paste!<cr>  " toggle paste mode
+nmap <LocalLeader>wm  :w<cr>:make<cr> " save and build
+map <LocalLeader>r 1z=                " When I'm pretty sure that the first suggestion is correct
+imap jj <Esc>                         " When I forget I'm in Insert mode, how often do you type 'jj' anyway?:
+
+nnoremap <leader>q gqip
+nnoremap <leader>v V']
+nnoremap gp `[v`]                     " select last pasted lines
+
+" undo tree (gundo)
+nnoremap <F5> :GundoToggle<CR>
+
+" no arrow keys ;)
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 
 " ---------------------------------------------------------------------------
 " Settings for Easymotion
@@ -263,113 +245,20 @@ map <Leader>' <Plug>(easymotion-prefix)
 " ---------------------------------------------------------------------------
 " Settings for jedi
 
-"let g:jedi#use_splits_not_buffers = "right"
+let g:jedi#use_splits_not_buffers = "right"
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = "2"
 
 let g:jedi#goto_command = ''
-nmap ,dd :call jedi#goto()<cr>zt " not sure if that is
-nmap ,dt :tab split<cr>,dd
-nmap ,ds <c-w>s,dd
-nmap ,dv <c-w>v,dd
-nmap ,dp <c-w>} " alternative for preview on tag
-
-
-" ---------------------------------------------------------------------------
-" Settings for Tagbar
-
-nmap <leader>\ :TagbarToggle<CR>
-
-
-" ---------------------------------------------------------------------------
-" some useful mappings
-
-map ,ww :set wrap!<cr> " toggle wrapping (on or off)
-" toggle list mode
-nmap <LocalLeader>tl :set list!<cr>
-" toggle paste mode
-nmap <LocalLeader>pp :set paste!<cr>
-" change directory to that of current file
-nmap <LocalLeader>cd :cd%:p:h<cr>
-" change local directory to that of current file
-nmap <LocalLeader>lcd :lcd%:p:h<cr>
-" correct type-o's on exit
-nmap q: :q
-" save and build
-nmap <LocalLeader>wm  :w<cr>:make<cr>
-" ,tt will toggle taglist on and off
-nmap <LocalLeader>tt :Tlist<cr>
-" When I'm pretty sure that the first suggestion is correct
-map <LocalLeader>r 1z=
-" If I forgot to sudo vim a file, do that with :w!!
-"FIXME
-"cmap w!! %!sudo tee > /dev/null %
-" Fix the # at the start of the line
-inoremap # X<BS>#
-" When I forget I'm in Insert mode, how often do you type 'jj' anyway?:
-imap jj <Esc>
-
-nnoremap <leader>q gqip
-nnoremap <leader>v V']
-
-" undo tree (gundo)
-nnoremap <F5> :GundoToggle<CR>
-
-" run pdflatex on currently open file
-nmap <LocalLeader>pl :!pdflatex %<cr><cr>
-
-" vimrc editing. Automatically reload the file after saving it.
-" Because there is no point in editing the file and *not* reloading
-" it, right?
-nnoremap <leader>ev <C-w>s<C-w>j<C-w>L:e $MYVIMRC<cr>
-autocmd! bufwritepost .vimrc source %
-
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
-" <m-j> and <m-k> to drag lines in any mode
-noremap ∆ :m+<CR>
-noremap ˚ :m-2<CR>
-inoremap ∆ <Esc>:m+<CR>
-inoremap ˚ <Esc>:m-2<CR>
-vnoremap ∆ :m'>+<CR>gv
-vnoremap ˚ :m-2<CR>gv
-
-
-" ---------------------------------------------------------------------------
-" Gist
-let g:gist_post_private = 1
-
-
-" ---------------------------------------------------------------------------
-" Settings for yankring
-
-let g:yankring_history_dir="~/.vim/"
-let g:yankring_history_file=".yank.txt"
-
-function! YRRunAfterMaps()
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-    omap <expr> L YRMapsExpression("", "$")
-    omap <expr> H YRMapsExpression("", "^")
-endfunction
+nmap <leader>dd :call jedi#goto()<cr>zt " not sure if that is
+nmap <leader>dt :tab split<cr>,dd
+nmap <leader>ds <c-w>s,dd
+nmap <leader>dv <c-w>v,dd
+nmap <leader>dp <c-w>} " alternative for preview on tag
 
 
 " ---------------------------------------------------------------------------
 " Ctrl-P
-
-let g:ctrlp_working_path_mode = 0 " always base off initial working folder
-let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
-"let g:ctrlp_jump_to_buffer = 0
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_match_current_file = 1 " match files even when it's the current file
-let g:ctrlp_map = '<leader>,'
-nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <leader>t :CtrlPBufTag<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
 
 let g:ctrlp_working_path_mode = 0 " always base off initial working folder
 let g:ctrlp_switch_buffer = 0 " don't switch between splits when selecting a file/buffer to open, stay on split, makes it easier to open same file in many splits
@@ -417,48 +306,7 @@ let g:ctrlp_user_command = ['.git/', my_ctrlp_git_command, my_ctrlp_user_command
 
 
 " ---------------------------------------------------------------------------
-" folding
-set foldlevelstart=0
-
-" Space to toggle folds.
-nnoremap <Space> za
-vnoremap <Space> za
-nmap <LocalLeader>fo  :%foldopen!<cr>
-nmap <LocalLeader>fc  :%foldclose!<cr>
-
-"nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
-
-" Make zO recursively open whatever top level fold we're in, no matter where the
-" cursor happens to be.
-nnoremap zO zCzO
-
-function! MyFoldText() " {{{
-    let line = getline(v:foldstart)
-
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
-
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
-
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction " }}}
-set foldtext=MyFoldText()
-
-
-" ---------------------------------------------------------------------------
-" Powerline
-
-let g:Powerline_symbols = 'fancy'
-let g:Powerline_cache_enabled = 1
-
-
-" ---------------------------------------------------------------------------
-" Fugitive
+" Fugitive / Git
 
 nnoremap <leader>gd :Gdiff<cr>
 nnoremap <leader>gs :Gstatus<cr>
@@ -481,6 +329,9 @@ augroup END
 nnoremap <leader>H :Gbrowse<cr>
 vnoremap <leader>H :Gbrowse<cr>
 
+" Extradite
+nnoremap <leader>gh :Extradite!<cr>
+
 
 " ---------------------------------------------------------------------------
 " Syntastic
@@ -489,43 +340,24 @@ vnoremap <leader>H :Gbrowse<cr>
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
+let g:pymode_python = 'python3'
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-" from marcin
-let g:syntastic_python_checkers = ['flake8']
+
+let g:syntastic_python_checkers = ['flake8', 'pylint']
 let g:syntastic_quiet_messages = { "type": "style" } " remove all style warnings
 "let g:syntastic_python_flake8_args='--ignore=E501,E225,E251,E231,W191'
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-" from me
-let g:syntastic_auto_jump = 1
+let g:syntastic_python_pylint_args='--disable=bad-continuation,bad-whitespace,too-many-locals,mixed-indentation,line-too-long,import-error'
+
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_auto_jump = 0
 let g:syntastic_mode_map = {"mode":"passive"}
+
 nmap <leader>sc :w<cr>:SyntasticCheck<cr>
 nmap <leader>sr :SyntasticReset<cr>
 nmap ]l :lnext<CR>
 nmap [l :lprev<CR>
 
-
 " ---------------------------------------------------------------------------
-" tabs
-map <LocalLeader>tc :tabnew %<cr>    " create a new tab
-map <LocalLeader>td :tabclose<cr>    " close a tab
-map <LocalLeader>tn :tabnext<cr>     " next tab
-map <LocalLeader>tp :tabprev<cr>     " previous tab
-map <LocalLeader>tm :tabmove         " move a tab to a new location
-
-
-" ---------------------------------------------------------------------------
-" Functions
-
-" Compile current coffee script buffer to javascript and open in new vsplit
-function! CoffeeToJS()
-    let res=expand('%')
-    exe 'vnew | r !coffee -p ' . res
-    set ft=javascript
-endfunc
-map <LocalLeader>cj :call CoffeeToJS()<cr>
-

@@ -3,43 +3,94 @@
 
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'morhetz/gruvbox'
-Plug 'kien/ctrlp.vim'
-Plug 'sjl/gundo.vim'
-Plug 'tpope/vim-airline'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-surround'
-Plug 'easymotion/vim-easymotion'
-Plug 'davidhalter/jedi-vim'
+Plug 'morhetz/gruvbox'              " colors for vim
+Plug 'kien/ctrlp.vim'               " open anything
+Plug 'sjl/gundo.vim'                " undo history tree
+Plug 'tpope/vim-airline'            " bottom bar
+Plug 'tpope/vim-sleuth'             " heuristically set buffer options
+Plug 'tpope/vim-surround'           " surround with brackets, quotes, ...
+Plug 'easymotion/vim-easymotion'    " the only movemement command you will ever use
+Plug 'davidhalter/jedi-vim'         " jump to definition etc..
 "Plug 'vim-syntastic/syntastic'
 
 " Git plugins
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'int3/vim-extradite'
+Plug 'airblade/vim-gitgutter'       " show unstaged edits
+Plug 'tpope/vim-fugitive'           " many git helpers
+Plug 'tpope/vim-rhubarb'            " goto github page
+Plug 'int3/vim-extradite'           " git commit browser
 
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'sbdchd/neoformat'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}      " python syn-tactic highlighting
+Plug 'sbdchd/neoformat'                                     " formatter
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete on steroids
 
 call plug#end()
 
-
-syntax on
+syntax enable
 set background=dark
 colorscheme gruvbox
 
 let mapleader = ","
-let maplocalleader=','        " all my macros start with ,
+let maplocalleader = ','
+
+set autoindent
+set backspace=indent,eol,start
+set complete-=i
+set smarttab
+set incsearch
+set autoread
+set encoding=utf-8
 
 imap jj <Esc>
 
-
 " ---------------------------------------------------------------------------
 " Settings for semshi
-"
-let g:semshi_simplify_markup = 1
 
+let g:semshi#simplify_markup = 1
+
+
+" ---------------------------------------------------------------------------
+" Settings for neoformat
+
+let g:neoformat_python_black = {
+    \ 'exe': 'python3 -m black',
+    \ 'args': [],
+    \ 'replace': 1,
+    \ 'stdin': 1,
+    \ 'env': [],
+    \ 'valid_exit_codes': [0, 23],
+    \ 'no_append': 1,
+    \ }
+
+let g:neoformat_enable_python = ['black']
+let g:neoformat_basic_format_trim = 1
+"augroup fmt
+  "autocmd!
+  "autocmd BufWritePre * undojoin | Neoformat
+"augroup END
+
+" ---------------------------------------------------------------------------
+" Settings for deoplete
+
+let g:deoplete#enable_at_startup = 1
+call deoplete#custom#option({
+    \ 'auto_complete_delay': 100,
+    \ 'auto_complete': v:false,
+\ })
+
+inoremap <silent><expr> <TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort "{{{
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction"}}}
+
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function() abort
+    return deoplete#close_popup() . "\<CR>"
+endfunction
 
 " ---------------------------------------------------------------------------
 " Settings for Easymotion
@@ -93,8 +144,11 @@ nnoremap <leader>gh :Extradite!<cr>
 
 " ---------------------------------------------------------------------------
 " Ctrl-P
+
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_match_current_file = 1 " match files even when it's the current file
 let g:ctrlp_map = '<leader>,'
 nnoremap <leader>. :CtrlPTag<cr>
 nnoremap <leader>t :CtrlPBufTag<cr>
 nnoremap <leader>b :CtrlPBuffer<cr>
+

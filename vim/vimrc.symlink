@@ -33,24 +33,24 @@ Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-rhubarb'
 Bundle 'int3/vim-extradite'
-Bundle 'junkblocker/patchreview-vim'
 
 
 " ---------------------------------------------------------------------------
 " basic options
 
 filetype plugin indent on
-set autoindent smartindent    " auto/smart indent
+set autoindent smartindent
 set tabstop=4
 set softtabstop=4
 set noexpandtab
 set copyindent
+set backspace=indent,eol,start
+set nolist                      " enable custom list chars
+"set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
+"set fillchars=diff:⣿,vert:│
+
 set scrolloff=3               " keep at least 3 lines above/below
 set sidescrolloff=5           " keep at least 5 lines left/right
-set backspace=indent,eol,start
-set list                      " enable custom list chars
-set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮    " replace tabs, eol
-set fillchars=diff:⣿,vert:│
 
 set breakindent               " visually breaks lines using the same indentation
 let &showbreak = '  ↪'        " show breaks
@@ -58,7 +58,8 @@ set nowrap
 
 set colorcolumn=+1
 set formatoptions-=t
-set formatoptions+=j " delete comment character when joining commented lines
+set formatoptions+=j          " delete comment character when joining commented lines
+set complete-=i
 
 set viminfo^=!
 
@@ -115,7 +116,7 @@ let maplocalleader=','        " all my macros start with ,
 autocmd BufWritePre * :%s/\s\+$//e
 
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+autocmd BufWinEnter *.* silent! loadview
 
 " trying autosave and co
 set autoread " autoread files if changed outside and not locally, on focus events, does not work out of the box in tmux vim
@@ -125,12 +126,6 @@ au FocusLost * :wa
 autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
 " less spacy for Python files
 autocmd Bufread,BufNewFile  *.py setlocal tabstop=2 shiftwidth=2
-
-" Use <localleader>1/2/3 to add headings.
-au BufNewFile,BufRead *.md setlocal filetype=markdown
-au Filetype markdown nnoremap <buffer> <localleader>1 yypVr=
-au Filetype markdown nnoremap <buffer> <localleader>2 yypVr-
-au Filetype markdown nnoremap <buffer> <localleader>3 I### <ESC>
 
 syntax on
 set background=dark
@@ -208,13 +203,12 @@ map <LocalLeader>tc :tabnew %<cr>    " create a new tab
 map <LocalLeader>td :tabclose<cr>    " close a tab
 map <LocalLeader>tn :tabnext<cr>     " next tab
 map <LocalLeader>tp :tabprev<cr>     " previous tab
-map <LocalLeader>tm :tabmove         " move a tab to a new location
 
 
 " ---------------------------------------------------------------------------
 " some useful mappings
 
-map ,ww :set wrap!<cr> " toggle wrapping (on or off)
+map <LocalLeader>ww :set wrap!<cr> " toggle wrapping (on or off)
 nmap <LocalLeader>tl :set list!<cr>   " toggle list mode
 nmap <LocalLeader>pp :set paste!<cr>  " toggle paste mode
 nmap <LocalLeader>wm  :w<cr>:make<cr> " save and build

@@ -51,22 +51,17 @@ let g:semshi#simplify_markup = 1
 " ---------------------------------------------------------------------------
 " Settings for neoformat
 
-let g:neoformat_python_black = {
-    \ 'exe': 'python3 -m black',
-    \ 'args': [],
-    \ 'replace': 1,
-    \ 'stdin': 1,
-    \ 'env': [],
-    \ 'valid_exit_codes': [0, 23],
-    \ 'no_append': 1,
-    \ }
+let g:neoformat_enabled_python = ['black']
+let g:neoformat_try_formatprg = 1
 
-let g:neoformat_enable_python = ['black']
+let g:neoformat_basic_format_align = 0
+let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
-"augroup fmt
-  "autocmd!
-  "autocmd BufWritePre * undojoin | Neoformat
-"augroup END
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " ---------------------------------------------------------------------------
 " Settings for deoplete
@@ -96,7 +91,7 @@ endfunction
 " Settings for Easymotion
 
 nmap s <Plug>(easymotion-overwin-f)
-map <Leader>' <Plug>(easymotion-prefix)
+map <Leader> <Plug>(easymotion-prefix)
 
 
 " ---------------------------------------------------------------------------

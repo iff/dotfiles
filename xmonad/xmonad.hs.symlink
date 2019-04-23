@@ -12,10 +12,10 @@ import XMonad.Actions.CycleWS
 main = xmonad defaultConfig
     { modMask = mod4Mask
     , handleEventHook = fullscreenEventHook
-    , terminal = "urxvt"
+    , terminal = "st"
     , normalBorderColor = "gray30"
     , focusedBorderColor = "#0198E1"
-    , borderWidth = 1
+    , borderWidth = 3
     , manageHook = myManageHook <+> manageScratchPad
     , layoutHook = myLayoutHook
     , workspaces = ["1:t", "2:t", "3:t", "4:t", "5:t", "6:t", "7:t", "8:t", "9:t"]

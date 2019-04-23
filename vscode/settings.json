@@ -1,9 +1,10 @@
 {
     // Enables font ligatures
-    "workbench.colorTheme": "Ocean Dark Extended",
+    //"workbench.colorTheme": "Ocean Dark Extended",
+    "workbench.colorTheme": "Gruvbox Dark (Medium)",
 
-    "editor.fontFamily":  ["Ubuntu Mono", "Monoid  HalfTight"], 
-    "editor.fontSize": 12,
+    "editor.fontFamily":  ["Monoid  HalfTight"], 
+    "editor.fontSize": 13,
     "editor.fontLigatures": true,
     "editor.lineNumbers": "off",
 
@@ -13,6 +14,7 @@
     "[python]": {
         "editor.tabSize": 2,
     },
+    "python.linting.flake8Args": ["--ignore=E126,E251,E261,E265,E302,E303,E402,E501,E731,W191", "--verbose"],
 
     // Show 80 character ruler
     "editor.rulers": [80],
@@ -30,21 +32,39 @@
 
     "vim.normalModeKeyBindingsNonRecursive": [
         {
-            "before": ["<leader>", "P"],
+            "before": ["<leader>", "p"],
             "commands": [
                 "workbench.action.showCommands",
             ],
         },
         {
-            "before": ["<leader>", "p"],
+            "before": ["<leader>", "."],
             "commands": [
                 "workbench.action.quickOpen",
             ]
-        }
+        },
+        {
+            "before": ["<leader>", "d"],
+            "commands": [
+                "workbench.action.showAllSymbols",
+            ]
+        },
+        {
+            "before": [ ">" ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [ "<" ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
     ],
 
+    "python.jediEnabled": false,
     "python.autoComplete.addBrackets": true,
-    "python.autoComplete.preloadModules": [
-        "numpy",
-    ],
+    "workbench.statusBar.feedback.visible": false,
+    "editor.largeFileOptimizations": false,
 }

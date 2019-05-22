@@ -9,8 +9,9 @@ Plug 'sjl/gundo.vim'                " undo history tree
 Plug 'tpope/vim-airline'            " bottom bar
 Plug 'tpope/vim-sleuth'             " heuristically set buffer options
 Plug 'tpope/vim-surround'           " surround with brackets, quotes, ...
-Plug 'easymotion/vim-easymotion'    " the only movemement command you will ever use
+Plug 'easymotion/vim-easymotion'    " the only movement command you will ever use
 Plug 'davidhalter/jedi-vim'         " jump to definition etc..
+Plug 'scrooloose/nerdcommenter'
 "Plug 'vim-syntastic/syntastic'
 
 " Git plugins
@@ -41,6 +42,31 @@ set autoread
 set encoding=utf-8
 
 imap jj <Esc>
+map ; :
+
+
+" ---------------------------------------------------------------------------
+" autosave and -read
+" interesting events:
+" InsertLeave, TextChanged, CursorHold
+" TextChangedI, CursorHoldI
+" FocusGained, FocusLost
+" (needs events configured coming from the terminal or tmux, check if that works)
+set autoread
+set updatetime=500
+augroup autosave
+    autocmd!
+    autocmd InsertLeave,TextChanged * silent! w
+    autocmd CursorHold,CursorHoldI * silent! update
+    autocmd FocusLost * silent! wa
+    autocmd FocusGained * checktime
+augroup END
+" problems:
+" should not run :w when buffer has no file
+" silent! surpressed that error messages
+" but would be nicer not to try at all
+" CursorHoldI doesn't seem to trigger update currently
+
 
 " ---------------------------------------------------------------------------
 " Settings for semshi
@@ -82,10 +108,10 @@ inoremap <silent><expr> <TAB>
     endfunction"}}}
 
 " <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-    return deoplete#close_popup() . "\<CR>"
-endfunction
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function() abort
+"     return deoplete#close_popup() . "\<CR>"
+" endfunction
 
 " ---------------------------------------------------------------------------
 " Settings for Easymotion

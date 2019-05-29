@@ -40,9 +40,26 @@ set smarttab
 set incsearch
 set autoread
 set encoding=utf-8
+set nocompatible
+set gdefault                  " automatically use /g with search & replace
+set showcmd
+
+set nobackup
+set nowritebackup
+set noswapfile
+set noundofile
+
+set timeoutlen=1000 ttimeoutlen=0
 
 imap jj <Esc>
 map ; :
+nnoremap gp `[v`]                     " select last pasted lines
+
+
+" ---------------------------------------------------------------------------
+" Settings for nerdcommenter
+
+let g:NERDDefaultAlign = 'left'
 
 
 " ---------------------------------------------------------------------------
@@ -116,8 +133,9 @@ inoremap <silent><expr> <TAB>
 " ---------------------------------------------------------------------------
 " Settings for Easymotion
 
+let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f)
-map <Leader> <Plug>(easymotion-prefix)
+nmap S <Plug>(easymotion-overwin-f2)
 
 
 " ---------------------------------------------------------------------------

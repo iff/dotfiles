@@ -1,18 +1,14 @@
-"curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'morhetz/gruvbox'              " colors for vim
-Plug 'kien/ctrlp.vim'               " open anything
 Plug 'sjl/gundo.vim'                " undo history tree
 Plug 'tpope/vim-airline'            " bottom bar
 Plug 'tpope/vim-sleuth'             " heuristically set buffer options
 Plug 'tpope/vim-surround'           " surround with brackets, quotes, ...
 Plug 'easymotion/vim-easymotion'    " the only movement command you will ever use
-Plug 'davidhalter/jedi-vim'         " jump to definition etc..
 Plug 'scrooloose/nerdcommenter'
-"Plug 'vim-syntastic/syntastic'
 
 " Git plugins
 Plug 'airblade/vim-gitgutter'       " show unstaged edits
@@ -23,6 +19,13 @@ Plug 'int3/vim-extradite'           " git commit browser
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}      " python syn-tactic highlighting
 Plug 'sbdchd/neoformat'                                     " formatter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete on steroids
+
+Plug '~/src/vimminent'
+
+" retired plugins:
+" Plug 'kien/ctrlp.vim'               " open anything
+" Plug 'davidhalter/jedi-vim'         " jump to definition etc..
+" Plug 'vim-syntastic/syntastic'
 
 call plug#end()
 
@@ -64,11 +67,6 @@ let g:NERDDefaultAlign = 'left'
 
 " ---------------------------------------------------------------------------
 " autosave and -read
-" interesting events:
-" InsertLeave, TextChanged, CursorHold
-" TextChangedI, CursorHoldI
-" FocusGained, FocusLost
-" (needs events configured coming from the terminal or tmux, check if that works)
 set autoread
 set updatetime=500
 augroup autosave
@@ -78,11 +76,12 @@ augroup autosave
     autocmd FocusLost * silent! wa
     autocmd FocusGained * checktime
 augroup END
-" problems:
-" should not run :w when buffer has no file
-" silent! surpressed that error messages
-" but would be nicer not to try at all
-" CursorHoldI doesn't seem to trigger update currently
+
+
+" ---------------------------------------------------------------------------
+" Settings for nerdcommenter
+
+let g:NERDDefaultAlign = 'left'
 
 
 " ---------------------------------------------------------------------------
@@ -103,7 +102,7 @@ let g:neoformat_basic_format_trim = 1
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
 augroup END
 
 " ---------------------------------------------------------------------------
@@ -139,21 +138,6 @@ nmap S <Plug>(easymotion-overwin-f2)
 
 
 " ---------------------------------------------------------------------------
-" Settings for jedi
-
-let g:jedi#use_splits_not_buffers = "right"
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = "2"
-
-let g:jedi#goto_command = ''
-nmap <leader>dd :call jedi#goto()<cr>zt " not sure if that is
-nmap <leader>dt :tab split<cr>,dd
-nmap <leader>ds <c-w>s,dd
-nmap <leader>dv <c-w>v,dd
-nmap <leader>dp <c-w>} " alternative for preview on tag
-
-
-" ---------------------------------------------------------------------------
 " Fugitive / Git
 
 nnoremap <leader>gd :Gdiff<cr>
@@ -182,12 +166,14 @@ nnoremap <leader>gh :Extradite!<cr>
 
 
 " ---------------------------------------------------------------------------
-" Ctrl-P
+" vimminent
 
-let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-let g:ctrlp_match_current_file = 1 " match files even when it's the current file
-let g:ctrlp_map = '<leader>,'
-nnoremap <leader>. :CtrlPTag<cr>
-nnoremap <leader>t :CtrlPBufTag<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
+map <leader>, :call NavProjectFiles()<cr>
+map <leader>. :call NavProjectSymbols()<cr>
+map <leader>d :call NavCwordProjectSymbols()<cr>
+map <leader>b :call NavBuffers()<cr>
+
+map <leader>F :call NavAllFiles()<cr>
+map <leader>L :call NavAllLines()<cr>
+map <leader>l :call NavProjectLines()<cr>
 

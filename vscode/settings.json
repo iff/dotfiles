@@ -1,23 +1,13 @@
 {
-    // Enables font ligatures
-    //"workbench.colorTheme": "Ocean Dark Extended",
     "workbench.colorTheme": "Gruvbox Dark (Medium)",
+    "workbench.editor.enablePreview": false,
 
     "editor.fontFamily":  ["Monoid  HalfTight"], 
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
     "editor.lineNumbers": "off",
 
-    // Insert spaces when pressing Tab. This setting is overridden based on the file contents when `editor.detectIndentation` is on.
-    "editor.insertSpaces": false,
-
-    "[python]": {
-        "editor.tabSize": 2,
-    },
     "python.linting.flake8Args": ["--ignore=E126,E251,E261,E265,E302,E303,E402,E501,E731,W191", "--verbose"],
-
-    // Show 80 character ruler
-    "editor.rulers": [80],
 
     "vim.easymotion": true,
     "vim.leader": ",",

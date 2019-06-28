@@ -21,6 +21,7 @@ Plug 'sbdchd/neoformat'                                     " formatter
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' } " autocomplete on steroids
 
 Plug '~/src/vimminent'
+Plug '~/src/pdocs'
 
 " retired plugins:
 " Plug 'kien/ctrlp.vim'               " open anything
@@ -29,6 +30,7 @@ Plug '~/src/vimminent'
 
 call plug#end()
 
+set nomodeline
 syntax enable
 set background=dark
 colorscheme gruvbox
@@ -96,14 +98,23 @@ let g:semshi#simplify_markup = 1
 let g:neoformat_enabled_python = ['black']
 let g:neoformat_try_formatprg = 1
 
+let g:neoformat_python_black = {
+            \ 'exe': 'black',
+            \ 'args': ['-', '--quiet', '--target-version=py36'],
+            \ 'stdin': 1,
+            \ }
+
 let g:neoformat_basic_format_align = 0
 let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
 
-augroup fmt
-  autocmd!
-  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
-augroup END
+map <leader>f :Neoformat<cr>
+
+"augroup fmt
+"  autocmd!
+"  "autocmd BufWritePre * undojoin | Neoformat
+"  autocmd BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+"augroup END
 
 " ---------------------------------------------------------------------------
 " Settings for deoplete

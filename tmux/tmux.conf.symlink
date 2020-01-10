@@ -33,32 +33,32 @@ set -g status-position top
 set -g status-left-length 32
 set -g status-right-length 150
 
-set-option -g status-bg "#2b303b" # base01
-set-option -g status-fg "#a7adba" # base04
+set-option -g status-bg "#3c3836"
+set-option -g status-fg "#d5c4a1"
 set-option -g status-attr default
 
 # default window title colors
 set-window-option -g window-status-bg default
-set-window-option -g window-status-fg "#a7adba" # base04
+set-window-option -g window-status-fg "#d5c4a1"
 
 # active window title colors
-set-window-option -g window-status-current-bg "#8fa1b3" #default
-set-window-option -g window-status-current-fg "#c0c5ce" # base05
+set-window-option -g window-status-current-bg "#504945" 
+set-window-option -g window-status-current-fg "#fbf17c"
 
 # pane border
-set-option -g pane-border-fg "#d65d0e" # base01
-set-option -g pane-active-border-fg "#d65d0e" # base02
+set-option -g pane-border-fg "#d65d0e"
+set-option -g pane-active-border-fg "#d65d0e"
 
 # message text
-set-option -g message-bg "#2b303b" # base01
-set-option -g message-fg "#c0c5ce" # base05
+set-option -g message-bg "#2b303b"
+set-option -g message-fg "#c0c5ce"
 
 # pane number display
-set-option -g display-panes-active-colour "#a3be8c" # base0B
-set-option -g display-panes-colour "#ebcb8b" # base0A
+set-option -g display-panes-active-colour "#a3be8c"
+set-option -g display-panes-colour "#ebcb8b"
 
 # clock
-set-window-option -g clock-mode-colour "#a3be8c" #base0B
+set-window-option -g clock-mode-colour "#fbf17c"
 
 # bell
 set-window-option -g window-status-bell-style fg="#2b303b",bg="#bf616a"

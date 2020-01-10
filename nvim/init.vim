@@ -4,7 +4,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'morhetz/gruvbox'              " colors for vim
 Plug 'sjl/gundo.vim'                " undo history tree
-Plug 'tpope/vim-airline'            " bottom bar
+Plug 'vim-airline/vim-airline'      " bottom bar
 Plug 'tpope/vim-sleuth'             " heuristically set buffer options
 Plug 'tpope/vim-surround'           " surround with brackets, quotes, ...
 Plug 'easymotion/vim-easymotion'    " the only movement command you will ever use

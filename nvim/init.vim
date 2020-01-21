@@ -122,17 +122,25 @@ map <leader>f :Neoformat<cr>
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
     \ 'auto_complete_delay': 100,
-    \ 'auto_complete': v:false,
-\ })
+    \ })
 
-inoremap <silent><expr> <TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#mappings#manual_complete()
-    function! s:check_back_space() abort "{{{
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction"}}}
+call deoplete#custom#option('keyword_patterns', {
+   \ 'denite-filter': '',
+   \})
+
+call deoplete#custom#source('_',
+    \ 'matchers', ['matcher_fuzzy', 'matcher_length'])
+
+inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" inoremap <silent><expr> <TAB>
+"    \ pumvisible() ? "\<C-n>" :
+"    \ <SID>check_back_space() ? "\<TAB>" :
+"    \ deoplete#mappings#manual_complete()
+"    function! s:check_back_space() abort "{{{
+"    let col = col('.') - 1
+"    return !col || getline('.')[col - 1]  =~ '\s'
+"    endfunction"}}}
 
 " <CR>: close popup and save indent.
 " inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -160,7 +168,7 @@ nnoremap <leader>gco :Gcheckout<cr>
 nnoremap <leader>gci :Gcommit<cr>
 nnoremap <leader>gm :Gmove<cr>
 nnoremap <leader>gr :Gremove<cr>
-"nnoremap <leader>gl :Shell git l19<cr>:wincmd \|<cr>
+nnoremap <leader>gl :Glog<cr>
 
 augroup ft_fugitive
     au!
@@ -181,6 +189,7 @@ nnoremap <leader>gh :Extradite!<cr>
 
 map <leader>, :call NavProjectFiles()<cr>
 map <leader>. :call NavProjectSymbols()<cr>
+map <leader>.. :call NavFileSymbols()<cr>
 map <leader>d :call NavCwordProjectSymbols()<cr>
 map <leader>b :call NavBuffers()<cr>
 
@@ -188,3 +197,5 @@ map <leader>F :call NavAllFiles()<cr>
 map <leader>L :call NavAllLines()<cr>
 map <leader>l :call NavProjectLines()<cr>
 
+map <leader>D :call NavCwordDocs()<cr>
+map <leader>DD :call NavDocs()<cr>

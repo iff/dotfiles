@@ -48,6 +48,7 @@ set encoding=utf-8
 set nocompatible
 set gdefault                  " automatically use /g with search & replace
 set showcmd
+set scrolloff=5
 
 set nobackup
 set nowritebackup
@@ -59,6 +60,16 @@ set timeoutlen=1000 ttimeoutlen=0
 imap jj <Esc>
 map ; :
 nnoremap gp `[v`]                     " select last pasted lines
+map // :nohlsearch<enter>
+
+" tab navigation
+" caveat: t is a default mapping for 'until'
+map tt :tab split<enter>
+map tT <c-w>T
+map tc :tabclose<enter>
+map tp :tabprevious<enter>
+map tn :tabnext<enter>
+map to :tabonly<enter>
 
 
 " ---------------------------------------------------------------------------

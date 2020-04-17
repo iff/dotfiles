@@ -7,32 +7,36 @@ set modelines=0
 "let g:secure_modelines_modelines=15 " 15 available modelines
 
 " ---------------------------------------------------------------------------
-" Vundle
-filetype off
+" Plug
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+call plug#begin('~/.vim/plugged')
 
-Bundle 'gmarik/vundle'
-Bundle 'morhetz/gruvbox'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
-Bundle 'leafgarland/typescript-vim'
-Bundle 'sjl/gundo.vim'
-Bundle 'tpope/vim-airline'
-Bundle 'tpope/vim-sleuth'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'ervandew/supertab'
-Bundle 'easymotion/vim-easymotion'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'vim-syntastic/syntastic'
+Plug 'gmarik/vundle'
+Plug 'morhetz/gruvbox'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'sjl/gundo.vim'
+Plug 'tpope/vim-airline'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'
+Plug 'davidhalter/jedi-vim'
+Plug 'vim-syntastic/syntastic'
 
 " Git plugins
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-rhubarb'
-Bundle 'int3/vim-extradite'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
+Plug 'int3/vim-extradite'
+
+" Test
+Plug '~/src/fzf-ptags'
+
+call plug#end()
 
 
 " ---------------------------------------------------------------------------
@@ -118,19 +122,36 @@ autocmd BufWritePre * :%s/\s\+$//e
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent! loadview
 
-" trying autosave and co
-set autoread " autoread files if changed outside and not locally, on focus events, does not work out of the box in tmux vim
-au FocusLost * :wa
-
 " improve editing TeX files
 autocmd Bufread,BufNewFile  *.tex setlocal tabstop=2 shiftwidth=2 spell
-" less spacy for Python files
-autocmd Bufread,BufNewFile  *.py setlocal tabstop=2 shiftwidth=2
 
 syntax on
 set background=dark
 colorscheme gruvbox
 let g:AutoClosePreservDotReg=0
+
+
+" ---------------------------------------------------------------------------
+" autosave and -read
+" interesting events:
+" InsertLeave, TextChanged, CursorHold
+" TextChangedI, CursorHoldI
+" FocusGained, FocusLost
+" (needs events configured coming from the terminal or tmux, check if that works)
+set autoread
+set updatetime=500
+augroup autosave
+    autocmd!
+    autocmd InsertLeave,TextChanged * silent! w
+    autocmd CursorHold,CursorHoldI * silent! update
+    autocmd FocusLost * silent! wa
+    autocmd FocusGained * checktime
+augroup END
+" problems:
+" should not run :w when buffer has no file
+" silent! surpressed that error messages
+" but would be nicer not to try at all
+" CursorHoldI doesn't seem to trigger update currently
 
 
 " ---------------------------------------------------------------------------

@@ -35,23 +35,21 @@ set -g status-right-length 150
 
 set-option -g status-bg "#3c3836"
 set-option -g status-fg "#d5c4a1"
-set-option -g status-attr default
+# set-option -g status-attr default
 
 # default window title colors
-set-window-option -g window-status-bg default
-set-window-option -g window-status-fg "#d5c4a1"
+set-option -g window-status-style 'fg=#d5c4a1,bg=default'
 
 # active window title colors
-set-window-option -g window-status-current-bg "#504945" 
-set-window-option -g window-status-current-fg "#fbf17c"
+set-option -g window-status-current-style 'fg=#fbf17c,bg=#504945'
 
 # pane border
-set-option -g pane-border-fg "#d65d0e"
-set-option -g pane-active-border-fg "#d65d0e"
+set-option -g pane-border-style 'fg=#d65d0e'
+set-option -g pane-active-border-style 'fg=#d65d0e'
 
 # message text
-set-option -g message-bg "#2b303b"
-set-option -g message-fg "#c0c5ce"
+# set-option -g message-bg "#2b303b"
+# set-option -g message-fg "#c0c5ce"
 
 # pane number display
 set-option -g display-panes-active-colour "#a3be8c"

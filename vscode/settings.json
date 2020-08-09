@@ -1,13 +1,23 @@
 {
     "workbench.colorTheme": "Gruvbox Dark (Medium)",
     "workbench.editor.enablePreview": false,
+    "workbench.statusBar.feedback.visible": false,
 
-    "editor.fontFamily":  ["Monoid  HalfTight"], 
-    "editor.fontSize": 13,
-    "editor.fontLigatures": true,
+    //"editor.fontFamily":  ["Monoid  HalfTight"],
+    "editor.fontSize": 14,
+    //"editor.fontLigatures": true,
     "editor.lineNumbers": "off",
+    "editor.largeFileOptimizations": false,
+
+    "window.zoomLevel": 1,
+
+    "files.associations": {
+        "*.mdx": "markdown",
+    },
 
     "python.linting.flake8Args": ["--ignore=E126,E251,E261,E265,E302,E303,E402,E501,E731,W191", "--verbose"],
+    "python.jediEnabled": false,
+    "python.autoComplete.addBrackets": true,
 
     "vim.easymotion": true,
     "vim.leader": ",",
@@ -52,9 +62,4 @@
             ]
         },
     ],
-
-    "python.jediEnabled": false,
-    "python.autoComplete.addBrackets": true,
-    "workbench.statusBar.feedback.visible": false,
-    "editor.largeFileOptimizations": false,
 }

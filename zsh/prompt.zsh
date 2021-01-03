@@ -29,9 +29,9 @@ precmd() {
   title "zsh" "%m" "%55<...<%~"
 
   if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-    zstyle ':vcs_info:git*' formats 'on %F{green}%b%f%F{red}%u%c%f'
+    zstyle ':vcs_info:git*' formats 'on %F{green}%b%f%F{red}%u%c%f'
   } else {
-    zstyle ':vcs_info:git*' formats 'on %F{red}%b%f%F{red}%u%c%f'
+    zstyle ':vcs_info:git*' formats 'on %F{red}%b%f%F{red}%u%c%f'
   }
 
   vcs_info

@@ -106,12 +106,18 @@ let g:semshi#simplify_markup = 1
 " ---------------------------------------------------------------------------
 " Settings for neoformat
 
-let g:neoformat_enabled_python = ['black']
+let g:neoformat_enabled_python = ['isort', 'black']
+let g:neoformat_run_all_formatters = 1
 let g:neoformat_try_formatprg = 1
 
 let g:neoformat_python_black = {
             \ 'exe': 'black',
-            \ 'args': ['-', '--quiet', '--target-version=py36'],
+            \ 'args': ['--quiet', '--target-version=py38', '-'],
+            \ 'stdin': 1,
+            \ }
+let g:neoformat_python_isort = {
+            \ 'exe': 'isort',
+            \ 'args': ['--profile=black', '--combine-as', '-'],
             \ 'stdin': 1,
             \ }
 
@@ -119,7 +125,8 @@ let g:neoformat_basic_format_align = 0
 let g:neoformat_basic_format_retab = 1
 let g:neoformat_basic_format_trim = 1
 
-map <leader>f :Neoformat<cr>
+"map <leader>f :Neoformat<cr>
+map == :Neoformat<cr>
 
 "augroup fmt
 "  autocmd!
@@ -171,7 +178,7 @@ nmap S <Plug>(easymotion-overwin-f2)
 " Fugitive / Git
 
 nnoremap <leader>gd :Gdiff<cr>
-nnoremap <leader>gs :Gstatus<cr>
+nnoremap <leader>gs :Gstatus<cr><c-w>T
 nnoremap <leader>gw :Gwrite<cr>
 nnoremap <leader>ga :Gadd<cr>
 nnoremap <leader>gb :Gblame<cr>

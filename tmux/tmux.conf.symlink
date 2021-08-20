@@ -62,13 +62,15 @@ set-window-option -g clock-mode-colour "#fbf17c"
 set-window-option -g window-status-bell-style fg="#2b303b",bg="#bf616a"
 
 # status bar
-set -g status-left ' #S  '
+set -g status-left ' #S |'
 set -g window-status-format " #I #W "
-set -g window-status-current-format " #I  #W "
-set -g status-right '%A %m/%d %l:%M %p'
+set -g window-status-current-format " #I *#W "
+set -g status-right '' # '%A %m/%d %l:%M %p'
 
 # fix paths for new windows
 bind c new-window -c "#{pane_current_path}"
+
+setw -g mode-keys vi
 
 # Splitting panes.
 bind | split-window -h -c "#{pane_current_path}"

@@ -5,7 +5,7 @@
 
 [core]
     pager = less -FRSX
-    editor = vim
+    editor = nvim
     excludesfile = /home/iff/.gitignore
 
 [color]

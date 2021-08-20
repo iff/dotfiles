@@ -32,6 +32,8 @@
     bs  = !git-branch-status
     bsi = !git-branch-status -i
 
+    sw = !git checkout $(git branch -a --format '%(refname:short)' | sed 's~origin/~~' | sort | uniq | fzf)
+
     ci  = commit
     co  = checkout
 

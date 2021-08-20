@@ -2,12 +2,13 @@
 export MYZSH=$HOME/.dotfiles/
 
 source $MYZSH/zsh/aliases.zsh
-source $MYZSH/zsh/antigen.zsh
 source $MYZSH/zsh/config.zsh
 source $MYZSH/zsh/fpath.zsh
-source $MYZSH/zsh/plugins.zsh
 source $MYZSH/zsh/prompt.zsh
 source $MYZSH/zsh/window.zsh
+
+source $MYZSH/zsh/antigen.zsh
+source $MYZSH/zsh/plugins.zsh
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

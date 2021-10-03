@@ -1,0 +1,21 @@
+#!/bin/zsh
+set -eu -o pipefail
+
+pkill redshift || true
+redshift -r -v |& ts '%F %T' >& $HOME/.log-redshift &
+
+xset -dpms
+xset s off
+
+# remap caps lock to backspace (moonlander ahead)
+#setxkbmap -option caps:backspace -option shift:both_capslock
+
+#feh --bg-scale $HOME/Downloads/heic2007a_4k.tif
+feh --bg-scale $HOME/pics/tmp/DSCF0237.jpg
+
+(
+  cd $HOME/src/ltstatus
+  nohup ./bin/ltstatus examples/dwm-status.py > /dev/null &
+)
+
+# sudo protonvpn c -f

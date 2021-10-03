@@ -9,7 +9,7 @@ ln -sfT ~/.dotfiles/nvim/lua/init.lua ~/.config/nvim/lua/init.lua
 # dependencies for vim plugins
 pip3 install black pynvim isort
 
-./install
+$(dirname $0)/install
 
 if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     curl --fail --location --create-dirs \

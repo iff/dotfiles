@@ -25,7 +25,7 @@ sudo apt-get upgrade -qqy
 sudo apt-get install -qqy --install-recommends linux-generic-hwe-20.04
 sudo apt-get autoremove -y
 
-sudo timedatectl set-timezone Europe/Bern
+sudo timedatectl set-timezone Europe/Zurich
 
 # apt installs (sorted)
 i=()

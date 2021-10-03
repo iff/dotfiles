@@ -1,7 +1,7 @@
+# bash <(curl https://raw.githubusercontent.com/iff/dotfiles/master/bootstrap/sh)
+
 #!/bin/bash
 set -eux -o pipefail
-
-# run with curl https://raw.githubusercontent.com/iff/dotfiles/master/bootstrap/sh | sh
 
 install_gh() {
     sudo apt install gpg

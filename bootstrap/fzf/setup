@@ -1,0 +1,16 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# originally got it from git, newer, but not so convenient
+# note, not building, only downloading bin
+#if [[ -d ~/fzf ]]; then
+#    # could update here, but we don't build currently
+#    # https://github.com/junegunn/fzf/blob/master/BUILD.md
+#else
+#    git clone https://github.com/junegunn/fzf.git ~/fzf
+#    ~/fzf/install --bin
+#    # todo not sure if --bin also sets up man pages
+#fi
+
+# now available with apt, and new enough
+sudo apt-get install -yqq fzf

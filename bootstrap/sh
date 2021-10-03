@@ -19,3 +19,4 @@ hostname=$(cat /proc/sys/kernel/hostname)
 ssh-keygen -t ed25519 -C "iff@yvesineichen.com" -f ~/.ssh/${hostname} -N ''
 
 gh auth login --hostname GitHub.com
+gh repo clone dotfiles ~/.dotfiles

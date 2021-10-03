@@ -1,0 +1,20 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+cd $base
+
+# config file
+ln -sfT ~/.dotfiles/tmux/tmux.conf.symlink ~/.tmux.conf
+
+( # install tmux from git
+
+    cd $base/tmux
+
+    sudo apt-get -yqq install git autoconf automake pkg-config libevent-dev libncurses5-dev byacc
+
+    sh autogen.sh
+    ./configure
+    make -j$(nproc)
+    sudo make install
+)

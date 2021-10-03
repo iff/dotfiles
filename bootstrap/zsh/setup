@@ -1,0 +1,13 @@
+#!/bin/bash
+set -eux -o pipefail
+
+# switch to zsh
+if [ -z ${ZSH_VERSION+1} ]; then
+    which zsh || sudo apt-get install -qqy zsh
+    exec zsh $0
+fi
+
+sudo chsh -s $(which zsh) $(whoami)
+
+ln -sfT ~/.dotfiles/zsh/zshrc.symlink ~/.zshrc
+touch ~/.localrc

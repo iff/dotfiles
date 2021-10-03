@@ -1,0 +1,6 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+sudo apt-get install -yqq git
+
+ln -sfT ~/.dotfiles/git/gitconfig.symlink ~/.gitconfig

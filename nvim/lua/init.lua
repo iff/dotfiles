@@ -28,8 +28,8 @@ Plug('numirias/semshi', {['do'] = ':UpdateRemotePlugins'})        -- python syn-
 Plug 'sbdchd/neoformat'                                           -- formatter
 Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins'})  -- autocomplete on steroids
 
-Plug '~/src/vimminent'
-Plug '~/src/pdocs'
+Plug '~/.dotfiles/bootstrap/nvim/vimminent'
+Plug '~/.dotfiles/bootstrap/pdocs/pdocs'
 
 vim.call('plug#end')
 

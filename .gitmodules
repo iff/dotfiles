@@ -1,0 +1,15 @@
+[submodule "bootstrap/pdocs/pdocs"]
+	path = bootstrap/pdocs/pdocs
+	url = git@github.com:dkuettel/pdocs.git
+[submodule "bootstrap/ptags/ptags"]
+	path = bootstrap/ptags/ptags
+	url = git@github.com:dkuettel/ptags.git
+[submodule "bootstrap/tmux/tmux"]
+	path = bootstrap/tmux/tmux
+	url = https://github.com/tmux/tmux.git
+[submodule "bootstrap/nvim/nvim"]
+	path = bootstrap/nvim/nvim
+	url = https://github.com/neovim/neovim.git
+[submodule "bootstrap/nvim/vimminent"]
+	path = bootstrap/nvim/vimminent
+	url = git@github.com:dkuettel/vimminent.git

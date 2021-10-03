@@ -1,0 +1,31 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+mkdir -p ~/.config/nvim/lua
+# TODO syntax, ftdetect, after
+ln -sfT ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+ln -sfT ~/.dotfiles/nvim/lua/init.lua ~/.config/nvim/lua/init.lua
+
+# dependencies for vim plugins
+pip3 install black pynvim isort
+
+./install
+
+if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+    curl --fail --location --create-dirs \
+        --output ~/.local/share/nvim/site/autoload/plug.vim \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    log=$(tempfile)
+    nvim -c PlugInstall -c "w $log" -c qa
+
+    # hacky check if any plugin failed to install
+    # (the output of plug starts with an "x" on a failed item)
+    if egrep '^x' $log; then
+        cat $log
+        exit 1
+    fi
+
+    rm $log
+
+fi

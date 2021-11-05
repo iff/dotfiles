@@ -1,0 +1,48 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# previously manually
+#curl -sS https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | sudo tee /etc/apt/sources.list.d/google-chrome.list
+#sudo apt update
+#sudo apt install -yqq google-chrome-stable
+
+if ! which google-chrome; then
+    # install from deb file
+    # it will also add apt sources for later updates
+    wget --fail \
+        'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' \
+        -O /tmp/google-chrome.deb
+    sudo apt-get install -yqq /tmp/google-chrome.deb
+    rm /tmp/google-chrome.deb
+
+    # NOTE: at this point apt has it in the index
+    # there is google-chrome-stable, google-chrome-beta, google-chrome-unstable
+
+fi
+
+apts=(
+    jq # parse json to change preferences
+    moreutils # for sponge
+    fonts-stix # some math pages seem to need that (also useful for firefox or other browsers)
+)
+sudo apt-get -yqq install $apts
+
+(
+    f=~/.config/google-chrome/Default/Preferences
+    if [[ ! -f $f ]]; then
+        if [[ -v DISPLAY ]]; then
+            echo 'start and exit chrome to intialize and adapt config files'
+            google-chrome
+        else
+            echo 'cant start chrome because no DISPLAY'
+            exit 1
+        fi
+    fi
+    while [[ ! -f $f ]]; do
+        sleep 1s
+        echo "waiting for chrome to initialize $f"
+    done
+    # system border works better with tiling window managers
+    jq '.browser.custom_chrome_frame=false' $f | sponge $f
+)

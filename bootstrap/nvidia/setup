@@ -1,0 +1,27 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# simple check to see if there is an nvidia gpu, might not be perfect
+# TODO this failed for A100 instances
+if ! lspci | grep -e 'VGA.*NVIDIA' -e Tesla; then
+    echo 'no nvidia gpu found'
+    exit 0
+fi
+
+# use
+# > ubuntu-drivers list
+# to see what are the available options
+# to switch to a newer version eventually
+
+sudo apt-get install -yqq ubuntu-drivers-common
+
+# check what is the newest recommended version for nvidia
+latest=$(ubuntu-drivers list | awk '/^nvidia-driver-[0-9]+,/ {print substr($1, 0, length($1)-1)}' | sort | tail -n 1)
+expected=nvidia-driver-495
+
+if [[ $latest != $expected ]]; then
+    echo "expected $expected but found $latest"
+    exit 1
+fi
+
+sudo apt install -yqq $expected

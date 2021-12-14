@@ -13,3 +13,9 @@
 [submodule "bootstrap/nvim/vimminent"]
 	path = bootstrap/nvim/vimminent
 	url = git@github.com:dkuettel/vimminent.git
+[submodule "bootstrap/dwm/dwm"]
+	path = bootstrap/dwm/dwm
+	url = git@github.com:iff/dwm.git
+[submodule "bootstrap/ltstatus/ltstatus"]
+	path = bootstrap/ltstatus/ltstatus
+	url = git@github.com:dkuettel/ltstatus.git

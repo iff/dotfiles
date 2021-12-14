@@ -1,0 +1,7 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# FIXME dont change zshrc
+curl -L https://nixos.org/nix/install | sh
+
+echo "if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi" >> $HOME/.localrc

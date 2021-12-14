@@ -61,6 +61,7 @@ setups=(
     ptags
     tmux
     nvim
+    nix
 )
 for i in $setups; do
     ../$i/setup

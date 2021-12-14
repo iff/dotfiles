@@ -1,0 +1,38 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+# NOTE
+# this could be both .xinitrc or .xsession
+# startx calls .xinitrc and if it doesn't exist
+# then it uses system defaults in /etc/X11/Xinit
+# and /etc/X11/Xsession and then starts
+# ~/.xsession which results in a cleaner setup
+# (eg, dbus and other ubuntu(desktop) defaults)
+
+# all log files here we recreate, we dont keep old xsession's logs
+exec > >(ts '%F %T' >& .log-dwm)
+exec 2>&1
+
+# monitor never off
+xset -dpms
+xset s off
+setterm --blank 0 --powerdown 0
+
+pkill redshift || true
+redshift -r -v |& ts '%F %T' >& $HOME/.log-redshift &
+
+xsetroot -bg black
+xsetroot -solid black
+feh --bg-scale $HOME/pics/tmp/DSCF0237.jpg
+
+# high dpi
+# export GDK_SCALE=2
+
+(
+  cd $HOME/src/ltstatus
+  nohup ./bin/ltstatus examples/dwm-status.py > /dev/null &
+)
+
+dwm
+
+kill %status || true

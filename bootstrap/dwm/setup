@@ -1,0 +1,31 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+h=${0:a:h}
+
+i=()
+i+=pulseaudio-utils
+i+=xinit
+sudo apt-get install -yqq $i
+
+( # dwm
+    cd $h/dwm
+    sudo make install
+)
+
+# note:
+# startx calls .xinitrc and if it doesn't exist
+# then it uses system defaults in /etc/X11/Xinit
+# and /etc/X11/Xsession and then starts
+# ~/.xsession which results in a cleaner setup (eg, dbus)
+if [[ -e ~/.xinitrc ]]; then
+    echo 'should not have an ~/.xinitrc, because then .xsession will not be used'
+    false
+fi
+ln -sfT $h/xsession ~/.xsession
+
+( # cursor themes for X
+    sudo apt-get install -yqq oxygen-cursor-theme oxygen-cursor-theme-extra
+    mkdir -p ~/.icons
+    ln -sfT /usr/share/icons/oxy-blue/ ~/.icons/default
+)

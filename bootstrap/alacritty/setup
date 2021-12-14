@@ -1,0 +1,39 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+cd $base
+
+(
+    cd $base/alacritty
+
+    if which rustup; then
+        # TODO we might never update rustup?
+        # see https://rust-lang.github.io/rustup/basics.html#keeping-rustup-up-to-date ?
+    else
+        curl --fail --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o ./install-rustup.sh
+        # NOTE paths are set already in i/zsh/path.zsh for rustup
+        sh install-rustup.sh -y --no-modify-path
+        rm install-rustup.sh
+    fi
+    rustup override set stable
+    rustup update stable
+
+    dependencies=(
+        cmake
+        pkg-config
+        libfreetype6-dev
+        libfontconfig1-dev
+        libxcb-xfixes0-dev
+        libxkbcommon-dev
+        python3
+        libegl1-mesa-dev  # only needed for wayland with nvidia gpu for EGL drivers
+    )
+    sudo apt-get install -y $dependencies
+
+    cargo build --release
+    infocmp alacritty || (echo 'no alacritty terminfo'; exit 1)
+    cp --force target/release/alacritty ~/bin
+)
+
+ln -sfT $base/alacritty.yml ~/.alacritty.yml

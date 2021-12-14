@@ -39,16 +39,16 @@ sudo apt-get install -qqy $i
 
 # ordered list of custom setups
 setups=(
-    docker
-    redshift
-    # dwm # sometimes '/dev/fb0: Permission denied' with startx, but probably not with good nvidia-drivers?
-    # alacritty # fonts might be missing here, ubuntu mono is probably always available
-    # ltstatus
-    sound
+    alacritty
     chrome
+    docker
+    dwm
+    ltstatus
+    redshift
     slack
-    steam
+    sound
     spotify
+    steam
     syncthing
 )
 for i in $setups; do

@@ -6,6 +6,8 @@ h=${0:a:h}
 i=()
 i+=pulseaudio-utils
 i+=xinit
+i+=libxft-dev
+i+=libxinerama-dev
 sudo apt-get install -yqq $i
 
 ( # dwm

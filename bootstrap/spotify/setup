@@ -7,13 +7,13 @@ set -eux -o pipefail
 # con: doesnt work with networkd, needs NetworkManager (set in netplan as renderer)
 #   see https://community.spotify.com/t5/Desktop-Linux/No-internet-connection-detected-error-code-4-on-Ubuntu-20-04-1/td-p/5062274
 # TODO maybe the above "bug" is fixed at some point?
-curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add -
+curl -sS https://download.spotify.com/debian/pubkey_5E3C45D7B312C643.gpg | sudo apt-key add -
 echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 sudo apt-get update
 sudo apt-get install -yqq spotify-client
 
 # as a hacky check to see that we currently use NetworkManager as explained above
-if ! grep '  renderer: NetworkManager' /etc/netplan/*; then
-    echo 'spotify probably doesnt work without using NetworkManager in netplan'
-    exit 1
-fi
+#if ! grep '  renderer: NetworkManager' /etc/netplan/*; then
+#    echo 'spotify probably doesnt work without using NetworkManager in netplan'
+#    exit 1
+#fi

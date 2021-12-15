@@ -8,23 +8,5 @@ sudo apt-get -yqq install docker.io
 sudo docker run hello-world
 
 # to use it without sudo
-sudo usermod -A -G docker $USER
+sudo usermod -a -G docker $USER
 echo 'use of docker without sudo only takes effect after new login, ssh localhost, su --login $USER, new tmux server, ...'
-
-if [[ which nvidia-smi >/dev/null ]]; then
-
-    curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | \
-        sudo apt-key add -
-    curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu$(lsb_release --release --short)/nvidia-docker.list | \
-        sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-
-    sudo apt-get update
-    sudo apt-get -yqq install nvidia-docker2
-
-    # reload the settings
-    sudo service docker restart
-
-    # could also pull latest potentially
-    sudo nvidia-docker run --rm nvidia/cuda:9.0-cudnn7-runtime nvidia-smi
-
-fi

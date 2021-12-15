@@ -28,21 +28,3 @@ apts=(
 )
 sudo apt-get -yqq install $apts
 
-(
-    f=~/.config/google-chrome/Default/Preferences
-    if [[ ! -f $f ]]; then
-        if [[ -v DISPLAY ]]; then
-            echo 'start and exit chrome to intialize and adapt config files'
-            google-chrome
-        else
-            echo 'cant start chrome because no DISPLAY'
-            exit 1
-        fi
-    fi
-    while [[ ! -f $f ]]; do
-        sleep 1s
-        echo "waiting for chrome to initialize $f"
-    done
-    # system border works better with tiling window managers
-    jq '.browser.custom_chrome_frame=false' $f | sponge $f
-)

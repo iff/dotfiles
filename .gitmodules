@@ -16,6 +16,11 @@
 [submodule "bootstrap/dwm/dwm"]
 	path = bootstrap/dwm/dwm
 	url = git@github.com:iff/dwm.git
+	branch = iff
 [submodule "bootstrap/ltstatus/ltstatus"]
 	path = bootstrap/ltstatus/ltstatus
 	url = git@github.com:dkuettel/ltstatus.git
+	branch = main
+[submodule "bootstrap/alacritty/alacritty"]
+	path = bootstrap/alacritty/alacritty
+	url = https://github.com/alacritty/alacritty.git

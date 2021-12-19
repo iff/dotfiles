@@ -45,6 +45,7 @@ setups=(
     dwm
     ltstatus
     redshift
+    roam
     slack
     sound
     spotify

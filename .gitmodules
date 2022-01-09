@@ -27,3 +27,7 @@
 [submodule "bootstrap/off-blast/off-blast"]
 	path = bootstrap/off-blast/off-blast
 	url = git@github.com:iff/off-blast.git
+[submodule "bootstrap/one-shell-history/one-shell-history"]
+	path = bootstrap/one-shell-history/one-shell-history
+	url = git@github.com:dkuettel/one-shell-history.git
+	branch = main

@@ -62,6 +62,7 @@ setups=(
     tmux
     nvim
     nix
+    one-shell-history
 )
 for i in $setups; do
     ../$i/setup

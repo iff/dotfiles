@@ -24,3 +24,6 @@
 [submodule "bootstrap/alacritty/alacritty"]
 	path = bootstrap/alacritty/alacritty
 	url = https://github.com/alacritty/alacritty.git
+[submodule "bootstrap/off-blast/off-blast"]
+	path = bootstrap/off-blast/off-blast
+	url = git@github.com:iff/off-blast.git

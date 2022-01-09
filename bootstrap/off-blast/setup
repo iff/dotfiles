@@ -1,0 +1,20 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+h=${0:a:h}
+
+i=()
+i+=xinit
+i+=xdotool
+sudo apt-get install -yqq $i
+
+( # grab
+    cd $h/src/grab
+    make install DESTDIR=$HOME/bin
+)
+
+( # off-blast
+    ln -sfT $h/bin/lstcmds $HOME/bin/lstcmds
+    ln -sfT $h/bin/off-blast $HOME/bin/off-blast
+    ln -sfT $h/bin/gds $HOME/bin/gds
+)

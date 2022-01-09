@@ -10,7 +10,7 @@ set -eux -o pipefail
 if ! which google-chrome; then
     # install from deb file
     # it will also add apt sources for later updates
-    wget --fail \
+    wget \
         'https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb' \
         -O /tmp/google-chrome.deb
     sudo apt-get install -yqq /tmp/google-chrome.deb

@@ -4,6 +4,7 @@ set -eux -o pipefail
 cd ${0:a:h}/pdocs
 
 # todo eventually have it in the right zshenv or so?
+sudo apt install -yyq pipenv
 export PIPENV_VENV_IN_PROJECT=1
 pipenv install
 

@@ -31,6 +31,7 @@ i+=gthumb
 i+=nautilus
 i+=scrot
 i+=suckless-tools
+i+=fonts-ubuntu
 i+=usbmount
 i+=xclip
 i+=xdotool

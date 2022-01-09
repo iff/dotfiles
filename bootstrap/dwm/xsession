@@ -23,13 +23,13 @@ redshift -r -v |& ts '%F %T' >& $HOME/.log-redshift &
 
 xsetroot -bg black
 xsetroot -solid black
-feh --bg-scale $HOME/pics/tmp/DSCF0237.jpg
+#feh --bg-scale $HOME/pics/tmp/DSCF0237.jpg
 
 # high dpi
-# export GDK_SCALE=2
+export GDK_SCALE=2
 
 (
-  cd $HOME/src/ltstatus
+  cd $HOME/.dotfiles/bootstrap/ltstatus/ltstatus
   nohup ./bin/ltstatus examples/dwm-status.py > /dev/null &
 )
 

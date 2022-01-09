@@ -1,0 +1,14 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+base=${0:a:h}
+cd $base
+
+(
+    cd $base/one-shell-history
+    PIPENV_VENV_IN_PROJECT=1 pipenv install
+    systemd/install
+    mkdir -p $HOME/.osh
+    ln -s $base/one-shell-history/bin/osh ~/bin/osh
+    echo "source shells/zsh to your .zshrc"
+)

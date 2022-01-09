@@ -14,8 +14,6 @@ xset s off
 feh --bg-scale $HOME/pics/tmp/DSCF0237.jpg
 
 (
-  cd $HOME/src/ltstatus
-  nohup ./bin/ltstatus examples/dwm-status.py > /dev/null &
+  cd $HOME/.dotfiles/bootstrap/ltstatus/ltstatus
+  nohup ./bin/ltstatus ../dwm.py > /dev/null &
 )
-
-# sudo protonvpn c -f

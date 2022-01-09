@@ -1,0 +1,15 @@
+#!/bin/zsh
+set -eux -o pipefail
+
+mkdir -p ~/sshots
+
+# sleep to make pstart disappear before the screenshot
+# alternatively, map it to a dwm shortcut
+sleep 0.2s
+
+# scrot in fullscreen mode and then edit and manually crop
+scrot ~/sshots/'%Y-%m-%d--%H:%M:%S.png' --silent --exec 'gthumb $f'
+
+# alternatives with cropping before screenshooting
+# > gnome-screenshot --area
+# > scrot ~/sshots/'%Y-%m-%d--%H:%M:%S.png' --silent --select --exec 'gthumb $f'

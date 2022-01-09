@@ -30,7 +30,7 @@ export GDK_SCALE=2
 
 (
   cd $HOME/.dotfiles/bootstrap/ltstatus/ltstatus
-  nohup ./bin/ltstatus examples/dwm-status.py > /dev/null &
+  nohup ./bin/ltstatus ../dwm.py > /dev/null &
 )
 
 dwm

@@ -6,8 +6,6 @@ vim.call('plug#begin', '~/.local/share/nvim/plugged')
 -- colors for vim
 Plug('morhetz/gruvbox')             -- colors for vim
 Plug('EdenEast/nightfox.nvim', { ['branch'] = 'main' })
--- Plug 'mhartington/oceanic-next'
--- Plug 'rktjmp/lush.nvim', { 'branch': 'main' }
 -- Plug 'npxbr/gruvbox.nvim', { 'branch': 'main' }
 
 Plug 'sjl/gundo.vim'                -- undo history tree

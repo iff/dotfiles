@@ -4,7 +4,7 @@ set -eux -o pipefail
 mkdir -p ~/.config/nvim/lua
 # TODO syntax, ftdetect, after
 ln -sfT ~/.dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-ln -sfT ~/.dotfiles/nvim/lua/init.lua ~/.config/nvim/lua/init.lua
+ln -sfT ~/.dotfiles/nvim/lua ~/.config/nvim/lua
 
 # dependencies for vim plugins
 pip3 install black pynvim isort

@@ -43,13 +43,6 @@ vim.cmd [[
   augroup END
 ]]
 
--- "Hub"
---nnoremap <leader>H :Gbrowse<cr>
---vnoremap <leader>H :Gbrowse<cr>
-
--- Extradite
-map('', '<leader>gh', ':Extradite!<cr>', {noremap = true})
-
 -- ---------------------------------------------------------------------------
 -- vimminent
 
@@ -63,9 +56,9 @@ map('', '<leader>F', ':call NavAllFiles()<cr>', {})
 map('', '<leader>L', ':call NavAllLines()<cr>', {})
 map('', '<leader>l', ':call NavProjectLines()<cr>', {})
 
-map('', '<leader>D',  ':call NavCwordDocs()<cr>', {})
-map('', '<leader>DD', ':call NavDocs()<cr>', {})
-
+vim.g['pdocs_default_mappings'] = 1
+-- map('', '<leader>D',  ':call NavCwordDocs()<cr>', {})
+-- map('', '<leader>DD', ':call NavDocs()<cr>', {})
 
 
 -- ---------------------------------------------------------------------------
@@ -116,7 +109,6 @@ inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 -- shenshi
 -- todo maybe exclude local, speed? too many colors?
 vim.g['semshi#excluded_hl_groups'] = {}
--- todo potentially slow?
 vim.g['semshi#always_update_all_highlights'] = true
 -- problem: if semshi would use the default keyword for its highlights, we didn't have to workaround with autocmds
 --                                                   cterm-colors

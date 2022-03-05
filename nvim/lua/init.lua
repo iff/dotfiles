@@ -47,6 +47,8 @@ local options = function()
 
   set.timeoutlen = 1000
   set.ttimeoutlen = 0
+
+  set.inccommand='nosplit'
 end
 
 local enable_autosave = function()

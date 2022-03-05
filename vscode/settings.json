@@ -1,10 +1,10 @@
 {
-    "workbench.colorTheme": "Gruvbox Dark (Medium)",
+    "workbench.colorTheme": "Base16 Dark Ocean",
     "workbench.editor.enablePreview": false,
     "workbench.statusBar.feedback.visible": false,
 
-    //"editor.fontFamily":  ["Monoid  HalfTight"],
-    "editor.fontSize": 14,
+    "editor.fontFamily":  "Ubuntu Mono",
+    "editor.fontSize": 20,
     //"editor.fontLigatures": true,
     "editor.lineNumbers": "off",
     "editor.largeFileOptimizations": false,
@@ -62,4 +62,7 @@
             ]
         },
     ],
+    "python.analysis.completeFunctionParens": true,
+    "jupyter.interactiveWindowMode": "perFile",
+    "jupyter.askForKernelRestart": false,
 }

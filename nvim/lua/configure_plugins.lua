@@ -3,12 +3,12 @@ local map = vim.api.nvim_set_keymap
 -- ---------------------------------------------------------------------------
 -- Settings for Easymotion
 
---vim.g['EasyMotion_do_mapping'] = 0
---map('n', 's', '<Plug>(easymotion-overwin-f)', {})
---map('n', 'S', '<Plug>(easymotion-overwin-f2)', {})
+vim.g['EasyMotion_do_mapping'] = 0
+map('n', 's', '<Plug>(easymotion-overwin-f)', {})
+map('n', 'S', '<Plug>(easymotion-overwin-f2)', {})
 
-map('', 's', ':HopChar1', {})
-map('', 'S', ':HopChar2', {})
+--map('', 's', ':HopChar1', {})
+--map('', 'S', ':HopChar2', {})
 
 
 -- ---------------------------------------------------------------------------

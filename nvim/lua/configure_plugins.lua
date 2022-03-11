@@ -28,7 +28,7 @@ map('', '<leader>gco', ':Git checkout<cr>', {noremap = true})
 map('', '<leader>gci', ':Git commit<cr>', {noremap = true})
 map('', '<leader>gm',  ':Gmove<cr>', {noremap = true})
 map('', '<leader>gr',  ':Gremove<cr>', {noremap = true})
-map('', '<leader>gl',  ':Git log<cr>', {noremap = true})
+map('', '<leader>gl',  ':Gclog<cr>', {noremap = true})
 
 vim.cmd [[
   augroup ft_fugitive
@@ -40,12 +40,44 @@ vim.cmd [[
 
 -- ---------------------------------------------------------------------------
 -- telescope
+local actions = require("telescope.actions")
+require("telescope").setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+      n = {
+        ["q"] = actions.close,
+      },
+    },
+  },
+})
 require('telescope').load_extension('coc')
 
 map('', '<leader>,',  ':Telescope git_files<cr>', {})
 map('', '<leader>.',  ':Telescope coc workspace_symbols<cr>', {})
 map('', '<leader>..',  ':Telescope coc document_symbols<cr>', {})
 
+
+map('', '<leader>d',  ':Telescope coc definitions<cr>', {})
+map('', '<leader>D',  ':Telescope coc diagnostics<cr>', {})
+
+
+require("nvim-treesitter.configs").setup({
+  sync_install = false,
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
+})
 
 -- ---------------------------------------------------------------------------
 -- vimminent

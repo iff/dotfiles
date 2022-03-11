@@ -6,6 +6,7 @@ antigen bundle git
 #antigen bundle pip
 #antigen bundle docker
 
-antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle dkuettel/zsh-syntax-highlighting
 
 antigen apply

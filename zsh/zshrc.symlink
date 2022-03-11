@@ -23,3 +23,9 @@ compinit
 
 # load every completion after autocomplete loads
 source $MYZSH/zsh/completion.zsh
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
+ZSH_HIGHLIGHT_MAXLENGTH=2000
+
+MANPAGER='nvim +Man!'

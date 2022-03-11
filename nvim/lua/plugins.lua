@@ -23,15 +23,20 @@ Plug 'easymotion/vim-easymotion'    -- the only movement command you will ever u
 -- Git plugins
 Plug 'airblade/vim-gitgutter'       -- show unstaged edits
 Plug 'tpope/vim-fugitive'           -- many git helpers
--- Plug 'int3/vim-extradite'           -- git commit browser
 
-Plug('numirias/semshi', {['do'] = ':UpdateRemotePlugins'})        -- python syn-tactic highlighting
--- Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+-- Plug('numirias/semshi', {['do'] = ':UpdateRemotePlugins'})        -- python syn-tactic highlighting
+Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'fannheyward/telescope-coc.nvim'
+
+Plug('neoclide/coc.nvim', {['branch'] = 'release'})
 
 Plug 'sbdchd/neoformat'                                           -- formatter
-Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins'})  -- autocomplete on steroids
+-- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins'})  -- autocomplete on steroids
 
-Plug '~/.dotfiles/bootstrap/nvim/vimminent'
-Plug '~/.dotfiles/bootstrap/pdocs/pdocs'
+-- Plug '~/.dotfiles/bootstrap/nvim/vimminent'
+-- Plug '~/.dotfiles/bootstrap/pdocs/pdocs'
 
 vim.call('plug#end')

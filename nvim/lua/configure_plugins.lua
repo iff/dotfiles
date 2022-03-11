@@ -17,11 +17,6 @@ map('n', 'S', '<Plug>(easymotion-overwin-f2)', {})
 vim.g['NERDDefaultAlign'] = 'left'
 
 -- ---------------------------------------------------------------------------
--- Settings for semshi
-
-vim.g['semshi#simplify_markup'] = 1
-
--- ---------------------------------------------------------------------------
 -- Fugitive / Git
 
 map('', '<leader>gd',  ':Git diff<cr>', {noremap = true})
@@ -44,19 +39,28 @@ vim.cmd [[
 ]]
 
 -- ---------------------------------------------------------------------------
+-- telescope
+require('telescope').load_extension('coc')
+
+map('', '<leader>,',  ':Telescope git_files<cr>', {})
+map('', '<leader>.',  ':Telescope coc workspace_symbols<cr>', {})
+map('', '<leader>..',  ':Telescope coc document_symbols<cr>', {})
+
+
+-- ---------------------------------------------------------------------------
 -- vimminent
 
-map('', '<leader>,',  ':call NavProjectFiles()<cr>', {})
-map('', '<leader>.',  ':call NavProjectSymbols()<cr>', {})
-map('', '<leader>..', ':call NavFileSymbols()<cr>', {})
-map('', '<leader>d',  ':call NavCwordProjectSymbols()<cr>', {})
-map('', '<leader>b',  ':call NavBuffers()<cr>', {})
+-- map('', '<leader>,',  ':call NavProjectFiles()<cr>', {})
+-- map('', '<leader>.',  ':call NavProjectSymbols()<cr>', {})
+-- map('', '<leader>..', ':call NavFileSymbols()<cr>', {})
+-- map('', '<leader>d',  ':call NavCwordProjectSymbols()<cr>', {})
+-- map('', '<leader>b',  ':call NavBuffers()<cr>', {})
 
-map('', '<leader>F', ':call NavAllFiles()<cr>', {})
-map('', '<leader>L', ':call NavAllLines()<cr>', {})
-map('', '<leader>l', ':call NavProjectLines()<cr>', {})
+-- map('', '<leader>F', ':call NavAllFiles()<cr>', {})
+-- map('', '<leader>L', ':call NavAllLines()<cr>', {})
+-- map('', '<leader>l', ':call NavProjectLines()<cr>', {})
 
-vim.g['pdocs_default_mappings'] = 1
+-- vim.g['pdocs_default_mappings'] = 1
 -- map('', '<leader>D',  ':call NavCwordDocs()<cr>', {})
 -- map('', '<leader>DD', ':call NavDocs()<cr>', {})
 
@@ -92,24 +96,25 @@ map('', '==', ':Neoformat<cr>', {})
 -- ---------------------------------------------------------------------------
 -- Settings for deoplete
 
-vim.g['deoplete#enable_at_startup'] = 1
+--vim.g['deoplete#enable_at_startup'] = 1
+
+--vim.cmd [[
+--  call deoplete#custom#option({ 'auto_complete_delay': 100, })
+--  call deoplete#custom#option('keyword_patterns', { 'denite-filter': '', })
+--  call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy', 'matcher_length'])
+--  inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+--]]
 
 vim.cmd [[
-call deoplete#custom#option({ 'auto_complete_delay': 100, })
-
-call deoplete#custom#option('keyword_patterns', { 'denite-filter': '', })
-
-call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy', 'matcher_length'])
-
-inoremap <silent><expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 ]]
-
 
 -- ---------------------------------------------------------------------------
 -- shenshi
--- todo maybe exclude local, speed? too many colors?
-vim.g['semshi#excluded_hl_groups'] = {}
-vim.g['semshi#always_update_all_highlights'] = true
+-- vim.g['semshi#simplify_markup'] = 1
+--vim.g['semshi#excluded_hl_groups'] = {}
+--vim.g['semshi#always_update_all_highlights'] = true
+
 -- problem: if semshi would use the default keyword for its highlights, we didn't have to workaround with autocmds
 --                                                   cterm-colors
 --      NR-16   NR-8    COLOR NAME
@@ -130,37 +135,37 @@ vim.g['semshi#always_update_all_highlights'] = true
 --      14      3*      Yellow, LightYellow
 --      15      7*      White
 
-vim.cmd [[
-  function! SemshiCustomColors()
-      " vim python highlights
-      hi pythonComment ctermfg=8 cterm=italic
-      "hi pythonStatement ctermfg=2 cterm=italic
-      hi pythonFunction ctermfg=4
-      "hi pythonInclude ctermfg=10 cterm=italic
-      hi pythonString ctermfg=2
-      hi pythonQuotes ctermfg=2
-      "hi pythonOperator ctermfg=2 cterm=italic
-      "hi pythonKeyword ctermfg=2 cterm=italic
-      "hi pythonConditional ctermfg=2 cterm=italic
-      "hi pythonDecorator ctermfg=4
-      "hi pythonDecoratorName ctermfg=10 cterm=italic
-      " semshi highlights
-      " todo missing different colors for type hints
-      " todo missing different colors for kw name vs kw value
-      hi semshiLocal ctermfg=7 cterm=none
-      "hi semshiGlobal ctermfg=4 cterm=none
-      hi semshiImported ctermfg=3 cterm=none
-      hi semshiParameter ctermfg=4 cterm=underline
-      hi semshiParameterUnused ctermfg=4 cterm=strikethrough
-      hi semshiAttribute ctermfg=12 cterm=none
-      "hi semshiFree ctermfg=15 cterm=bold
-      hi semshiBuiltin ctermfg=7 cterm=italic
-      hi semshiSelf ctermfg=8 cterm=italic
-      hi semshiUnresolved ctermfg=10 cterm=strikethrough
-      hi semshiSelected ctermfg=14 ctermbg=0 cterm=underline
-      hi semshiErrorSign ctermfg=1 cterm=none
-      sign define semshiError text=E> texthl=semshiErrorSign
-      hi semshiErrorChar ctermfg=10 cterm=strikethrough
-  endfunction
-  autocmd FileType python call SemshiCustomColors()
-]]
+--vim.cmd [[
+--  function! SemshiCustomColors()
+--      " vim python highlights
+--      hi pythonComment ctermfg=8 cterm=italic
+--      "hi pythonStatement ctermfg=2 cterm=italic
+--      hi pythonFunction ctermfg=4
+--      "hi pythonInclude ctermfg=10 cterm=italic
+--      hi pythonString ctermfg=2
+--      hi pythonQuotes ctermfg=2
+--      "hi pythonOperator ctermfg=2 cterm=italic
+--      "hi pythonKeyword ctermfg=2 cterm=italic
+--      "hi pythonConditional ctermfg=2 cterm=italic
+--      "hi pythonDecorator ctermfg=4
+--      "hi pythonDecoratorName ctermfg=10 cterm=italic
+--      " semshi highlights
+--      " todo missing different colors for type hints
+--      " todo missing different colors for kw name vs kw value
+--      hi semshiLocal ctermfg=7 cterm=none
+--      "hi semshiGlobal ctermfg=4 cterm=none
+--      hi semshiImported ctermfg=3 cterm=none
+--      hi semshiParameter ctermfg=4 cterm=underline
+--      hi semshiParameterUnused ctermfg=4 cterm=strikethrough
+--      hi semshiAttribute ctermfg=12 cterm=none
+--      "hi semshiFree ctermfg=15 cterm=bold
+--      hi semshiBuiltin ctermfg=7 cterm=italic
+--      hi semshiSelf ctermfg=8 cterm=italic
+--      hi semshiUnresolved ctermfg=10 cterm=strikethrough
+--      hi semshiSelected ctermfg=14 ctermbg=0 cterm=underline
+--      hi semshiErrorSign ctermfg=1 cterm=none
+--      sign define semshiError text=E> texthl=semshiErrorSign
+--      hi semshiErrorChar ctermfg=10 cterm=strikethrough
+--  endfunction
+--  autocmd FileType python call SemshiCustomColors()
+--]]

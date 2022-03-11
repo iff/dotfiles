@@ -45,9 +45,6 @@ local options = function()
   set.swapfile = false
   set.undofile = false
 
-  set.timeoutlen = 1000
-  set.ttimeoutlen = 0
-
   set.inccommand='nosplit'
 end
 

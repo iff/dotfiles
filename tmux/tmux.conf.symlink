@@ -86,3 +86,20 @@ bind l resize-pane -R 5
 bind -r C-h select-window -t :-
 bind -r C-l select-window -t :+
 
+# tmux at 3934d9b24de376cf0b6868c56751b55bd2d60399 in input.c and tty-features.c
+#   ../tmux/input.c: see dispatch functions, like input_csi_dispatch_sgr_colon
+#   ../tmux/tty-features.c: lists all the options and codes use for the terminal-features flags
+#   (maybe other tty-*.c)
+# alacritty at 1df7dc5171abfe1eab3e95be964f61c5876198f1
+#   ../../alacritty/alacritty/alacritty_terminal/src/ansi.rs:
+#       see 'fn csi_dispatch' for CSI
+#       or 'fn attrs_from_sgr_parameters' for SGR, and similar function names
+#   some summary at https://github.com/alacritty/alacritty/blob/master/docs/escape_support.md
+#   https://github.com/alacritty/alacritty/pull/4660 tries to add underline color support, but no styles yet
+# https://terminalguide.namepad.de/ has a good list, hard to know if anything is ever complete
+# alacritty support, from what I can tell:
+#   supported  : 256, clipboard, ccolour, cstyle, focus, mouse, RGB, strikethrough, title
+#   unsupported: extkeys, margins, overline, rectfill, sync, usstyle
+#   of the unsupported, those could be interesting: margins, overline, rectfill, sync, usstyle
+set-option -a terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title'
+#set-option -sa terminal-overrides ",alacritty*:Tc"

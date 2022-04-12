@@ -27,6 +27,7 @@ end
 local options = function()
   local set = vim.opt
 
+  set.termguicolors = true
   set.modeline = false
   set.autoindent = true
   set.backspace = 'indent,eol,start'

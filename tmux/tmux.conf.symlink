@@ -16,7 +16,7 @@ set -sg escape-time 0
 
 # Set term color properly
 #set -g default-terminal "screen-256color"
-set-option -g default-terminal tmux-256color
+#set-option -g default-terminal tmux-256color
 
 # confirm before killing a window or the server
 bind-key k confirm kill-window

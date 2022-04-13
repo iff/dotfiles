@@ -49,21 +49,6 @@ local options = function()
   set.inccommand='nosplit'
 end
 
-local enable_autosave = function()
-  vim.opt.autoread =  true
-  vim.opt.updatetime = 500
-
-  vim.cmd [[
-    augroup autosave
-        autocmd!
-        autocmd InsertLeave,TextChanged * silent! w
-        autocmd CursorHold,CursorHoldI * silent! update
-        autocmd FocusLost * silent! wa
-        autocmd FocusGained * checktime
-    augroup END
-  ]]
-end
-
 local load = function()
   require('plugins')
 
@@ -73,7 +58,6 @@ local load = function()
   require('theme')
   
   options()
-  enable_autosave()
 
   require('keymap')
   require('configure_plugins')

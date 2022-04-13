@@ -10,6 +10,10 @@ vim.cmd('colorscheme nordfox')
 -- require('lualine').setup {options = { theme = 'nightfox' }}
 require('nvim-web-devicons').setup {}
 
+function window_nr()
+    return "#" .. vim.api.nvim_win_get_number(0)
+end
+
 require('lualine').setup {
   options = {
     theme = 'nightfox',
@@ -20,7 +24,7 @@ require('lualine').setup {
     always_divide_middle = true,
   },
   sections = {
-    lualine_a = {'mode'},
+    lualine_a = { window_nr },
     lualine_b = {'diagnostics'},
     lualine_c = {'filename'},
     lualine_x = {},
@@ -28,7 +32,7 @@ require('lualine').setup {
     lualine_z = {'location'}
   },
   inactive_sections = {
-    lualine_a = {},
+    lualine_a = { window_nr },
     lualine_b = {},
     lualine_c = {'filename'},
     lualine_x = {'location'},

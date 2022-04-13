@@ -4,27 +4,24 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
 -- colors for vim
-Plug('morhetz/gruvbox')             -- colors for vim
+Plug('morhetz/gruvbox')
 Plug('EdenEast/nightfox.nvim', { ['branch'] = 'main' })
--- Plug 'npxbr/gruvbox.nvim', { 'branch': 'main' }
 
-Plug 'sjl/gundo.vim'                -- undo history tree
+Plug 'kyazdani42/nvim-web-devicons' -- icons
+Plug 'nvim-lualine/lualine.nvim'
 
-Plug 'nvim-lualine/lualine.nvim'    -- bottom bar
-Plug 'kyazdani42/nvim-web-devicons' -- If you want to have icons in your statusline choose one of these
+-- Plug 'tpope/vim-surround'
 
-Plug 'tpope/vim-sleuth'             -- heuristically set buffer options
-Plug 'tpope/vim-surround'           -- surround with brackets, quotes, ...
-Plug 'scrooloose/nerdcommenter'
+Plug 'numToStr/Comment.nvim'
 
-Plug 'easymotion/vim-easymotion'    -- the only movement command you will ever use
--- Plug 'phaazon/hop.nvim'
+Plug 'phaazon/hop.nvim'
 
--- Git plugins
-Plug 'airblade/vim-gitgutter'       -- show unstaged edits
-Plug 'tpope/vim-fugitive'           -- many git helpers
+-- Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 
--- Plug('numirias/semshi', {['do'] = ':UpdateRemotePlugins'})        -- python syn-tactic highlighting
+Plug 'Pocco81/AutoSave.nvim'
+
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 
 Plug 'nvim-lua/plenary.nvim'
@@ -33,10 +30,6 @@ Plug 'fannheyward/telescope-coc.nvim'
 
 Plug('neoclide/coc.nvim', {['branch'] = 'release'})
 
-Plug 'sbdchd/neoformat'                                           -- formatter
--- Plug('Shougo/deoplete.nvim', { ['do'] = ':UpdateRemotePlugins'})  -- autocomplete on steroids
-
--- Plug '~/.dotfiles/bootstrap/nvim/vimminent'
--- Plug '~/.dotfiles/bootstrap/pdocs/pdocs'
+Plug 'sbdchd/neoformat'
 
 vim.call('plug#end')

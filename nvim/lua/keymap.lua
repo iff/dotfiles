@@ -20,3 +20,16 @@ map('', 'tc', ':tabclose<enter>', {})
 map('', 'tp', ':tabprevious<enter>', {})
 map('', 'tn', ':tabnext<enter>', {})
 map('', 'to', ':tabonly<enter>', {})
+
+-- quickfix
+-- map('', 'cj', ':cprev<cr>', {})
+-- map('', 'ck', ':cnext<cr>', {})
+
+local map = vim.keymap.set
+-- window navigation
+-- ',#' goes to window #
+-- original is '#<c-w>w', not so bad either
+-- alternatives ',w#', or just '<c-w>', or just 'w' like tabs go with 't'?
+for i = 1,9 do
+    map('n', ','..i, i..'<c-w>w')
+end

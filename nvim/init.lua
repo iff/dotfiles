@@ -55,12 +55,21 @@ local load = function()
   disable_distribution_plugins()
   leader_map()
 
-  require('theme')
+  require('theme').setup()
   
   options()
 
   require('keymap')
-  require('configure_plugins')
+
+  require('Comment').setup()
+  require('my/hop').setup()
+  require('my/autosave').setup()
+  require('my/git').setup()
+
+  require('my/telescope').setup()
+  require('my/coc').setup()
+  require('my/treesitter').setup()
+  require('my/neoformat').setup()
 end
 
 load()

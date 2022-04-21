@@ -26,6 +26,8 @@ function mod.setup()
           au BufNewFile,BufRead .git/index setlocal nolist
       augroup END
     ]]
+
+    require("gitsigns").setup()
 end
 
 return mod

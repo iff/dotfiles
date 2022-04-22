@@ -9,21 +9,34 @@ end
 
 function mod.setup()
     local map = vim.api.nvim_set_keymap
+    local telescope = require("telescope")
     local actions = require("telescope.actions")
-    require("telescope").setup({
-      defaults = {
-        mappings = {
-          i = {
+
+    local defaults = require("telescope.themes").get_dropdown()
+    defaults.layout_config.width = function(_, max_columns, _)
+        return math.min(max_columns, 120)
+    end
+    defaults.mappings = {
+        i = {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
-          },
-          n = {
-            ["q"] = actions.close,
-          },
         },
-      },
+        n = {
+            ["q"] = actions.close,
+        },
+    }
+    defaults.path_display = { "truncate" }
+
+    telescope.setup({
+        defaults = defaults,
+    --     extensions = {
+    --         -- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
+    --         fzf = {},
+    --     },
     })
-    require('telescope').load_extension('coc')
+    -- telescope.load_extension("fzf")
+
+    telescope.load_extension('coc')
 
     map('', '<leader>,',  ':Telescope git_files<cr>', {})
     map('', '<leader>.',  ':Telescope coc workspace_symbols<cr>', {})

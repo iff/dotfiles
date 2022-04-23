@@ -41,10 +41,8 @@ local options = function()
   set.showcmd = true
   set.scrolloff = 5
 
-  set.backup = false
   set.writebackup = false
   set.swapfile = false
-  set.undofile = false
 
   set.inccommand='nosplit'
 

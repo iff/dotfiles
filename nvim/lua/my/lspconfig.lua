@@ -128,9 +128,12 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup_rust(capabilities)
-  local lspconfig = require('lspconfig')
+  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
 
-  lspconfig.rust_analyzer.setup {
+  -- https://github.com/rust-lang/rust-analyzer
+  -- curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/bin/rust-analyzer && chmod +x ~/bin/rust-analyzer
+
+  require("lspconfig").rust_analyzer.setup {
     on_attach = M.on_attach,
     flags = {
       debounce_text_changes = 150,

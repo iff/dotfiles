@@ -42,6 +42,7 @@ function M.setup()
 
     M.setup_rust(capabilities)
     M.setup_lua(capabilities)
+    M.setup_python(capabilities)
 end
 
 
@@ -95,10 +96,10 @@ function M.on_attach(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  --Enable completion triggered by <c-x><c-o>
+  -- enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
+  -- mappings
   local opts = { noremap=true, silent=true }
 
   -- See `:help vim.lsp.*` for documentation on any of the below functions
@@ -117,7 +118,7 @@ function M.on_attach(client, bufnr)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
-  -- Get signatures (and _only_ signatures) when in argument lists.
+  -- get signatures (and _only_ signatures) when in argument lists
   require "lsp_signature".on_attach({
     doc_lines = 0,
     handler_opts = {
@@ -194,7 +195,21 @@ function M.setup_lua(capabilities)
                 },
             },
         },
-        on_attach = M.mappings,
+        on_attach = M.on_attach,
+        capabilities = capabilities,
+    })
+end
+
+function M.setup_python(capabilities)
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
+
+    -- https://github.com/microsoft/pyright
+    -- npm install -g pyright
+    -- cd $HOME/bin && ln -s $HOME/bin/nodejs/bin/pyright-langserver .
+    -- cd $HOME/bin && ln -s $HOME/bin/nodejs/bin/pyright .
+
+    require("lspconfig").pyright.setup({
+        on_attach = M.on_attach,
         capabilities = capabilities,
     })
 end

@@ -41,6 +41,7 @@ function M.setup()
     M.setup_completion()
 
     M.setup_rust(capabilities)
+    M.setup_lua(capabilities)
 end
 
 
@@ -157,6 +158,45 @@ function M.setup_rust(capabilities)
   -- type inlay hints
   -- FIXME what does this do?
   vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
+end
+
+function M.setup_lua(capabilities)
+    -- using sumneko https://github.com/sumneko
+    -- alternative language server https://github.com/Alloyed/lua-lsp
+
+    local runtime_path = vim.split(package.path, ";")
+    table.insert(runtime_path, "lua/?.lua")
+    table.insert(runtime_path, "lua/?/init.lua")
+    -- TODO does this the right thing? vim seems to resolve last match, but lua originally does first match?
+
+    -- TODO probably that goes to individual config files or function, one per LSP?
+    -- from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
+    require("lspconfig").sumneko_lua.setup({
+        cmd = { os.getenv("HOME") .. "/bin/sumneko/bin/lua-language-server" },
+        settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = "LuaJIT",
+                    -- Setup your lua path
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = { "vim" },
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                telemetry = {
+                    enable = false,
+                },
+            },
+        },
+        on_attach = M.mappings,
+        capabilities = capabilities,
+    })
 end
 
 return M

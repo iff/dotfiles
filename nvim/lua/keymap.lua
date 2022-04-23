@@ -25,6 +25,13 @@ map('', 'to', ':tabonly<enter>', {})
 -- map('', 'cj', ':cprev<cr>', {})
 -- map('', 'ck', ':cnext<cr>', {})
 
+-- Search results centered please
+map('', 'n', 'nzz', {})
+map('', 'N', 'Nzz', {})
+map('', '*', '*zz', {})
+map('', '#', '#zz', {})
+map('', 'g*', 'g*zz', {})
+
 local map = vim.keymap.set
 -- window navigation
 -- ',#' goes to window #

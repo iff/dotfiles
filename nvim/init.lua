@@ -47,6 +47,26 @@ local options = function()
   set.undofile = false
 
   set.inccommand='nosplit'
+
+  set.tabstop = 4
+  set.softtabstop = 4
+  set.shiftwidth = 4
+  set.expandtab = true
+  set.smarttab = true
+  set.autoindent = true
+  set.copyindent = true
+
+  set.modeline = false
+  set.modelines = 0
+  set.wildmode = "longest:full"
+
+  -- Better completion?
+  -- menuone: popup even when there's only one match
+  -- noinsert: Do not insert text until a selection is made
+  -- noselect: Do not select, force user to select one from the menu
+  set.completeopt = "menuone,noinsert,noselect"
+  -- diagnostic messages defaults to 4000
+  set.updatetime = 300
 end
 
 local load = function()
@@ -56,7 +76,7 @@ local load = function()
   leader_map()
 
   require('theme').setup()
-  
+
   options()
 
   require('keymap')

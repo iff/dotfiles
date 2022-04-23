@@ -3,8 +3,8 @@ local M = {}
 function M.plugs()
     local Plug = vim.fn['plug#']
 
-    Plug('neovim/nvim-lspconfig') -- sane configurations for lsp
-    -- Plug 'nvim-lua/lsp_extensions.nvim'
+    Plug('neovim/nvim-lspconfig')
+    Plug 'nvim-lua/lsp_extensions.nvim'
 
     Plug('hrsh7th/cmp-nvim-lsp', {['branch'] = 'main'})
     Plug('hrsh7th/cmp-buffer', {['branch'] = 'main'})
@@ -15,6 +15,7 @@ function M.plugs()
     -- Only because nvim-cmp _requires_ snippets
     -- Plug('hrsh7th/cmp-vsnip', {['branch'] = 'main'})
     -- Plug('hrsh7th/vim-vsnip')
+    -- whats the difference to the above?
     Plug('L3MON4D3/LuaSnip')
     Plug('saadparwaiz1/cmp_luasnip')
 
@@ -39,8 +40,6 @@ function M.setup()
 
     M.setup_completion()
 
-    -- M.setup_lua(capabilities)
-    -- M.setup_python(capabilities)
     M.setup_rust(capabilities)
 end
 
@@ -55,8 +54,8 @@ function M.setup_completion()
         end,
     },
     mapping = {
-      -- Tab immediately completes. C-n/C-p to select.
-      ['<Tab>'] = cmp.mapping.confirm({ select = true })
+      -- enter immediately completes. C-n/C-p to select.
+      ['<enter>'] = cmp.mapping.confirm({ select = true })
     },
     experimental = {
       ghost_text = true,
@@ -67,22 +66,22 @@ function M.setup_completion()
         { name = "nvim_lsp" },
         -- TODO should not be here for most filetypes, ah but I think it does it itself
         { name = "nvim_lua" },
-        --{name='buffer'},
+        -- {name='buffer'},
     }),
-    formatting = {
-        format = require("lspkind").cmp_format({
-            mode = "symbol_text",
-            maxwidth = 50,
-            menu = {
-                buffer = "[buffer]",
-                nvim_lsp = "[lsp]",
-                nvim_lua = "[lua]",
-            },
-        }),
-    },
+    -- formatting = {
+    --     format = require("lspkind").cmp_format({
+    --         mode = "symbol_text",
+    --         maxwidth = 50,
+    --         menu = {
+    --             buffer = "[buffer]",
+    --             nvim_lsp = "[lsp]",
+    --             nvim_lua = "[lua]",
+    --         },
+    --     }),
+    -- },
   })
 
-  -- Enable completing paths in :
+  -- enable completing paths in :
   cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
       { name = 'path' }
@@ -140,9 +139,7 @@ function M.setup_rust(capabilities)
           allFeatures = true,
         },
         completion = {
-  	postfix = {
-  	  enable = false,
-  	},
+          postfix = { enable = false },
         },
       },
     },
@@ -156,45 +153,10 @@ function M.setup_rust(capabilities)
       update_in_insert = true,
     }
   )
+
+  -- type inlay hints
+  -- FIXME what does this do?
+  vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
 end
 
---" Enable type inlay hints
---autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }
---
---" Plugin settings
---let g:secure_modelines_allowed_items = [
---                \ "textwidth",   "tw",
---                \ "softtabstop", "sts",
---                \ "tabstop",     "ts",
---                \ "shiftwidth",  "sw",
---                \ "expandtab",   "et",   "noexpandtab", "noet",
---                \ "filetype",    "ft",
---                \ "foldmethod",  "fdm",
---                \ "readonly",    "ro",   "noreadonly", "noro",
---                \ "rightleft",   "rl",   "norightleft", "norl",
---                \ "colorcolumn"
---                \ ]
---
---" rust
---let g:rustfmt_autosave = 1
---let g:rustfmt_emit_files = 1
---let g:rustfmt_fail_silently = 0
---let g:rust_clip_command = 'xclip -selection clipboard'
---
---" Completion
---" Better completion
---" menuone: popup even when there's only one match
---" noinsert: Do not insert text until a selection is made
---" noselect: Do not select, force user to select one from the menu
---set completeopt=menuone,noinsert,noselect
---" Better display for messages
---set cmdheight=2
---" You will have bad experience for diagnostic messages when it's default 4000.
---set updatetime=300
---
---" Search results centered please
---nnoremap <silent> n nzz
---nnoremap <silent> N Nzz
---nnoremap <silent> * *zz
---nnoremap <silent> # #zz
---nnoremap <silent> g* g*zz
+return M

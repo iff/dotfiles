@@ -87,10 +87,10 @@ local load = function()
   require('my/git').setup()
 
   require('my/telescope').setup()
-  require('my/coc').setup()
+  -- require('my/coc').setup()
+  require('my/lspconfig').setup()
   require('my/treesitter').setup()
   require('my/neoformat').setup()
 end
 
 load()
-

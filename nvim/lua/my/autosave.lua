@@ -6,12 +6,12 @@ function mod.plugs()
 end
 
 function mod.setup()
-    require'autosave'.setup(
-      {
-        enabled = true,
-        events = {"InsertLeave", "TextChanged"},
-        debounce_delay = 500,
-      }
+    require 'autosave'.setup(
+        {
+            enabled = true,
+            events = { "InsertLeave", "TextChanged" },
+            debounce_delay = 500,
+        }
     )
 end
 

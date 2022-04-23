@@ -18,7 +18,7 @@ function mod.setup()
     -- - use a single executable that chains isort and black
     -- - set a env variable when starting vim for the formatter to use to discover a venv or settings
     -- TODO I dont get anymore a message about changes needed
-    vim.g['neoformat_enabled_python'] = {'isort_and_black'}
+    vim.g['neoformat_enabled_python'] = { 'isort_and_black' }
     vim.g['neoformat_only_msg_on_error'] = 0
     --let g:neoformat_try_formatprg = 1
     vim.cmd [[

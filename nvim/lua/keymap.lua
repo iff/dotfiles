@@ -1,9 +1,9 @@
 local map = vim.api.nvim_set_keymap
 
-map('', ';', ':', {})                     -- no shift for cmd mode
-map('i', 'jj', '<Esc>', {})               -- no shift for cmd mode
-map('', 'gp', '`[v`]', {noremap = true})  -- select last pasted lines
-map('', '//', ':nohlsearch<enter>', {})   -- reset search
+map('', ';', ':', {}) -- no shift for cmd mode
+map('i', 'jj', '<Esc>', {}) -- no shift for cmd mode
+map('', 'gp', '`[v`]', { noremap = true }) -- select last pasted lines
+map('', '//', ':nohlsearch<enter>', {}) -- reset search
 
 -- keep selection when indent/outdent
 -- xnoremap({ ">", ">gv" })
@@ -32,11 +32,10 @@ map('', '*', '*zz', {})
 map('', '#', '#zz', {})
 map('', 'g*', 'g*zz', {})
 
-local map = vim.keymap.set
 -- window navigation
 -- ',#' goes to window #
 -- original is '#<c-w>w', not so bad either
 -- alternatives ',w#', or just '<c-w>', or just 'w' like tabs go with 't'?
-for i = 1,9 do
-    map('n', ','..i, i..'<c-w>w')
+for i = 1, 9 do
+    vim.keymap.set('n', ',' .. i, i .. '<c-w>w')
 end

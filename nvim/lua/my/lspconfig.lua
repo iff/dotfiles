@@ -6,10 +6,10 @@ function M.plugs()
     Plug('neovim/nvim-lspconfig')
     Plug 'nvim-lua/lsp_extensions.nvim'
 
-    Plug('hrsh7th/cmp-nvim-lsp', {['branch'] = 'main'})
-    Plug('hrsh7th/cmp-buffer', {['branch'] = 'main'})
-    Plug('hrsh7th/cmp-path', {['branch'] = 'main'})
-    Plug('hrsh7th/nvim-cmp', {['branch'] = 'main'})
+    Plug('hrsh7th/cmp-nvim-lsp', { ['branch'] = 'main' })
+    Plug('hrsh7th/cmp-buffer', { ['branch'] = 'main' })
+    Plug('hrsh7th/cmp-path', { ['branch'] = 'main' })
+    Plug('hrsh7th/nvim-cmp', { ['branch'] = 'main' })
     Plug('ray-x/lsp_signature.nvim')
 
     -- Only because nvim-cmp _requires_ snippets
@@ -31,7 +31,6 @@ function M.plugs()
     -- https://github.com/nvim-lua/lsp-status.nvim
 end
 
-
 function M.setup()
     -- TODO not sure why that is needed
     -- from https://github.com/hrsh7th/nvim-cmp/#setup
@@ -45,123 +44,120 @@ function M.setup()
     M.setup_python(capabilities)
 end
 
-
 function M.setup_completion()
-  local cmp = require('cmp')
+    local cmp = require('cmp')
 
-  cmp.setup({
-    snippet = {
-        expand = function(args)
-            require("luasnip").lsp_expand(args.body)
-        end,
-    },
-    mapping = {
-      -- enter immediately completes. C-n/C-p to select.
-      ['<enter>'] = cmp.mapping.confirm({ select = true })
-    },
-    experimental = {
-      ghost_text = true,
-    },
-    -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-    -- TODO removed buffer as source, but still seems to be happening ...
-    sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        -- TODO should not be here for most filetypes, ah but I think it does it itself
-        { name = "nvim_lua" },
-        -- {name='buffer'},
-    }),
-    -- formatting = {
-    --     format = require("lspkind").cmp_format({
-    --         mode = "symbol_text",
-    --         maxwidth = 50,
-    --         menu = {
-    --             buffer = "[buffer]",
-    --             nvim_lsp = "[lsp]",
-    --             nvim_lua = "[lua]",
-    --         },
-    --     }),
-    -- },
-  })
-
-  -- enable completing paths in :
-  cmp.setup.cmdline(':', {
-    sources = cmp.config.sources({
-      { name = 'path' }
+    cmp.setup({
+        snippet = {
+            expand = function(args)
+                require("luasnip").lsp_expand(args.body)
+            end,
+        },
+        mapping = {
+            -- enter immediately completes. C-n/C-p to select.
+            ['<enter>'] = cmp.mapping.confirm({ select = true })
+        },
+        experimental = {
+            ghost_text = true,
+        },
+        -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+        -- TODO removed buffer as source, but still seems to be happening ...
+        sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            -- TODO should not be here for most filetypes, ah but I think it does it itself
+            { name = "nvim_lua" },
+            -- {name='buffer'},
+        }),
+        -- formatting = {
+        --     format = require("lspkind").cmp_format({
+        --         mode = "symbol_text",
+        --         maxwidth = 50,
+        --         menu = {
+        --             buffer = "[buffer]",
+        --             nvim_lsp = "[lsp]",
+        --             nvim_lua = "[lua]",
+        --         },
+        --     }),
+        -- },
     })
-  })
+
+    -- enable completing paths in :
+    cmp.setup.cmdline(':', {
+        sources = cmp.config.sources({
+            { name = 'path' }
+        })
+    })
 end
 
 ---@diagnostic disable-next-line: unused-local
 function M.on_attach(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+    local function nmap(lhs, rhs) vim.keymap.set('n', lhs, rhs, { buffer = bufnr }) end
 
-  -- enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local b = vim.lsp.buf
+    nmap('gD', b.declaration)
+    nmap('gd', b.definition)
+    nmap('K', b.hover)
+    nmap('gi', b.implementation)
+    nmap('<c-k>', b.signature_help)
+    nmap('gr', b.references)
 
-  -- mappings
-  local opts = { noremap=true, silent=true }
+    nmap('==', b.formatting_seq_sync)
+    nmap(',ca', b.code_action)
+    nmap(',rn', b.rename)
+    nmap('gtd', b.type_definition)
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>r', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>a', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+    local D = vim.diagnostic
+    nmap(',d', D.open_float)
+    nmap('[d', D.goto_prev)
+    nmap(']d', D.goto_next)
+    nmap(',q', D.setloclist)
 
-  -- get signatures (and _only_ signatures) when in argument lists
-  require "lsp_signature".on_attach({
-    doc_lines = 0,
-    handler_opts = {
-      border = "none"
-    },
-  })
+    -- get signatures (and _only_ signatures) when in argument lists
+    require "lsp_signature".on_attach({
+        doc_lines = 0,
+        handler_opts = {
+            border = "none"
+        },
+    })
 end
 
 function M.setup_rust(capabilities)
-  -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
+    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
 
-  -- https://github.com/rust-lang/rust-analyzer
-  -- curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/bin/rust-analyzer && chmod +x ~/bin/rust-analyzer
+    -- https://github.com/rust-lang/rust-analyzer
+    -- curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/bin/rust-analyzer && chmod +x ~/bin/rust-analyzer
 
-  require("lspconfig").rust_analyzer.setup {
-    on_attach = M.on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    },
-    settings = {
-      ["rust-analyzer"] = {
-        cargo = {
-          allFeatures = true,
+    require("lspconfig").rust_analyzer.setup {
+        on_attach = M.on_attach,
+        flags = {
+            debounce_text_changes = 150,
         },
-        completion = {
-          postfix = { enable = false },
+        settings = {
+            ["rust-analyzer"] = {
+                cargo = {
+                    allFeatures = true,
+                },
+                completion = {
+                    postfix = { enable = false },
+                },
+            },
         },
-      },
-    },
-    capabilities = capabilities,
-  }
-
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      virtual_text = true,
-      signs = true,
-      update_in_insert = true,
+        capabilities = capabilities,
     }
-  )
 
-  -- type inlay hints
-  -- FIXME what does this do?
-  vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
+    vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+        vim.lsp.diagnostic.on_publish_diagnostics, {
+            virtual_text = true,
+            signs = true,
+            update_in_insert = true,
+        }
+    )
+
+    -- type inlay hints
+    -- FIXME what does this do?
+    vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
 end
 
 function M.setup_lua(capabilities)

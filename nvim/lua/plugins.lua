@@ -3,19 +3,19 @@
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
-require"theme".plugs()
+require "theme".plugs()
 
 Plug 'numToStr/Comment.nvim'
-require"my/hop".plugs()
-require"my/autosave".plugs()
-require"my/neoformat".plugs()
+require "my/hop".plugs()
+require "my/autosave".plugs()
+require "my/neoformat".plugs()
 
-require"my/git".plugs()
+require "my/git".plugs()
 
-require"my/treesitter".plugs()
+require "my/treesitter".plugs()
 
-require"my/telescope".plugs()
+require "my/telescope".plugs()
 -- require"my/coc".plugs()
-require"my/lspconfig".plugs()
+require "my/lspconfig".plugs()
 
 vim.call('plug#end')

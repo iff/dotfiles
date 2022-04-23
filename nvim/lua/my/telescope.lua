@@ -5,7 +5,7 @@ function mod.plugs()
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'fannheyward/telescope-coc.nvim'
-    Plug('nvim-telescope/telescope-fzf-native.nvim', {['do'] = 'make'})
+    Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 end
 
 function mod.setup()
@@ -39,7 +39,7 @@ function mod.setup()
     telescope.load_extension('fzf')
     telescope.load_extension('coc')
 
-    map('', '<leader>,',  ':Telescope git_files<cr>', {})
+    map('', '<leader>,', ':Telescope git_files<cr>', {})
 
     -- map('', '<leader>.',  ':Telescope coc workspace_symbols<cr>', {})
     -- map('', '<leader>..',  ':Telescope coc document_symbols<cr>', {})

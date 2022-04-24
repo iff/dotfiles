@@ -15,7 +15,6 @@ require "my/git".plugs()
 require "my/treesitter".plugs()
 
 require "my/telescope".plugs()
--- require"my/coc".plugs()
 require "my/lspconfig".plugs()
 
 vim.call('plug#end')

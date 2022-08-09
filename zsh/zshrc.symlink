@@ -1,31 +1,25 @@
-# shortcut to this dotfiles path is $MYZSH
 export MYZSH=$HOME/.dotfiles/
 
-source $MYZSH/zsh/aliases.zsh
-source $MYZSH/zsh/config.zsh
-source $MYZSH/zsh/fpath.zsh
-source $MYZSH/zsh/prompt.zsh
-source $MYZSH/zsh/window.zsh
+alias src=source
+# alias src='source $MYZSH/zsh/timed-source.zsh'
 
-source $MYZSH/zsh/antigen.zsh
-source $MYZSH/zsh/plugins.zsh
+src $MYZSH/zsh/aliases.zsh
+src $MYZSH/zsh/config.zsh
+src $MYZSH/zsh/fpath.zsh
+src $MYZSH/zsh/prompt.zsh
+src $MYZSH/zsh/window.zsh
+
+# load every completion after autocomplete loads
+src $MYZSH/zsh/completion.zsh
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
 if [[ -a ~/.localrc ]]
 then
-  source ~/.localrc
+  src ~/.localrc
 fi
+src $MYZSH/bootstrap/one-shell-history/one-shell-history/shells/zsh
 
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-compinit
+# needs to be sourced last
+src $MYZSH/zsh/plugins.zsh
 
-# load every completion after autocomplete loads
-source $MYZSH/zsh/completion.zsh
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
-ZSH_HIGHLIGHT_MAXLENGTH=2000
-
-MANPAGER='nvim +Man!'

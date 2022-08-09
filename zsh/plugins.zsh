@@ -1,12 +1,11 @@
-antigen bundle psprint/history-search-multi-word
+source $MYZSH/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-antigen bundle command-not-found
-antigen bundle cp
-antigen bundle git
-#antigen bundle pip
-#antigen bundle docker
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
+ZSH_HIGHLIGHT_MAXLENGTH=2000
 
-# antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle dkuettel/zsh-syntax-highlighting
-
-antigen apply
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/cp/cp.plugin.zsh
+cpv() {
+    rsync -pogbr -hhh --backup-dir="/tmp/rsync-${USERNAME}" -e /dev/null --progress "$@"
+}
+compdef _files cpv

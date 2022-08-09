@@ -1,9 +1,6 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
-#fpath=($MYZSH/zsh/functions $fpath)
-#autoload -U $MYZSH/zsh/functions/*(:t)
-
 HISTFILE=~/.zsh_history
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -28,10 +25,6 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
-
-# don't expand aliases _before_ completion has finished
-#   like: git comm-[tab]
-setopt complete_aliases
 
 bindkey '^R' history-incremental-search-backward
 
@@ -60,3 +53,5 @@ bindkey '^w' backward-kill-word
 bindkey '^r' history-search-multi-word # todo not sure why I have to do it here, the plugin does it already, but it doesnt work
 # edit command line in editor
 #bindkey '^x^e' edit-command-line
+
+MANPAGER='nvim +Man!'

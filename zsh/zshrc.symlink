@@ -5,7 +5,6 @@ alias src=source
 
 src $MYZSH/zsh/aliases.zsh
 src $MYZSH/zsh/config.zsh
-src $MYZSH/zsh/fpath.zsh
 src $MYZSH/zsh/prompt.zsh
 src $MYZSH/zsh/window.zsh
 

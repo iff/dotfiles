@@ -102,7 +102,7 @@ function M.on_attach(client, bufnr)
     nmap('<c-k>', b.signature_help)
     nmap('gr', b.references)
 
-    nmap('==', b.formatting_seq_sync)
+    -- nmap('==', b.formatting_seq_sync)
     nmap(',ca', b.code_action)
     nmap(',rn', b.rename)
     nmap('gtd', b.type_definition)
@@ -210,6 +210,7 @@ function M.setup_python(capabilities)
     require("lspconfig").pyright.setup({
         on_attach = M.on_attach,
         capabilities = capabilities,
+        settings = {},
     })
 end
 

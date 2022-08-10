@@ -11,12 +11,26 @@ src $MYZSH/zsh/window.zsh
 # load every completion after autocomplete loads
 src $MYZSH/zsh/completion.zsh
 
-# use .localrc for SUPER SECRET CRAP that you don't
-# want in your public, versioned repo.
+path=(
+    $HOME/bin
+    $HOME/bin/nodejs/bin
+    $HOME/.local/bin # pip
+    $HOME/.cargo/bin # rust
+    $path
+)
+
+# use .localrc for SUPER SECRET STUFF
 if [[ -a ~/.localrc ]]
 then
   src ~/.localrc
 fi
+
+# path -> reverse -> keep only first unique -> reverse
+# prevents any duplication for paths that are already setup
+path=(${(Oa)${(u)${(Oa)path}}})
+export path PATH
+
+# source one-shell-history after setting paths (needs binary in bin)
 src $MYZSH/bootstrap/one-shell-history/one-shell-history/shells/zsh
 
 # needs to be sourced last

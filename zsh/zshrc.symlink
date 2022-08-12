@@ -6,7 +6,6 @@ alias src=source
 src $MYZSH/zsh/aliases.zsh
 src $MYZSH/zsh/config.zsh
 src $MYZSH/zsh/prompt.zsh
-src $MYZSH/zsh/window.zsh
 
 # load every completion after autocomplete loads
 src $MYZSH/zsh/completion.zsh

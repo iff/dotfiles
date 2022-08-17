@@ -8,7 +8,10 @@ require "theme".plugs()
 Plug 'numToStr/Comment.nvim'
 require "my/hop".plugs()
 require "my/autosave".plugs()
-require "my/neoformat".plugs()
+
+-- formatters
+--require "my/neoformat".plugs()
+require "my/funky".plugs()
 
 require "my/git".plugs()
 

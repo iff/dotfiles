@@ -87,7 +87,10 @@ local load = function()
     require('my/telescope').setup()
     require('my/lspconfig').setup()
     require('my/treesitter').setup()
-    require('my/neoformat').setup()
+
+    -- formatters
+    --require('my/neoformat').setup()
+    require('my/funky').setup()
 end
 
 load()

@@ -2,8 +2,8 @@ local mod = {}
 
 function mod.plugs()
     local Plug = vim.fn['plug#']
-    Plug 'tpope/vim-fugitive'
-    Plug 'lewis6991/gitsigns.nvim'
+    Plug('tpope/vim-fugitive')
+    Plug('lewis6991/gitsigns.nvim')
 end
 
 function mod.setup()
@@ -19,15 +19,15 @@ function mod.setup()
     map('', '<leader>gr', ':Gremove<cr>', { noremap = true })
     map('', '<leader>gl', ':Gclog<cr>', { noremap = true })
 
-    vim.cmd [[
+    vim.cmd([[
       augroup ft_fugitive
           au!
     
           au BufNewFile,BufRead .git/index setlocal nolist
       augroup END
-    ]]
+    ]])
 
-    require("gitsigns").setup()
+    require('gitsigns').setup()
 end
 
 return mod

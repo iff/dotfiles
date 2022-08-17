@@ -37,6 +37,8 @@ setopt pushd_ignore_dups
 bindkey -v
 export KEYTIMEMOUT=1 # quicker reaction to mode change (might interfere with other things) (1=0.1seconds)
 
+ZLE_SPACE_SUFFIX_CHARS=$'&|'
+
 # Use vim cli mode
 # bindkey '^P' up-history
 # bindkey '^N' down-history

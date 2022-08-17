@@ -13,6 +13,7 @@ src $MYZSH/zsh/completion.zsh
 path=(
     $HOME/bin
     $HOME/bin/nodejs/bin
+    $HOME/bin/sumneko/bin
     $HOME/.local/bin # pip
     $HOME/.cargo/bin # rust
     $path

@@ -16,10 +16,11 @@ zstyle ':completion:*:default' menu select
 # also probably overwritten further down from omz copy
 # zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*:cd:*' tag-order local-directories directory-stack path-directories
-# TODO should that not be in :completion? like this in omz; also I'm not sure what it does
-# zstyle '*' single-ignored show
 zstyle ':completion:*' special-dirs true
 
 # pasting with tabs doesn't perform completion
@@ -55,5 +56,6 @@ function _complete_tm {
 }
 compctl -K _complete_tm tm
 
+zmodload zsh/complist
 autoload -U compinit
 compinit -d ~/.zcompdump

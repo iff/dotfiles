@@ -56,13 +56,13 @@ local options = function()
 
     set.modeline = false
     set.modelines = 0
-    set.wildmode = "longest:full"
+    set.wildmode = 'longest:full'
 
     -- Better completion?
     -- menuone: popup even when there's only one match
     -- noinsert: Do not insert text until a selection is made
     -- noselect: Do not select, force user to select one from the menu
-    set.completeopt = "menuone,noinsert,noselect"
+    set.completeopt = 'menuone,noinsert,noselect'
     -- diagnostic messages defaults to 4000
     set.updatetime = 300
 end

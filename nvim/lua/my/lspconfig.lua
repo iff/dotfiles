@@ -42,6 +42,7 @@ function M.setup()
     M.setup_rust(capabilities)
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
+    M.setup_typescript(capabilities)
 end
 
 function M.setup_completion()
@@ -211,6 +212,14 @@ function M.setup_python(capabilities)
         on_attach = M.on_attach,
         capabilities = capabilities,
         settings = {},
+    })
+end
+
+function M.setup_typescript(capabilities)
+    -- npm install --global typescript-language-server prettier
+
+    require('lspconfig').tsserver.setup({
+        capabilities = capabilities,
     })
 end
 

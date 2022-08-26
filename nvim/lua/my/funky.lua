@@ -14,6 +14,11 @@ function mod.setup()
             lua = { command = { 'stylua', '--config-path', '.stylua.toml', '-' } },
             json = { command = { 'jq' } },
             rust = { command = { 'rustfmt' } },
+            css = { command = { 'prettier', '--parser', 'css' } },
+            markdown = { command = { 'prettier', '--parser', 'markdown' } },
+            javascript = { command = { 'prettier', '--parser', 'typescript' } },
+            typescript = { command = { 'prettier', '--parser', 'typescript' } },
+            typescriptreact = { command = { 'prettier', '--parser', 'typescript' } },
         },
     })
     vim.keymap.set('n', '==', funky_formatter.format, { desc = 'funky formatter' })

@@ -11,6 +11,9 @@ path=(
 export path PATH
 npm install -g pyright
 
+# typescript
+npm install -g typescript-language-server prettier typescript
+
 # rust
 curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/bin/rust-analyzer && chmod +x ~/bin/rust-analyzer
 

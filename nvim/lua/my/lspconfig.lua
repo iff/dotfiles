@@ -216,7 +216,7 @@ function M.setup_python(capabilities)
 end
 
 function M.setup_typescript(capabilities)
-    -- npm install --global typescript-language-server prettier
+    -- npm install --global typescript-language-server prettier typescript
 
     require('lspconfig').tsserver.setup({
         capabilities = capabilities,

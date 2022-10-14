@@ -17,4 +17,8 @@ require('my/treesitter').plugs()
 require('my/telescope').plugs()
 require('my/lspconfig').plugs()
 
+Plug('dkuettel/funky-contexts.nvim')
+
 vim.call('plug#end')
+
+require('funky-contexts').setup()

@@ -6,8 +6,8 @@ function M.plugs()
     -- Plug('morhetz/gruvbox')
     Plug('EdenEast/nightfox.nvim', { ['branch'] = 'main' })
 
-    Plug 'kyazdani42/nvim-web-devicons' -- icons
-    Plug 'nvim-lualine/lualine.nvim'
+    Plug('kyazdani42/nvim-web-devicons') -- icons
+    Plug('nvim-lualine/lualine.nvim')
 end
 
 function M.setup()
@@ -21,13 +21,13 @@ function M.setup()
     -- lualine
     -- require('lualine').setup {options = { theme = 'gruvbox' }}
     -- require('lualine').setup {options = { theme = 'nightfox' }}
-    require('nvim-web-devicons').setup {}
+    require('nvim-web-devicons').setup({})
 
     local function window_nr()
-        return "#" .. vim.api.nvim_win_get_number(0)
+        return '#' .. vim.api.nvim_win_get_number(0)
     end
 
-    require('lualine').setup {
+    require('lualine').setup({
         options = {
             theme = 'nightfox',
             icons_enabled = false,
@@ -42,7 +42,7 @@ function M.setup()
             lualine_c = { 'filename' },
             lualine_x = {},
             lualine_y = { 'progress' },
-            lualine_z = { 'location' }
+            lualine_z = { 'location' },
         },
         inactive_sections = {
             lualine_a = { window_nr },
@@ -50,11 +50,18 @@ function M.setup()
             lualine_c = { 'filename' },
             lualine_x = { 'location' },
             lualine_y = {},
-            lualine_z = {}
+            lualine_z = {},
         },
-        tabline = {},
-        extensions = { 'quickfix' }
-    }
+        tabline = {
+            lualine_a = {
+                function()
+                    return '[' .. (vim.g.funky_context or '...') .. ']'
+                end,
+            },
+            lualine_b = { 'tabs' },
+        },
+        extensions = { 'quickfix' },
+    })
 end
 
 return M

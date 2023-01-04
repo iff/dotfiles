@@ -25,7 +25,7 @@ function M.plugs()
 
     -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
     -- Plug("cmp-cmdline")
-    -- Plug("lspkind-nvim") -- piktograms
+    Plug('onsails/lspkind.nvim') -- vscode-like pictograms
 
     -- could be interesting to show more info from lsp
     -- https://github.com/nvim-lua/lsp-status.nvim
@@ -69,17 +69,17 @@ function M.setup_completion()
             { name = 'nvim_lua' },
             -- {name='buffer'},
         }),
-        -- formatting = {
-        --     format = require("lspkind").cmp_format({
-        --         mode = "symbol_text",
-        --         maxwidth = 50,
-        --         menu = {
-        --             buffer = "[buffer]",
-        --             nvim_lsp = "[lsp]",
-        --             nvim_lua = "[lua]",
-        --         },
-        --     }),
-        -- },
+        formatting = {
+            format = require('lspkind').cmp_format({
+                mode = 'symbol_text',
+                maxwidth = 50,
+                menu = {
+                    buffer = '[buffer]',
+                    nvim_lsp = '[lsp]',
+                    nvim_lua = '[lua]',
+                },
+            }),
+        },
     })
 
     -- enable completing paths in :

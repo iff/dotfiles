@@ -101,5 +101,5 @@ bind -r C-l select-window -t :+
 #   supported  : 256, clipboard, ccolour, cstyle, focus, mouse, RGB, strikethrough, title
 #   unsupported: extkeys, margins, overline, rectfill, sync, usstyle
 #   of the unsupported, those could be interesting: margins, overline, rectfill, sync, usstyle
-set-option -a terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title'
-#set-option -sa terminal-overrides ",alacritty*:Tc"
+set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
+set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'

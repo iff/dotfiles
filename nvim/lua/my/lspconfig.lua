@@ -35,7 +35,7 @@ function M.setup()
     -- TODO not sure why that is needed
     -- from https://github.com/hrsh7th/nvim-cmp/#setup
     -- that makes vim the client say it can accept more from the LS?
-    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     M.setup_completion()
 
@@ -43,6 +43,8 @@ function M.setup()
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     M.setup_typescript(capabilities)
+    M.setup_rnix(capabilities)
+    M.setup_clangd(capabilities)
 end
 
 function M.setup_completion()
@@ -219,6 +221,18 @@ function M.setup_typescript(capabilities)
     -- npm install --global typescript-language-server prettier typescript
 
     require('lspconfig').tsserver.setup({
+        capabilities = capabilities,
+    })
+end
+
+function M.setup_rnix(capabilities)
+    require('lspconfig').rnix.setup({
+        capabilities = capabilities,
+    })
+end
+
+function M.setup_clangd(capabilities)
+    require('lspconfig').clangd.setup({
         capabilities = capabilities,
     })
 end

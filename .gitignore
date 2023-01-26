@@ -1,5 +1,4 @@
 *.db
-*.lock
 *.pyc
 tags
 tags-ja

@@ -20,6 +20,7 @@ function mod.setup()
             markdown = { command = { 'prettier', '--parser', 'markdown' } },
             typescript = { command = { 'prettier', '--parser', 'typescript' } },
             typescriptreact = { command = { 'prettier', '--parser', 'typescript' } },
+            nix = { command = { 'nixpkgs-fmt' } },
         },
     })
     vim.keymap.set('n', '==', funky_formatter.format, { desc = 'funky formatter' })

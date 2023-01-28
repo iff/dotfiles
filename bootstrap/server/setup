@@ -54,13 +54,9 @@ sudo apt-get install -qqy $i
 # ordered list of custom setups
 setups=(
     ssh
-    git
-    fzf
     python
     pdocs
     ptags
-    tmux
-    nvim
     nix
     one-shell-history
 )

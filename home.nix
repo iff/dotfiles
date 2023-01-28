@@ -6,7 +6,7 @@
 
   home.packages = [
     # FIXME wayland
-    # pkgs.alacritty
+    pkgs.alacritty
     pkgs.exa
     pkgs.fzf
     pkgs.git

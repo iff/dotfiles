@@ -2,4 +2,4 @@
 
 Everything after the dot.
 
-Run: nix run . switch -- --flake .
+Run: `home-manager switch -- --flake .#iff.linux/darwin`

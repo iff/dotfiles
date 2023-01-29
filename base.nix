@@ -8,14 +8,19 @@
     pkgs.alacritty
     pkgs.direnv
     pkgs.exa
-    pkgs.fzf
     pkgs.git
+    pkgs.jq
     pkgs.nix-direnv
     pkgs.tmux
     # fonts
     pkgs.fontconfig
     (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" ]; })
   ];
+
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+  };
 
   home.file.".gitconfig".source = ./git/gitconfig;
   home.file.".tmux.conf".source = ./tmux/tmux.conf;

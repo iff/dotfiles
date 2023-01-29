@@ -24,12 +24,12 @@
     homeConfigurations = {
       "iff.linux" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        modules = [ ./linux ./base.nix ] ++ (import ./modules/editor);
+        modules = [ ./linux ./base.nix ] ++ (import ./modules/editor) ++ (import ./modules/shell);
       };
 
       "iff.darwin" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-darwin;
-        modules = [ ./darwin ./base.nix ] ++ (import ./modules/editor);
+        modules = [ ./darwin ./base.nix ] ++ (import ./modules/editor) ++ (import ./modules/shell);
       };
     };
   };

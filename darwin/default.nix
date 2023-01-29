@@ -9,4 +9,13 @@
   home.packages = [
     pkgs.ncurses
   ];
+
+  programs = {
+    zsh = {
+      enable = true;
+      # initExtra = builtins.readFile ../zsh/zshrc;
+    };
+  };
+
+  home.file.".zshrc".source = ../zsh/zshrc;
 }

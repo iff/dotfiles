@@ -5,18 +5,18 @@
   fonts.fontconfig.enable = true;
 
   home.packages = [
-    # FIXME wayland
     pkgs.alacritty
+    pkgs.direnv
     pkgs.exa
     pkgs.fzf
     pkgs.git
+    pkgs.nix-direnv
     pkgs.tmux
-    pkgs.redshift
+    # fonts
     pkgs.fontconfig
     (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" ]; })
   ];
 
   home.file.".gitconfig".source = ./git/gitconfig;
   home.file.".tmux.conf".source = ./tmux/tmux.conf;
-  home.file.".config/redshift.conf".source = ./redshift/redshift.conf;
 }

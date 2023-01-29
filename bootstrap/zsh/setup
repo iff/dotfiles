@@ -9,5 +9,5 @@ fi
 
 sudo chsh -s $(which zsh) $(whoami)
 
-ln -sfT ~/.dotfiles/zsh/zshrc.symlink ~/.zshrc
+ln -sfT ~/.dotfiles/zsh/zshrc ~/.zshrc
 touch ~/.localrc

@@ -1,6 +1,11 @@
 { pkgs, ... }: {
   home.stateVersion = "22.11";
 
+  # TODO: https://nix-community.github.io/home-manager/#sec-install-nixos-module
+  # do we need to set?:
+  # home-manager.useUserPackages = true;
+  # home-manager.useGlobalPkgs = true;
+
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
 

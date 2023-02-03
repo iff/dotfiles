@@ -28,6 +28,7 @@
 
         # FIXME how to properly add nix path?
         . $HOME/.nix-profile/etc/profile.d/nix.sh
+        eval "$(direnv hook zsh)"
       '' + builtins.readFile ../../zsh/zshrc;
 
       plugins = [

@@ -10,6 +10,7 @@
   fonts.fontconfig.enable = true;
 
   home.packages = [
+    # FIXME: move to module mkMerge config for Darwin/Linux
     pkgs.alacritty
     pkgs.direnv
     pkgs.exa

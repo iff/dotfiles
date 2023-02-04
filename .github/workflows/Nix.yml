@@ -37,8 +37,8 @@ jobs:
       
       - name: "Build Nix config"
         run: |
-          nix --experimental-features 'nix-command flakes' build -L '.#iff.linux'
-          # nix run . switch -- --flake .#iff.linux
+          # nix --experimental-features 'nix-command flakes' build -L '.#iff.linux'
+          nix --experimental-features 'nix-command flakes' run . switch -- --flake .#iff.linux
 
       - name: "Print nixpkgs version"
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'

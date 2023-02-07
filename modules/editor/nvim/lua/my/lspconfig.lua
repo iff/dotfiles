@@ -1,5 +1,36 @@
 local M = {}
 
+-- from looking at
+--   nvim/runtime/lua/vim/lsp/buf.lua
+--   nvim/runtime/lua/vim/lsp/handlers.lua
+--   nvim/runtime/lua/vim/lsp/util.lua
+-- all the lsp jumps are done async, but I need it sync
+-- and there is no option to control this
+-- I want: sync, optional splits or tabs before, move target line to the top (like "zt")
+local function lsp_jumper(method, before)
+    -- methods
+    --   textDocument/definition
+    return function()
+        local params = vim.lsp.util.make_position_params()
+        local function handler(_, result, ctx, _)
+            -- full signature: err, result, ctx, config
+            local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
+            if vim.tbl_islist(result) then
+                -- TODO we only use the first result
+                -- like the original, it would be better to open quickfix with options?
+                result = result[1]
+            end
+            if before then
+                vim.cmd(before)
+            end
+            vim.lsp.util.jump_to_location(result, offset_encoding, false)
+            vim.cmd('normal! zt')
+        end
+        -- TODO kinda works, but still async, user might get bored, switches buffer/windows, and then it gets weird
+        vim.lsp.buf_request(0, method, params, handler)
+    end
+end
+
 function M.plugs()
     local Plug = vim.fn['plug#']
 
@@ -45,6 +76,36 @@ function M.setup()
     M.setup_typescript(capabilities)
     M.setup_rnix(capabilities)
     M.setup_clangd(capabilities)
+
+    vim.diagnostic.config({
+        -- underline = { severity = vim.diagnostic.severity.ERROR },
+        virtual_text = {
+            -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-severity
+            severity = { min = vim.diagnostic.severity.WARN },
+            prefix = '', -- alternatives ﲑﲒﲕﲖ
+            format = function(diagnostic)
+                -- local icons = {"", "", "", ""}
+                local icons = { 'E', 'W', 'I', 'H' }
+                if diagnostic.code == nil then
+                    return icons[diagnostic.severity] .. ' ' .. diagnostic.message
+                else
+                    return icons[diagnostic.severity] .. '/' .. diagnostic.code
+                end
+            end,
+            -- TODO doesnt seem to disable, which signs are they? I want to change them
+            -- signs = false,
+            -- TODO doesnt seem to apply to open_float ...
+            -- float = {
+            --     prefix = function(diagnostics, i, total)
+            --         return "somee: "
+            --     end,
+            -- },
+            -- TODO not sure I see an effect either way, with false it was maybe flickery and out of date?
+            update_in_insert = true,
+            severity_sort = true, -- is it working?
+            spacing = 0,
+        },
+    })
 end
 
 function M.setup_completion()
@@ -106,6 +167,8 @@ function M.on_attach(client, bufnr)
     nmap('gi', b.implementation)
     nmap('<c-k>', b.signature_help)
     nmap('gr', b.references)
+
+    nmap('gv', lsp_jumper('textDocument/definition', 'vsplit'))
 
     -- nmap('==', b.formatting_seq_sync)
     nmap(',ca', b.code_action)

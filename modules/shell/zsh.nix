@@ -4,6 +4,14 @@
     ({
       initExtra = lib.optionalString pkgs.stdenv.isDarwin ''
         bindkey '^R' history-incremental-search-backward
+        export TERM=xterm-256color
+      '';
+    })
+    ({
+      initExtra = lib.optionalString pkgs.stdenv.isLinux ''
+        # FIXME
+        # builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh
+        source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
       '';
     })
     {
@@ -17,6 +25,7 @@
         man = "man --no-justification";
         k = "kubectl";
         v = "nvim";
+        dk = "docker kill $(docker ps -q)";
       };
 
       initExtra = ''
@@ -24,12 +33,13 @@
         ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
         ZSH_HIGHLIGHT_MAXLENGTH=2000
 
-        export TERM=xterm-256color
-
         # FIXME how to properly add nix path?
         . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
-      '' + builtins.readFile ../../zsh/zshrc;
+      '' + builtins.readFile ../../zsh/zshrc
+      + builtins.readFile ../../zsh/config.zsh
+      + builtins.readFile ../../zsh/prompt.zsh
+      + builtins.readFile ../../zsh/completion.zsh;
 
       plugins = [
         {
@@ -42,6 +52,17 @@
             sha256 = "lxwkVq9Ysvl2ZosD+riQ8dsCQIB5X4kqP+ix7XTDkKw=";
           };
         }
+        # nix run uses $SHELL
+        # {
+        #   name = "zsh-nix-shell";
+        #   file = "nix-shell.plugin.zsh";
+        #   src = pkgs.fetchFromGitHub {
+        #     owner = "chisui";
+        #     repo = "zsh-nix-shell";
+        #     rev = "v0.5.0";
+        #     sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
+        #   };
+        # }
       ];
     }
   ];

@@ -1,13 +1,11 @@
-export MYZSH=$HOME/.dotfiles/
-
-alias src=source
+# alias src=source
 # alias src='source $MYZSH/zsh/timed-source.zsh'
 
-src $MYZSH/zsh/config.zsh
-src $MYZSH/zsh/prompt.zsh
+# src $HOME/.dotfiles/zsh/config.zsh
+# src $HOME/.dotfiles/zsh/prompt.zsh
 
 # load every completion after autocomplete loads
-src $MYZSH/zsh/completion.zsh
+# src $HOME/.dotfiles/zsh/completion.zsh
 
 path=(
     # FIXME remove and use direnv in projects

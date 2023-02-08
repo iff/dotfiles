@@ -1,6 +1,5 @@
 [user]
     name = iff
-    email = iff@yvesineichen.com
     signingkey = 165AEDEB
 
 [core]
@@ -16,12 +15,7 @@
     enabled = 1
 
 [merge]
-    tool = threesome
-
-[mergetool "splice"]
-    cmd = "vim -f $BASE $LOCAL $REMOTE $MERGED -c 'SpliceInit'"
-    trustExitCode = true
-    keepBackup = false
+    tool = nvim
 
 [alias]
     st = status
@@ -54,6 +48,7 @@
     l19 = log   --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all -19
     # and this one can be a real lifesaver on a complex tree
     lsd = log   --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all --simplify-by-decoration
+    lgr = log   --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --first-parent
 
     ru  = remote update
 
@@ -85,3 +80,6 @@
     # fixup
     fu  = commit --amend --reset-author -C HEAD
     fuu = !git add -u && git fu
+
+[core]
+    sshCommand = git-ssh-dispatch

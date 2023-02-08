@@ -29,5 +29,6 @@
   };
 
   home.file.".gitconfig".source = ./git/gitconfig;
+  home.file."bin/git-ssh-dispatch".source = ./bin/git-ssh-dispatch;
   home.file.".tmux.conf".source = ./tmux/tmux.conf;
 }

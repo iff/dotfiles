@@ -1,2 +1,0 @@
-slock &
-systemctl suspend

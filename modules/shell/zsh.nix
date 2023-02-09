@@ -9,10 +9,11 @@
     })
     ({
       initExtra = lib.optionalString pkgs.stdenv.isLinux ''
-        # FIXME
-        # builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh
+        # FIXME workaround for now
         source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
       '';
+      # FIXME can't get files from submodules??
+      #  + builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh;
     })
     {
       enable = true;

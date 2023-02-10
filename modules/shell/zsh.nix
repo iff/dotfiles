@@ -37,10 +37,10 @@
         # FIXME how to properly add nix path?
         . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
-      '' + builtins.readFile ../../zsh/zshrc
-      + builtins.readFile ../../zsh/config.zsh
-      + builtins.readFile ../../zsh/prompt.zsh
-      + builtins.readFile ../../zsh/completion.zsh;
+      '' + builtins.readFile ./zsh/zshrc
+      + builtins.readFile ./zsh/config.zsh
+      + builtins.readFile ./zsh/prompt.zsh
+      + builtins.readFile ./zsh/completion.zsh;
 
       plugins = [
         {

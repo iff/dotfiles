@@ -11,7 +11,7 @@
       initExtra = lib.optionalString pkgs.stdenv.isLinux ''
         # FIXME workaround for now
         source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
-      '';
+      '' + builtins.readFile ./zsh/path.zsh;
       # FIXME can't get files from submodules??
       #  + builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh;
     })
@@ -37,7 +37,7 @@
         # FIXME how to properly add nix path?
         . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
-      '' + builtins.readFile ./zsh/zshrc
+      ''
       + builtins.readFile ./zsh/config.zsh
       + builtins.readFile ./zsh/prompt.zsh
       + builtins.readFile ./zsh/completion.zsh;

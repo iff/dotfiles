@@ -9,6 +9,11 @@
     })
     ({
       initExtra = lib.optionalString pkgs.stdenv.isLinux ''
+        # FIXME only on work machine
+        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+        ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
+        ZSH_HIGHLIGHT_MAXLENGTH=2000
+
         # FIXME workaround for now
         source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
       '' + builtins.readFile ./zsh/path.zsh;
@@ -30,13 +35,10 @@
       };
 
       initExtra = ''
-        ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-        ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
-        ZSH_HIGHLIGHT_MAXLENGTH=2000
-
-        # FIXME how to properly add nix path?
+        # FIXME how to properly add nix path? and direnv
         . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
+
       ''
       + builtins.readFile ./zsh/config.zsh
       + builtins.readFile ./zsh/prompt.zsh

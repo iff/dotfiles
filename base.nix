@@ -78,8 +78,6 @@ in
 
   home.packages = [
     git-ssh-dispatch
-    # FIXME: move to module mkMerge config for Darwin/Linux
-    pkgs.alacritty
     pkgs.direnv
     pkgs.exa
     pkgs.git

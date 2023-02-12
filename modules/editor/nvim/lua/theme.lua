@@ -1,6 +1,5 @@
 local is_day = function()
-    -- other option is to parse the log-redshift file and decide based on redshift
-    return vim.fn.system('cat /home/yineichen/.theme') == 'daytime\n'
+    return vim.fn.system("tail -n 2 $HOME/.log-redshift | cut -d' ' -f5 | tr -d '\n'") == '5700K'
 end
 
 local M = {}

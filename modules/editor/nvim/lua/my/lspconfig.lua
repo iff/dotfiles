@@ -50,10 +50,6 @@ function M.plugs()
     Plug('L3MON4D3/LuaSnip')
     Plug('saadparwaiz1/cmp_luasnip')
 
-    -- Rust
-    -- https://github.com/Saecki/crates.nvim
-    -- Plug('rust-lang/rust.vim') -- don't want such a huge plugin?
-
     -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
     -- Plug("cmp-cmdline")
     Plug('onsails/lspkind.nvim') -- vscode-like pictograms
@@ -63,9 +59,6 @@ function M.plugs()
 end
 
 function M.setup()
-    -- TODO not sure why that is needed
-    -- from https://github.com/hrsh7th/nvim-cmp/#setup
-    -- that makes vim the client say it can accept more from the LS?
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
     M.setup_completion()
@@ -192,11 +185,6 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup_rust(capabilities)
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer
-
-    -- https://github.com/rust-lang/rust-analyzer
-    -- curl -L https://github.com/rust-analyzer/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > ~/bin/rust-analyzer && chmod +x ~/bin/rust-analyzer
-
     require('lspconfig').rust_analyzer.setup({
         on_attach = M.on_attach,
         flags = {
@@ -237,8 +225,7 @@ function M.setup_lua(capabilities)
 
     -- TODO probably that goes to individual config files or function, one per LSP?
     -- from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
-    require('lspconfig').sumneko_lua.setup({
-        cmd = { os.getenv('HOME') .. '/bin/sumneko/bin/lua-language-server' },
+    require('lspconfig').lua_ls.setup({
         settings = {
             Lua = {
                 runtime = {
@@ -266,13 +253,6 @@ function M.setup_lua(capabilities)
 end
 
 function M.setup_python(capabilities)
-    -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
-
-    -- https://github.com/microsoft/pyright
-    -- npm install -g pyright
-    -- cd $HOME/bin && ln -s $HOME/bin/nodejs/bin/pyright-langserver .
-    -- cd $HOME/bin && ln -s $HOME/bin/nodejs/bin/pyright .
-
     require('lspconfig').pyright.setup({
         on_attach = M.on_attach,
         capabilities = capabilities,
@@ -281,8 +261,6 @@ function M.setup_python(capabilities)
 end
 
 function M.setup_typescript(capabilities)
-    -- npm install --global typescript-language-server prettier typescript
-
     require('lspconfig').tsserver.setup({
         capabilities = capabilities,
     })

@@ -3,7 +3,7 @@
   programs.alacritty = lib.mkMerge [
     ({
       settings = lib.optionalAttrs pkgs.stdenv.isDarwin {
-        font.size = 17.0;
+        font.size = 16.0;
       };
     })
     ({

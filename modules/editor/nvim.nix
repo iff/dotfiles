@@ -6,6 +6,9 @@ let
     #!/bin/bash
     npm i -g npm typescript typescript-language-server
   '';
+  # FIXME: need to install Plug, maybe migrate away?
+  # sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+  # https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 in
 {
   programs = {

@@ -1,9 +1,6 @@
 local mod = {}
 
-function mod.plugs()
-    local Plug = vim.fn['plug#']
-    Plug('dkuettel/funky-formatter.nvim')
-end
+function mod.plugs() end
 
 function mod.setup()
     local funky_formatter = require('funky-formatter')

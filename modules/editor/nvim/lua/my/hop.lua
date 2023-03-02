@@ -1,9 +1,6 @@
 local mod = {}
 
-function mod.plugs()
-    local Plug = vim.fn['plug#']
-    Plug('phaazon/hop.nvim')
-end
+function mod.plugs() end
 
 function mod.setup()
     local map = vim.api.nvim_set_keymap

@@ -6,11 +6,6 @@ local M = {}
 
 function M.plugs() end
 
-    local Plug = vim.fn['plug#']
-
-    -- Plug('EdenEast/nightfox.nvim', { ['branch'] = 'main' })
-    Plug('kyazdani42/nvim-web-devicons') -- icons
-    Plug('nvim-lualine/lualine.nvim')
 function M.setup()
     vim.opt.background = 'dark'
     vim.cmd('syntax enable')

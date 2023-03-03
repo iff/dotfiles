@@ -5,7 +5,6 @@ vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
 require('theme').plugs()
 
-Plug('numToStr/Comment.nvim')
 require('my/hop').plugs()
 require('my/autosave').plugs()
 require('my/funky').plugs()
@@ -16,8 +15,6 @@ require('my/treesitter').plugs()
 
 require('my/telescope').plugs()
 require('my/lspconfig').plugs()
-
-Plug('dkuettel/funky-contexts.nvim')
 
 vim.call('plug#end')
 

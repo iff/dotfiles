@@ -37,6 +37,17 @@ in
         (plug "EdenEast" "nightfox.nvim" "5e9c8ca12f0bfefd958d3729ee2182499e7a6e73" "sha256-kbQlUQgW+rt/UPZwd4CMT8tJSheodSg7AH7CHDpbh+s=")
         (plug "nvim-tree" "nvim-web-devicons" "c2c2317f356c8b7da0252f5da758f71bb60bb6b2" "sha256-WHymlANhUr/4Trxs0P/huCVRyOHTns1drfFS0hBm2GA=")
         (plug "nvim-lualine" "lualine.nvim" "e99d733e0213ceb8f548ae6551b04ae32e590c80" "sha256-mItWWRqWj9a/JaW8sccnGBijBsvvnh/b4q/S60UwYwc")
+        (plug "neovim" "nvim-lspconfig" "56f4c8cdcdffca8521d3415cba7894d2f9f11dfe" "sha256-lWTUx9SXcp9YADeFiGgWV+jMxrL7hEPc/jjMxYyzEFs=")
+        # FIXME outdated?
+        # (plug "nvim-lua" "lsp_extensions.nvim" "" "")
+        (plug "hrsh7th" "cmp-nvim-lsp" "0e6b2ed705ddcff9738ec4ea838141654f12eeef" "sha256-DxpcPTBlvVP88PDoTheLV2fC76EXDqS2UpM5mAfj/D4=")
+        (plug "hrsh7th" "cmp-buffer" "3022dbc9166796b644a841a02de8dd1cc1d311fa" "sha256-dG4U7MtnXThoa/PD+qFtCt76MQ14V1wX8GMYcvxEnbM=")
+        (plug "hrsh7th" "cmp-path" "447c87cdd6e6d6a1d2488b1d43108bfa217f56e1" "sha256-G/I2SH4Uidr25/4fjrtcK3VfxWwD9MSN+ODcB6zjvVo=")
+        (plug "hrsh7th" "nvim-cmp" "feed47fd1da7a1bad2c7dca456ea19c8a5a9823a" "sha256-rAFEmCXbPoHo1nZ6YHGdKcbGCpKXgQeZ0aa7InmZo2c=")
+        (plug "ray-x" "lsp_signature.nvim" "6f6252f63b0baf0f2224c4caea33819a27f3f550" "sha256-g5bAumjFvA0MBPNKWqOxk5OsaR4KEe5CEsiNN5YbIQU=")
+        (plug "L3MON4D3" "LuaSnip" "9b5be5e9b460fad7134991d3fd0434466959db08" "sha256-RyC2yJPAbkUVOCGh0M2N0xyjapQPkedESiVpWA1NcQ4=")
+        (plug "saadparwaiz1" "cmp_luasnip" "18095520391186d634a0045dacaa346291096566" "sha256-Z5SPy3j2oHFxJ7bK8DP8Q/oRyLEMlnWyIfDaQcNVIS0=")
+        (plug "onsails" "lspkind.nvim" "c68b3a003483cf382428a43035079f78474cd11e" "sha256-WwUQ+O2rIfD4yl0GFx70GsZc9nnhS7b2KWfNdaXCLmM=")
       ];
     };
   };

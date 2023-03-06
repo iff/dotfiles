@@ -31,16 +31,6 @@ local function lsp_jumper(method, before)
     end
 end
 
-function M.plugs()
-    local Plug = vim.fn['plug#']
-
-    -- TODO outdated!
-    Plug('nvim-lua/lsp_extensions.nvim')
-
-    -- could be interesting to show more info from lsp
-    -- https://github.com/nvim-lua/lsp-status.nvim
-end
-
 function M.setup()
     local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 

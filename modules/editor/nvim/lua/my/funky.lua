@@ -1,7 +1,5 @@
 local mod = {}
 
-function mod.plugs() end
-
 function mod.setup()
     local funky_formatter = require('funky-formatter')
     funky_formatter.setup({

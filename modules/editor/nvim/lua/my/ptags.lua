@@ -1,7 +1,5 @@
 local mod = {}
 
-function mod.plugs() end
-
 function mod.setup()
     local pickers = require('telescope.pickers')
     local finders = require('telescope.finders')

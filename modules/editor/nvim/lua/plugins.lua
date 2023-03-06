@@ -3,19 +3,6 @@
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.local/share/nvim/plugged')
 
-require('theme').plugs()
-
-require('my/hop').plugs()
-require('my/autosave').plugs()
-require('my/funky').plugs()
-
-require('my/git').plugs()
-
-require('my/treesitter').plugs()
-
-require('my/telescope').plugs()
-require('my/lspconfig').plugs()
+Plug('nvim-telescope/telescope-fzf-native.nvim', { ['do'] = 'make' })
 
 vim.call('plug#end')
-
-require('funky-contexts').setup()

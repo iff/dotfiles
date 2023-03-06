@@ -4,8 +4,6 @@ end
 
 local M = {}
 
-function M.plugs() end
-
 function M.setup()
     vim.opt.background = 'dark'
     vim.cmd('syntax enable')

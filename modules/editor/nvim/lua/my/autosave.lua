@@ -13,8 +13,6 @@ local function callback(context)
     vim.cmd('silent update')
 end
 
-function mod.plugs() end
-
 function mod.setup()
     -- controls CursorHold and CursorHoldI events
     -- (idle time before they are triggered in milliseconds)

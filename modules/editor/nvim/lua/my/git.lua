@@ -1,7 +1,5 @@
 local mod = {}
 
-function mod.plugs() end
-
 function mod.setup()
     local map = vim.api.nvim_set_keymap
     map('', '<leader>gd', ':Git diff<cr>', { noremap = true })

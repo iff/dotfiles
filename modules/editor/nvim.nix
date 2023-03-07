@@ -11,7 +11,23 @@ let
   # and overlay
   # see also https://nixos.wiki/wiki/Neovim#See_Also
 
-  # FIXME some need to run make for some plugs?
+  treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ c javascript json cpp go python typescript rust bash html haskell regex css toml nix clojure latex lua make markdown vim yaml glsl dockerfile graphql bibtex cmake ]);
+
+  # TODO: maybe combine with plug?
+  plugm = owner: repo: rev: sha256: pkgs.vimUtils.buildVimPlugin {
+    pname = "${lib.strings.sanitizeDerivationName repo}";
+    version = rev;
+    src = pkgs.fetchFromGitHub {
+      owner = owner;
+      repo = repo;
+      rev = rev;
+      sha256 = sha256;
+    };
+    buildPhase = ''                   
+      make
+    '';
+  };
+
   # see: https://nixos.wiki/wiki/Vim#Using_flake
   plug = owner: repo: rev: sha256: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
@@ -32,7 +48,7 @@ in
       withNodeJs = true;
       extraPackages = [
       ];
-      plugins = with pkgs.vimPlugins;[
+      plugins = with pkgs.vimPlugins; [
         (plug "phaazon" "hop.nvim" "90db1b2c61b820e230599a04fedcd2679e64bd07" "sha256-UZZlo5n1x8UfM9OP7RHfT3sFRfMpLkBLbEdcSO+SU6E=")
         (plug "tpope" "vim-fugitive" "bba8d1beb37fe933a9f182b6bdf981e01f31499a" "sha256-4X9v6SXEFaC8D2qoCTZtEx448TPAnYlFdfwAnFVnhDE=")
         (plug "lewis6991" "gitsigns.nvim" "3b6c0a6412b31b91eb26bb8f712562cf7bb1d3be" "sha256-Ny2kW4FpA5reDmvJkXaezRi2BlIaTiIZYFuTuunFJh8=")
@@ -59,16 +75,16 @@ in
         # telescope
         (plug "nvim-lua" "plenary.nvim" "253d34830709d690f013daf2853a9d21ad7accab" "sha256-z5JHuQcF1EvySnRBywl6EOrp8aRO0nd2dnkXJg2ge58=")
         (plug "nvim-telescope" "telescope.nvim" "a3f17d3baf70df58b9d3544ea30abe52a7a832c2" "sha256-QmyVJ/LZFtb/qqD5Q5fHsqAGgqaOT9XkVoLyOcqM14w=")
-        # TODO: run make
-        # (plug "nvim-telescope" "telescope-fzf-native.nvim" "580b6c48651cabb63455e97d7e131ed557b8c7e2" "")
+        (plugm "nvim-telescope" "telescope-fzf-native.nvim" "580b6c48651cabb63455e97d7e131ed557b8c7e2" "sha256-psIJkVRHSiyuB1oX3PM4VB6ol3Ag0aYyQN/rJA6xTfo=")
 
         # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
-        nvim-treesitter
-        # nvim-treesitter.withPlugins (plugins: with plugins; [ tree-sitter-nix tree-sitter-python ])
-        # nvim-treesitter.withPlugins (p: [ p.tree-sitter-c p.tree-sitter-javascript p.tree-sitter-json p.tree-sitter-cpp p.tree-sitter-go p.tree-sitter-python p.tree-sitter-typescript p.tree-sitter-rust p.tree-sitter-bash p.tree-sitter-html p.tree-sitter-haskell p.tree-sitter-regex p.tree-sitter-css p.tree-sitter-toml ])
+        treesitter
 
-        # FIXME outdated nvim-lua/lsp_extensions.nvim: switch to https://github.com/simrat39/rust-tools.nvim for inline hints and rust (see: https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
-        # could be interesting to show more info from lsp: https://github.com/nvim-lua/lsp-status.nvim
+        # potentially interesting plugins for the future
+        # FIXME outdated nvim-lua/lsp_extensions.nvim
+        # switch to https://github.com/simrat39/rust-tools.nvim for inline hints and rust
+        # (see: https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
+        # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
       ];
     };
   };

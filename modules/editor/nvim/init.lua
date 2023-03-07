@@ -68,8 +68,6 @@ local options = function()
 end
 
 local load = function()
-    require('plugins')
-
     disable_distribution_plugins()
     leader_map()
 

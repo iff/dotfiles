@@ -7,10 +7,6 @@ let
     npm i -g npm typescript typescript-language-server
   '';
 
-  # FIXME: neovim has a flake: https://github.com/neovim/neovim/tree/master/contrib
-  # and overlay
-  # see also https://nixos.wiki/wiki/Neovim#See_Also
-
   treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ c javascript json cpp go python typescript rust bash html haskell regex css toml nix clojure latex lua make markdown vim yaml glsl dockerfile graphql bibtex cmake ]);
 
   # TODO: maybe combine with plug?
@@ -44,6 +40,7 @@ in
   programs = {
     neovim = {
       enable = true;
+      package = pkgs.neovim-nightly;
       withPython3 = true;
       withNodeJs = true;
       extraPackages = [

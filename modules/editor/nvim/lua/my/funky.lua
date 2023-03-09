@@ -15,6 +15,7 @@ function mod.setup()
             markdown = { command = { 'prettier', '--parser', 'markdown' } },
             typescript = { command = { 'prettier', '--parser', 'typescript' } },
             typescriptreact = { command = { 'prettier', '--parser', 'typescript' } },
+            yaml = { command = { 'prettier', '--parser', 'yaml' } },
             nix = { command = { 'nixpkgs-fmt' } },
         },
     })

@@ -42,6 +42,7 @@ function M.setup()
     M.setup_typescript(capabilities)
     M.setup_rnix(capabilities)
     M.setup_clangd(capabilities)
+    M.setup_yaml(capabilities)
 
     vim.diagnostic.config({
         -- underline = { severity = vim.diagnostic.severity.ERROR },
@@ -247,6 +248,12 @@ end
 
 function M.setup_clangd(capabilities)
     require('lspconfig').clangd.setup({
+        capabilities = capabilities,
+    })
+end
+
+function M.setup_yaml(capabilities)
+    require('lspconfig').yamlls.setup({
         capabilities = capabilities,
     })
 end

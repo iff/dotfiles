@@ -93,6 +93,7 @@ in
       rnix-lsp
       rust-analyzer
       sumneko-lua-language-server
+      yaml-language-server
       # formatters
       black
       nixpkgs-fmt

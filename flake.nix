@@ -6,8 +6,10 @@
     flake-utils.url = "github:numtide/flake-utils";
 
     # life on the cutting edge
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -28,36 +30,13 @@
 
   };
 
-  outputs = { nixpkgs, flake-utils, neovim-nightly-overlay, home-manager, ... }:
+  outputs = inputs @ { self, nixpkgs, flake-utils, neovim-nightly-overlay, home-manager, ... }:
     {
-      homeConfigurations = {
-        "iff.linux" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            ./linux
-            ./base.nix
-            {
-              nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-            }
-          ]
-          ++ (import ./modules/editor)
-          ++ (import ./modules/shell);
-        };
-
-        "iff.darwin" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-          modules =
-            [
-              ./darwin
-              ./base.nix
-              {
-                nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-              }
-            ]
-            ++ (import ./modules/editor)
-            ++ (import ./modules/shell)
-            ++ (import ./modules/programs);
-        };
-      };
+      homeConfigurations = (
+        import ./homes {
+          inherit (nixpkgs) lib; # TODO necessary?
+          inherit inputs nixpkgs home-manager neovim-nightly-overlay;
+        }
+      );
     };
 }

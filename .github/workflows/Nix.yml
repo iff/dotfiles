@@ -1,12 +1,13 @@
 name: NixOS
-#concurrency: 
+
 on:
   push:
-    branches: [ master ]
+    branches: [main]
   pull_request:
-    branches: [ master ]
+    branches: [main]
+
 jobs:
-  build-laptop:  
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: "Nix dir"
@@ -20,25 +21,24 @@ jobs:
           remove-android: "true"
           remove-haskell: "true"
       - uses: actions/checkout@v3
-    
+
       - name: "Install Nix"
         uses: cachix/install-nix-action@v18
         with:
           github_access_token: ${{ secrets.TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
       - run: nix flake check
-      
+
       - name: "Install Cachix"
         uses: cachix/cachix-action@v10
         with:
           name: ruixi-rebirth
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          extraPullNames: nix-community          
-      
+          extraPullNames: nix-community
+
       - name: "Build Nix config"
         run: |
-          # nix --experimental-features 'nix-command flakes' build -L '.#iff.linux'
-          nix --experimental-features 'nix-command flakes' run . switch -- --flake .#iff.linux
+          nix --experimental-features 'nix-command flakes' run . switch -- --flake .#darktower
 
       - name: "Print nixpkgs version"
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'

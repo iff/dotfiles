@@ -94,6 +94,7 @@ in
     enableZshIntegration = true;
   };
 
+  # TODO: switch to hm config
   home.file.".gitconfig".source = ./git/gitconfig;
   home.file.".tmux.conf".source = ./tmux/tmux.conf;
 }

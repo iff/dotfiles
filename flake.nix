@@ -30,13 +30,16 @@
 
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, neovim-nightly-overlay, home-manager, ... }:
-    {
-      homeConfigurations = (
-        import ./homes {
-          inherit (nixpkgs) lib; # TODO necessary?
-          inherit inputs nixpkgs home-manager neovim-nightly-overlay;
-        }
-      );
-    };
+  outputs = inputs @ { self, nixpkgs, flake-utils, neovim-nightly-overlay, home-manager, ... }: {
+    # needed for bootstrapping with nix run
+    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
+    defaultPackage.aarch64-darwin = home-manager.defaultPackage.aarch64-darwin;
+
+    homeConfigurations = (
+      import ./homes {
+        inherit (nixpkgs) lib; # TODO necessary?
+        inherit inputs nixpkgs home-manager neovim-nightly-overlay;
+      }
+    );
+  };
 }

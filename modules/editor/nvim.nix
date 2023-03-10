@@ -7,6 +7,35 @@ let
     npm i -g npm typescript typescript-language-server
   '';
 
+  isort_and_black = pkgs.writeScriptBin "isort_and_black"
+    ''
+      #!/bin/zsh
+      set -eu -o pipefail
+
+      # run isort and black from:
+      # 1) $vim_project_folder venv, if any
+      # 2) from local folder venv, if any
+      # 3) else, from global installation
+
+      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/isort ]]; then
+          isort=$vim_project_folder/.venv/bin/isort
+      elif [[ -f ./.venv/bin/isort ]]; then
+          isort=./.venv/bin/isort
+      else
+          isort=isort
+      fi
+
+      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/black ]]; then
+          black=$vim_project_folder/.venv/bin/black
+      elif [[ -f ./.venv/bin/black ]]; then
+          black=./.venv/bin/black
+      else
+          black=black
+      fi
+
+      $isort --profile=black --combine-as - | $black --quiet --target-version=py39 -
+    '';
+
   treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ c javascript json cpp go python typescript rust bash html haskell regex css toml nix clojure latex lua make markdown vim yaml glsl dockerfile graphql bibtex cmake ]);
 
   # TODO: maybe combine with plug?
@@ -87,6 +116,7 @@ in
   };
   home = {
     packages = with pkgs; [
+      isort_and_black
       install_lsp
       clang-tools
       pyright

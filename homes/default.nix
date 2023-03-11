@@ -6,6 +6,7 @@
     modules = [
       ../linux
       ../base.nix
+      ../modules/programs/tmux.nix
       {
         nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
         home = {
@@ -23,6 +24,7 @@
     modules = [
       ../linux
       ../base.nix
+      ../modules/programs/tmux.nix
       {
         nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
         home = {
@@ -41,6 +43,7 @@
       [
         ../darwin
         ../base.nix
+        ../modules/programs/tmux.nix
         {
           nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
           home = {

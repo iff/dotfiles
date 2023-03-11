@@ -82,7 +82,6 @@ in
     pkgs.exa
     pkgs.jq
     pkgs.nix-direnv
-    pkgs.tmux
     # fonts
     pkgs.fontconfig
     (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" ]; })
@@ -173,7 +172,5 @@ in
       fuu = "!git add -u && git fu";
     };
   };
-
-  # TODO: switch to hm config
-  home.file.".tmux.conf".source = ./tmux/tmux.conf;
 }
+

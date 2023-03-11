@@ -6,6 +6,7 @@
     modules = [
       ../linux
       ../base.nix
+      ../modules/programs/git.nix
       ../modules/programs/tmux.nix
       {
         nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
@@ -24,6 +25,7 @@
     modules = [
       ../linux
       ../base.nix
+      ../modules/programs/git.nix
       ../modules/programs/tmux.nix
       {
         nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
@@ -39,21 +41,21 @@
 
   "urithiru" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-    modules =
-      [
-        ../darwin
-        ../base.nix
-        ../modules/programs/tmux.nix
-        {
-          nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
-          home = {
-            username = "iff";
-            homeDirectory = "/Users/iff";
-          };
-        }
-      ]
-      ++ (import ../modules/editor)
-      ++ (import ../modules/shell)
-      ++ (import ../modules/programs);
+    modules = [
+      ../darwin
+      ../base.nix
+      ../modules/programs/git.nix
+      ../modules/programs/tmux.nix
+      {
+        nixpkgs.overlays = [ neovim-nightly-overlay.overlay ];
+        home = {
+          username = "iff";
+          homeDirectory = "/Users/iff";
+        };
+      }
+    ]
+    ++ (import ../modules/editor)
+    ++ (import ../modules/shell)
+    ++ (import ../modules/programs);
   };
 }

@@ -4,9 +4,6 @@
 [submodule "bootstrap/ptags/ptags"]
 	path = bootstrap/ptags/ptags
 	url = git@github.com:dkuettel/ptags.git
-[submodule "bootstrap/nvim/vimminent"]
-	path = bootstrap/nvim/vimminent
-	url = git@github.com:dkuettel/vimminent.git
 [submodule "bootstrap/dwm/dwm"]
 	path = bootstrap/dwm/dwm
 	url = git@github.com:iff/dwm.git

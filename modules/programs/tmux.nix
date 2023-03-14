@@ -1,4 +1,27 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+
+let
+  tmux-bind-g = pkgs.writeScriptBin "tmux-bind-g"
+    ''
+      #!/bin/zsh
+      set -eux -o pipefail
+
+      # bind an executable to g (split) and G (new window)
+      # meant to use dynamically for whatever is the current task
+      # at the end
+      #   [q] to exit
+      #   [enter] to rerun
+
+      # NOTE alternatively, we put the command in a file? less escape problems?
+      cmd='while true; do clear; echo ">" '$@'; echo; '$@'; echo; echo ">" '$@' ; read -sk "r?exit code = $? [q or any]"; if [[ $r == q ]]; then break; fi; done'
+      tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
+      tmux bind-key G new-window -n g-bound -c "#{pane_current_path}" zsh -ic $cmd
+    '';
+in
+{
+  home.packages = [
+    tmux-bind-g
+  ];
 
   programs.tmux = {
     enable = true;

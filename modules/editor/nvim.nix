@@ -36,24 +36,38 @@ let
       $isort --profile=black --combine-as - | $black --quiet --target-version=py39 -
     '';
 
-  treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [ c javascript json cpp go python typescript rust bash html haskell regex css toml nix clojure latex lua make markdown vim yaml glsl dockerfile graphql bibtex cmake ]);
-
-  # TODO: maybe combine with plug?
-  plugm = owner: repo: rev: sha256: pkgs.vimUtils.buildVimPlugin {
-    pname = "${lib.strings.sanitizeDerivationName repo}";
-    version = rev;
-    src = pkgs.fetchFromGitHub {
-      owner = owner;
-      repo = repo;
-      rev = rev;
-      sha256 = sha256;
-    };
-    buildPhase = ''                   
-      make
-    '';
-  };
+  treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
+    c
+    javascript
+    json
+    cpp
+    go
+    python
+    typescript
+    rust
+    bash
+    html
+    haskell
+    regex
+    css
+    toml
+    nix
+    clojure
+    latex
+    lua
+    make
+    markdown
+    vim
+    yaml
+    glsl
+    dockerfile
+    graphql
+    bibtex
+    cmake
+  ]);
 
   # see: https://nixos.wiki/wiki/Vim#Using_flake
+  # TODO: move deps to flake.nix
   plug = owner: repo: rev: sha256: pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "${lib.strings.sanitizeDerivationName repo}";
     version = rev;
@@ -63,6 +77,9 @@ let
       rev = rev;
       sha256 = sha256;
     };
+    buildPhase = ''
+      ${if repo == "telescope-fzf-native.nvim" then "make" else ""}
+    '';
   };
 in
 {
@@ -101,7 +118,7 @@ in
         # telescope
         (plug "nvim-lua" "plenary.nvim" "253d34830709d690f013daf2853a9d21ad7accab" "sha256-z5JHuQcF1EvySnRBywl6EOrp8aRO0nd2dnkXJg2ge58=")
         (plug "nvim-telescope" "telescope.nvim" "a3f17d3baf70df58b9d3544ea30abe52a7a832c2" "sha256-QmyVJ/LZFtb/qqD5Q5fHsqAGgqaOT9XkVoLyOcqM14w=")
-        (plugm "nvim-telescope" "telescope-fzf-native.nvim" "580b6c48651cabb63455e97d7e131ed557b8c7e2" "sha256-psIJkVRHSiyuB1oX3PM4VB6ol3Ag0aYyQN/rJA6xTfo=")
+        (plug "nvim-telescope" "telescope-fzf-native.nvim" "580b6c48651cabb63455e97d7e131ed557b8c7e2" "sha256-psIJkVRHSiyuB1oX3PM4VB6ol3Ag0aYyQN/rJA6xTfo=")
 
         # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
         treesitter

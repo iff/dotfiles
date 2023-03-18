@@ -1,8 +1,9 @@
-{ lib, inputs, nixpkgs, home-manager, neovim-nightly-overlay, ... }:
+{ nixpkgs, home-manager, neovim-nightly-overlay, inputs, ... }:
 
 {
   "darktower" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    extraSpecialArgs = { inherit inputs; };
     modules = [
       ../linux
       ../base.nix
@@ -22,6 +23,7 @@
 
   "blackhole" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    extraSpecialArgs = { inherit inputs; };
     modules = [
       ../linux
       ../base.nix
@@ -41,6 +43,7 @@
 
   "urithiru" = home-manager.lib.homeManagerConfiguration {
     pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    extraSpecialArgs = { inherit inputs; };
     modules = [
       ../darwin
       ../base.nix

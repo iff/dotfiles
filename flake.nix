@@ -122,6 +122,11 @@
       flake = false;
     };
 
+    rust-tools-nvim = {
+      url = github:simrat39/rust-tools.nvim;
+      flake = false;
+    };
+
     # trouble = {
     #   url = "github:folke/trouble.nvim";
     #   flake = false;

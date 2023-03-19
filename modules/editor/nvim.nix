@@ -115,17 +115,19 @@ in
         (plug "telescope-nvim")
         (plug "telescope-fzf-native-nvim")
 
-        # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
-        treesitter
-
         # potentially interesting plugins for the future
         # FIXME outdated nvim-lua/lsp_extensions.nvim
         # switch to https://github.com/simrat39/rust-tools.nvim for inline hints and rust
         # (see: https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
         # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
+        (plug "rust-tools-nvim")
+
+        # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
+        treesitter
       ];
     };
   };
+
   home = {
     packages = with pkgs; [
       isort_and_black

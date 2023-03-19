@@ -1,16 +1,12 @@
 local is_day = function()
+    -- TODO this does not work on osx
     return vim.fn.system("tail -n 2 $HOME/.log-redshift | cut -d' ' -f5 | tr -d '\n'") == '5700K'
 end
 
 local M = {}
 
 function M.setup()
-    vim.opt.background = 'dark'
     vim.cmd('syntax enable')
-
-    -- vim.cmd('colorscheme gruvbox')
-    -- vim.cmd('colorscheme nordfox')
-    -- vim.cmd('colorscheme dawnfox')
 
     if is_day() then
         vim.opt.background = 'light'
@@ -20,9 +16,6 @@ function M.setup()
         vim.cmd('colorscheme nordfox')
     end
 
-    -- lualine
-    -- require('lualine').setup {options = { theme = 'gruvbox' }}
-    -- require('lualine').setup {options = { theme = 'nightfox' }}
     require('nvim-web-devicons').setup({})
 
     local function window_nr()
@@ -65,6 +58,7 @@ function M.setup()
         extensions = { 'quickfix' },
     })
 
+    -- custom diagnostics
     vim.cmd([[
        highlight DiagnosticFloatingError guifg=#3c3836
        highlight DiagnosticVirtualTextError guifg=#bdae93

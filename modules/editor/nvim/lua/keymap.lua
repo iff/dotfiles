@@ -34,7 +34,6 @@ map('', 'g*', 'g*zz', {})
 
 -- window navigation
 -- ',#' goes to window #
--- original is '#<c-w>w', not so bad either
 -- alternatives ',w#', or just '<c-w>', or just 'w' like tabs go with 't'?
 for i = 1, 9 do
     vim.keymap.set('n', ',' .. i, i .. '<c-w>w')

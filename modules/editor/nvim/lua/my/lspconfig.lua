@@ -185,7 +185,7 @@ function M.setup_rust(capabilities)
 
     -- type inlay hints
     -- FIXME what does this do?
-    vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
+    -- vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
 end
 
 function M.setup_lua(capabilities)

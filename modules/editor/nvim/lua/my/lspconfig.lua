@@ -183,9 +183,24 @@ function M.setup_rust(capabilities)
         update_in_insert = true,
     })
 
-    -- type inlay hints
-    -- FIXME what does this do?
-    -- vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'lsp_extensions'.inlay_hints{ only_current_line = true }")
+    local rt = require('rust-tools')
+    rt.setup({
+        tools = {
+            inlay_hints = {
+                only_current_line = true,
+            },
+        },
+        server = {
+            on_attach = function(_, bufnr)
+                -- Hover actions
+                vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
+                -- Code action groups
+                vim.keymap.set('n', '<Leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
+            end,
+        },
+    })
+
+    -- vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'rust-tools'.inlay_hints.enable()")
 end
 
 function M.setup_lua(capabilities)

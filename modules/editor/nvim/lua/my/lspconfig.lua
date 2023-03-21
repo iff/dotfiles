@@ -68,11 +68,17 @@ function M.setup()
             --     end,
             -- },
             -- TODO not sure I see an effect either way, with false it was maybe flickery and out of date?
-            update_in_insert = true,
-            severity_sort = true, -- is it working?
-            spacing = 0,
+            spacing = 2,
         },
+        update_in_insert = true,
+        severity_sort = true, -- is it working?
     })
+
+    -- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+    --     virtual_text = true,
+    --     signs = true,
+    --     update_in_insert = true,
+    -- })
 end
 
 function M.setup_completion()
@@ -94,9 +100,9 @@ function M.setup_completion()
         -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
         -- TODO removed buffer as source, but still seems to be happening ...
         sources = cmp.config.sources({
-            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp', max_item_count = 20 },
             -- TODO should not be here for most filetypes, ah but I think it does it itself
-            { name = 'nvim_lua' },
+            { name = 'nvim_lua', max_item_count = 20 },
             -- {name='buffer'},
         }),
         formatting = {
@@ -175,12 +181,6 @@ function M.setup_rust(capabilities)
             },
         },
         capabilities = capabilities,
-    })
-
-    vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = true,
-        signs = true,
-        update_in_insert = true,
     })
 
     local rt = require('rust-tools')

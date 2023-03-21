@@ -85,6 +85,9 @@ function M.setup_completion()
     local cmp = require('cmp')
 
     cmp.setup({
+        completion = {
+            autocomplete = false,
+        },
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body)
@@ -93,6 +96,15 @@ function M.setup_completion()
         mapping = {
             -- enter immediately completes. C-n/C-p to select.
             ['<enter>'] = cmp.mapping.confirm({ select = true }),
+            ['<C-k>'] = cmp.mapping.complete({
+                -- TODO is it necessary to repeat sources?
+                config = {
+                    sources = {
+                        { name = 'nvim_lsp', max_item_count = 20 },
+                        { name = 'nvim_lua', max_item_count = 20 },
+                    },
+                },
+            }),
         },
         experimental = {
             ghost_text = true,

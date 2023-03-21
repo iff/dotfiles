@@ -204,15 +204,13 @@ function M.setup_rust(capabilities)
 end
 
 function M.setup_lua(capabilities)
-    -- using sumneko https://github.com/sumneko
-    -- alternative language server https://github.com/Alloyed/lua-lsp
-
     local runtime_path = vim.split(package.path, ';')
     table.insert(runtime_path, 'lua/?.lua')
     table.insert(runtime_path, 'lua/?/init.lua')
     -- TODO does this the right thing? vim seems to resolve last match, but lua originally does first match?
 
-    -- TODO probably that goes to individual config files or function, one per LSP?
+    require('neodev').setup({})
+
     -- from https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
     require('lspconfig').lua_ls.setup({
         settings = {

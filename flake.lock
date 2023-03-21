@@ -323,6 +323,22 @@
         "type": "github"
       }
     },
+    "neodev-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679393192,
+        "narHash": "sha256-fGHEGra0uRFze4MRYn66VL6UGonD07XVAOY0pEh/+Ro=",
+        "owner": "folke",
+        "repo": "neodev.nvim",
+        "rev": "13376f7b2098e5665becd2861930085e26fce0a1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "neodev.nvim",
+        "type": "github"
+      }
+    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
@@ -437,6 +453,7 @@
         "lspkind-nvim": "lspkind-nvim",
         "lualine-nvim": "lualine-nvim",
         "luasnip-nvim": "luasnip-nvim",
+        "neodev-nvim": "neodev-nvim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nightfox-nvim": "nightfox-nvim",
         "nixpkgs": "nixpkgs",

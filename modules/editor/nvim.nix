@@ -122,6 +122,8 @@ in
         # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
         (plug "rust-tools-nvim")
 
+        (plug "neodev-nvim")
+
         # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
         treesitter
       ];

@@ -96,15 +96,7 @@ function M.setup_completion()
         mapping = {
             -- enter immediately completes. C-n/C-p to select.
             ['<enter>'] = cmp.mapping.confirm({ select = true }),
-            ['<C-k>'] = cmp.mapping.complete({
-                -- TODO is it necessary to repeat sources?
-                config = {
-                    sources = {
-                        { name = 'nvim_lsp', max_item_count = 20 },
-                        { name = 'nvim_lua', max_item_count = 20 },
-                    },
-                },
-            }),
+            ['<C-k>'] = cmp.mapping.complete({}),
         },
         experimental = {
             ghost_text = true,

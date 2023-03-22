@@ -35,7 +35,7 @@ let
           black=black
       fi
 
-      $isort --profile=black --combine-as - | $black --quiet --target-version=py39 -
+      $isort --profile=black --combine-as - | $black --quiet --target-version=py310 -
     '';
 
   treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [

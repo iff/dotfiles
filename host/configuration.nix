@@ -1,9 +1,14 @@
 { config, pkgs, ... }:
 
+let
+  flake-compat = builtins.fetchTarball "https://github.com/edolstra/flake-compat/archive/master.tar.gz";
+  hyprland = (import flake-compat {
+    src = builtins.fetchTarball "https://github.com/hyprwm/Hyprland/archive/master.tar.gz";
+  }).defaultNix;
+in
 {
   imports =
-    [
-      # Include the results of the hardware scan.
+    [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -38,7 +43,7 @@
 
   # xserver config
   # services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = ["nvidia"];
   # services.xserver.layout = "us";
   # services.xserver.displayManager.gdm = {
   #   enable = false;
@@ -49,12 +54,19 @@
   hardware.nvidia.modesetting.enable = true;
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
+  programs.xwayland.enable = true;
   programs.hyprland.enable = true;
   programs.hyprland.nvidiaPatches = true;
   programs.hyprland.xwayland.enable = true;
-  # try sway as well
-  programs.sway.enable = true;
-  xdg.portal.wlr.enable = true;
+
+  programs.waybar.enable = true;
+
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    # extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    # gtkUsePortal = true;
+  };
 
   # hardware.pulseaudio.enable = true;
   services.pipewire = {
@@ -77,7 +89,9 @@
   };
 
   environment.systemPackages = with pkgs; [
+    alacritty
     git
+    google-chrome
     jq
     lnav
     tree
@@ -88,20 +102,33 @@
     wayland
     wayland-scanner
     wayland-utils
-    egl-wayland
+    # egl-wayland
     wayland-protocols
-    xwayland
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
+  programs.mtr.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+  };
 
   services.openssh.enable = true;
+
+  security.polkit.enable = true;
+
+  nix = {
+    settings.auto-optimise-store = true;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+  };
 
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;

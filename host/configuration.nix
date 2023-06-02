@@ -59,8 +59,6 @@ in
   programs.hyprland.nvidiaPatches = true;
   programs.hyprland.xwayland.enable = true;
 
-  programs.waybar.enable = true;
-
   xdg.portal = {
     enable = true;
     wlr.enable = true;
@@ -116,7 +114,7 @@ in
 
   services.openssh.enable = true;
 
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
 
   nix = {
     settings.auto-optimise-store = true;

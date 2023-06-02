@@ -5,8 +5,7 @@
 
 {
   imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" ];
@@ -15,15 +14,21 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/0e96cc4b-43f2-4671-adce-d1db204da693";
+    { device = "/dev/disk/by-uuid/0e96cc4b-43f2-4671-adce-d1db204da693";
       fsType = "ext4";
     };
-  fileSystems."/boot/efi" =
-    {
-      device = "/dev/disk/by-uuid/9F4C-752E";
+  fileSystems."/boot/efi" = 
+    { device = "/dev/disk/by-uuid/9F4C-752E";
       fsType = "vfat";
     };
+  fileSystems."/pics" = 
+    { device = "/dev/disk/by-uuid/b898a75d-5616-42a6-9e64-7ead819e21e5";
+      fsType = "ext4";
+    };
+  # fileSystems."/mnt/ubuntu" = 
+  #   { device = "/dev/disk/by-uuid/39f82f22-e8f2-4710-b67a-4d356f213280";
+  #     fsType = "ext4";
+  #   };
 
   swapDevices = [ ];
 

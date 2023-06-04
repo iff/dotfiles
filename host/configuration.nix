@@ -75,6 +75,7 @@ in
   };
 
   services.dbus.enable = true;
+  services.dbus.packages = [ pkgs.gcr ];
 
   programs.zsh.enable = true;
 
@@ -92,6 +93,7 @@ in
     google-chrome
     jq
     lnav
+    pulsemixer
     tree
     vim
     # wayland

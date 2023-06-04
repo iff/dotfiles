@@ -43,4 +43,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux"; # warning: the group 'nixbld' specified in 'build-users-group' does not exist;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 }

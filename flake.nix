@@ -21,6 +21,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hypr-contrib = {
+        url = "github:hyprwm/contrib";
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)

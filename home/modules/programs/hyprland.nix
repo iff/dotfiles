@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
 
@@ -6,8 +6,9 @@ in
 {
   home = {
     packages = with pkgs; [
-      rofi-wayland
+      inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       hyprpaper
+      rofi-wayland
       swaylock-effects
     ];
   };

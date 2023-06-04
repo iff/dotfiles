@@ -115,6 +115,7 @@ in
   services.openssh.enable = true;
 
   # security.polkit.enable = true;
+  security.pam.services.swaylock = {};
 
   nix = {
     settings.auto-optimise-store = true;

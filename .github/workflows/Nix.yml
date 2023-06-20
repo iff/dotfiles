@@ -29,12 +29,12 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - run: nix flake check
 
-      - name: "Install Cachix"
-        uses: cachix/cachix-action@v10
-        with:
-          name: ruixi-rebirth
-          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          extraPullNames: nix-community
+      # - name: "Install Cachix"
+      #   uses: cachix/cachix-action@v10
+      #   with:
+      #     name: dotfiles
+      #     authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      #     extraPullNames: nix-community
 
       - name: "Build Nix config"
         run: |

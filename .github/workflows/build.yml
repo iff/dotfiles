@@ -1,0 +1,59 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: darktower
+          # - os: ubuntu-latest
+          #   target: nixos
+          - os: macos-13
+            target: urithiru
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: nix dir
+        run: |
+          sudo mkdir /nix
+
+      - name: maximize space
+        uses: easimon/maximize-build-space@v7
+        if: contains(matrix.os, 'ubuntu')
+        with:
+          build-mount-path: /nix
+          remove-dotnet: "true"
+          remove-android: "true"
+          remove-haskell: "true"
+          remove-docker-images: true
+          remove-codeql: true
+          overprovision-lvm: true
+
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: install nix
+        uses: cachix/install-nix-action@v21
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - name: build target
+        run: |
+          set -o pipefail
+          nix --experimental-features 'nix-command flakes' build .#${{ matrix.target }} --fallback -v --log-format raw > >(tee /tmp/nix-build-out.log) 2> >(tee /tmp/nix-build-err.log >&2)
+
+      - name: output build failure
+        if: failure()
+        run: |
+          drv=$(grep "For full logs, run" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
+          nix log $drv
+          echo $drv
+          exit 1

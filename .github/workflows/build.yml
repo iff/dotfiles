@@ -49,8 +49,7 @@ jobs:
       - name: build target
         run: |
           set -o pipefail
-          nix --experimental-features 'nix-command flakes' run --fallback -v --log-format raw . switch -- --flake .#${{ matrix.target }} > >(tee /tmp/nix-build-out.log) 2> >(tee /tmp/nix-build-err.log >&2)
-          # nix --experimental-features 'nix-command flakes' build .#${{ matrix.target }} --fallback -v --log-format raw > >(tee /tmp/nix-build-out.log) 2> >(tee /tmp/nix-build-err.log >&2)
+          nix build .#top.${{ matrix.target }} --fallback -v --log-format raw > >(tee /tmp/nix-build-out.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
       - name: output build failure
         if: failure()

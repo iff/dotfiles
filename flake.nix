@@ -164,5 +164,14 @@
         inherit nixpkgs home-manager neovim-nightly-overlay inputs;
       }
     );
+
+    # CI build helper
+    top =
+      let
+        home = inputs.nixpkgs.lib.genAttrs
+          (builtins.attrNames inputs.self.homeConfigurations)
+          (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
+      in
+      home;
   };
 }

@@ -65,6 +65,15 @@ local options = function()
     set.completeopt = 'menuone,noinsert,noselect'
     -- diagnostic messages defaults to 4000
     set.updatetime = 300
+
+    vim.api.nvim_create_autocmd({ 'VimResized' }, {
+        desc = 'relayout on resize',
+        callback = function()
+            local t = vim.api.nvim_get_current_tabpage()
+            vim.cmd('tabdo wincmd =')
+            vim.api.nvim_set_current_tabpage(t)
+        end,
+    })
 end
 
 local load = function()

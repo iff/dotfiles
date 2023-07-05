@@ -86,10 +86,6 @@ local load = function()
     require('my/lspconfig').setup()
     require('my/treesitter').setup()
     require('my/funky').setup()
-
-    -- ptags for symbols
-    -- FIXME only for Python?
-    require('my/ptags').setup()
 end
 
 load()

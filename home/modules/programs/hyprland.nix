@@ -9,7 +9,7 @@ in
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       hyprpaper
       rofi-wayland
-      swaylock-effects
+      # swaylock-effects
     ];
   };
 
@@ -35,7 +35,7 @@ in
       line-color = "00000000";
       inside-color = "00000088";
       separator-color = "00000000";
-      grace = 2;
+      # grace = 2;
     };
   };
 

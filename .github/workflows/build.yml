@@ -46,6 +46,12 @@ jobs:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
 
+      - name: cachix
+        uses: cachix/cachix-actions@v12
+        with:
+          name: iff-dotfiles
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
       - name: build target
         run: |
           set -o pipefail

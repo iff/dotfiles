@@ -7,7 +7,6 @@
     ({
       initExtra = lib.optionalString pkgs.stdenv.isDarwin ''
         bindkey '^R' history-incremental-search-backward
-        export TERM=xterm-256color
       '';
     })
     ({
@@ -39,7 +38,7 @@
 
       initExtra = ''
         # FIXME how to properly add nix path? and direnv
-        . $HOME/.nix-profile/etc/profile.d/nix.sh
+        # . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
 
         eval "$(starship init zsh)"

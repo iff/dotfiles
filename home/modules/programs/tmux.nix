@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   tmux-bind-g = pkgs.writeScriptBin "tmux-bind-g"
@@ -19,9 +19,11 @@ let
     '';
 in
 {
+  # FIXME alacritty and TMUX have issues with OSX native ncurses
+  # see https://github.com/NixOS/nixpkgs/issues/204144
   home.packages = [
     tmux-bind-g
-  ];
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
 
   programs.tmux = {
     enable = true;

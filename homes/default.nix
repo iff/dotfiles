@@ -1,4 +1,4 @@
-{ nixpkgs, home-manager, neovim-nightly-overlay, inputs, ... }:
+{ nixpkgs, home-manager, neovim-nightly-overlay, inputs, system, ... }:
 
 {
   "darktower" = home-manager.lib.homeManagerConfiguration {
@@ -34,6 +34,7 @@
         home = {
           username = "yineichen";
           homeDirectory = "/home/yineichen";
+          sessionPath = [ "$HOME/bin" ];
         };
       }
     ]
@@ -42,7 +43,7 @@
   };
 
   "urithiru" = home-manager.lib.homeManagerConfiguration {
-    pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    pkgs = inputs.self.pkgsBySystem."aarch64-darwin";
     extraSpecialArgs = { inherit inputs; };
     modules = [
       ../darwin

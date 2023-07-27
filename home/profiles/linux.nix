@@ -1,6 +1,9 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
+with lib;
 let
+  cfg = config.dots.profiles.linux;
+
   sshot = pkgs.writeScriptBin "sshot"
     ''
       #!/bin/zsh
@@ -49,30 +52,36 @@ let
     '';
 in
 {
-  # targets.genericLinux.enable = true;
+  options.dots.profiles.linux = {
+    enable = mkEnableOption "linux profile";
+  };
 
-  home.packages = [
-    lvm-overview
-    sshot
-    susp
-    pkgs.redshift
-  ];
+  config = mkIf cfg.enable {
+    # targets.genericLinux.enable = true;
 
-  services = {
-    redshift = {
-      enable = true;
-      temperature = {
-        day = 5700;
-        night = 3200;
-      };
-      provider = "manual";
-      latitude = 47.4;
-      longitude = 8.5;
-      settings = {
-        redshift.adjustment-method = "randr";
-        redshift.transition = 1;
-        redshift.brightness-day = 1.0;
-        redshift.brightness-night = 0.7;
+    home.packages = [
+      lvm-overview
+      sshot
+      susp
+      pkgs.redshift
+    ];
+
+    services = {
+      redshift = {
+        enable = true;
+        temperature = {
+          day = 5700;
+          night = 3200;
+        };
+        provider = "manual";
+        latitude = 47.4;
+        longitude = 8.5;
+        settings = {
+          redshift.adjustment-method = "randr";
+          redshift.transition = 1;
+          redshift.brightness-day = 1.0;
+          redshift.brightness-night = 0.7;
+        };
       };
     };
   };

@@ -170,9 +170,9 @@
         urithiru = { system = "aarch64-darwin"; };
       };
 
-      nixosConfigurations = mapAttrs' intoNixOs {
-        # ?? = { };
-      };
+      # nixosConfigurations = mapAttrs' intoNixOs {
+      #   ?? = { };
+      # };
 
       # CI build helper
       top =
@@ -184,6 +184,7 @@
             (builtins.attrNames inputs.self.homeConfigurations)
             (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
         in
-        systems // homes;
+        homes;
+      # systems // homes;
     };
 }

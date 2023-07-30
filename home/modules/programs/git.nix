@@ -33,7 +33,7 @@ let
               user="Yves Ineichen iff@yvesineichen.com"
               ;;
     
-          (git@github.com:werehamster/*)
+          (git@github.com:wereHamster/*)
               key=private
               user="Yves Ineichen iff@yvesineichen.com"
               ;;

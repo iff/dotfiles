@@ -132,46 +132,59 @@
       flake = false;
     };
 
-    # trouble = {
-    #   url = "github:folke/trouble.nvim";
-    #   flake = false;
-    # };
-
   };
 
-  outputs = inputs @ { self, nixpkgs, flake-utils, neovim-nightly-overlay, home-manager, ... }: {
-    # needed for bootstrapping with nix run
-    defaultPackage.x86_64-linux = home-manager.defaultPackage.x86_64-linux;
-    defaultPackage.aarch64-darwin = home-manager.defaultPackage.aarch64-darwin;
+  outputs = { self, flake-utils, neovim-nightly-overlay, home-manager, ... } @ inputs:
+    with self.lib;
 
-    # plugins =
-    #   let
-    #     f = xs: pkgs.lib.attrsets.filterAttrs (k: v: !builtins.elem k xs);
-    #
-    #     nonPluginInputNames = [
-    #       "self"
-    #       "nixpkgs"
-    #       "flake-utils"
-    #       "neovim-nightly-overlay"
-    #       "home-manager"
-    #     ];
-    #   in
-    #   builtins.attrNames (f nonPluginInputNames inputs);
+    let
+      forEachSystem = genAttrs [ "x86_64-linux" "aarch64-darwin" ];
+      pkgsBySystem = forEachSystem (system:
+        import inputs.nixpkgs {
+          inherit system;
+        }
+      );
 
-    homeConfigurations = (
-      import ./homes {
-        # inherit (nixpkgs) lib; # TODO necessary?
-        inherit nixpkgs home-manager neovim-nightly-overlay inputs;
-      }
-    );
+    in
+    rec {
+      inherit pkgsBySystem;
+      lib = import ./lib { inherit inputs; } // inputs.nixpkgs.lib;
 
-    # CI build helper
-    top =
-      let
-        home = inputs.nixpkgs.lib.genAttrs
-          (builtins.attrNames inputs.self.homeConfigurations)
-          (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
-      in
-      home;
-  };
+      # plugins =
+      #   let
+      #     f = xs: pkgs.lib.attrsets.filterAttrs (k: v: !builtins.elem k xs);
+      #
+      #     nonPluginInputNames = [
+      #       "self"
+      #       "nixpkgs"
+      #       "flake-utils"
+      #       "neovim-nightly-overlay"
+      #       "home-manager"
+      #     ];
+      #   in
+      #   builtins.attrNames (f nonPluginInputNames inputs);
+
+      homeConfigurations = mapAttrs' intoHomeManager {
+        darktower = { };
+        blackhole = { };
+        urithiru = { system = "aarch64-darwin"; };
+      };
+
+      # nixosConfigurations = mapAttrs' intoNixOs {
+      #   ?? = { };
+      # };
+
+      # CI build helper
+      top =
+        let
+          systems = genAttrs
+            (builtins.attrNames inputs.self.nixosConfigurations)
+            (attr: inputs.self.nixosConfigurations.${attr}.config.system.build.toplevel);
+          homes = genAttrs
+            (builtins.attrNames inputs.self.homeConfigurations)
+            (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
+        in
+        homes;
+      # systems // homes;
+    };
 }

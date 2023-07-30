@@ -50,10 +50,7 @@ setups=(
     off-blast
     redshift
     roam
-    slack
     sound
-    spotify
-    steam
     syncthing
 )
 for i in $setups; do

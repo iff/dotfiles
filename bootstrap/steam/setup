@@ -1,8 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-wget \
-    'https://cdn.akamai.steamstatic.com/client/installer/steam.deb' \
-    -O /tmp/steam.deb
-sudo apt-get install /tmp/steam.deb
-rm /tmp/steam.deb

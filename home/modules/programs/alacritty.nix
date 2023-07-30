@@ -19,16 +19,9 @@ in
     # see https://github.com/NixOS/nixpkgs/issues/204144
     home.packages = [ ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
 
-    programs.alacritty = lib.mkMerge [
-      ({
-        settings = {
-          font.size = cfg.font_size;
-        };
-      })
-      {
-        enable = cfg.enable;
-        settings = lib.attrsets.recursiveUpdate (import ./alacritty/basics.nix) (import ./alacritty/colors.nix);
-      }
-    ];
+    programs.alacritty = {
+      enable = cfg.enable;
+      settings = { font.size = cfg.font_size; } // lib.attrsets.recursiveUpdate (import ./alacritty/basics.nix) (import ./alacritty/colors.nix);
+    };
   };
 }

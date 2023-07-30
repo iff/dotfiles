@@ -2,7 +2,7 @@
 
 {
   home.stateVersion = "23.05";
-  home.sessionPath = [ "$HOME/.nix-profile/bin" "$HOME/bin" "$HOME/bin/nodejs/bin" "$HOME/.cargo/bin" ];
+  home.sessionPath = [ "$HOME/.nix-profile/bin" "$HOME/bin" "$HOME/.cargo/bin" ];
 
   dots = {
     profiles = {

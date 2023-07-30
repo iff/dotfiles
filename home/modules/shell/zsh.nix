@@ -18,7 +18,7 @@
 
         # FIXME workaround for now
         source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
-      '' + builtins.readFile ./zsh/path.zsh;
+      '';
       # FIXME can't get files from submodules??
       #  + builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh;
     })

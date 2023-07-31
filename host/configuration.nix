@@ -106,6 +106,23 @@ in
     wayland-protocols
   ];
 
+  # TODO not so sure that this helps?
+  fonts.fontconfig = {
+    antialias = true;
+
+    # fixes antialiasing blur
+    hinting = {
+      enable = true;
+      style = "slight"; # no difference
+      autohint = true; # no difference
+    };
+
+    subpixel = {
+      rgba = "rgb";
+      lcdfilter = "default";
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   programs.mtr.enable = true;

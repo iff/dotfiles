@@ -22,7 +22,7 @@
     };
 
     hypr-contrib = {
-        url = "github:hyprwm/contrib";
+      url = "github:hyprwm/contrib";
     };
 
     # nvim plugins

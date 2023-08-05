@@ -267,5 +267,8 @@ in
         };
       }];
     };
+
+    home.file.".config/hypr/hyprpaper.conf".source = ../modules/programs/hypr/hyprpaper.conf;
+    home.file.".config/hypr/hyprland.conf".source = ../modules/programs/hypr/hyprland.conf;
   };
 }

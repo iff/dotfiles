@@ -188,6 +188,7 @@
         darktower = { };
         blackhole = { };
         urithiru = { system = "aarch64-darwin"; };
+        nixos = { };
       };
 
       # nixosConfigurations = mapAttrs' intoNixOs {

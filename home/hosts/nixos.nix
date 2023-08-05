@@ -5,10 +5,9 @@
 
   dots = {
     profiles = {
-      linux.enable = true;
+      nixos.enable = true;
     };
-    alacritty.font_size = 13.0;
-    #  TODO ../modules/programs/hyprland.nix
-    # TODO ../nixos.nix
+    alacritty.enable = true;
+    alacritty.font_size = 12.0;
   };
 }

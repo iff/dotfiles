@@ -124,6 +124,9 @@ in
 
         (plug "neodev-nvim")
 
+        # hugging face code completion
+        # (plug "hfcc")
+
         # letting Nix manage treesitter: https://nixos.wiki/wiki/Treesitter
         treesitter
       ];

@@ -16,6 +16,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hyprpaper = {
+      url = "github:hyprwm/hyprpaper";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hypr-contrib = {
+      url = "github:hyprwm/contrib";
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)
@@ -132,6 +141,11 @@
       flake = false;
     };
 
+    # hugging face code completion
+    # hfcc = {
+    #   url = github:huggingface/hfcc.nvim;
+    #   flake = false;
+    # };
   };
 
   outputs = { self, flake-utils, neovim-nightly-overlay, home-manager, ... } @ inputs:
@@ -168,6 +182,7 @@
         darktower = { };
         blackhole = { };
         urithiru = { system = "aarch64-darwin"; };
+        nixos = { };
       };
 
       # nixosConfigurations = mapAttrs' intoNixOs {

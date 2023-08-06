@@ -3,7 +3,7 @@
 let
   git-ssh-dispatch = pkgs.writeScriptBin "git-ssh-dispatch"
     ''
-      #!/bin/zsh
+      #!/usr/bin/env zsh
       set -eu -o pipefail
     
       # this script roughly acts like openssh

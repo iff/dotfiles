@@ -290,7 +290,7 @@
       "inputs": {
         "flake-parts": "flake-parts_3",
         "haskell-flake": "haskell-flake",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1688568579,
@@ -361,6 +361,44 @@
       "original": {
         "owner": "phaazon",
         "repo": "hop.nvim",
+        "type": "github"
+      }
+    },
+    "hypr-contrib": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1684479483,
+        "narHash": "sha256-NCkOkgR7PtkAQmYgeYd6vOzkulQjxlf+vWGUmrQu4uw=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "805bedf51a2f75a2279b6fc75b3066ff21f235ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "type": "github"
+      }
+    },
+    "hyprpaper": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1685378141,
+        "narHash": "sha256-/ehJbAtSJS86NlqHVOeR2ViBKlImKH4guFVPacTmCr8=",
+        "owner": "hyprwm",
+        "repo": "hyprpaper",
+        "rev": "cd86c196f3500f20539754d347c8378349ca0974",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "hyprpaper",
         "type": "github"
       }
     },
@@ -560,6 +598,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1686501370,
+        "narHash": "sha256-G0WuM9fqTPRc2URKP9Lgi5nhZMqsfHGrdEbrLvAPJcg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "75a5ebf473cd60148ba9aec0d219f72e5cf52519",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1688523306,
         "narHash": "sha256-xcJHmwlw0w05D/c8oPX6COxVLYNbu6lXF2mIV7dFGkc=",
         "owner": "nixos",
@@ -605,6 +659,8 @@
         "gitsigns-nvim": "gitsigns-nvim",
         "home-manager": "home-manager",
         "hop-nvim": "hop-nvim",
+        "hypr-contrib": "hypr-contrib",
+        "hyprpaper": "hyprpaper",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspconfig-nvim": "lspconfig-nvim",
         "lspkind-nvim": "lspkind-nvim",
@@ -613,7 +669,7 @@
         "neodev-nvim": "neodev-nvim",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nightfox-nvim": "nightfox-nvim",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs_3",
         "plenary-nvim": "plenary-nvim",
         "rust-tools-nvim": "rust-tools-nvim",
         "telescope-fzf-native-nvim": "telescope-fzf-native-nvim",

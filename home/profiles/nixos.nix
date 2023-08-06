@@ -4,6 +4,16 @@ with lib;
 let
   cfg = config.dots.profiles.nixos;
 
+  startx = pkgs.writeScriptBin "startx"
+    ''
+      export LIBVA_DRIVER_NAME=nvidia
+      export XDG_SESSION_TYPE=wayland
+      export GBM_BACKEND=nvidia-drm
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      export WLR_NO_HARDWARE_CURSORS=1
+
+      Hyprland
+    '';
 in
 {
   options.dots.profiles.nixos = {
@@ -18,6 +28,7 @@ in
       pkgs.hyprpaper
       pkgs.rofi-wayland
       # pkgs.swaylock-effects
+      startx
     ];
 
     services.syncthing.enable = true;

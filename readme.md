@@ -44,7 +44,7 @@ After the first activation use home-manager: `home-manager switch --flake .#$(ho
 - [home-manger manual][home-manager-man]
 - [nix manual][nix-man]
 - [nixOS manual][nixos-man]
-- [nixpkgs][nixpgs-man]
+- [nixpkgs][nixpkgs-man]
 
 [home-manager-man]: https://nix-community.github.io/home-manager/
 [nix-man]: https://nixos.org/manual/nix/stable/

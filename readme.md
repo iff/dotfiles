@@ -53,4 +53,4 @@ After the first activation use home-manager: `home-manager switch --flake .#$(ho
 
 ## References
 
-[nyx]: https://github.com/EdenEast/nyx
+- [nyx](https://github.com/EdenEast/nyx)

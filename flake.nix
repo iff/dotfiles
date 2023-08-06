@@ -146,12 +146,6 @@
     #   url = github:huggingface/hfcc.nvim;
     #   flake = false;
     # };
-
-    # trouble = {
-    #   url = "github:folke/trouble.nvim";
-    #   flake = false;
-    # };
-
   };
 
   outputs = { self, flake-utils, neovim-nightly-overlay, home-manager, ... } @ inputs:

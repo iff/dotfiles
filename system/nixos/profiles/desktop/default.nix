@@ -82,6 +82,7 @@ in
       enable = true; # TODO only if dwm?
       layout = "us";
       videoDrivers = [ "nvidia" ];
+      windowManager.dwm.enable = true; # TODO my patch
     };
 
     # wayland and hyprland setup below

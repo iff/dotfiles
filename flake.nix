@@ -182,12 +182,11 @@
         darktower = { };
         blackhole = { };
         urithiru = { system = "aarch64-darwin"; };
-        nixos = { };
       };
 
-      # nixosConfigurations = mapAttrs' intoNixOs {
-      #   ?? = { };
-      # };
+      nixosConfigurations = mapAttrs' intoNixOs {
+        nixos = { };
+      };
 
       # CI build helper
       top =
@@ -199,7 +198,6 @@
             (builtins.attrNames inputs.self.homeConfigurations)
             (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
         in
-        homes;
-      # systems // homes;
+        systems // homes;
     };
 }

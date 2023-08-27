@@ -67,4 +67,56 @@ rec {
           { inherit inputs name self system; };
       }
     );
+
+  intoNixOs = name: { config ? name, user ? "iff", system ? "x86_64-linux" }:
+    nameValuePair name (
+      let
+        pkgs = inputs.self.pkgsBySystem."${system}";
+        userConf = import (strToFile user ../user);
+      in
+      nixosSystem {
+        inherit system;
+        modules = [
+          (
+            { name, ... }: {
+              networking.hostName = name;
+            }
+          )
+          (
+            { inputs, ... }: {
+              nixpkgs = { inherit pkgs; };
+            }
+          )
+          (
+            { ... }: {
+              system.stateVersion = "23.05";
+            }
+          )
+          (inputs.home-manager.nixosModules.home-manager)
+          (
+            {
+              home-manager = {
+                # useUserPackages = true;
+                useGlobalPkgs = true;
+                extraSpecialArgs =
+                  let
+                    self = inputs.self;
+                    user = userConf;
+                  in
+                  # NOTE: Cannot pass name to home-manager as it passes `name` in to set the `hmModule`
+                  { inherit inputs self system user; };
+              };
+            }
+          )
+          (import ../system/nixos/profiles)
+          (import (strToPath config ../system/nixos/hosts))
+        ];
+        specialArgs =
+          let
+            self = inputs.self;
+            user = userConf;
+          in
+          { inherit inputs name self system user; };
+      }
+    );
 }

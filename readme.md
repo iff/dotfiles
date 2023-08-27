@@ -39,6 +39,8 @@ nix run . switch -- --flake .#$(hostname)
 
 After the first activation use home-manager: `home-manager switch --flake .#$(hostname)`
 
+On Nixos run: `sudo nixos-rebuild switch --flake '.#$(hostname)'`
+
 ## Resources
 
 - [home-manger manual][home-manager-man]

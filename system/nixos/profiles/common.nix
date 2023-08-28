@@ -10,8 +10,6 @@ in
     time.timeZone = "Europe/Zurich";
     i18n.defaultLocale = "en_US.UTF-8";
 
-    nixpkgs.config.allowUnfree = true;
-
     services = {
       cron.enable = true;
       openssh.enable = true;

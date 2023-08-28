@@ -45,7 +45,7 @@ in
       google-chrome
       pamixer
       pulsemixer
-    ] ++ lib.optionals cfg.wm == "hyprland" [
+    ] ++ lib.optionals (cfg.wm == "hyprland") [
       wl-clipboard
       wlr-randr
       wayland

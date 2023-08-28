@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, iff-dwm, ... }:
 
 with lib;
 let
@@ -82,7 +82,9 @@ in
       enable = true; # TODO only if dwm?
       layout = "us";
       videoDrivers = [ "nvidia" ];
-      windowManager.dwm.enable = true; # TODO my patch
+      windowManager.dwm.package = pkgs.dwm.overrideAttrs {
+        src = iff-dwm;
+      };
     };
 
     # wayland and hyprland setup below

@@ -25,6 +25,11 @@
       url = "github:hyprwm/contrib";
     };
 
+    iff-dwm = {
+      url = "git+ssh://git@github.com/iff/dwm?ref=iff";
+      flake = false;
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)

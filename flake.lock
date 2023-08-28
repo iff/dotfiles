@@ -402,6 +402,23 @@
         "type": "github"
       }
     },
+    "iff-dwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1691409006,
+        "narHash": "sha256-1UtIXd7j2IH3GGUb2VFBCMl7z8zbBDtdKwGIYL0KHOY=",
+        "ref": "iff",
+        "rev": "93c40199486c2872813ebf4094a4e088f72b4d3d",
+        "revCount": 1726,
+        "type": "git",
+        "url": "ssh://git@github.com/iff/dwm"
+      },
+      "original": {
+        "ref": "iff",
+        "type": "git",
+        "url": "ssh://git@github.com/iff/dwm"
+      }
+    },
     "lsp-signature-nvim": {
       "flake": false,
       "locked": {
@@ -661,6 +678,7 @@
         "hop-nvim": "hop-nvim",
         "hypr-contrib": "hypr-contrib",
         "hyprpaper": "hyprpaper",
+        "iff-dwm": "iff-dwm",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspconfig-nvim": "lspconfig-nvim",
         "lspkind-nvim": "lspkind-nvim",

@@ -1,5 +1,5 @@
 { lib, ... }:
 
 {
-  imports = [ ./darwin.nix ./linux.nix ./nixos.nix ];
+  imports = [ ./darwin.nix ./linux.nix ];
 }

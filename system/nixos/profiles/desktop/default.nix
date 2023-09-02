@@ -1,4 +1,4 @@
-{ config, lib, pkgs, iff-dwm, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 with lib;
 let
@@ -85,8 +85,9 @@ in
       # no display manager (https://nixos.wiki/wiki/Using_X_without_a_Display_Manager)
       displayManager.startx.enable = true;
       # currently only for DWM
+      windowManager.dwm.enable = true;
       windowManager.dwm.package = pkgs.dwm.overrideAttrs {
-        src = iff-dwm;
+        src = builtins.getAttr "iff-dwm" inputs;
       };
     };
 

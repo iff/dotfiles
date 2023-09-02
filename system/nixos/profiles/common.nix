@@ -1,14 +1,10 @@
 { config, inputs, lib, pkgs, ... }:
 
-with lib;
-let
-  nixConf = import ../../../nix/conf.nix;
-in
 {
   config = {
-    networking.networkmanager.enable = true;
     time.timeZone = "Europe/Zurich";
     i18n.defaultLocale = "en_US.UTF-8";
+    networking.networkmanager.enable = true;
 
     services = {
       cron.enable = true;
@@ -32,6 +28,8 @@ in
       enable = true;
       enableSSHSupport = true;
     };
+
+    hardware.keyboard.zsa.enable = true;
 
     environment.systemPackages = with pkgs; [
       curl

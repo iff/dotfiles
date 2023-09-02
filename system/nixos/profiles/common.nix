@@ -44,7 +44,6 @@
     nix = {
       settings = {
         auto-optimise-store = true;
-        allowed-users = [ "root" ];
       };
 
       extraOptions = ''

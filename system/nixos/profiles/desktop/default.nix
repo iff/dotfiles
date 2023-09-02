@@ -79,9 +79,12 @@ in
     # xorg and dwm
 
     services.xserver = mkIf (cfg.wm == "dwm") {
-      enable = true; # TODO only if dwm?
+      enable = true;
       layout = "us";
       videoDrivers = [ "nvidia" ];
+      # no display manager (https://nixos.wiki/wiki/Using_X_without_a_Display_Manager)
+      displayManager.startx.enable = true;
+      # currently only for DWM
       windowManager.dwm.package = pkgs.dwm.overrideAttrs {
         src = iff-dwm;
       };

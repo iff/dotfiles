@@ -41,8 +41,6 @@ in
     services.blueman.enable = true;
 
     environment.systemPackages = with pkgs; [
-      # FIXME: move chrome to HM
-      google-chrome
       pamixer
       pulsemixer
     ] ++ lib.optionals (cfg.wm == "hyprland") [

@@ -5,6 +5,7 @@
     feh
     geeqie
     gthumb
+    google-chrome
     scrot
     slock
     # vscode
@@ -19,6 +20,7 @@
     # FIXME only for dwm
     profiles = {
       linux.enable = true;
+      desktop.dwm.enable = true;
     };
     alacritty.enable = true;
     # FIXME depends on dwm/hypr?

@@ -6,7 +6,7 @@ let
 
   sshot = pkgs.writeScriptBin "sshot"
     ''
-      #!/bin/zsh
+      #!/usr/bin/env zsh
       set -eux -o pipefail
 
       mkdir -p ~/sshots
@@ -15,7 +15,7 @@ let
     '';
   susp = pkgs.writeScriptBin "susp"
     ''
-      #!/bin/zsh
+      #!/usr/bin/env zsh
       slock &
       systemctl suspend
     '';

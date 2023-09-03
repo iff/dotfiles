@@ -12,6 +12,8 @@ let
     else x;
 in
 rec {
+  existsOrDefault = x: set: default: if hasAttr x set then getAttr x set else default;
+
   mkUserHome = { config, system ? "x86_64-linux" }:
     { ... }: {
       imports = [
@@ -84,7 +86,10 @@ rec {
           )
           (
             { inputs, ... }: {
-              nixpkgs = { inherit pkgs; };
+              nixpkgs = {
+                inherit pkgs;
+                overlays = [ inputs.neovim-nightly-overlay.overlay ];
+              };
             }
           )
           (
@@ -96,7 +101,6 @@ rec {
           (
             {
               home-manager = {
-                # useUserPackages = true;
                 useGlobalPkgs = true;
                 extraSpecialArgs =
                   let
@@ -109,6 +113,7 @@ rec {
             }
           )
           (import ../system/nixos/profiles)
+          (import ../system/nixos/modules)
           (import (strToPath config ../system/nixos/hosts))
         ];
         specialArgs =

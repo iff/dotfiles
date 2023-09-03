@@ -2,8 +2,12 @@
 
 {
   home.packages = with pkgs; [
-    pkgs.geeqie
-    # pkgs.vscode
+    feh
+    geeqie
+    gthumb
+    scrot
+    slock
+    # vscode
   ];
 
   services.syncthing.enable = true;
@@ -12,7 +16,12 @@
     # profiles = {
     #   hyprland.enable = true;
     # };
+    # FIXME only for dwm
+    profiles = {
+      linux.enable = true;
+    };
     alacritty.enable = true;
+    # FIXME depends on dwm/hypr?
     alacritty.font_size = 12.0;
   };
 }

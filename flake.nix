@@ -161,6 +161,9 @@
       pkgsBySystem = forEachSystem (system:
         import inputs.nixpkgs {
           inherit system;
+
+          config.allowUnfreePredicate = pkg: builtins.elem (self.lib.getName pkg)
+            [ "google-chrome" "nvidia-settings" "nvidia-x11" ];
         }
       );
 

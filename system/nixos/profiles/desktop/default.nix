@@ -89,6 +89,8 @@ in
       };
     };
 
+    programs.slock.enable = mkIf (cfg.wm == "dwm") true;
+
     # wayland and hyprland setup below
 
     programs.xwayland.enable = mkIf (cfg.wm == "hyprland") true;

@@ -405,16 +405,16 @@
     "iff-dwm": {
       "flake": false,
       "locked": {
-        "lastModified": 1691409006,
-        "narHash": "sha256-1UtIXd7j2IH3GGUb2VFBCMl7z8zbBDtdKwGIYL0KHOY=",
-        "ref": "iff",
-        "rev": "93c40199486c2872813ebf4094a4e088f72b4d3d",
-        "revCount": 1726,
+        "lastModified": 1693807787,
+        "narHash": "sha256-yMwJ3WXh1wvA3fl9U1cfaVF57iduUmkE261BWjXZr0U=",
+        "ref": "nixos",
+        "rev": "bec0ef3def9814159b8c1d1b5925345506ec335b",
+        "revCount": 1728,
         "type": "git",
         "url": "ssh://git@github.com/iff/dwm"
       },
       "original": {
-        "ref": "iff",
+        "ref": "nixos",
         "type": "git",
         "url": "ssh://git@github.com/iff/dwm"
       }

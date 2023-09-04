@@ -2,10 +2,22 @@
 
 with lib;
 let
-  cfg = config.dots.profiles.desktop.dwm;
+  cfg = config.dots.profiles.dwm;
+in
+{
+  options.dots.profiles.dwm = {
+    enable = mkEnableOption "dwm profile";
+  };
 
-  xinitrc = pkgs.writeText ".xinitrc"
-    ''
+  config = mkIf cfg.enable {
+    home.packages = with pkgs; [
+      dmenu-rs
+      feh
+      gthumb
+      scrot
+    ];
+
+    home.file.".xinitrc".text = ''
       #!/usr/bin/env zsh
       set -eux -o pipefail
 
@@ -13,13 +25,5 @@ let
 
       dwm
     '';
-in
-{
-  options.dots.profiles.desktop.dwm = {
-    enable = mkEnableOption "dwm profile";
-  };
-
-  config = mkIf cfg.enable {
-    home.file.".xinitrc".source = xinitrc;
   };
 }

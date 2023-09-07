@@ -14,8 +14,8 @@ jobs:
         include:
           - os: ubuntu-latest
             target: darktower
-          # - os: ubuntu-latest
-          #   target: nixos
+          - os: ubuntu-latest
+            target: nixos
           # - os: macos-13 # no arm/m1 runners?
           #   target: urithiru
     runs-on: ${{ matrix.os }}

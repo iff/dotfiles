@@ -26,7 +26,7 @@
     };
 
     iff-dwm = {
-      url = "git+ssh://git@github.com/iff/dwm?ref=nixos";
+      url = "github:iff/dwm/nixos";
       flake = false;
     };
 

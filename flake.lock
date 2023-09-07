@@ -407,16 +407,16 @@
       "locked": {
         "lastModified": 1693807787,
         "narHash": "sha256-yMwJ3WXh1wvA3fl9U1cfaVF57iduUmkE261BWjXZr0U=",
-        "ref": "nixos",
+        "owner": "iff",
+        "repo": "dwm",
         "rev": "bec0ef3def9814159b8c1d1b5925345506ec335b",
-        "revCount": 1728,
-        "type": "git",
-        "url": "ssh://git@github.com/iff/dwm"
+        "type": "github"
       },
       "original": {
+        "owner": "iff",
         "ref": "nixos",
-        "type": "git",
-        "url": "ssh://git@github.com/iff/dwm"
+        "repo": "dwm",
+        "type": "github"
       }
     },
     "lsp-signature-nvim": {

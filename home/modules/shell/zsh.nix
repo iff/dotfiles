@@ -27,8 +27,8 @@
 
       shellAliases = {
         reload = ". ~/.zshrc";
-        la = "exa --long --header --all --icons --git";
-        ll = "exa --long --header --icons --git";
+        la = "eza --long --header --all --icons --git";
+        ll = "eza --long --header --icons --git";
         md = "mkdir -p";
         man = "man --no-justification";
         k = "kubectl";

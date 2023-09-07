@@ -17,7 +17,7 @@
   home.packages = [
     pkgs.direnv
     pkgs.dua
-    pkgs.exa
+    pkgs.eza
     pkgs.fd
     pkgs.jq
     pkgs.nix-direnv

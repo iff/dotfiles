@@ -3,7 +3,8 @@
 {
   imports = [ ./hardware.nix ];
 
-  networking.interfaces.enp0s31f6.useDHCP = true;
+  # TODO causing issues with DHCP often restarting loosing connection
+  # networking.interfaces.enp0s31f6.useDHCP = true;
 
   dots = {
     modules = {

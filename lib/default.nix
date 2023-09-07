@@ -90,6 +90,21 @@ rec {
                 inherit pkgs;
                 overlays = [ inputs.neovim-nightly-overlay.overlay ];
               };
+
+              environment.etc.nixpkgs.source = inputs.nixpkgs;
+              nix.nixPath = [ "nixpkgs=/etc/nixpkgs" ];
+            }
+          )
+          (
+            { inputs, ... }: {
+              # re-expose self and nixpkgs as flakes.
+              nix.registry = {
+                self.flake = inputs.self;
+                nixpkgs = {
+                  from = { id = "nixpkgs"; type = "indirect"; };
+                  flake = inputs.nixpkgs;
+                };
+              };
             }
           )
           (

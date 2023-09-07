@@ -25,6 +25,11 @@
       url = "github:hyprwm/contrib";
     };
 
+    iff-dwm = {
+      url = "git+ssh://git@github.com/iff/dwm?ref=nixos";
+      flake = false;
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)
@@ -156,6 +161,9 @@
       pkgsBySystem = forEachSystem (system:
         import inputs.nixpkgs {
           inherit system;
+
+          config.allowUnfreePredicate = pkg: builtins.elem (self.lib.getName pkg)
+            [ "google-chrome" "nvidia-settings" "nvidia-x11" ];
         }
       );
 
@@ -182,12 +190,11 @@
         darktower = { };
         blackhole = { };
         urithiru = { system = "aarch64-darwin"; };
-        nixos = { };
       };
 
-      # nixosConfigurations = mapAttrs' intoNixOs {
-      #   ?? = { };
-      # };
+      nixosConfigurations = mapAttrs' intoNixOs {
+        nixos = { };
+      };
 
       # CI build helper
       top =
@@ -199,7 +206,6 @@
             (builtins.attrNames inputs.self.homeConfigurations)
             (attr: inputs.self.homeConfigurations.${attr}.activationPackage);
         in
-        homes;
-      # systems // homes;
+        systems // homes;
     };
 }

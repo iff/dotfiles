@@ -1,4 +1,0 @@
-bin/start &
-
-exec dwm
-#RUST_BACKTRACE=1 exec ywm

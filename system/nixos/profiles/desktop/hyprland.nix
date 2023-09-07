@@ -2,9 +2,7 @@
 
 with lib;
 let
-  cfg = config.dots.profiles.nixos;
-
-  startx = pkgs.writeScriptBin "startx"
+  startw = pkgs.writeScriptBin "startw"
     ''
       export LIBVA_DRIVER_NAME=nvidia
       export XDG_SESSION_TYPE=wayland
@@ -16,22 +14,14 @@ let
     '';
 in
 {
-  options.dots.profiles.nixos = {
-    enable = mkEnableOption "nixos profile";
-  };
-
-  config = mkIf cfg.enable {
+  config = mkIf (config.dots.profiles.desktop.wm == "hyprland") {
     home.packages = [
-      pkgs.geeqie
-      # pkgs.vscode
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       pkgs.hyprpaper
       pkgs.rofi-wayland
       # pkgs.swaylock-effects
-      startx
+      startw
     ];
-
-    services.syncthing.enable = true;
 
     services.wlsunset = {
       enable = true;
@@ -279,7 +269,7 @@ in
       }];
     };
 
-    home.file.".config/hypr/hyprpaper.conf".source = ../modules/programs/hypr/hyprpaper.conf;
-    home.file.".config/hypr/hyprland.conf".source = ../modules/programs/hypr/hyprland.conf;
+    home.file.".config/hypr/hyprpaper.conf".source = ./hypr/hyprpaper.conf;
+    home.file.".config/hypr/hyprland.conf".source = ./hypr/hyprland.conf;
   };
 }

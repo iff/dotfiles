@@ -402,6 +402,23 @@
         "type": "github"
       }
     },
+    "iff-dwm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693807787,
+        "narHash": "sha256-yMwJ3WXh1wvA3fl9U1cfaVF57iduUmkE261BWjXZr0U=",
+        "ref": "nixos",
+        "rev": "bec0ef3def9814159b8c1d1b5925345506ec335b",
+        "revCount": 1728,
+        "type": "git",
+        "url": "ssh://git@github.com/iff/dwm"
+      },
+      "original": {
+        "ref": "nixos",
+        "type": "git",
+        "url": "ssh://git@github.com/iff/dwm"
+      }
+    },
     "lsp-signature-nvim": {
       "flake": false,
       "locked": {
@@ -614,11 +631,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1688523306,
-        "narHash": "sha256-xcJHmwlw0w05D/c8oPX6COxVLYNbu6lXF2mIV7dFGkc=",
+        "lastModified": 1693626178,
+        "narHash": "sha256-Rpiy6lIOu4zny8tfGuIeN1ji9eSz9nPmm9yBhh/4IOM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "023b1df882979a413a3f7e2009424db30d51a0fe",
+        "rev": "bfb7dfec93f3b5d7274db109f2990bc889861caf",
         "type": "github"
       },
       "original": {
@@ -661,6 +678,7 @@
         "hop-nvim": "hop-nvim",
         "hypr-contrib": "hypr-contrib",
         "hyprpaper": "hyprpaper",
+        "iff-dwm": "iff-dwm",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspconfig-nvim": "lspconfig-nvim",
         "lspkind-nvim": "lspkind-nvim",

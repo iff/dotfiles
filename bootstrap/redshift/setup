@@ -1,7 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-# http://jonls.dk/redshift/
-sudo apt install -yqq redshift
-
-ln -sfT ${0:a:h}/../../redshift/redshift.conf ~/.config/redshift.conf

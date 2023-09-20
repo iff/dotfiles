@@ -1,4 +1,0 @@
-import:
-  - ~/.dotfiles/bootstrap/alacritty/basics.yml
-  - ~/.dotfiles/bootstrap/alacritty/colors.yml
-  - ~/.dotfiles/bootstrap/alacritty/font.yml

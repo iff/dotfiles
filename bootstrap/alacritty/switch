@@ -1,4 +1,0 @@
-#!/bin/zsh
-set -eux -o pipefail
-
-cp $1 ${0:a:h}/alacritty.yml

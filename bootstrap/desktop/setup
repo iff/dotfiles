@@ -51,7 +51,6 @@ setups=(
     redshift
     roam
     sound
-    syncthing
 )
 for i in $setups; do
     ${0:a:h}/../$i/setup

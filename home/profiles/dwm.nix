@@ -17,6 +17,8 @@ in
       scrot
     ];
 
+    home.file.".dwm-status.py".source = ./dwm-status.py;
+
     home.file.".xinitrc".text = ''
       #!/usr/bin/env zsh
       set -eux -o pipefail

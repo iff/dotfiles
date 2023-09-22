@@ -4,6 +4,8 @@
   home.packages = with pkgs; [
     geeqie
     google-chrome
+    roam-research
+    # busybox
     # vscode
   ];
 
@@ -21,5 +23,6 @@
     alacritty.enable = true;
     # FIXME depends on dwm/hypr?
     alacritty.font_size = 12.0;
+    ltstatus.enable = true;
   };
 }

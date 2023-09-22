@@ -30,6 +30,11 @@
       flake = false;
     };
 
+    ltstatus = {
+      url = "github:iff/ltstatus.flake";
+      flake = true;
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)
@@ -163,7 +168,7 @@
           inherit system;
 
           config.allowUnfreePredicate = pkg: builtins.elem (self.lib.getName pkg)
-            [ "google-chrome" "nvidia-settings" "nvidia-x11" ];
+            [ "google-chrome" "nvidia-settings" "nvidia-x11" "roam-research" ];
         }
       );
 

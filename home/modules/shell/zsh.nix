@@ -10,17 +10,12 @@
       '';
     })
     ({
+      # FIXME only on work machine
       initExtra = lib.optionalString pkgs.stdenv.isLinux ''
-        # FIXME only on work machine
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
         ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
         ZSH_HIGHLIGHT_MAXLENGTH=2000
-
-        # FIXME workaround for now
-        source $HOME/.dotfiles/bootstrap/one-shell-history/one-shell-history/shells/zsh
       '';
-      # FIXME can't get files from submodules??
-      #  + builtins.readFile ../../bootstrap/one-shell-history/one-shell-history/shells/zsh;
     })
     {
       enable = true;

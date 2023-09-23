@@ -35,6 +35,11 @@
       flake = true;
     };
 
+    osh = {
+      url = "git+ssh://git@github.com/iff/one-shell-history.flake";
+      flake = true;
+    };
+
     # nvim plugins
 
     # TODO darwin configuration.nix (system stuff?)

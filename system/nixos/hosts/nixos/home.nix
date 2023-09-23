@@ -24,5 +24,6 @@
     # FIXME depends on dwm/hypr?
     alacritty.font_size = 12.0;
     ltstatus.enable = true;
+    osh.enable = true;
   };
 }

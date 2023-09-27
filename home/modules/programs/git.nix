@@ -28,6 +28,11 @@ let
               user="Yves Ineichen iff@yvesineichen.com"
               ;;
     
+          (git@github.com:/dkuettel/*)
+              key=private
+              user="Yves Ineichen iff@yvesineichen.com"
+              ;;
+
           (git@github.com:iff/*)
               key=private
               user="Yves Ineichen iff@yvesineichen.com"

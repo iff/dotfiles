@@ -32,12 +32,9 @@
       };
 
       initExtra = ''
-        # FIXME how to properly add nix path? and direnv
-        # . $HOME/.nix-profile/etc/profile.d/nix.sh
         eval "$(direnv hook zsh)"
-
         eval "$(starship init zsh)"
-
+        path+="$HOME/.nix-profile/bin"
       ''
       + builtins.readFile ./zsh/config.zsh
       # + builtins.readFile ./zsh/prompt.zsh

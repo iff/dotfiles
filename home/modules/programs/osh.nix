@@ -13,7 +13,7 @@ in
     home.packages = [ inputs.osh.packages.${pkgs.system}.default ];
 
     # FIXME this should be provided by one-shell-history.flake
-    programs.zsh.initExtra = mkOrder 200 ''
+    programs.zsh.initExtra = mkOrder 20000 ''
       function __osh {
           osh --no-warn-on-missing-service $@
       }

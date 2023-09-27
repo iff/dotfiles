@@ -9,5 +9,7 @@
       linux.enable = true;
     };
     alacritty.font_size = 13.0;
+    ltstatus.enable = true;
+    osh.enable = true;
   };
 }

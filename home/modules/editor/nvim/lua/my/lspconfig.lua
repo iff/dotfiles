@@ -155,8 +155,8 @@ function M.on_attach(client, bufnr)
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
     nmap(',d', D.open_float)
-    nmap('[d', D.goto_prev)
-    nmap(']d', D.goto_next)
+    -- nmap('[d', D.goto_prev)
+    -- nmap(']d', D.goto_next)
     nmap(',q', D.setloclist)
 
     -- get signatures (and _only_ signatures) when in argument lists

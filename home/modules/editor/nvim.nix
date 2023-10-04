@@ -68,7 +68,7 @@ let
     cmake
   ]);
 
-  plug = name: pkgs.vimUtils.buildVimPluginFrom2Nix {
+  plug = name: pkgs.vimUtils.buildVimPlugin {
     pname = name;
     version = "master";
     src = builtins.getAttr name inputs;

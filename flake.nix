@@ -102,30 +102,37 @@
       url = github:hrsh7th/cmp-nvim-lsp;
       flake = false;
     };
+
     cmp-buffer-nvim = {
       url = github:hrsh7th/cmp-buffer;
       flake = false;
     };
+
     cmp-path-nvim = {
       url = github:hrsh7th/cmp-path;
       flake = false;
     };
+
     cmp-nvim = {
       url = github:hrsh7th/nvim-cmp;
       flake = false;
     };
+
     lsp-signature-nvim = {
       url = github:ray-x/lsp_signature.nvim;
       flake = false;
     };
+
     luasnip-nvim = {
       url = github:L3MON4D3/LuaSnip;
       flake = false;
     };
+
     cmp-luasnip-nvim = {
       url = github:saadparwaiz1/cmp_luasnip;
       flake = false;
     };
+
     lspkind-nvim = {
       url = github:onsails/lspkind.nvim;
       flake = false;

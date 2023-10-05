@@ -169,23 +169,23 @@ function M.on_attach(client, bufnr)
 end
 
 function M.setup_rust(capabilities)
-    require('lspconfig').rust_analyzer.setup({
-        on_attach = M.on_attach,
-        flags = {
-            debounce_text_changes = 150,
-        },
-        settings = {
-            ['rust-analyzer'] = {
-                cargo = {
-                    allFeatures = true,
-                },
-                completion = {
-                    postfix = { enable = false },
-                },
-            },
-        },
-        capabilities = capabilities,
-    })
+    -- require('lspconfig').rust_analyzer.setup({
+    --     on_attach = M.on_attach,
+    --     flags = {
+    --         debounce_text_changes = 150,
+    --     },
+    --     settings = {
+    --         ['rust-analyzer'] = {
+    --             cargo = {
+    --                 allFeatures = true,
+    --             },
+    --             completion = {
+    --                 postfix = { enable = false },
+    --             },
+    --         },
+    --     },
+    --     capabilities = capabilities,
+    -- })
 
     local rt = require('rust-tools')
     rt.setup({
@@ -195,7 +195,8 @@ function M.setup_rust(capabilities)
             },
         },
         server = {
-            on_attach = function(_, bufnr)
+            on_attach = function(client, bufnr)
+                M.on_attach(client, bufnr)
                 -- Hover actions
                 vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
                 -- Code action groups

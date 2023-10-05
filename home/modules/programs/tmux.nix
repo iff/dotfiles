@@ -3,7 +3,7 @@
 let
   tmux-bind-g = pkgs.writeScriptBin "tmux-bind-g"
     ''
-      #!/bin/zsh
+      #!/usr/bin/env zsh
       set -eux -o pipefail
 
       # bind an executable to g (split) and G (new window)
@@ -40,10 +40,11 @@ in
       bind-key k confirm kill-window
       bind-key K confirm kill-server
 
-      bind-key Space choose-tree
+      # bind-key Space choose-tree
+      bind-key Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
 
       # Reload the file with Prefix r.
-      bind r source-file ~/.tmux.conf
+      bind r source-file ~/.config/tmux/tmux.conf
 
       set-option -g renumber-windows on
 

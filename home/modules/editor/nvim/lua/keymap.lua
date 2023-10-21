@@ -3,11 +3,17 @@ local M = {}
 function M.setup()
     M.general()
 
-    M.mappings()
+    -- TODO don't activate uncoditionally
     M.colemak()
 end
 
 function M.general()
+    local map = vim.api.nvim_set_keymap
+
+    map('', ';', ':', {}) -- no shift for cmd mode
+    -- map('i', 'hh', '<Esc>', {})
+    map('', 'wp', '`[v`]', { noremap = true }) -- select last pasted lines
+
     -- window navigation
     -- ',#' goes to window #
     -- alternatives ',w#', or just '<c-w>', or just 'w' like tabs go with 't'?
@@ -17,12 +23,6 @@ function M.general()
 end
 
 function M.mappings()
-    local map = vim.api.nvim_set_keymap
-
-    map('', ';', ':', {}) -- no shift for cmd mode
-    map('i', 'nn', '<Esc>', {}) -- no shift for cmd mode
-    map('', 'gp', '`[v`]', { noremap = true }) -- select last pasted lines
-
     -- keep selection when indent/outdent
     -- xnoremap({ ">", ">gv" })
     -- xnoremap({ "<", "<gv" })

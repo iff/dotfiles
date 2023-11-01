@@ -85,8 +85,10 @@ function M.setup_completion()
     local cmp = require('cmp')
 
     cmp.setup({
+        view = { entries = { name = 'wildmenu', separator = ' | ' }, docs = { auto_open = true } },
         completion = {
             autocomplete = false,
+            completeopt = 'menu,menuone',
         },
         snippet = {
             expand = function(args)
@@ -94,20 +96,23 @@ function M.setup_completion()
             end,
         },
         mapping = {
-            -- enter immediately completes. C-n/C-p to select.
+            ['<c-t>'] = cmp.mapping(
+                cmp.mapping.complete({
+                    reason = cmp.ContextReason.Auto,
+                }),
+                { 'i', 'c' }
+            ),
             ['<enter>'] = cmp.mapping.confirm({ select = true }),
-            ['<C-i>'] = cmp.mapping.complete({}),
+            ['<c-i>'] = cmp.mapping.select_next_item(),
+            ['<c-n>'] = cmp.mapping.select_prev_item(),
+            -- ['<c-u>'] = cmp.mapping.open_docs(),
         },
-        experimental = {
-            ghost_text = true,
-        },
-        -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-        -- TODO removed buffer as source, but still seems to be happening ...
+        -- experimental = {
+        --     ghost_text = true,
+        -- },
         sources = cmp.config.sources({
-            { name = 'nvim_lsp', max_item_count = 20 },
-            -- TODO should not be here for most filetypes, ah but I think it does it itself
-            { name = 'nvim_lua', max_item_count = 20 },
-            -- {name='buffer'},
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lua' },
         }),
         formatting = {
             format = require('lspkind').cmp_format({

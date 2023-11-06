@@ -77,7 +77,9 @@ function M.get_maps()
             { 'so', 'A' }, -- append at end of line
             { 'sm', '^i' }, -- insert at beginning of line
             { 'sl', 'lbi' }, -- insert at beginning of word
+            { 'sL', 'lBi' }, -- insert at beginning of Word
             { 'sy', 'hea' }, -- append at end of word
+            { 'sY', 'hEa' }, -- append at end of Word
             { 'p', 'r' }, -- single replace
         },
     }

@@ -11,11 +11,12 @@ function mod.setup()
         char2_fallback_key = '<enter>',
         jump_on_sole_occurrence = false,
         -- based on https://colemakmods.github.io/mod-dh/model.html
-        keys = 'ntesiroahdufkvlp,cyw',
+        keys = 'ntseriufhdywoa',
     })
 
-    vim.keymap.set('n', 'r', hop.hint_char1, { desc = 'hop 1char' })
-    vim.keymap.set('n', 'R', hop.hint_char2, { desc = 'hop 2char' })
+    -- vim.keymap.set('n', 'r', hop.hint_char1, { desc = 'hop 1char' })
+    -- vim.keymap.set('n', 'R', hop.hint_char2, { desc = 'hop 2char' })
+    vim.keymap.set('n', ' ', hop.hint_char2, { desc = 'hop 2char' })
 end
 
 return mod

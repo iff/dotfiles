@@ -4,6 +4,10 @@ function mod.setup()
     vim.g['fugitive_no_maps'] = 1
 
     vim.keymap.set('n', ',gs', ':tab Git<enter>')
+    vim.keymap.set('n', ',gc', ':tab Git commit<enter>')
+    vim.keymap.set('n', ',ga', ':tab Git commit --amend<enter>')
+    -- vim.keymap.set('n', ',gd', ':Git diff<cr>')
+    -- vim.keymap.set('n', ',gl', ':Gclog<cr>')
 
     vim.api.nvim_create_autocmd('User', {
         pattern = { 'FugitiveIndex', 'FugitiveObject' },
@@ -18,13 +22,6 @@ function mod.setup()
         end,
     })
 
-    -- local map = vim.api.nvim_set_keymap
-    -- map('', '<leader>gd', ':Git diff<cr>', { noremap = true })
-    -- map('', '<leader>gs', ':Git<cr><c-w>T', { noremap = true })
-    -- map('', '<leader>gb', ':Git blame<cr>', { noremap = true })
-    -- map('', '<leader>gc', ':Git commit<cr>', { noremap = true })
-    -- map('', '<leader>gl', ':Gclog<cr>', { noremap = true })
-    --
     -- vim.cmd([[
     --   augroup ft_fugitive
     --       au!

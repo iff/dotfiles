@@ -860,15 +860,15 @@
       "locked": {
         "lastModified": 1695476480,
         "narHash": "sha256-vERiVfTIm7VIeeFgyYjaruux6/ApsGDSFOx8nYyo1BA=",
-        "ref": "refs/heads/main",
+        "owner": "iff",
+        "repo": "one-shell-history.flake",
         "rev": "4ac523bbcedb4a74e5809adc9664483e484b5a73",
-        "revCount": 7,
-        "type": "git",
-        "url": "ssh://git@github.com/iff/one-shell-history.flake"
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "ssh://git@github.com/iff/one-shell-history.flake"
+        "owner": "iff",
+        "repo": "one-shell-history.flake",
+        "type": "github"
       }
     },
     "osh_2": {

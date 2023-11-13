@@ -36,7 +36,7 @@
     };
 
     osh = {
-      url = "git+ssh://git@github.com/iff/one-shell-history.flake";
+      url = "github:iff/one-shell-history.flake";
       flake = true;
     };
 

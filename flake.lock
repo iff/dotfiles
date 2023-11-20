@@ -858,11 +858,11 @@
         "osh": "osh_2"
       },
       "locked": {
-        "lastModified": 1695476480,
-        "narHash": "sha256-vERiVfTIm7VIeeFgyYjaruux6/ApsGDSFOx8nYyo1BA=",
+        "lastModified": 1700466102,
+        "narHash": "sha256-RskpFE5XY7rn/oKql118D4A+AO4LbeV42alDRFg+69I=",
         "owner": "iff",
         "repo": "one-shell-history.flake",
-        "rev": "4ac523bbcedb4a74e5809adc9664483e484b5a73",
+        "rev": "c2d9d6553a1ab4aab3ec571b3cbf441e5fdcf28c",
         "type": "github"
       },
       "original": {
@@ -876,16 +876,16 @@
       "locked": {
         "lastModified": 1662323132,
         "narHash": "sha256-AE9unvtek5jfM8ffp7CLf6f554vwfTQ4MX568oV9cPw=",
-        "ref": "refs/heads/main",
+        "owner": "dkuettel",
+        "repo": "one-shell-history",
         "rev": "1385eaec85ac774ad5381ef2e6cff4091276b828",
-        "revCount": 250,
-        "type": "git",
-        "url": "ssh://git@github.com/dkuettel/one-shell-history"
+        "type": "github"
       },
       "original": {
+        "owner": "dkuettel",
+        "repo": "one-shell-history",
         "rev": "1385eaec85ac774ad5381ef2e6cff4091276b828",
-        "type": "git",
-        "url": "ssh://git@github.com/dkuettel/one-shell-history"
+        "type": "github"
       }
     },
     "plenary-nvim": {

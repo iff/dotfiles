@@ -171,6 +171,16 @@
     # };
   };
 
+  nixConfig = {
+    extra-substituters = [
+      "https://iff-dotfiles.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "iff-dotfiles.cachix.org-1:9PzCJ44z3MuyvrvjkbbMWCDl5Rrf9nt3OZHq446Wn58="
+    ];
+    extra-experimental-features = "nix-command flakes";
+  };
+
   outputs = { self, flake-utils, neovim-nightly-overlay, home-manager, ... } @ inputs:
     with self.lib;
 

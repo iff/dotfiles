@@ -58,13 +58,17 @@ function M.get_maps()
 
     maps['browse'] = {
         nv = {
-            { '<c-u>', 'kzz' }, -- view and cursor up
-            { '<c-e>', 'jzz' }, -- view and cursor down
+            { '<c-u>', '1<c-u>' }, -- view and cursor up
+            { '<c-e>', '1<c-d>' }, -- view and cursor down
+            -- { '<c-u>', 'kzz' }, -- view and cursor up
+            -- { '<c-e>', 'jzz' }, -- view and cursor down
             { 'zz', 'zz' }, -- center line in view
             { 'ze', 'zb' }, -- line at top of view
             { 'zu', 'zt' }, -- line at botton of view
-            { 'k', ':set scroll=0<enter><c-u><c-u>' }, -- view and cursor one page up
-            { 'h', ':set scroll=0<enter><c-d><c-d>' }, -- view and cursor one page down
+            { 'k', '<cmd>set scroll=0<enter><c-u><c-u>' }, -- view and cursor one page up
+            { 'h', '<cmd>set scroll=0<enter><c-d><c-d>' }, -- view and cursor one page down
+            -- { 'k', ':set scroll=0<enter><c-u><c-u>' }, -- view and cursor one page up
+            -- { 'h', ':set scroll=0<enter><c-d><c-d>' }, -- view and cursor one page down
         },
     }
 
@@ -122,7 +126,7 @@ function M.get_maps()
     maps['moves'] = {
         nv = {
             -- { "gn", "^" }, -- start of text in line
-            { 'm', '^' }, -- start of text in line
+            { 'm', '0^' }, -- start of text in line
             -- TODO could also use mlyo and co, it not needed for some
             -- they might be quite natural
             -- { "ggn", "0" }, -- start of line
@@ -194,13 +198,13 @@ function M.get_maps()
 
     maps['tabs'] = {
         n = {
-            { 'ftu', '<cmd>tab split<enter>' }, -- new tab
-            { 'ftU', '<c-w>T' }, -- explode into new tab
+            -- { 'ftu', '<cmd>tab split<enter>' }, -- new tab
+            -- { 'ftU', '<c-w>T' }, -- explode into new tab
             { 'ftn', '<cmd>tabprevious<enter>' }, -- previous tab
             { 'fti', '<cmd>tabnext<enter>' }, -- next tab
             { 'ft,', '<cmd>tabclose<enter>' }, -- close tab
             { 'ft.', '<cmd>tabonly<enter>' }, -- only tab
-            { 'ft;', 'g<tab>' }, -- last tab
+            { 'fth', 'g<tab>' }, -- last tab
             { 'ftl', '<cmd>tabmove -1<enter>' }, -- move tab left
             { 'fty', '<cmd>tabmove +1<enter>' }, -- move tab right
             -- TODO consider ft{digit} for go to
@@ -215,10 +219,14 @@ function M.get_maps()
             { 'stn', '<cmd>set splitright! | vsplit | set splitright!<enter>' }, -- split left
             { 'ste', '<cmd>split<enter>' }, -- split down
             { 'stu', '<cmv>set splitbelow! | split | set splitbelow!<enter>' }, -- split up
+            { 'sty', '<cmd>tab split<enter>' }, -- new tab
+            { 'stY', '<c-w>T' }, -- explode into new tab
             { 'st,', '<c-w>c' }, -- close split
-            { 'st<', '<cmd>x<enter>' }, -- TODO needed? have a write & close/delete buffer? needed in fugitive commit messages
+            -- { "stst,", "<cmd>tabclose<enter>" }, -- close tab
+            -- { 'st<', '<cmd>x<enter>' }, -- TODO needed? have a write & close/delete buffer? needed in fugitive commit messages
             { 'st.', '<c-w>o' }, -- only split
             { 'sth', '<c-w>w' }, -- last split
+            -- { "ststh", "g<tab>" }, -- last tab
             -- TODO add st{digit}
         },
     }

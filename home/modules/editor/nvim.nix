@@ -19,6 +19,14 @@ let
       # 2) from local folder venv, if any
       # 3) else, from global installation
 
+      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/ruff ]]; then
+          $vim_project_folder/.venv/bin/ruff check --fix-only --select 'I' -s - | $vim_project_folder/.venv/bin/ruff format -s -
+          exit $?
+      elif [[ -f ./.venv/bin/ruff ]]; then
+          ./.venv/bin/ruff check --fix-only --select 'I' -s - | ./.venv/bin/ruff format -s -
+          exit $?
+      fi
+
       if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/isort ]]; then
           isort=$vim_project_folder/.venv/bin/isort
       elif [[ -f ./.venv/bin/isort ]]; then

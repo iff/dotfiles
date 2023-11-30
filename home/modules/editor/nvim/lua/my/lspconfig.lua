@@ -107,9 +107,9 @@ function M.setup_completion()
             ['<c-n>'] = cmp.mapping.select_prev_item(),
             -- ['<c-u>'] = cmp.mapping.open_docs(),
         },
-        -- experimental = {
-        --     ghost_text = true,
-        -- },
+        experimental = {
+            ghost_text = true,
+        },
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
             { name = 'nvim_lua' },

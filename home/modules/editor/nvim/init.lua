@@ -84,7 +84,7 @@ local load = function()
 
     options()
 
-    require('keymap')
+    require('keymap').setup()
 
     require('Comment').setup()
     require('my/hop').setup()

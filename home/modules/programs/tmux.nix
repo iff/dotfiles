@@ -36,16 +36,6 @@ in
       # forward focus events
       set -g focus-events on
 
-      # confirm before killing a window or the server
-      bind-key k confirm kill-window
-      bind-key K confirm kill-server
-
-      # bind-key Space choose-tree
-      bind-key Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
-
-      # Reload the file with Prefix r.
-      bind r source-file ~/.config/tmux/tmux.conf
-
       set-option -g renumber-windows on
 
       set -g status-position top
@@ -86,24 +76,32 @@ in
       set -g window-status-current-format " #I *#W "
       set -g status-right "" # '%A %m/%d %l:%M %p'
 
-      # fix paths for new windows
-      bind c new-window -c "#{pane_current_path}"
-
       setw -g mode-keys vi
 
-      # Splitting panes.
-      bind | split-window -h -c "#{pane_current_path}"
-      bind - split-window -v -c "#{pane_current_path}"
+      bind BSpace new-window -c "#{pane_current_path}"
+      bind Enter split-window -h -c "#{pane_current_path}"
+      bind Tab split-window -v -c "#{pane_current_path}"
 
-      # xmonad likeish
-      bind h resize-pane -L 5
-      bind j resize-pane -D 5
-      bind k resize-pane -U 5
-      bind l resize-pane -R 5
+      # confirm before killing a window or the server
+      bind-key k confirm kill-window
+      bind-key K confirm kill-server
 
-      # Moving between windows.
-      bind -r C-h select-window -t :-
-      bind -r C-l select-window -t :+
+      # bind-key Space choose-tree
+      bind-key Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
+
+      # Reload the file with Prefix r.
+      bind r source-file ~/.config/tmux/tmux.conf
+
+      bind -r n resize-pane -L 5
+      bind -r e resize-pane -D 5
+      bind -r u resize-pane -U 5
+      bind -r i resize-pane -R 5
+
+      bind -r m select-window -t :-
+      bind -r o select-window -t :+
+
+      bind -r l select-pane -t :.-
+      bind -r y select-pane -t :.+
 
       set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
       set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'

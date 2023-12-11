@@ -2,7 +2,8 @@
   description = "home manager flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/e4e2af6d113155799eb9be93e3d8dd32d7300e06";
     flake-utils.url = "github:numtide/flake-utils";
 
     # life on the cutting edge
@@ -36,7 +37,7 @@
     };
 
     osh = {
-      url = "git+ssh://git@github.com/iff/one-shell-history.flake";
+      url = "github:iff/one-shell-history.flake";
       flake = true;
     };
 
@@ -168,6 +169,16 @@
     #   url = github:huggingface/hfcc.nvim;
     #   flake = false;
     # };
+  };
+
+  nixConfig = {
+    extra-substituters = [
+      "https://iff-dotfiles.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "iff-dotfiles.cachix.org-1:9PzCJ44z3MuyvrvjkbbMWCDl5Rrf9nt3OZHq446Wn58="
+    ];
+    extra-experimental-features = "nix-command flakes";
   };
 
   outputs = { self, flake-utils, neovim-nightly-overlay, home-manager, ... } @ inputs:

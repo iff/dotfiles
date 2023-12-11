@@ -85,8 +85,10 @@ function M.setup_completion()
     local cmp = require('cmp')
 
     cmp.setup({
+        view = { entries = { name = 'wildmenu', separator = ' | ' }, docs = { auto_open = true } },
         completion = {
             autocomplete = false,
+            completeopt = 'menu,menuone',
         },
         snippet = {
             expand = function(args)
@@ -94,20 +96,23 @@ function M.setup_completion()
             end,
         },
         mapping = {
-            -- enter immediately completes. C-n/C-p to select.
+            ['<c-t>'] = cmp.mapping(
+                cmp.mapping.complete({
+                    reason = cmp.ContextReason.Auto,
+                }),
+                { 'i', 'c' }
+            ),
             ['<enter>'] = cmp.mapping.confirm({ select = true }),
-            ['<C-k>'] = cmp.mapping.complete({}),
+            ['<c-i>'] = cmp.mapping.select_next_item(),
+            ['<c-n>'] = cmp.mapping.select_prev_item(),
+            -- ['<c-u>'] = cmp.mapping.open_docs(),
         },
         experimental = {
             ghost_text = true,
         },
-        -- see https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
-        -- TODO removed buffer as source, but still seems to be happening ...
         sources = cmp.config.sources({
-            { name = 'nvim_lsp', max_item_count = 20 },
-            -- TODO should not be here for most filetypes, ah but I think it does it itself
-            { name = 'nvim_lua', max_item_count = 20 },
-            -- {name='buffer'},
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lua' },
         }),
         formatting = {
             format = require('lspkind').cmp_format({
@@ -132,32 +137,53 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 function M.on_attach(client, bufnr)
-    local function nmap(lhs, rhs)
-        vim.keymap.set('n', lhs, rhs, { buffer = bufnr })
+    local function nmap(lhs, rhs, desc)
+        vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
+    end
+    local function imap(lhs, rhs, desc)
+        vim.keymap.set('i', lhs, rhs, { buffer = bufnr, desc = desc })
     end
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local b = vim.lsp.buf
-    nmap('gD', b.declaration)
-    nmap('gd', b.definition)
-    nmap('K', b.hover)
-    nmap('gi', b.implementation)
-    nmap('<c-k>', b.signature_help)
-    nmap('gr', b.references)
+    -- TODO
+    -- nmap('gD', b.declaration)
+    -- nmap('gi', b.implementation)
+    -- nmap('gtd', b.type_definition)
 
-    nmap('gv', lsp_jumper('textDocument/definition', 'vsplit'))
+    nmap('tt', lsp_jumper('textDocument/definition'), 'go to definition')
+    nmap('ty', lsp_jumper('textDocument/definition', 'tab split'), 'go to definition in a new tab')
+    nmap('ti', lsp_jumper('textDocument/definition', 'vsplit'), 'go to definition in split right')
+    nmap(
+        'tn',
+        lsp_jumper('textDocument/definition', 'set splitright! | vsplit | set splitright!'),
+        'go to definition in split left'
+    )
+    nmap('te', lsp_jumper('textDocument/definition', 'split'), 'go to definition in split down')
+    nmap(
+        'tu',
+        lsp_jumper('textDocument/definition', 'set splitbelow! | split | set splitbelow!'),
+        'go to definition in split up'
+    )
 
-    -- nmap('==', b.formatting_seq_sync)
-    nmap(',ca', b.code_action)
-    nmap(',rn', b.rename)
-    nmap('gtd', b.type_definition)
+    nmap('t.', b.hover, 'hover symbol')
+    imap('<c-k>', b.signature_help, 'signature help')
+    nmap('tl', b.references, 'find references')
+    nmap('t;', b.code_action, 'code action')
+    nmap('to', b.rename, 'rename symbol')
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
-    nmap(',d', D.open_float)
-    -- nmap('[d', D.goto_prev)
-    -- nmap(']d', D.goto_next)
-    nmap(',q', D.setloclist)
+    nmap('t,', function()
+        D.open_float({
+            prefix = function(d, i, t)
+                return vim.diagnostic.severity[d.severity] .. ': '
+            end,
+        })
+    end, 'diagnostics float')
+    nmap('tk', D.goto_prev, 'diagnostics previous')
+    nmap('th', D.goto_next, 'diagnostics next')
+    nmap('tH', D.setloclist, 'diagnostics loclist')
 
     -- get signatures (and _only_ signatures) when in argument lists
     require('lsp_signature').on_attach({

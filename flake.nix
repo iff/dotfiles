@@ -191,7 +191,7 @@
           inherit system;
 
           config.allowUnfreePredicate = pkg: builtins.elem (self.lib.getName pkg)
-            [ "google-chrome" "nvidia-settings" "nvidia-x11" "roam-research" ];
+            [ "google-chrome" "nvidia-settings" "nvidia-x11" "roam-research" "spotify" ];
         }
       );
 

@@ -5,6 +5,7 @@
     geeqie
     google-chrome
     roam-research
+    spotify
     # busybox
     # vscode
   ];

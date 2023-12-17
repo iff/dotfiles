@@ -37,8 +37,8 @@ in
     services.dbus.enable = true;
     services.dbus.packages = [ pkgs.gcr ];
 
-    hardware.bluetooth.enable = true;
-    services.blueman.enable = true;
+    # hardware.bluetooth.enable = true;
+    # services.blueman.enable = true;
 
     environment.systemPackages = with pkgs; [
       pamixer

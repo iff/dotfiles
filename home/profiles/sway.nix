@@ -64,6 +64,7 @@ in
     home.packages = [
       inputs.hypr-contrib.packages.${pkgs.system}.grimblast
       pkgs.rofi-wayland
+      # pkgs.swaylock-effects
       configure-gtk
       dbus-sway-environment
       startw

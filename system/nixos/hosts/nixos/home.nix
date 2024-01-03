@@ -15,12 +15,8 @@
   dots = {
     profiles = {
       sway.enable = true;
+      linux.enable = false;
     };
-    # FIXME only for dwm
-    # profiles = {
-    #   dwm.enable = true;
-    #   linux.enable = true;
-    # };
     alacritty.enable = true;
     # FIXME depends on dwm/hypr?
     alacritty.font_size = 10.0;

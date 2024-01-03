@@ -54,6 +54,11 @@ let
 
       exec sway
     '';
+
+  sptfy = pkgs.writeScriptBin "sptfy"
+    ''
+      spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
+    '';
 in
 {
   options.dots.profiles.sway = {
@@ -67,6 +72,7 @@ in
       # pkgs.swaylock-effects
       configure-gtk
       dbus-sway-environment
+      sptfy
       startw
     ];
 

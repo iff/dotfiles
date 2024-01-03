@@ -8,7 +8,6 @@ icons = True
 
 monitors = [
     m.Redshift(),
-    m.Bluetooth(),
     m.Cpu(),
     m.Datetime(),
 ]

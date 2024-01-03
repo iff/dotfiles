@@ -10,20 +10,15 @@
     # vscode
   ];
 
-  services.syncthing.enable = true;
+  # services.syncthing.enable = true;
 
   dots = {
-    # profiles = {
-    #   hyprland.enable = true;
-    # };
-    # FIXME only for dwm
     profiles = {
-      dwm.enable = true;
-      linux.enable = true;
+      sway.enable = true;
     };
     alacritty.enable = true;
     # FIXME depends on dwm/hypr?
-    alacritty.font_size = 12.0;
+    alacritty.font_size = 10.0;
     ltstatus.enable = true;
     osh.enable = true;
   };

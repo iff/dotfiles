@@ -227,37 +227,22 @@ in
 
         modules-left = [
           "wlr/workspaces"
-          "mpd"
+          # "mpd"
         ];
         modules-center = [
         ];
         modules-right = [
-          "pulseaudio"
           "memory"
           "cpu"
           "temperature"
-          "network"
-          "clock"
+          # "network"
           "tray"
+          "clock"
         ];
 
         "wlr/workspaces" = {
           "format" = "{icon}";
-          "on-click" = "activate";
-        };
-
-        "pulseaudio" = {
-          "scroll-step" = 1;
-          "format" = "{icon} {volume}%";
-          "format-muted" = "󰖁 Muted";
-          "format-icons" = {
-            "default" = [ "" "" "" ];
-          };
-          "states" = {
-            "warning" = 85;
-          };
-          "on-click" = "pamixer -t";
-          "tooltip" = false;
+          # "on-click" = "activate";
         };
 
         "clock" = {

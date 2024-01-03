@@ -15,7 +15,6 @@
   dots = {
     profiles = {
       sway.enable = true;
-      linux.enable = false;
     };
     alacritty.enable = true;
     # FIXME depends on dwm/hypr?

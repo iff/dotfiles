@@ -18,7 +18,6 @@
     };
     alacritty.enable = true;
     alacritty.font_size = 10.0;
-    ltstatus.enable = true;
     osh.enable = true;
   };
 }

@@ -17,7 +17,6 @@
       sway.enable = true;
     };
     alacritty.enable = true;
-    # FIXME depends on dwm/hypr?
     alacritty.font_size = 10.0;
     ltstatus.enable = true;
     osh.enable = true;

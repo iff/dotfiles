@@ -4,7 +4,7 @@ with lib;
 let
   cfg = config.dots.profiles.desktop;
 
-  wmList = [ "hyprland" "dwm" "sway" ];
+  wmList = [ "dwm" "sway" ];
 in
 {
   options.dots.profiles.desktop = {
@@ -12,7 +12,7 @@ in
     wm = mkOption {
       description = "window manager";
       type = types.enum (wmList);
-      default = "hyprland";
+      default = "sway";
     };
   };
 
@@ -43,7 +43,7 @@ in
     environment.systemPackages = with pkgs; [
       pamixer
       pulsemixer
-    ] ++ lib.optionals (cfg.wm == "hyprland" || cfg.wm == "sway") [
+    ] ++ lib.optionals (cfg.wm == "sway") [
       xdg-utils
       glib
       dracula-theme
@@ -96,14 +96,9 @@ in
 
     programs.slock.enable = mkIf (cfg.wm == "dwm") true;
 
-    # wayland and hyprland setup below
+    # wayland and sway setup below
 
-    programs.xwayland.enable = mkIf (cfg.wm == "hyprland" || cfg.wm == "sway") true;
-    programs.hyprland = mkIf (cfg.wm == "hyprland") {
-      enable = true;
-      nvidiaPatches = true;
-      xwayland.enable = true;
-    };
+    programs.xwayland.enable = mkIf (cfg.wm == "sway") true;
 
     # FIXME use home-manager to use on Ubuntu?
     programs.sway = mkIf (cfg.wm == "sway") {
@@ -116,14 +111,14 @@ in
     #   enable = true;
     # };
 
-    xdg.portal = mkIf (cfg.wm == "hyprland" || cfg.wm == "sway") {
+    xdg.portal = mkIf (cfg.wm == "sway") {
       enable = true;
       wlr.enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       # gtkUsePortal = true;
     };
 
-    security.pam.services = mkIf (cfg.wm == "hyprland" || cfg.wm == "sway") {
+    security.pam.services = mkIf (cfg.wm == "sway") {
       swaylock = { };
     };
 

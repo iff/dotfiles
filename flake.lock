@@ -393,26 +393,6 @@
         "type": "github"
       }
     },
-    "hyprpaper": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1685378141,
-        "narHash": "sha256-/ehJbAtSJS86NlqHVOeR2ViBKlImKH4guFVPacTmCr8=",
-        "owner": "hyprwm",
-        "repo": "hyprpaper",
-        "rev": "cd86c196f3500f20539754d347c8378349ca0974",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hyprwm",
-        "repo": "hyprpaper",
-        "type": "github"
-      }
-    },
     "iff-dwm": {
       "flake": false,
       "locked": {
@@ -863,7 +843,6 @@
         "home-manager": "home-manager",
         "hop-nvim": "hop-nvim",
         "hypr-contrib": "hypr-contrib",
-        "hyprpaper": "hyprpaper",
         "iff-dwm": "iff-dwm",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspconfig-nvim": "lspconfig-nvim",

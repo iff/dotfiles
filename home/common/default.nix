@@ -31,5 +31,24 @@
     enable = true;
     enableZshIntegration = true;
   };
-}
 
+
+  home.file.".lesskey".text =
+    ''
+      #command
+      e forw-line
+      u back-line
+      n left-scroll
+      i right-scroll
+      h forw-screen
+      H forw-forever
+      ^h goto-end
+      k back-screen
+      ^k goto-line
+      r repaint
+      E repeat-search
+      U reverse-search
+      ff clear-search
+    '';
+
+}

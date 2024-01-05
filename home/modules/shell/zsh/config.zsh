@@ -213,3 +213,7 @@ LESS+='--clear-screen '  # so that the view starts at the top always
 LESS+='--clear-screen '  # complete redraw when scrolling
 LESS+='--jump-target=.3 '  # the target (for example when searching) is put at 1/3 from the top
 export LESS
+
+export FZF_DEFAULT_OPTS='--bind=ctrl-e:down,ctrl-u:up,ctrl-g:jump-accept'
+export FZF_CTRL_T_OPTS='--layout=reverse'
+export FZF_CTRL_R_OPTS='--layout=reverse'

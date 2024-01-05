@@ -202,3 +202,14 @@ zle -N zle-line-finish
 export MANPAGER='nvim +Man!'
 export VISUAL=nvim
 export EDITOR=nvim
+
+LESS=''
+LESS+='--status-column '  # mark matched lines on the left side
+LESS+='--HILITE-UNREAD '  # mark next unread line (not working with --status-column?)
+LESS+='--RAW-CONTROL-CHARS '  # pass ansi colors
+LESS+='--chop-long-lines '  # don't wrap long lines
+LESS+='--clear-screen '  # so that the view starts at the top always
+# LESS+='--no-init '  # don't clear the screen after exit
+LESS+='--clear-screen '  # complete redraw when scrolling
+LESS+='--jump-target=.3 '  # the target (for example when searching) is put at 1/3 from the top
+export LESS

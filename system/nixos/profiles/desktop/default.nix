@@ -74,10 +74,23 @@ in
     #   };
     # };
 
-    hardware.opengl.enable = true;
-    hardware.nvidia.modesetting.enable = true;
-    hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
-    hardware.nvidia.powerManagement.enable = true;
+    hardware.opengl = {
+      enable = true;
+      driSupport = true;
+      driSupport32Bit = true;
+    };
+
+    hardware.nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = true;
+      powerManagement.finegrained = false;
+
+      # todo at some point try open source kernel modules
+      open = false;
+
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+
 
     # xorg and dwm
 

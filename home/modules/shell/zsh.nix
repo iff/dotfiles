@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }: {
 
-  programs.starship.enable = true;
-  home.file.".config/starship.toml".source = ./zsh/starship.toml;
+  # programs.starship.enable = true;
+  # home.file.".config/starship.toml".source = ./zsh/starship.toml;
 
   programs.zsh = lib.mkMerge [
     ({
@@ -33,11 +33,11 @@
 
       initExtra = ''
         eval "$(direnv hook zsh)"
-        eval "$(starship init zsh)"
+        # eval "$(starship init zsh)"
         path+="$HOME/.nix-profile/bin"
       ''
       + builtins.readFile ./zsh/config.zsh
-      # + builtins.readFile ./zsh/prompt.zsh
+      + builtins.readFile ./zsh/prompt.zsh
       + builtins.readFile ./zsh/completion.zsh;
 
       plugins = [

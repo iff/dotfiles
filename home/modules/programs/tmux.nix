@@ -103,6 +103,18 @@ in
       bind -r l select-pane -t :.-
       bind -r y select-pane -t :.+
 
+      bind-key -T copy-mode-vi u send-keys -X cursor-up
+      bind-key -T copy-mode-vi n send-keys -X cursor-left
+      bind-key -T copy-mode-vi i send-keys -X cursor-right
+      bind-key -T copy-mode-vi m send-keys -X start-of-line
+      bind-key -T copy-mode-vi o send-keys -X end-of-line
+      bind-key -T copy-mode-vi h send-keys -X page-down
+      bind-key -T copy-mode-vi k send-keys -X page-up
+      bind-key -T copy-mode-vi C-h send-keys -X history-bottom
+      bind-key -T copy-mode-vi C-k send-keys -X history-top
+      bind-key -T copy-mode-vi C-u send-keys -X previous-prompt
+      bind-key -T copy-mode-vi C-e send-keys -X next-prompt
+
       set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
       set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
     '';

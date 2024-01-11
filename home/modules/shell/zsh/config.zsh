@@ -139,6 +139,7 @@ function {
 
         # delete (see viopp below)
         d vi-delete
+        x vi-delete-char
 
         # history
         '^u' up-line-or-beginning-search

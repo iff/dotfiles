@@ -60,19 +60,11 @@ function {
         '%(1j, %F{1}%j&%f,)'  # background jobs
         '%E%k'  # fill to end of line
     )
-    local edit='%F{15}${${${KEYMAP:-main}/vicmd/N}/(main|viins)/I}>%f '
+    # 󰫍 󰌒
+    local edit='%F{4}%B%b%f '
     local prompt_marker=']133;A\'
     PS1=$prompt_marker$n$alerts$n${(j//)headers}$n$edit
 }
-
-
-# see 'man zshzle' for reporting the current vim mode
-function zle-keymap-select() {
-    zle reset-prompt
-    zle -R
-}
-zle -N zle-keymap-select
-
 
 ## easier output for when using 'set -x'
 # we show "[context/trace]" with faint color and on its own line

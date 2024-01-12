@@ -60,8 +60,8 @@ function {
         '%(1j, %F{1}%j&%f,)'  # background jobs
         '%E%k'  # fill to end of line
     )
-    # 󰫍 󰌒
-    local edit='%F{4}%B%b%f '
+    # 󰫍  󰌒  
+    local edit='%F{4}%B󰫍%b%f '
     local prompt_marker=']133;A\'
     PS1=$prompt_marker$n$alerts$n${(j//)headers}$n$edit
 }

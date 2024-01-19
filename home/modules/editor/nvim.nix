@@ -9,41 +9,14 @@ let
     npm i -g npm typescript typescript-language-server
   '';
 
-  isort_and_black = pkgs.writeScriptBin "isort_and_black"
+  pyformat = pkgs.writeScriptBin "pyformat"
     ''
       #!/bin/zsh
       set -eu -o pipefail
 
-      # run isort and black from:
-      # 1) $vim_project_folder venv, if any
-      # 2) from local folder venv, if any
-      # 3) else, from global installation
-
-      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/ruff ]]; then
-          $vim_project_folder/.venv/bin/ruff check --fix-only --select 'I' -s - | $vim_project_folder/.venv/bin/ruff format -s -
-          exit $?
-      elif [[ -f ./.venv/bin/ruff ]]; then
+      if [[ -f ./.venv/bin/ruff ]]; then
           ./.venv/bin/ruff check --fix-only --select 'I' -s - | ./.venv/bin/ruff format -s -
-          exit $?
       fi
-
-      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/isort ]]; then
-          isort=$vim_project_folder/.venv/bin/isort
-      elif [[ -f ./.venv/bin/isort ]]; then
-          isort=./.venv/bin/isort
-      else
-          isort=isort
-      fi
-
-      if [[ -v vim_project_folder && -f $vim_project_folder/.venv/bin/black ]]; then
-          black=$vim_project_folder/.venv/bin/black
-      elif [[ -f ./.venv/bin/black ]]; then
-          black=./.venv/bin/black
-      else
-          black=black
-      fi
-
-      $isort --profile=black --combine-as - | $black --quiet --target-version=py310 -
     '';
 
   treesitter = pkgs.vimPlugins.nvim-treesitter.withPlugins (p: with p; [
@@ -143,7 +116,7 @@ in
 
   home = {
     packages = with pkgs; [
-      isort_and_black
+      pyformat
       install_lsp
       clang-tools
       pyright

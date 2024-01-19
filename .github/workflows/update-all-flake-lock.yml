@@ -1,0 +1,19 @@
+name: update-all-flake-lock
+on:
+  workflow_dispatch:
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install nix
+        uses: cachix/install-nix-action@v25
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: update flake.lock
+        uses: DeterminateSystems/update-flake-lock@v20
+        with:
+          pr-assignees: iff
+          pr-reviewers: iff

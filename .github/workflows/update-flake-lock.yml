@@ -20,3 +20,4 @@ jobs:
           inputs: nixpkgs
           pr-assignees: iff
           pr-reviewers: iff
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}

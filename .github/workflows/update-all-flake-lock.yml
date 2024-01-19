@@ -17,3 +17,4 @@ jobs:
         with:
           pr-assignees: iff
           pr-reviewers: iff
+          token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}

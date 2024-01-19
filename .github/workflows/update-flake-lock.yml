@@ -2,15 +2,13 @@ name: update-flake-lock
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * 0" # runs weekly on Sunday at 00:00
+    - cron: "0 21 * * 5"
 
 jobs:
   lockfile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - name: install nix
         uses: cachix/install-nix-action@v25
         with:
@@ -20,3 +18,5 @@ jobs:
         uses: DeterminateSystems/update-flake-lock@v20
         with:
           inputs: nixpkgs
+          pr-assignees: iff
+          pr-reviewers: iff

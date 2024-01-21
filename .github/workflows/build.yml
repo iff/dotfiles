@@ -21,33 +21,36 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - name: nix dir
+      - name: nix mount point
         if: contains(matrix.os, 'ubuntu')
         run: sudo mkdir /nix
 
       - name: maximize space
-        uses: easimon/maximize-build-space@v7
+        uses: easimon/maximize-build-space@v9
         if: contains(matrix.os, 'ubuntu')
         with:
+          root-reserve-mb: 512
+          swap-size-mb: 1024
           build-mount-path: /nix
-          remove-dotnet: "true"
-          remove-android: "true"
-          remove-haskell: "true"
+          remove-dotnet: true
+          remove-android: true
+          remove-haskell: true
           remove-docker-images: true
           remove-codeql: true
           overprovision-lvm: true
 
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: install nix
-        uses: cachix/install-nix-action@v21
+        uses: cachix/install-nix-action@v25
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: cachix
-        uses: cachix/cachix-action@v12
+        uses: cachix/cachix-action@v14
         with:
           name: iff-dotfiles
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
@@ -61,6 +64,8 @@ jobs:
         if: failure()
         run: |
           drv=$(grep "For full logs, run" /tmp/nix-build-err.log | grep -oE "/nix/store/.*.drv")
-          nix log $drv
-          echo $drv
+          if [ -n $drv ]; then
+            nix log $drv
+            echo $drv
+          fi
           exit 1

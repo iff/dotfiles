@@ -24,7 +24,7 @@ jobs:
           # https://api.github.com/users/github-actions[bot] seems to be the API entry for the 
           # github-actions bot, which also contains the ID 41898282.
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          nix flake update --commit-lock-file
+          nix --accept-flake-config flake update --commit-lock-file
 
       - name: get commit message
         id: commit

@@ -9,15 +9,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: install nix
         uses: cachix/install-nix-action@v25
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
           nix_path: nixpkgs=channel:nixos-unstable
-      - name: update flake.lock
-        uses: DeterminateSystems/update-flake-lock@v20
+
+      - name: update lock file
+        run: |
+          git config user.name github-actions[bot]
+          # https://api.github.com/users/github-actions[bot] seems to be the API entry for the 
+          # github-actions bot, which also contains the ID 41898282.
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          nix flake update --commit-lock-file
+
+      - name: get commit message
+        id: commit
+        run: |
+          delimiter="$(openssl rand -hex 16)"
+          echo "message<<${delimiter}" >> "${GITHUB_OUTPUT}"
+          git log -1 --pretty=%B | tail +3 | awk -f ./.github/misc/flake-to-markdown.awk >> "${GITHUB_OUTPUT}"
+          echo "${delimiter}" >> "${GITHUB_OUTPUT}"
+
+      - name: create Pull Request
+        uses: peter-evans/create-pull-request@v5
         with:
-          inputs: nixpkgs
-          pr-assignees: iff
-          pr-reviewers: iff
           token: ${{ secrets.GH_TOKEN_FOR_UPDATES }}
+          title: "flake: update flake.lock"
+          body: "${{ steps.commit.outputs.message }}"
+          branch: automated/flake-updates
+          delete-branch: true
+          assignees: iff

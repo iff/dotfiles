@@ -63,4 +63,20 @@ function mod.setup()
     end, { desc = 'lsp diagnostic all messages' })
 end
 
+function mod.git_diff_files(opts)
+    local pickers = require('telescope.pickers')
+    local finders = require('telescope.finders')
+    local conf = require('telescope.config').values
+    -- FIXME main vs. master
+    local list = vim.fn.systemlist('git diff --name-only master')
+
+    pickers
+        .new(opts, {
+            prompt_title = 'git diff to main/master',
+            finder = finders.new_table({ results = list }),
+            sorter = conf.generic_sorter(opts),
+        })
+        :find()
+end
+
 return mod

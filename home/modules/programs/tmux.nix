@@ -76,49 +76,65 @@ in
       set -g window-status-current-format " #I *#W "
       set -g status-right "" # '%A %m/%d %l:%M %p'
 
+      set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
+      set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
+
+      # keybindings
+
+      # unbind all
+      unbind -a -T prefix
+      unbind -a -T root
+      unbind -a -T copy-mode
+      unbind -a -T copy-mode-vi
+
       setw -g mode-keys vi
+      set-option -g status-keys vi
+
+      # reload tmux conf
+      bind r source-file ~/.config/tmux/tmux.conf
+      bind d detach-client
 
       bind BSpace new-window -c "#{pane_current_path}"
       bind Enter split-window -h -c "#{pane_current_path}"
       bind Tab split-window -v -c "#{pane_current_path}"
 
       # confirm before killing a window or the server
-      bind-key k confirm kill-window
-      bind-key K confirm kill-server
+      bind g confirm kill-window
 
-      # bind-key Space choose-tree
-      bind-key Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
+      # navigate tmux sessions
+      bind Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
 
-      # Reload the file with Prefix r.
-      bind r source-file ~/.config/tmux/tmux.conf
-
+      bind-key h last-window
+      bind-key k last-pane
+      bind-key . resize-pane -Z
+      bind-key , break-pane
+    
+      # TODO do I really use that frequently?
       bind -r n resize-pane -L 5
       bind -r e resize-pane -D 5
       bind -r u resize-pane -U 5
       bind -r i resize-pane -R 5
 
-      bind -r m select-window -t :-
-      bind -r o select-window -t :+
-
       bind -r l select-pane -t :.-
       bind -r y select-pane -t :.+
 
-      bind-key -T copy-mode-vi u send-keys -X cursor-up
-      bind-key -T copy-mode-vi n send-keys -X cursor-left
-      bind-key -T copy-mode-vi i send-keys -X cursor-right
-      bind-key -T copy-mode-vi m send-keys -X start-of-line
-      bind-key -T copy-mode-vi o send-keys -X end-of-line
-      bind-key -T copy-mode-vi h send-keys -X page-down
-      bind-key -T copy-mode-vi k send-keys -X page-up
-      bind-key -T copy-mode-vi C-h send-keys -X history-bottom
-      bind-key -T copy-mode-vi C-k send-keys -X history-top
-      bind-key -T copy-mode-vi C-u send-keys -X previous-prompt
-      bind-key -T copy-mode-vi C-e send-keys -X next-prompt
+      bind -r m select-window -t :-
+      bind -r o select-window -t :+
 
-      set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
-      set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
+      bind a copy-mode
+      bind -T copy-mode-vi u send-keys -X cursor-up
+      bind -T copy-mode-vi n send-keys -X cursor-left
+      bind -T copy-mode-vi i send-keys -X cursor-right
+      bind -T copy-mode-vi m send-keys -X start-of-line
+      bind -T copy-mode-vi o send-keys -X end-of-line
+      bind -T copy-mode-vi h send-keys -X page-down
+      bind -T copy-mode-vi k send-keys -X page-up
+      bind -T copy-mode-vi C-h send-keys -X history-bottom
+      bind -T copy-mode-vi C-k send-keys -X history-top
+      bind -T copy-mode-vi C-u send-keys -X previous-prompt
+      bind -T copy-mode-vi C-e send-keys -X next-prompt
+      bind -T copy-mode-vi Escape send-keys -X cancel
     '';
   };
-
 
 }

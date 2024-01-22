@@ -1,20 +1,10 @@
-local is_day = function()
-    -- TODO this does not work on osx
-    return vim.fn.system("tail -n 2 $HOME/.log-redshift | cut -d' ' -f5 | tr -d '\n'") == '5700K'
-end
-
 local M = {}
 
 function M.setup()
     vim.cmd('syntax enable')
 
-    if is_day() then
-        vim.opt.background = 'light'
-        vim.cmd('colorscheme dawnfox')
-    else
-        vim.opt.background = 'dark'
-        vim.cmd('colorscheme nordfox')
-    end
+    vim.opt.background = 'dark'
+    vim.cmd('colorscheme nordfox')
 
     require('nvim-web-devicons').setup({})
 

@@ -54,6 +54,7 @@ function mod.setup()
         bi.man_pages({ sections = { 'ALL' } })
     end, { desc = 'man pages' })
     map('n', ',cc', bi.commands, { desc = 'vim commands' })
+    map('n', ',c', mod.git_diff_files, {})
 
     map('n', ',]d', function()
         bi.diagnostics({ bufnr = 0 })

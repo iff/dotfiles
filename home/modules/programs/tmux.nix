@@ -104,22 +104,19 @@ in
       # navigate tmux sessions
       bind Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
 
+      # pane selection
+      bind ` display-panes
+
+      # some movement
       bind-key h last-window
       bind-key k last-pane
-      bind-key . resize-pane -Z
-      bind-key , break-pane
-    
-      # TODO do I really use that frequently?
-      bind -r n resize-pane -L 5
-      bind -r e resize-pane -D 5
-      bind -r u resize-pane -U 5
-      bind -r i resize-pane -R 5
-
-      bind -r l select-pane -t :.-
-      bind -r y select-pane -t :.+
-
       bind -r m select-window -t :-
       bind -r o select-window -t :+
+
+      # fullscreen pane
+      bind-key . resize-pane -Z
+      # move to new window
+      bind-key , break-pane
 
       bind a copy-mode
       bind -T copy-mode-vi u send-keys -X cursor-up

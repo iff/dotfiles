@@ -5,7 +5,7 @@
   colors = {
     cursor = {
       text = "CellBackground";
-      Cursor = "CellForeground";
+      cursor = "CellForeground";
     };
     primary = {
       background = "0x2e3440";

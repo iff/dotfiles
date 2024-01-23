@@ -90,8 +90,7 @@ in
       setw -g mode-keys vi
       set-option -g status-keys vi
 
-      # reload tmux conf
-      bind r source-file ~/.config/tmux/tmux.conf
+      bind ';' command-prompt
       bind d detach-client
 
       bind BSpace new-window -c "#{pane_current_path}"

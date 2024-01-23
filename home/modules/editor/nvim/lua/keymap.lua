@@ -3,7 +3,6 @@ local M = {}
 function M.setup()
     M.general()
 
-    -- TODO don't activate uncoditionally
     M.colemak()
 end
 
@@ -11,8 +10,10 @@ function M.general()
     local map = vim.api.nvim_set_keymap
 
     map('', ';', ':', {}) -- no shift for cmd mode
-    -- map('i', 'hh', '<Esc>', {})
-    map('', 'wp', '`[v`]', { noremap = true }) -- select last pasted lines
+
+    -- TODO configure new keybinding
+    vim.keymap.set('n', 'Q', '<nop>')
+    vim.keymap.set('n', 'q', '<nop>')
 
     -- window navigation
     -- ',#' goes to window #
@@ -20,10 +21,9 @@ function M.general()
     for i = 1, 9 do
         vim.keymap.set('n', ',' .. i, i .. '<c-w>w')
     end
-end
 
-function M.mappings()
     -- keep selection when indent/outdent
+    -- . works as well
     -- xnoremap({ ">", ">gv" })
     -- xnoremap({ "<", "<gv" })
 
@@ -165,11 +165,13 @@ function M.get_maps()
     maps['copy'] = {
         nv = {
             { 'w', 'y' },
-            { 'ww', 'yy' },
+            { 'wa', '"+y' }, -- put into system clipboard
         },
         n = {
             { 'wf', 'p' },
             { 'WF', 'P' },
+            { 'ww', 'yy' },
+            { 'wp', '`[v`]' }, -- select last pasted lines
         },
     }
 
@@ -185,7 +187,6 @@ function M.get_maps()
             -- { "FT", "N" },
             { 'E', 'nzz' },
             { 'U', 'Nzz' },
-            -- { "FP", "<cmd>nohlsearch<enter>" },
             { 'ff', '<cmd>nohlsearch<enter>' },
         },
     }

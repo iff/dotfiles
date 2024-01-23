@@ -80,15 +80,17 @@ in
         (plug "web-devicons-nvim")
         (plug "lualine-nvim")
 
-        # lsp
-        (plug "lspconfig-nvim")
+        # lsp (minimal)
+        (plug "nvim-lspconfig")
+        (plug "nvim-cmp")
         (plug "cmp-lsp-nvim")
+        (plug "luasnip-nvim")
+
+        # lsp (ext completion)
         (plug "cmp-buffer-nvim")
         (plug "cmp-path-nvim")
-        (plug "cmp-nvim")
-        (plug "lsp-signature-nvim")
-        (plug "luasnip-nvim")
         (plug "cmp-luasnip-nvim")
+        (plug "lsp-signature-nvim")
         (plug "lspkind-nvim")
 
         # telescope
@@ -96,14 +98,14 @@ in
         (plug "telescope-nvim")
         (plug "telescope-fzf-native-nvim")
 
-        # potentially interesting plugins for the future
-        # FIXME outdated nvim-lua/lsp_extensions.nvim
-        # switch to https://github.com/simrat39/rust-tools.nvim for inline hints and rust
         # (see: https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
-        # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
         (plug "rust-tools-nvim")
 
         (plug "neodev-nvim")
+
+        # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
+
+        # interesting navigation and term/tmux commands: https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 
         # hugging face code completion
         # (plug "hfcc")

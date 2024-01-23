@@ -48,22 +48,6 @@
         "type": "github"
       }
     },
-    "cmp-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1702541213,
-        "narHash": "sha256-BtAYRYn6m788zAq/mNnbAzAxp1TGf9QkRE0hSOp9sdc=",
-        "owner": "hrsh7th",
-        "repo": "nvim-cmp",
-        "rev": "538e37ba87284942c1d76ed38dd497e54e65b891",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hrsh7th",
-        "repo": "nvim-cmp",
-        "type": "github"
-      }
-    },
     "cmp-path-nvim": {
       "flake": false,
       "locked": {
@@ -429,22 +413,6 @@
         "type": "github"
       }
     },
-    "lspconfig-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1705757419,
-        "narHash": "sha256-StYsN9C2rV471JkncUR1PFeXs0S15ZGTF1DigSbwOHI=",
-        "owner": "neovim",
-        "repo": "nvim-lspconfig",
-        "rev": "8917d2c830e04bf944a699b8c41f097621283828",
-        "type": "github"
-      },
-      "original": {
-        "owner": "neovim",
-        "repo": "nvim-lspconfig",
-        "type": "github"
-      }
-    },
     "lspkind-nvim": {
       "flake": false,
       "locked": {
@@ -744,6 +712,38 @@
         "type": "github"
       }
     },
+    "nvim-cmp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702541213,
+        "narHash": "sha256-BtAYRYn6m788zAq/mNnbAzAxp1TGf9QkRE0hSOp9sdc=",
+        "owner": "hrsh7th",
+        "repo": "nvim-cmp",
+        "rev": "538e37ba87284942c1d76ed38dd497e54e65b891",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hrsh7th",
+        "repo": "nvim-cmp",
+        "type": "github"
+      }
+    },
+    "nvim-lspconfig": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1705757419,
+        "narHash": "sha256-StYsN9C2rV471JkncUR1PFeXs0S15ZGTF1DigSbwOHI=",
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "rev": "8917d2c830e04bf944a699b8c41f097621283828",
+        "type": "github"
+      },
+      "original": {
+        "owner": "neovim",
+        "repo": "nvim-lspconfig",
+        "type": "github"
+      }
+    },
     "osh": {
       "inputs": {
         "flake-utils": "flake-utils_5",
@@ -835,7 +835,6 @@
         "cmp-buffer-nvim": "cmp-buffer-nvim",
         "cmp-lsp-nvim": "cmp-lsp-nvim",
         "cmp-luasnip-nvim": "cmp-luasnip-nvim",
-        "cmp-nvim": "cmp-nvim",
         "cmp-path-nvim": "cmp-path-nvim",
         "comment-nvim": "comment-nvim",
         "flake-utils": "flake-utils",
@@ -848,7 +847,6 @@
         "hypr-contrib": "hypr-contrib",
         "iff-dwm": "iff-dwm",
         "lsp-signature-nvim": "lsp-signature-nvim",
-        "lspconfig-nvim": "lspconfig-nvim",
         "lspkind-nvim": "lspkind-nvim",
         "ltstatus": "ltstatus",
         "lualine-nvim": "lualine-nvim",
@@ -857,6 +855,8 @@
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nightfox-nvim": "nightfox-nvim",
         "nixpkgs": "nixpkgs_4",
+        "nvim-cmp": "nvim-cmp",
+        "nvim-lspconfig": "nvim-lspconfig",
         "osh": "osh",
         "plenary-nvim": "plenary-nvim",
         "rust-tools-nvim": "rust-tools-nvim",

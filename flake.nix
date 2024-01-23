@@ -89,13 +89,23 @@
       flake = false;
     };
 
-    lspconfig-nvim = {
+    nvim-lspconfig = {
       url = github:neovim/nvim-lspconfig;
+      flake = false;
+    };
+
+    nvim-cmp = {
+      url = github:hrsh7th/nvim-cmp;
       flake = false;
     };
 
     cmp-lsp-nvim = {
       url = github:hrsh7th/cmp-nvim-lsp;
+      flake = false;
+    };
+
+    luasnip-nvim = {
+      url = github:L3MON4D3/LuaSnip;
       flake = false;
     };
 
@@ -109,18 +119,8 @@
       flake = false;
     };
 
-    cmp-nvim = {
-      url = github:hrsh7th/nvim-cmp;
-      flake = false;
-    };
-
     lsp-signature-nvim = {
       url = github:ray-x/lsp_signature.nvim;
-      flake = false;
-    };
-
-    luasnip-nvim = {
-      url = github:L3MON4D3/LuaSnip;
       flake = false;
     };
 

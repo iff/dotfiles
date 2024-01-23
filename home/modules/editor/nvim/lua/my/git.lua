@@ -4,8 +4,6 @@ function mod.setup()
     vim.g['fugitive_no_maps'] = 1
 
     vim.keymap.set('n', 'gg', ':tab Git<enter>')
-    vim.keymap.set('n', 'ggc', ':tab Git commit<enter>')
-    vim.keymap.set('n', 'gga', ':tab Git commit --amend<enter>')
     -- vim.keymap.set('n', ',gd', ':Git diff<cr>')
     -- vim.keymap.set('n', ',gl', ':Gclog<cr>')
 

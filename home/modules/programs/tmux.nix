@@ -101,10 +101,21 @@ in
       bind g confirm kill-window
 
       # navigate tmux sessions
-      bind Space new-window zsh -c 'tmux list-session | cut -d : -f 1 | fzf --bind "enter:become(tmux switch -t {})"'
+      bind Space new-window zsh -c "tmux list-sessions -F '#{session_name}' | fzf --bind 'enter:become(tmux switch -t {})+abort'"
 
       # pane selection
       bind ` display-panes
+
+      # windows
+      bind-key 1 select-window -t :1
+      bind-key 2 select-window -t :2
+      bind-key 3 select-window -t :3
+      bind-key 4 select-window -t :4
+      bind-key 5 select-window -t :5
+      bind-key 6 select-window -t :6
+      bind-key 7 select-window -t :7
+      bind-key 8 select-window -t :8
+      bind-key 9 select-window -t :9
 
       # some movement
       bind-key h last-window

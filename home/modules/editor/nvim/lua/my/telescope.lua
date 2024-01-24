@@ -42,24 +42,24 @@ function mod.setup()
     })
     telescope.load_extension('fzf')
 
-    map('n', ',f', bi.find_files, { desc = 'find files' })
-    map('', '<leader>,', ':Telescope git_files<cr>', { desc = 'find git files' })
-    map('n', '<leader>..', bi.lsp_document_symbols, { desc = 'document symbols' })
-    map('n', '<leader>.', bi.lsp_dynamic_workspace_symbols, { desc = 'workspace symbols' })
+    map('', 'gg', ':Telescope git_files<cr>', { desc = 'find git files' })
+    map('n', 'ge', bi.lsp_document_symbols, { desc = 'document symbols' })
+    map('n', 'gi', bi.lsp_dynamic_workspace_symbols, { desc = 'workspace symbols' })
+    map('n', 'gf', bi.find_files, { desc = 'find files' })
 
-    map('n', ',gr', bi.live_grep, { desc = 'live grep' })
-    map('n', ',b', bi.buffers, { desc = 'buffers' })
-    map('n', ',h', bi.help_tags, { desc = 'help tags' })
-    map('n', ',m', function()
+    -- map('n', 'gr', bi.live_grep, { desc = 'live grep' })
+    map('n', 'gn', bi.buffers, { desc = 'buffers' })
+    map('n', 'go', bi.help_tags, { desc = 'help tags' })
+    map('n', 'gm', function()
         bi.man_pages({ sections = { 'ALL' } })
     end, { desc = 'man pages' })
-    map('n', ',cc', bi.commands, { desc = 'vim commands' })
-    map('n', ',c', mod.git_diff_files, {})
+    map('n', 'gt', bi.commands, { desc = 'vim commands' })
+    map('n', 'gc', mod.git_diff_files, {})
 
-    map('n', ',]d', function()
+    map('n', 'gu', function()
         bi.diagnostics({ bufnr = 0 })
     end, { desc = 'lsp diagnostic buffer messages' })
-    map('n', ',]D', function()
+    map('n', 'g,', function()
         bi.diagnostics({ bufnr = nil })
     end, { desc = 'lsp diagnostic all messages' })
 end
@@ -68,8 +68,7 @@ function mod.git_diff_files(opts)
     local pickers = require('telescope.pickers')
     local finders = require('telescope.finders')
     local conf = require('telescope.config').values
-    -- FIXME main vs. master
-    local list = vim.fn.systemlist('git diff --name-only master')
+    local list = vim.fn.systemlist('git diff --name-only master 2>/dev/null | git diff --name-only main')
 
     pickers
         .new(opts, {

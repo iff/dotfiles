@@ -12,8 +12,10 @@ function M.general()
     map('', ';', ':', {}) -- no shift for cmd mode
 
     -- TODO configure new keybinding
-    vim.keymap.set('n', 'Q', '<nop>')
-    vim.keymap.set('n', 'q', '<nop>')
+    -- disable some original mappings
+    for _, k in pairs({ 'q', 'a', 'Q' }) do
+        vim.keymap.set('', k, '<nop>')
+    end
 
     -- window navigation
     -- ',#' goes to window #
@@ -21,11 +23,6 @@ function M.general()
     for i = 1, 9 do
         vim.keymap.set('n', ',' .. i, i .. '<c-w>w')
     end
-
-    -- keep selection when indent/outdent
-    -- . works as well
-    -- xnoremap({ ">", ">gv" })
-    -- xnoremap({ "<", "<gv" })
 
     -- search for selected text
     -- xnoremap({ "*", '"xy/<c-r><cr>' })
@@ -93,6 +90,12 @@ function M.get_maps()
             -- TODO have it in f instead? and ff for r?
             -- or ss is r
             { 'ss', 'c' },
+            { '<c-n>', '<<' },
+            { '<c-i>', '>>' },
+        },
+        v = {
+            { '<c-n>', '<gv' },
+            { '<c-i>', '>gv' },
         },
     }
 

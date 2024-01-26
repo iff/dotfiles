@@ -101,7 +101,7 @@ in
       bind g confirm kill-window
 
       # navigate tmux sessions
-      bind Space new-window zsh -c "tmux list-sessions -F '#{session_name}' | fzf --bind 'enter:become(tmux switch -t {})+abort'"
+      bind Space new-window zsh -c "tmux list-sessions -F '#{session_name}' | fzf --preview 'tmux capture-pane -pe -t {}' --bind 'enter:become(tmux switch -t {})+abort'"
 
       # pane selection
       bind ` display-panes
@@ -132,6 +132,7 @@ in
       bind -T copy-mode-vi u send-keys -X cursor-up
       bind -T copy-mode-vi n send-keys -X cursor-left
       bind -T copy-mode-vi i send-keys -X cursor-right
+      bind -T copy-mode-vi e send-keys -X cursor-down
       bind -T copy-mode-vi m send-keys -X start-of-line
       bind -T copy-mode-vi o send-keys -X end-of-line
       bind -T copy-mode-vi h send-keys -X page-down

@@ -24,7 +24,7 @@
     pkgs.procs
     # fonts
     pkgs.fontconfig
-    (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" "Iosevka" ]; })
   ];
 
   programs.fzf = {

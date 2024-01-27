@@ -10,7 +10,11 @@ in
     font_size = mkOption {
       description = "alacritty font size";
       type = types.number;
-      default = 13.0;
+    };
+    font_normal = mkOption {
+      description = "alacritty normal font";
+      type = types.str;
+      default = "Ubuntu Mono Nerd Font Complete Mono";
     };
   };
 
@@ -21,7 +25,8 @@ in
 
     programs.alacritty = {
       enable = cfg.enable;
-      settings = { font.size = cfg.font_size; } // lib.attrsets.recursiveUpdate (import ./alacritty/basics.nix) (import ./alacritty/colors.nix);
+      # FIXME font can't be in basic and override here, need proper merger
+      settings = { font.normal.family = cfg.font_normal; font.size = cfg.font_size; } // lib.attrsets.recursiveUpdate (import ./alacritty/basics.nix) (import ./alacritty/colors.nix);
     };
   };
 }

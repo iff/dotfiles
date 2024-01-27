@@ -6,18 +6,17 @@
     google-chrome
     roam-research
     spotify
-    # busybox
-    # vscode
   ];
-
-  # services.syncthing.enable = true;
 
   dots = {
     profiles = {
       sway.enable = true;
     };
-    alacritty.enable = true;
-    alacritty.font_size = 10.0;
+    alacritty = {
+      enable = true;
+      font_size = 10.0;
+      font_normal = "Zed Mono Nerd Font";
+    };
     osh.enable = true;
   };
 }

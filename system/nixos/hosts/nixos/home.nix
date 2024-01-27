@@ -16,7 +16,7 @@
       enable = true;
       font_size = 10.0;
       # font_normal = "Zed Mono Nerd Font";
-      font_normal = "IosevkaNerdFont";
+      font_normal = "Iosevka Nerd Font";
     };
     osh.enable = true;
   };

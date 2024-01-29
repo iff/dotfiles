@@ -103,6 +103,8 @@ function M.get_maps()
         o = {
             { 'e', 'iw' }, -- inner word
             { 'E', 'iW' }, -- inner Word
+            { 'u', 'aw' }, -- inner word with connecting whitespace
+            { 'U', 'aW' }, -- inner word with connecting whitespace
             { 'i', '$' }, -- to end of line
             { 'n', 'Vl' }, -- line
             { '(', 'i(' }, -- inner ()
@@ -160,8 +162,8 @@ function M.get_maps()
 
     maps['undo'] = {
         n = {
-            { 'qq', 'u' },
-            { 'qw', '<c-r>' },
+            { 'qn', 'u' },
+            { 'qi', '<c-r>' },
         },
     }
 
@@ -180,17 +182,13 @@ function M.get_maps()
 
     maps['search'] = {
         n = {
-            { 'fe', '/' },
-            { 'fu', '?' },
-            -- TODO gonna be harder here to use operator mode?
-            -- { "fe", "viw*" }, -- TODO as an example
-            -- { "fpe", "viw#" }, -- TODO as an example
-            -- TODO could overload kh or ue or so? just for as long as search is active
-            -- { "ft", "n" },
-            -- { "FT", "N" },
+            { 'fi', '/' },
+            { 'fn', '?' },
+            { 'fy', '*' }, -- search word forward
+            { 'fl', '#' }, -- search word backward
             { 'E', 'nzz' },
             { 'U', 'Nzz' },
-            { 'ff', '<cmd>nohlsearch<enter>' },
+            { 'f,', '<cmd>nohlsearch<enter>' },
         },
     }
 

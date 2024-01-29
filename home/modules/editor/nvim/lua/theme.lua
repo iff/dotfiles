@@ -9,7 +9,62 @@ function M.setup()
     require('nvim-web-devicons').setup({})
 
     local function window_nr()
-        return '#' .. vim.api.nvim_win_get_number(0)
+        return '%#AlwaysOnWindowNumber#󰐤' .. vim.api.nvim_win_get_number(0)
+    end
+
+    local function show_file()
+        local file_icons = {
+            modified = '',
+            unmodified = '󰈖',
+            read_only = '',
+            autosave = '',
+            no_autosave = ' ',
+        }
+
+        local icon = nil
+        if vim.bo.modifiable then
+            if vim.bo.modified then
+                icon = file_icons.modified
+            else
+                icon = file_icons.unmodified
+            end
+        else
+            icon = file_icons.read_only
+        end
+
+        local autosave = nil
+        if vim.b.autosave == true then
+            autosave = file_icons.autosave
+        else
+            autosave = file_icons.no_autosave
+        end
+
+        local name = vim.api.nvim_buf_get_name(0)
+        local protocol = string.match(name, '^(.+)://')
+        if protocol == nil then
+        elseif protocol == 'fugitive' then
+            -- (fugitive summary)
+            local summary = string.match(name, 'git//$')
+            -- (at commit, thats always [index] in a diff?)
+            local at = string.match(name, 'git//(%w+)/')
+            if summary ~= nil then
+                protocol = protocol .. '@summary'
+            elseif at ~= nil then
+                protocol = protocol .. '@' .. string.sub(at, 1, 7)
+            else
+                protocol = protocol .. '@?'
+            end
+        else
+            protocol = protocol .. '?'
+        end
+
+        if protocol == nil then
+            protocol = ''
+        else
+            protocol = protocol .. '://'
+        end
+
+        return icon .. autosave .. ' ' .. protocol .. '%t'
     end
 
     require('lualine').setup({
@@ -17,23 +72,31 @@ function M.setup()
             theme = 'nightfox',
             icons_enabled = false,
             component_separators = { left = '', right = '' },
-            section_separators = { left = '', right = '' },
-            disabled_filetypes = {},
+            section_separators = { left = '', right = '' },
             always_divide_middle = true,
+            globalstatus = false,
         },
         sections = {
-            lualine_a = { window_nr },
-            lualine_b = { 'diagnostics' },
-            lualine_c = { 'filename' },
+            lualine_a = { show_file },
+            -- lualine_a = { window_nr, show_file },
+            lualine_b = { { 'diff', icon = '', colored = false } },
+            lualine_c = {},
             lualine_x = {},
-            lualine_y = { 'progress' },
-            lualine_z = { 'location' },
+            lualine_y = { { 'diagnostics', sources = { 'nvim_lsp' }, colored = false } },
+            lualine_z = {
+                -- function()
+                --     return lsp_indicator.get_state(0)
+                -- end,
+                { 'filetype', icons_enabled = false },
+                'location',
+            },
         },
         inactive_sections = {
-            lualine_a = { window_nr },
+            lualine_a = { show_file },
+            -- lualine_a = { window_nr, show_file },
             lualine_b = {},
-            lualine_c = { 'filename' },
-            lualine_x = { 'location' },
+            lualine_c = {},
+            lualine_x = {},
             lualine_y = {},
             lualine_z = {},
         },
@@ -43,9 +106,15 @@ function M.setup()
                     return '[' .. (vim.g.funky_context or '...') .. ']'
                 end,
             },
-            lualine_b = { 'tabs' },
+            lualine_b = {
+                {
+                    'tabs',
+                    max_length = vim.o.columns,
+                    show_modified_status = false,
+                },
+            },
         },
-        extensions = { 'quickfix' },
+        extensions = {},
     })
 
     -- custom diagnostics

@@ -216,5 +216,56 @@ LESS+='--jump-target=.3 '  # the target (for example when searching) is put at 1
 export LESS
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-e:down,ctrl-u:up,ctrl-g:jump-accept'
-export FZF_CTRL_T_OPTS='--layout=reverse'
-export FZF_CTRL_R_OPTS='--layout=reverse'
+
+# git branches
+function __fzf_branch () {
+    function branches () {
+        # local branches
+        git branch --format '%(refname:short)'
+        # remote branches that look like local branches
+        git branch --remotes --format '%(refname:lstrip=3)'
+        # remote branches
+        git branch --remotes --format '%(refname:short)'
+    }
+    if local branch=$(branches | sort | uniq | fzf); then
+        LBUFFER="${LBUFFER}$branch"
+    fi
+    zle reset-prompt
+}
+zle -N __fzf_branch
+bindkey '^fb' __fzf_branch
+
+
+# items from git status
+function __fzf_git () {
+    # TODO this also lists already added files, maybe thats okay, lets see how it goes
+    if local files=$(git status --short | fzf --nth=2.. --multi | awk -v ORS=' ' 'match($0, /.. (.*)/, m) { print m[1] }'); then
+        # TODO not sure if we need some ${=files} or ${(f)files} for proper escaping?
+        LBUFFER="${LBUFFER}$files"
+    fi
+    zle reset-prompt
+}
+zle -N __fzf_git
+bindkey '^fg' __fzf_git
+
+
+# insert files and folders
+function __fzf_files {
+    if local f=$(fd | fzf --layout=reverse --height=50% --preview='file {}; echo; cat {}'); then
+        LBUFFER+=$f
+    fi
+    zle reset-prompt
+}
+zle -N __fzf_files
+bindkey '^t' __fzf_files
+
+
+# change directory
+function __fzf_cd {
+    if local d=$(fd --type=directory | fzf --layout=reverse --height=50% --preview='eza --header --git --time-style=long-iso --icons --no-permissions --no-user --long --sort=name {}'); then
+        cd $d
+    fi
+    zle reset-prompt
+}
+zle -N __fzf_cd
+bindkey '^g' __fzf_cd

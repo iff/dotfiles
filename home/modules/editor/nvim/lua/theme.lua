@@ -79,7 +79,8 @@ function M.setup()
         sections = {
             lualine_a = { show_file },
             -- lualine_a = { window_nr, show_file },
-            lualine_b = { { 'diff', icon = '', colored = false } },
+            lualine_b = {},
+            -- lualine_b = { { 'diff', icon = '', colored = false } },
             lualine_c = {},
             lualine_x = {},
             lualine_y = { { 'diagnostics', sources = { 'nvim_lsp' }, colored = false } },

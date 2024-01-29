@@ -130,7 +130,7 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 function M.on_attach(client, bufnr)
-    vim.api.nvim_set_option_value('signcolumn', 'yes')
+    -- vim.api.nvim_set_option_value('signcolumn', 'yes')
 
     local function nmap(lhs, rhs, desc)
         vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
@@ -150,7 +150,7 @@ function M.on_attach(client, bufnr)
     nmap('ty', lsp_jumper('textDocument/definition', 'tab split'), 'go to definition in a new tab')
     nmap(
         'ti',
-        lsp_jumper('textDocument/definition', 'set splitleft! | vsplit | set splitleft!'),
+        lsp_jumper('textDocument/definition', 'set splitright | vsplit | set splitright!'),
         'go to definition in split right'
     )
     nmap('tn', lsp_jumper('textDocument/definition', 'vsplit'), 'go to definition in split left')

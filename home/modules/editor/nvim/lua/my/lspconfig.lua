@@ -32,8 +32,7 @@ local function lsp_jumper(method, before)
 end
 
 function M.setup()
-    local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
-
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
     M.setup_completion()
 
     M.setup_rust(capabilities)
@@ -68,17 +67,11 @@ function M.setup()
             --     end,
             -- },
             -- TODO not sure I see an effect either way, with false it was maybe flickery and out of date?
-            spacing = 2,
+            update_in_insert = true,
+            severity_sort = true,
+            spacing = 0,
         },
-        update_in_insert = true,
-        severity_sort = true, -- is it working?
     })
-
-    -- vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    --     virtual_text = true,
-    --     signs = true,
-    --     update_in_insert = true,
-    -- })
 end
 
 function M.setup_completion()
@@ -137,6 +130,8 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 function M.on_attach(client, bufnr)
+    vim.api.nvim_set_option_value('signcolumn', 'yes')
+
     local function nmap(lhs, rhs, desc)
         vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
     end
@@ -153,12 +148,12 @@ function M.on_attach(client, bufnr)
 
     nmap('tt', lsp_jumper('textDocument/definition'), 'go to definition')
     nmap('ty', lsp_jumper('textDocument/definition', 'tab split'), 'go to definition in a new tab')
-    nmap('ti', lsp_jumper('textDocument/definition', 'vsplit'), 'go to definition in split right')
     nmap(
-        'tn',
-        lsp_jumper('textDocument/definition', 'set splitright! | vsplit | set splitright!'),
-        'go to definition in split left'
+        'ti',
+        lsp_jumper('textDocument/definition', 'set splitleft! | vsplit | set splitleft!'),
+        'go to definition in split right'
     )
+    nmap('tn', lsp_jumper('textDocument/definition', 'vsplit'), 'go to definition in split left')
     nmap('te', lsp_jumper('textDocument/definition', 'split'), 'go to definition in split down')
     nmap(
         'tu',
@@ -181,9 +176,16 @@ function M.on_attach(client, bufnr)
             end,
         })
     end, 'diagnostics float')
-    nmap('tk', D.goto_prev, 'diagnostics previous')
-    nmap('th', D.goto_next, 'diagnostics next')
-    nmap('tH', D.setloclist, 'diagnostics loclist')
+    nmap('tk', function()
+        D.goto_prev()
+        vim.cmd('normal! zz')
+    end, 'diagnostics previous')
+    nmap('th', function()
+        D.goto_next()
+        vim.cmd('normal! zz')
+    end, 'diagnostics next')
+    nmap('tK', D.setqflist, 'diagnostics global qflist')
+    nmap('tH', D.setloclist, 'diagnostics buffer loclist')
 
     -- get signatures (and _only_ signatures) when in argument lists
     require('lsp_signature').on_attach({
@@ -275,7 +277,18 @@ function M.setup_python(capabilities)
     require('lspconfig').pyright.setup({
         on_attach = M.on_attach,
         capabilities = capabilities,
-        settings = {},
+        settings = {
+            pyright = {
+                disableOrganizeImports = true,
+            },
+            python = {
+                analysis = {
+                    autoImportCompletions = true,
+                    diagnosticMode = 'workspace',
+                    useLibraryCodeForTypes = true,
+                },
+            },
+        },
     })
 end
 

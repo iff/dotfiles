@@ -130,7 +130,7 @@ end
 
 ---@diagnostic disable-next-line: unused-local
 function M.on_attach(client, bufnr)
-    -- vim.api.nvim_set_option_value('signcolumn', 'yes')
+    vim.api.nvim_set_option_value('signcolumn', 'yes', {})
 
     local function nmap(lhs, rhs, desc)
         vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })

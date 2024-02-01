@@ -59,6 +59,11 @@
       flake = false;
     };
 
+    lsp-indicator-nvim = {
+      url = github:dkuettel/lsp-indicator.nvim;
+      flake = false;
+    };
+
     funky-formatter-nvim = {
       url = github:dkuettel/funky-formatter.nvim;
       flake = false;

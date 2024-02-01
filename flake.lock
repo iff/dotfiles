@@ -397,6 +397,22 @@
         "type": "github"
       }
     },
+    "lsp-indicator-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689430474,
+        "narHash": "sha256-ntR7/fG9rhWC20cZi4hn0V5TY1gzQFO2w2Qm7yX+Sew=",
+        "owner": "dkuettel",
+        "repo": "lsp-indicator.nvim",
+        "rev": "4dd032f7f81bfdfe3145de0bfe84cf90df4c8ea4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dkuettel",
+        "repo": "lsp-indicator.nvim",
+        "type": "github"
+      }
+    },
     "lsp-signature-nvim": {
       "flake": false,
       "locked": {
@@ -846,6 +862,7 @@
         "hop-nvim": "hop-nvim",
         "hypr-contrib": "hypr-contrib",
         "iff-dwm": "iff-dwm",
+        "lsp-indicator-nvim": "lsp-indicator-nvim",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspkind-nvim": "lspkind-nvim",
         "ltstatus": "ltstatus",

@@ -7,6 +7,7 @@ function M.setup()
     vim.cmd('colorscheme nordfox')
 
     require('nvim-web-devicons').setup({})
+    local lsp_indicator = require('lsp-indicator')
 
     local function window_nr()
         return '%#AlwaysOnWindowNumber#󰐤' .. vim.api.nvim_win_get_number(0)
@@ -80,14 +81,13 @@ function M.setup()
             lualine_a = { show_file },
             -- lualine_a = { window_nr, show_file },
             lualine_b = {},
-            -- lualine_b = { { 'diff', icon = '', colored = false } },
             lualine_c = {},
             lualine_x = {},
             lualine_y = { { 'diagnostics', sources = { 'nvim_lsp' }, colored = false } },
             lualine_z = {
-                -- function()
-                --     return lsp_indicator.get_state(0)
-                -- end,
+                function()
+                    return lsp_indicator.get_state(0)
+                end,
                 { 'filetype', icons_enabled = false },
                 'location',
             },
@@ -102,17 +102,28 @@ function M.setup()
             lualine_z = {},
         },
         tabline = {
+            -- lualine_a = {
+            --     function()
+            --         return '[' .. (vim.g.funky_context or '...') .. ']'
+            --     end,
+            -- },
             lualine_a = {
-                function()
-                    return '[' .. (vim.g.funky_context or '...') .. ']'
-                end,
-            },
-            lualine_b = {
                 {
                     'tabs',
                     max_length = vim.o.columns,
                     show_modified_status = false,
                 },
+            },
+            lualine_y = {
+                function()
+                    return lsp_indicator.get_diagnostics()
+                end,
+            },
+            lualine_z = {
+                -- TODO because documentation doesnt say what those params are that it passes ...
+                function()
+                    return lsp_indicator.get_named_progress()
+                end,
             },
         },
         extensions = {},

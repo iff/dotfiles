@@ -3,12 +3,6 @@
 with builtins;
 
 let
-  # FIXME does that work?
-  install_lsp = pkgs.writeShellScriptBin "install_lsp" ''
-    #!/bin/bash
-    npm i -g npm typescript typescript-language-server
-  '';
-
   pyformat = pkgs.writeScriptBin "pyformat"
     ''
       #!/bin/zsh
@@ -117,7 +111,6 @@ in
   home = {
     packages = with pkgs; [
       pyformat
-      install_lsp
       clang-tools
       pyright
       rnix-lsp
@@ -128,6 +121,7 @@ in
       black
       nixpkgs-fmt
       nodePackages.prettier
+      nodePackages.typescript-language-server
       rustfmt
       stylua
     ];

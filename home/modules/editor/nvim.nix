@@ -99,12 +99,9 @@ in
         (plug "telescope-nvim")
         (plug "telescope-fzf-native-nvim")
 
-        # (see: https://rsdlt.github.io/posts/rust-nvim-ide-guide-walkthrough-development-debug/)
-        (plug "rust-tools-nvim")
+        (plug "rustacean-nvim")
 
         (plug "neodev-nvim")
-
-        # could be interesting to show lsp info in status: https://github.com/nvim-lua/lsp-status.nvim
 
         # interesting navigation and term/tmux commands: https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 

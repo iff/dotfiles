@@ -35,7 +35,6 @@ function M.setup()
     local capabilities = require('cmp_nvim_lsp').default_capabilities()
     M.setup_completion()
 
-    M.setup_rust(capabilities)
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     M.setup_typescript(capabilities)
@@ -194,46 +193,6 @@ function M.on_attach(client, bufnr)
             border = 'none',
         },
     })
-end
-
-function M.setup_rust(capabilities)
-    -- require('lspconfig').rust_analyzer.setup({
-    --     on_attach = M.on_attach,
-    --     flags = {
-    --         debounce_text_changes = 150,
-    --     },
-    --     settings = {
-    --         ['rust-analyzer'] = {
-    --             cargo = {
-    --                 allFeatures = true,
-    --             },
-    --             completion = {
-    --                 postfix = { enable = false },
-    --             },
-    --         },
-    --     },
-    --     capabilities = capabilities,
-    -- })
-
-    local rt = require('rust-tools')
-    rt.setup({
-        tools = {
-            inlay_hints = {
-                only_current_line = true,
-            },
-        },
-        server = {
-            on_attach = function(client, bufnr)
-                M.on_attach(client, bufnr)
-                -- Hover actions
-                vim.keymap.set('n', '<C-space>', rt.hover_actions.hover_actions, { buffer = bufnr })
-                -- Code action groups
-                vim.keymap.set('n', '<Leader>a', rt.code_action_group.code_action_group, { buffer = bufnr })
-            end,
-        },
-    })
-
-    -- vim.cmd("autocmd CursorHold,CursorHoldI *.rs :lua require'rust-tools'.inlay_hints.enable()")
 end
 
 function M.setup_lua(capabilities)

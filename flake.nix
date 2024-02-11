@@ -154,9 +154,9 @@
       flake = false;
     };
 
-    rust-tools-nvim = {
-      url = github:simrat39/rust-tools.nvim;
-      flake = false;
+    rustacean-nvim = {
+      url = github:mrcjkb/rustaceanvim;
+      flake = true;
     };
 
     neodev-nvim = {

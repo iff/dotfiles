@@ -64,8 +64,6 @@ function M.get_maps()
             { 'zu', 'zt' }, -- line at botton of view
             { 'k', '<cmd>set scroll=0<enter><c-u><c-u>' }, -- view and cursor one page up
             { 'h', '<cmd>set scroll=0<enter><c-d><c-d>' }, -- view and cursor one page down
-            -- { 'k', ':set scroll=0<enter><c-u><c-u>' }, -- view and cursor one page up
-            -- { 'h', ':set scroll=0<enter><c-d><c-d>' }, -- view and cursor one page down
         },
     }
 
@@ -157,6 +155,7 @@ function M.get_maps()
             { 'L', 'B' }, -- Word back
             { 'y', 'w' }, -- word forward
             { 'Y', 'W' }, -- Word forward
+            -- { "'", "'." }, -- TODO
         },
     }
 
@@ -177,6 +176,7 @@ function M.get_maps()
             { 'WF', 'P' },
             { 'ww', 'yy' },
             { 'wp', '`[v`]' }, -- select last pasted lines
+            -- { 'wa', '[["+Y]]' }, -- put into system clipboard
         },
     }
 
@@ -195,6 +195,7 @@ function M.get_maps()
     maps['delete'] = {
         nv = {
             { 'd', 'd' },
+            -- { 'D', '"_d' },
         },
     }
 

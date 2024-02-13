@@ -36,13 +36,13 @@
       flake = true;
     };
 
-    # nvim plugins
-
     # TODO darwin configuration.nix (system stuff?)
     # darwin = {
     #   url = "github:lnl7/nix-darwin/master";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+
+    # nvim plugins
 
     hop-nvim = {
       url = github:phaazon/hop.nvim;

@@ -40,6 +40,11 @@ in
     # hardware.bluetooth.enable = true;
     # services.blueman.enable = true;
 
+    services.tailscale.enable = true;
+
+    virtualisation.docker.enable = true;
+    users.users.iff.extraGroups = [ "docker" ];
+
     environment.systemPackages = with pkgs; [
       pamixer
       pulsemixer

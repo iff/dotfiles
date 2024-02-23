@@ -21,7 +21,7 @@
         efiSupport = true;
         # efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
         device = "nodev";
-        useOSProber = true;
+        # useOSProber = true;
       };
     };
 
@@ -42,10 +42,11 @@
       device = "/dev/disk/by-uuid/b898a75d-5616-42a6-9e64-7ead819e21e5";
       fsType = "ext4";
     };
-  # fileSystems."/mnt/ubuntu" = 
-  #   { device = "/dev/disk/by-uuid/39f82f22-e8f2-4710-b67a-4d356f213280";
-  #     fsType = "ext4";
-  #   };
+  fileSystems."/mnt/scratch" =
+    {
+      device = "/dev/disk/by-uuid/3c5e7e5b-a5a0-49e0-b698-8a53eeff91f9";
+      fsType = "ext4";
+    };
 
   swapDevices = [ ];
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

@@ -11,11 +11,14 @@
       openssh.enable = true;
     };
 
+    services.tailscale.enable = true;
+    virtualisation.docker.enable = true;
+
     # TODO move
     programs.zsh.enable = true;
     users.users.iff = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "systemd-journal" "audio" "video" "input" "networkmanager" ];
+      extraGroups = [ "wheel" "systemd-journal" "audio" "video" "input" "networkmanager" "docker" ];
       shell = pkgs.zsh;
       packages = with pkgs; [
       ];

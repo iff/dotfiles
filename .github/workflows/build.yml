@@ -16,8 +16,8 @@ jobs:
             target: blackhole
           - os: ubuntu-latest
             target: nixos
-          # - os: macos-13 # no arm/m1 runners? no there are but no small
-          #   target: urithiru
+          - os: macos-14
+            target: urithiru
     runs-on: ${{ matrix.os }}
 
     steps:

@@ -11,18 +11,12 @@
       kernelModules = [ "dm-snapshot" ];
     };
 
-    # nixos has to manage grub, will regularly change entries (configurations)
     loader = {
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot/efi";
       };
-      grub = {
-        efiSupport = true;
-        # efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
-        device = "nodev";
-        # useOSProber = true;
-      };
+      systemd-boot.enable = true;
     };
 
   };

@@ -38,7 +38,6 @@ function M.setup()
     M.setup_lua(capabilities)
     M.setup_python(capabilities)
     M.setup_typescript(capabilities)
-    M.setup_rnix(capabilities)
     M.setup_clangd(capabilities)
     M.setup_yaml(capabilities)
 
@@ -253,12 +252,6 @@ end
 
 function M.setup_typescript(capabilities)
     require('lspconfig').tsserver.setup({
-        capabilities = capabilities,
-    })
-end
-
-function M.setup_rnix(capabilities)
-    require('lspconfig').rnix.setup({
         capabilities = capabilities,
     })
 end

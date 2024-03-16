@@ -113,7 +113,6 @@ in
       pyformat
       clang-tools
       pyright
-      rnix-lsp
       rust-analyzer
       sumneko-lua-language-server
       yaml-language-server

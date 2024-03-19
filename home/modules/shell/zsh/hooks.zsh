@@ -3,9 +3,8 @@ load_late=yes
 function zle-line-init {
     if [[ -v load_late ]]; then
         unset load_late
-        # slow setups
-        # source ~/.zshrc.d/completion.zsh
-        # source ~/.zshrc.d/syntax.zsh  # NOTE needs to be sourced last
+        # TODO: slow setups
+        # completion.zsh
     fi
     echo -ne "\e[6 q"  # steady beam
 }

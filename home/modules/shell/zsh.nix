@@ -46,6 +46,16 @@
         compinit -d ~/.zcompdump
       '';
 
+      history = {
+        size = 1000000000;
+        save = 1000000000;
+        ignoreDups = true;
+        ignoreAllDups = false;
+        expireDuplicatesFirst = true;
+        extended = true;
+        share = true;
+      };
+
       plugins = [
         {
           name = "zsh-syntax-highlighting";

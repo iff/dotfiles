@@ -23,19 +23,19 @@ setopt auto_pushd  # cd does directory stack
 setopt pushd_ignore_dups  # dont add duplicates
 setopt pushd_minus  # flip + and - meaning when working with stack
 
-## history
-HISTFILE=~/.zsh_history
-export HISTSIZE=1000000000  # "forever"
-export SAVEHIST=1000000000  # "forever"
+## history (partly managed by home-manager)
+# HISTFILE=~/.zsh_history
+# export HISTSIZE=1000000000  # "forever"
+# export SAVEHIST=1000000000  # "forever"
 setopt append_history
-setopt extended_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups  # ignore duplication command history list
-setopt hist_ignore_space
+# setopt extended_history
+# setopt hist_expire_dups_first
+# setopt hist_ignore_dups  # ignore duplication command history list
+# setopt hist_ignore_space
 setopt hist_save_no_dups
 setopt hist_verify
 setopt inc_append_history
-setopt share_history
+# setopt share_history
 
 # vim mode for zle
 bindkey -v

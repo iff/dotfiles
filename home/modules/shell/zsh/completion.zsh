@@ -56,6 +56,6 @@ function _complete_tm {
 }
 compctl -K _complete_tm tm
 
-zmodload zsh/complist
-autoload -U compinit
-compinit -d ~/.zcompdump
+# zmodload zsh/complist
+# autoload -U compinit
+# compinit -d ~/.zcompdump

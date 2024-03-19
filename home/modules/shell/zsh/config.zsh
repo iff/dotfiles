@@ -1,37 +1,41 @@
 export LSCOLORS="exfxcxdxbxegedabagacad"
 export CLICOLOR=true
 
+## misc options
+setopt extended_glob
+setopt interactive_comments  # allow comments in interactive use
+setopt long_list_jobs
+setopt no_flow_control  # no ctrl-s and ctrl-q
+setopt noautocd  # dont assume an implicit cd prefix for folder names
+setopt rm_star_silent  # no confirmation anymore for "rm *"-like
+
+## completion options
+setopt always_to_end  # move to end of word after completion
+setopt always_to_end  # move to the end of word
+setopt auto_menu  # menu on second request
+setopt auto_remove_slash  # depending on next character
+setopt complete_in_word
+setopt no_list_beep  # dont beep on incomplete/ambiguous completion
+setopt no_menu_complete  # dont insert first ambiguous match
+
+## directory stack
+setopt auto_pushd  # cd does directory stack
+setopt pushd_ignore_dups  # dont add duplicates
+setopt pushd_minus  # flip + and - meaning when working with stack
+
+## history
 HISTFILE=~/.zsh_history
-HISTSIZE=10000000
-SAVEHIST=10000000
-
-setopt NO_BG_NICE # don't nice background tasks
-setopt NO_HUP
-setopt NO_LIST_BEEP
-setopt LOCAL_OPTIONS # allow functions to have local options
-setopt LOCAL_TRAPS # allow functions to have local traps
-setopt HIST_VERIFY
-setopt PROMPT_SUBST
-setopt CORRECT
-setopt COMPLETE_IN_WORD
-
-setopt SHARE_HISTORY # share history between sessions ???
-setopt EXTENDED_HISTORY # add timestamps to history
-setopt APPEND_HISTORY # adds history
-setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_SAVE_NO_DUPS
-
-# use the directory stack for normal cd commands
-setopt auto_pushd
-# invert +/- for the directory stack (so "cd -2" jumps to the second last dir)
-setopt pushd_minus
-# ignore duplicates on the directory stack
-setopt pushd_ignore_dups
+export HISTSIZE=1000000000  # "forever"
+export SAVEHIST=1000000000  # "forever"
+setopt append_history
+setopt extended_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups  # ignore duplication command history list
+setopt hist_ignore_space
+setopt hist_save_no_dups
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
 
 # vim mode for zle
 bindkey -v
@@ -178,31 +182,10 @@ function {
     bindkey -M viopp $binds
 }
 
-# TODO these hooks, should I chain? do others chain?
-# the default already contained something. copy that function and chain?
-function zle-line-init {
-     echo -ne "\e[6 q"  # steady beam
-}
-zle -N zle-line-init
-
-function zle-keymap-select {
-    if [[ $KEYMAP == vicmd ]]; then
-        echo -ne "\e[2 q"  # steady block
-    elif [[ $KEYMAP == (viins|main) ]]; then
-        # TODO also viopp and visual or something?
-        echo -ne "\e[6 q"  # steady beam
-    fi
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
-    echo -ne "\e[2 q"  # steady block
-}
-zle -N zle-line-finish
-
 export MANPAGER='nvim +Man!'
 export VISUAL=nvim
 export EDITOR=nvim
+export SUDO_EDITOR=nvim
 
 LESS=''
 LESS+='--status-column '  # mark matched lines on the left side
@@ -214,6 +197,8 @@ LESS+='--clear-screen '  # so that the view starts at the top always
 LESS+='--clear-screen '  # complete redraw when scrolling
 LESS+='--jump-target=.3 '  # the target (for example when searching) is put at 1/3 from the top
 export LESS
+
+## FZF
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-e:down,ctrl-u:up,ctrl-g:jump-accept'
 

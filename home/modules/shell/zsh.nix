@@ -1,17 +1,14 @@
 { config, pkgs, lib, ... }: {
 
-  # programs.starship.enable = true;
-  # home.file.".config/starship.toml".source = ./zsh/starship.toml;
-
   programs.zsh = lib.mkMerge [
     ({
-      initExtra = lib.optionalString pkgs.stdenv.isDarwin ''
+      initExtraBeforeCompInit = lib.optionalString pkgs.stdenv.isDarwin ''
         bindkey '^R' history-incremental-search-backward
       '';
     })
     ({
       # FIXME only on work machine
-      initExtra = lib.optionalString pkgs.stdenv.isLinux ''
+      initExtraBeforeCompInit = lib.optionalString pkgs.stdenv.isLinux ''
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
         ZSH_HIGHLIGHT_DIRS_BLACKLIST+=(/efs)
         ZSH_HIGHLIGHT_MAXLENGTH=2000
@@ -22,8 +19,10 @@
 
       shellAliases = {
         reload = ". ~/.zshrc";
+        ls = "eza --header --git --time-style=relative --icons --no-permissions --no-user --long --mounts --sort=name";
+        lr = "ls --sort=newest";
         la = "eza --long --header --all --icons --git";
-        ll = "eza --long --header --icons --git";
+        ll = "eza --header --git --time-style=long-iso --icons --group --long --mounts --sort=name";
         md = "mkdir -p";
         man = "man --no-justification";
         k = "kubectl";
@@ -31,14 +30,21 @@
         dk = "docker kill $(docker ps -q)";
       };
 
-      initExtra = ''
+      initExtraBeforeCompInit = ''
         eval "$(direnv hook zsh)"
-        # eval "$(starship init zsh)"
         path+="$HOME/.nix-profile/bin"
       ''
       + builtins.readFile ./zsh/config.zsh
       + builtins.readFile ./zsh/prompt.zsh
-      + builtins.readFile ./zsh/completion.zsh;
+      + builtins.readFile ./zsh/completion.zsh
+      + builtins.readFile ./zsh/hooks.zsh; # needs to be last
+
+      # TODO or set to empty and control?
+      completionInit = ''
+        zmodload zsh/complist
+        autoload -U compinit
+        compinit -d ~/.zcompdump
+      '';
 
       plugins = [
         {

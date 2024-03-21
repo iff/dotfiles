@@ -23,7 +23,10 @@ in
               date '+%s.%N'
           }
         ''
-      ) + ''
+      );
+
+      # TODO fzf bindings overwrite ^r
+      programs.zsh.initExtra = mkOrder 20000 ''
         function __osh {
             osh-oxy $@
         }

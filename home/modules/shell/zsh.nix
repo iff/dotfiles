@@ -2,11 +2,6 @@
 
   programs.zsh = lib.mkMerge [
     ({
-      initExtraBeforeCompInit = lib.optionalString pkgs.stdenv.isDarwin ''
-        bindkey '^R' history-incremental-search-backward
-      '';
-    })
-    ({
       # FIXME only on work machine
       initExtraBeforeCompInit = lib.optionalString pkgs.stdenv.isLinux ''
         ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)

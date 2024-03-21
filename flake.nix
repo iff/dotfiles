@@ -31,8 +31,9 @@
       flake = true;
     };
 
-    osh = {
-      url = "github:iff/one-shell-history.flake";
+    osh-oxy = {
+      url = "github:iff/osh-oxy";
+      inputs.nixpkgs.follows = "nixpkgs";
       flake = true;
     };
 

@@ -16,11 +16,11 @@ in
       programs.zsh.initExtraBeforeCompInit = (
         if pkgs.stdenv.isDarwin then ''
           function __osh_ts {
-              $(date '+%s')
+              date '+%s'
           }
         '' else ''
           function __osh_ts {
-              $(date '+%s.%N')
+              date '+%s.%N'
           }
         ''
       ) + ''
@@ -31,13 +31,13 @@ in
         autoload -U add-zsh-hook
 
         __osh_session_id=$(uuidgen)
-        __osh_session_start=__osh_ts
+        __osh_session_start=$(__osh_ts)
 
         function __osh_before {
             local command=''${1[0,-2]}
             if [[ $command != "" ]]; then
                 __osh_current_command=(
-                    --starttime __osh_ts
+                    --starttime $(__osh_ts)
                     --command $command
                     --folder "$(pwd)"
                 )
@@ -47,7 +47,7 @@ in
             local exit_code=$?
             if [[ -v __osh_current_command ]]; then
             __osh_current_command+=(
-                    --endtime __osh_ts
+                    --endtime $(__osh_ts)
                     --exit-code $exit_code
                     --machine "$(hostname)"
                     --session $__osh_session_id

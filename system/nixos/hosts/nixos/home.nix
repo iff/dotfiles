@@ -6,6 +6,7 @@
     google-chrome
     roam-research
     spotify
+    syncthing
   ];
 
   dots = {

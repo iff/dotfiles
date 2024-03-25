@@ -6,7 +6,7 @@ let
 in
 {
   options.dots.osh = {
-    enable = mkEnableOption "enable one-shell-history";
+    enable = mkEnableOption "enable osh-oxy";
   };
 
   config = mkIf cfg.enable
@@ -25,8 +25,8 @@ in
         ''
       );
 
-      # TODO fzf bindings overwrite ^r
-      programs.zsh.initExtra = mkOrder 20000 ''
+      # ensure we are late in zshrc
+      programs.zsh.initExtra = mkOrder 1000 ''
         function __osh {
             osh-oxy $@
         }
@@ -74,40 +74,6 @@ in
         bindkey '^r' __osh_search
         bindkey -M vicmd '^r' __osh_search
         bindkey -M viins '^r' __osh_search
-
-
-        # function __osh_previous {
-        #     __osh_prefix_timestamp=''${__osh_prefix_timestamp-$(date "+%s")}
-        #     __osh_prefix=''${__osh_prefix-$BUFFER}
-        #     # NOTE --ignore=$BUFFER would skip consecutive duplicates, sounds good, but not typically intuitive
-        #     if result=$(__osh previous-event --timestamp=$__osh_prefix_timestamp --prefix=$__osh_prefix --session-id=$__osh_session_id --session-start=$__osh_session_start); then
-        #         __osh_prefix_timestamp=$result[1,21]
-        #         BUFFER=$result[23,-1]
-        #         CURSOR=$#BUFFER
-        #     fi
-        #     zle reset-prompt
-        # }
-        # zle -N __osh_previous
-        # bindkey '^p' __osh_previous
-        # bindkey -M vicmd '^p' __osh_previous
-        # bindkey -M viins '^p' __osh_previous
-        #
-        #
-        # function __osh_next {
-        #     __osh_prefix_timestamp=''${__osh_prefix_timestamp-$(date "+%s")}
-        #     __osh_prefix=''${__osh_prefix-$BUFFER}
-        #     # NOTE --ignore=$BUFFER would skip consecutive duplicates, sounds good, but not typically intuitive
-        #     if result=$(__osh next-event --timestamp=$__osh_prefix_timestamp --prefix=$__osh_prefix --session-id=$__osh_session_id --session-start=$__osh_session_start); then
-        #         __osh_prefix_timestamp=$result[1,21]
-        #         BUFFER=$result[23,-1]
-        #         CURSOR=$#BUFFER
-        #     fi
-        #     zle reset-prompt
-        # }
-        # zle -N __osh_next
-        # bindkey '^n' __osh_next
-        # bindkey -M vicmd '^n' __osh_next
-        # bindkey -M viins '^n' __osh_next
       '';
     };
 }

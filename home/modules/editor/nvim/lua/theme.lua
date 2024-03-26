@@ -128,35 +128,6 @@ function M.setup()
         },
         extensions = {},
     })
-
-    -- custom diagnostics
-    vim.cmd([[
-       highlight DiagnosticFloatingError guifg=#3c3836
-       highlight DiagnosticVirtualTextError guifg=#bdae93
-       highlight DiagnosticUnderlineError gui=undercurl guisp=#cc241d
-       highlight DiagnosticSignError guifg=#cc241d
-       sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=
-
-       highlight DiagnosticFloatingWarn guifg=#3c3836
-       highlight DiagnosticVirtualTextWarn guifg=#bdae93
-       highlight DiagnosticUnderlineWarn gui=undercurl guisp=#cc241d
-       highlight DiagnosticSignWarn guifg=#cc241d
-       sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=
-
-       highlight DiagnosticFloatingInfo guifg=#3c3836
-       highlight DiagnosticVirtualTextInfo guifg=#bdae93
-       highlight DiagnosticUnderlineInfo gui=undercurl guisp=#076678
-       highlight DiagnosticSignInfo guifg=#076678
-       sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=
-
-       highlight DiagnosticFloatingHint guifg=#3c3836
-       highlight DiagnosticVirtualTextHint guifg=#bdae93
-       highlight DiagnosticUnderlineHint gui=undercurl guisp=#076678
-       highlight DiagnosticSignHint guifg=#076678
-       sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=
-
-       highlight LspSignatureActiveParameter gui=bold
-    ]])
 end
 
 return M

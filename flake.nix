@@ -3,36 +3,36 @@
 
   inputs = {
     # nixpkgs.url = "github:nixos/nixpkgs/25c8b480b35d409848f23a0b1889eacc1b7a95ec";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
     flake-utils.url = "github:numtide/flake-utils";
 
     # life on the cutting edge
     neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
+      url = github:nix-community/neovim-nightly-overlay;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hypr-contrib = {
-      url = "github:hyprwm/contrib";
+      url = github:hyprwm/contrib;
     };
 
     iff-dwm = {
-      url = "github:iff/dwm/nixos";
+      url = github:iff/dwm/nixos;
       flake = false;
     };
 
     ltstatus = {
-      url = "github:iff/ltstatus.flake";
+      url = github:iff/ltstatus.flake;
       flake = true;
     };
 
     osh-oxy = {
-      url = "github:iff/osh-oxy";
+      url = github:iff/osh-oxy;
       inputs.nixpkgs.follows = "nixpkgs";
       flake = true;
     };

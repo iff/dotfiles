@@ -17,8 +17,7 @@
     alacritty = {
       enable = true;
       font_size = 10.0;
-      # font_normal = "Zed Mono Nerd Font";
-      font_normal = "Iosevka Nerd Font";
+      font_normal = "Zed Mono Nerd Font";
     };
     osh.enable = true;
   };

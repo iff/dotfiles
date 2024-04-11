@@ -22,7 +22,7 @@
     pkgs.procs
     # fonts
     pkgs.fontconfig
-    (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" "Iosevka" ]; })
+    (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" "ZedMono" ]; })
   ];
 
   programs.direnv = {

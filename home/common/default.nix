@@ -15,17 +15,23 @@
   fonts.fontconfig.enable = true;
 
   home.packages = [
-    pkgs.direnv
     pkgs.dua
     pkgs.eza
     pkgs.fd
     pkgs.jq
-    pkgs.nix-direnv
     pkgs.procs
     # fonts
     pkgs.fontconfig
     (pkgs.nerdfonts.override { fonts = [ "UbuntuMono" "Iosevka" ]; })
   ];
+
+  programs.direnv = {
+    enable = true;
+    config = {
+      hide_env_diff = true;
+    };
+    nix-direnv.enable = true;
+  };
 
   programs.fzf = {
     enable = true;

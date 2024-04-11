@@ -5,6 +5,7 @@
     _1password-gui
     geeqie
     google-chrome
+    protonmail-desktop
     roam-research
     spotify
     syncthing

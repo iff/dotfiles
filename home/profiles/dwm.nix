@@ -26,8 +26,6 @@ in
       feh --bg-scale $HOME/Downloads/mountains.jpg
       redshift -r -v & # |& ts '%F %T' >& $HOME/.log-redshift &
 
-      nohup ltstatus ~/.dwm-status.py > /dev/null &
-
       dwm
     '';
   };

@@ -26,11 +26,6 @@
       flake = false;
     };
 
-    ltstatus = {
-      url = github:iff/ltstatus.flake;
-      flake = true;
-    };
-
     osh-oxy = {
       url = github:iff/osh-oxy;
       inputs.nixpkgs.follows = "nixpkgs";

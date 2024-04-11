@@ -52,6 +52,11 @@ let
               key=work
               user="Yves Ineichen yineichen@ptc.com"
               ;;
+
+          (git@github.com:ptc-yineichen/*)
+              key=work
+              user="Yves Ineichen yineichen@ptc.com"
+              ;;
     
           (*)
               echo 'no match for' $target >&2

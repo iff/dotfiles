@@ -31,6 +31,7 @@ in
     baseIndex = 1;
     historyLimit = 5000;
     escapeTime = 0;
+    terminal = "tmux-256color";
 
     extraConfig = ''
       # forward focus events

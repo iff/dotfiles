@@ -24,6 +24,16 @@ function M.general()
         vim.keymap.set('n', ',' .. i, i .. '<c-w>w')
     end
 
+    -- FIXME not sure why I need to rebind this?
+    vim.keymap.set('n', '<CR>', function()
+        if vim.o.buftype == 'quickfix' then
+            return ':.cc<CR>'
+        else
+            -- TODO maybe bind something interesting here?
+            return '<CR>'
+        end
+    end, { expr = true, replace_keycodes = true })
+
     -- search for selected text
     -- xnoremap({ "*", '"xy/<c-r><cr>' })
 

@@ -59,6 +59,11 @@ let
     ''
       spotify --enable-features=UseOzonePlatform --ozone-platform=wayland
     '';
+
+  pmail = pkgs.writeScriptBin "pmail"
+    ''
+      proton-mail --enable-features=UseOzonePlatform --ozone-platform=wayland
+    '';
 in
 {
   options.dots.profiles.sway = {
@@ -72,6 +77,7 @@ in
       # pkgs.swaylock-effects
       configure-gtk
       dbus-sway-environment
+      pmail
       sptfy
       startw
     ];

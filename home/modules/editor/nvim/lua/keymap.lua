@@ -89,15 +89,13 @@ function M.get_maps()
             { 'sL', 'lBi' }, -- insert at beginning of Word
             { 'sy', 'hea' }, -- append at end of word
             { 'sY', 'hEa' }, -- append at end of Word
-            { 'p', 'r' }, -- single replace
         },
     }
 
     maps['change'] = {
         n = {
-            -- TODO have it in f instead? and ff for r?
-            -- or ss is r
-            { 'ss', 'c' },
+            { 'r', 'c' },
+            { 'rr', 'r' },
             { '<c-n>', '<<' },
             { '<c-i>', '>>' },
         },
@@ -130,12 +128,9 @@ function M.get_maps()
             { 'Y', 'E' }, -- to end of Word
             { 'l', 'b' }, -- to start of word
             { 'L', 'B' }, -- to start of Word
-            -- TODO from here maybe longer sequences prefixed with l or u or y
-            -- like argument, or body, or other python objects
         },
     }
 
-    -- TODO add that to arrows at the top? same topic
     maps['moves'] = {
         nv = {
             -- { "gn", "^" }, -- start of text in line
@@ -178,15 +173,19 @@ function M.get_maps()
 
     maps['copy'] = {
         nv = {
-            { 'w', 'y' },
-            { 'wa', '"+y' }, -- put into system clipboard
+            { 'c', '"zy' },
+            { 'ca', '"+y' }, -- put into system clipboard
         },
         n = {
-            { 'wf', 'p' },
-            { 'WF', 'P' },
-            { 'ww', 'yy' },
-            { 'wp', '`[v`]' }, -- select last pasted lines
+            { 'pu', '"zP' },
+            { 'pn', '"zP' },
+            { 'pe', '"zp' },
+            { 'pi', '"zp' },
+            { 'pv', '`[v`]' }, -- select last pasted lines
             -- { 'wa', '[["+Y]]' }, -- put into system clipboard
+        },
+        v = {
+            { 'p', '"zp' }, -- replace
         },
     }
 
@@ -206,6 +205,13 @@ function M.get_maps()
         nv = {
             { 'd', 'd' },
             -- { 'D', '"_d' },
+        },
+    }
+
+    maps['visual'] = {
+        nv = {
+            { 'v', 'V' },  -- using line select more often
+            { 'V', 'v' },
         },
     }
 
@@ -234,13 +240,14 @@ function M.get_maps()
             { 'stu', '<cmv>set splitbelow! | split | set splitbelow!<enter>' }, -- split up
             { 'sty', '<cmd>tab split<enter>' }, -- new tab
             { 'stY', '<c-w>T' }, -- explode into new tab
-            { 'st,', '<c-w>c' }, -- close split
-            -- { "stst,", "<cmd>tabclose<enter>" }, -- close tab
-            -- { 'st<', '<cmd>x<enter>' }, -- TODO needed? have a write & close/delete buffer? needed in fugitive commit messages
-            { 'st.', '<c-w>o' }, -- only split
-            { 'sth', '<c-w>w' }, -- last split
+            { 'st,', '<cmd>wincmd c | wincmd=<enter>' }, -- close split
+            { 'st.', '<cmd>wincmd o | wincmd=<enter>' }, -- close split
+            { 'sth', '<c-w>p' }, -- last split
             -- { "ststh", "g<tab>" }, -- last tab
-            -- TODO add st{digit}
+            { 'stt', '1<c-w>w' }, -- split #1
+            { 'sts', '2<c-w>w' }, -- split #2
+            { 'str', '3<c-w>w' }, -- split #3
+            { 'sta', '4<c-w>w' }, -- split #4
         },
     }
 

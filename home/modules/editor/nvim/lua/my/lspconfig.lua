@@ -40,6 +40,7 @@ function M.setup()
     M.setup_typescript(capabilities)
     M.setup_clangd(capabilities)
     M.setup_yaml(capabilities)
+    M.setup_rust(capabilities)
 
     vim.diagnostic.config({
         -- underline = { severity = vim.diagnostic.severity.ERROR },
@@ -294,6 +295,15 @@ function M.setup_yaml(capabilities)
     require('lspconfig').yamlls.setup({
         capabilities = capabilities,
     })
+end
+
+function M.setup_rust(capabilities)
+    vim.g.rustaceanvim = {
+        server = {
+            on_attach = M.on_attach,
+            capabilities = capabilities,
+        },
+    }
 end
 
 return M

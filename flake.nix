@@ -2,7 +2,6 @@
   description = "home manager flake";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/25c8b480b35d409848f23a0b1889eacc1b7a95ec";
     nixpkgs.url = github:nixos/nixpkgs/nixpkgs-unstable;
     flake-utils.url = "github:numtide/flake-utils";
 

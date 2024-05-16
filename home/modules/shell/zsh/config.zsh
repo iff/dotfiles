@@ -139,7 +139,7 @@ function {
         p vi-replace-chars
 
         # change (see viopp below)
-        ss vi-change
+        r vi-change
 
         # delete (see viopp below)
         d vi-delete

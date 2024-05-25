@@ -58,7 +58,7 @@ rec {
             };
 
             nixpkgs = {
-              overlays = [ inputs.neovim-nightly-overlay.overlay ];
+              overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
             };
           }
         ];
@@ -88,7 +88,7 @@ rec {
             { inputs, ... }: {
               nixpkgs = {
                 inherit pkgs;
-                overlays = [ inputs.neovim-nightly-overlay.overlay ];
+                overlays = [ inputs.neovim-nightly-overlay.overlays.default ];
               };
 
               environment.etc.nixpkgs.source = inputs.nixpkgs;

@@ -59,7 +59,7 @@ in
   programs = {
     neovim = {
       enable = true;
-      package = pkgs.neovim-nightly;
+      package = pkgs.neovim;
       withPython3 = true;
       withNodeJs = true;
       extraPackages = [

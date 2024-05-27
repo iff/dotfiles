@@ -116,7 +116,6 @@ in
       pyformat
       clang-tools
       pyright
-      rust-analyzer
       sumneko-lua-language-server
       yaml-language-server
       # formatters
@@ -124,7 +123,6 @@ in
       nixpkgs-fmt
       nodePackages.prettier
       nodePackages.typescript-language-server
-      rustfmt
       stylua
     ];
   };

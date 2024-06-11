@@ -253,3 +253,14 @@ function __fzf_cd {
 }
 zle -N __fzf_cd
 bindkey '^g' __fzf_cd
+
+function take {
+    mkdir -p $1
+    cd $1
+}
+
+function ff {
+    tmux last-window
+    eval $@ && exit
+    tmux rename-window -t $TMUX_PANE failed
+}

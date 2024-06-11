@@ -2,6 +2,7 @@ local M = {}
 
 function M.setup()
     M.general()
+    M.setup_term_runners()
 
     M.colemak()
 end
@@ -49,6 +50,25 @@ function M.general()
     -- map('', 'g*', 'g*zz', {})
 end
 
+function M.setup_term_runners()
+    local map = vim.api.nvim_set_keymap
+
+    map('n', '<leader>g', ":vsplit | term zsh -c '$(pwd)/.tmux/g'<CR>", { noremap = true, silent = true })
+
+    -- make sure we always scroll to the last line in term buffers
+    vim.cmd([[
+      augroup TermScroll
+        autocmd!
+        autocmd BufWinEnter,WinEnter term://* startinsert | autocmd BufWritePost <buffer> normal! G
+        autocmd TermOpen * startinsert
+      augroup END
+    ]])
+
+    -- exit insert mode in terminal with an easier shortcut
+    -- or use c-,
+    vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]])
+end
+
 function M.get_maps()
     -- consider https://colemakmods.github.io/mod-dh/model.html
 
@@ -90,6 +110,10 @@ function M.get_maps()
             { 'sy', 'hea' }, -- append at end of word
             { 'sY', 'hEa' }, -- append at end of Word
         },
+
+        v = {
+            { 's', 'c' },
+        },
     }
 
     maps['change'] = {
@@ -100,6 +124,7 @@ function M.get_maps()
             { '<c-i>', '>>' },
         },
         v = {
+            { 'r', 'c' },
             { '<c-n>', '<gv' },
             { '<c-i>', '>gv' },
         },
@@ -133,34 +158,15 @@ function M.get_maps()
 
     maps['moves'] = {
         nv = {
-            -- { "gn", "^" }, -- start of text in line
             { 'm', '0^' }, -- start of text in line
-            -- TODO could also use mlyo and co, it not needed for some
-            -- they might be quite natural
-            -- { "ggn", "0" }, -- start of line
             { '<c-m>', '0' }, -- start of line
-            -- { "gi", "$" }, -- end of line
             { 'o', '$' }, -- end of line
-            -- { "gu", "gg" }, -- top of document
             { '<c-k>', 'gg' }, -- top of document
-            -- { "ggu", "gg0" }, -- top left of document
-            { 'j', 'gg0' }, -- top left of document
-            -- { "ge", "G" }, -- bottom of document
             { '<c-h>', 'G' }, -- bottom of document
-            -- { "<c-i>", "w" }, -- word
-            -- { "<c-o>", "W" }, -- Word
-            -- { "<c-n>", "b" }, -- reverse word
-            -- { "<c-m>", "B" }, -- reverse Word
-            -- { "<s-i>", "e" }, -- end of word
-            -- { "<s-o>", "E" }, -- End of word
-            -- { "<s-n>", "ge" }, -- reverse end of word
-            -- { "<s-m>", "gE" }, -- reverse end of Word
-            -- TODO should those move into the middles of the words?
             { 'l', 'b' }, -- word back
             { 'L', 'B' }, -- Word back
             { 'y', 'w' }, -- word forward
             { 'Y', 'W' }, -- Word forward
-            -- { "'", "'." }, -- TODO
         },
     }
 
@@ -174,7 +180,10 @@ function M.get_maps()
     maps['copy'] = {
         nv = {
             { 'c', '"zy' },
+            { 'x', '"zd' }, -- copy and cut
             { 'ca', '"+y' }, -- put into system clipboard
+            { '<c-c>u', [["yy'<"yP]] }, -- duplicate above
+            { '<c-c>e', [["yy'>"yp]] }, -- duplicate below
         },
         n = {
             { 'pu', '"zP' },
@@ -210,7 +219,7 @@ function M.get_maps()
 
     maps['visual'] = {
         nv = {
-            { 'v', 'V' },  -- using line select more often
+            { 'v', 'V' }, -- using line select more often
             { 'V', 'v' },
         },
     }
@@ -241,9 +250,8 @@ function M.get_maps()
             { 'sty', '<cmd>tab split<enter>' }, -- new tab
             { 'stY', '<c-w>T' }, -- explode into new tab
             { 'st,', '<cmd>wincmd c | wincmd=<enter>' }, -- close split
-            { 'st.', '<cmd>wincmd o | wincmd=<enter>' }, -- close split
+            { 'st.', '<cmd>wincmd o | wincmd=<enter>' }, -- only split, close all other splits
             { 'sth', '<c-w>p' }, -- last split
-            -- { "ststh", "g<tab>" }, -- last tab
             { 'stt', '1<c-w>w' }, -- split #1
             { 'sts', '2<c-w>w' }, -- split #2
             { 'str', '3<c-w>w' }, -- split #3

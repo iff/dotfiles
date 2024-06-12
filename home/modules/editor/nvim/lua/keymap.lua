@@ -109,6 +109,7 @@ function M.get_maps()
             { 'sL', 'lBi' }, -- insert at beginning of Word
             { 'sy', 'hea' }, -- append at end of word
             { 'sY', 'hEa' }, -- append at end of Word
+            { 's/', 'gi' }, -- insert where insert mode was last stopped
         },
 
         v = {
@@ -167,6 +168,12 @@ function M.get_maps()
             { 'L', 'B' }, -- Word back
             { 'y', 'w' }, -- word forward
             { 'Y', 'W' }, -- Word forward
+        },
+    }
+
+    maps['marks'] = {
+        nv = {
+            { '/', "'^^" }, -- jump to last insert exit
         },
     }
 

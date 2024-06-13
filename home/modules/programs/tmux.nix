@@ -1,29 +1,9 @@
 { lib, pkgs, ... }:
 
-let
-  tmux-bind-g = pkgs.writeScriptBin "tmux-bind-g"
-    ''
-      #!/usr/bin/env zsh
-      set -eux -o pipefail
-
-      # bind an executable to g (split) and G (new window)
-      # meant to use dynamically for whatever is the current task
-      # at the end
-      #   [q] to exit
-      #   [enter] to rerun
-
-      # NOTE alternatively, we put the command in a file? less escape problems?
-      cmd='while true; do clear; echo ">" '$@'; echo; '$@'; echo; echo ">" '$@' ; read -sk "r?exit code = $? [q or any]"; if [[ $r == q ]]; then break; fi; done'
-      tmux bind-key g split-window -h -c "#{pane_current_path}" zsh -ic $cmd
-      tmux bind-key G new-window -n g-bound -c "#{pane_current_path}" zsh -ic $cmd
-    '';
-in
 {
   # FIXME alacritty and TMUX have issues with OSX native ncurses
   # see https://github.com/NixOS/nixpkgs/issues/204144
-  home.packages = [
-    tmux-bind-g
-  ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
+  home.packages = [ ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
 
   programs.tmux = {
     enable = true;
@@ -56,10 +36,6 @@ in
       # pane border
       set-option -g pane-border-style 'fg=#d65d0e'
       set-option -g pane-active-border-style 'fg=#d65d0e'
-
-      # message text
-      # set-option -g message-bg "#2b303b"
-      # set-option -g message-fg "#c0c5ce"
 
       # pane number display
       set-option -g display-panes-active-colour "#a3be8c"
@@ -143,6 +119,9 @@ in
       bind -T copy-mode-vi C-u send-keys -X previous-prompt
       bind -T copy-mode-vi C-e send-keys -X next-prompt
       bind -T copy-mode-vi Escape send-keys -X cancel
+
+      # bind-key g switch-client -Trunners
+      # bind-key -Trunners g split-window -h zsh -i .tmux/g
     '';
   };
 

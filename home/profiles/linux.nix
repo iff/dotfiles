@@ -50,6 +50,24 @@ let
                           continue
                       print(f"      {pv_by_uuid[pvseg['pv_uuid']]['pv_name']}")
     '';
+  loop = pkgs.writeScriptBin "loop"
+    ''
+      #!/usr/bin/env zsh
+      set -eux -o pipefail
+
+      while true; do 
+        clear
+        echo ">" $@
+        echo
+        $@
+        echo
+        echo ">" $@
+        read -sk "r?exit code = $? [q or any]"
+        if [[ $r == q ]]; then 
+          break
+        fi
+      done
+    '';
 in
 {
   options.dots.profiles.linux = {
@@ -60,6 +78,7 @@ in
     # targets.genericLinux.enable = true;
 
     home.packages = [
+      loop
       lvm-overview
       sshot
       susp

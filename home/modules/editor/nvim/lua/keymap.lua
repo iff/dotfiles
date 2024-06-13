@@ -139,16 +139,16 @@ function M.get_maps()
             { 'U', 'aW' }, -- inner word with connecting whitespace
             { 'i', '$' }, -- to end of line
             { 'n', 'Vl' }, -- line
-            { '(', 'i(' }, -- inner ()
-            { ')', 'a(' }, -- outer ()
-            { '[', 'i[' }, -- inner []
-            { ']', 'a[' }, -- outer []
-            { '{', 'i{' }, -- inner {}
-            { '}', 'a{' }, -- outer {}
-            { "'", "i'" }, -- inner ''
-            { '\\', "a'" }, -- outer ''
-            { '"', 'i"' }, -- inner ""
-            { '|', 'a"' }, -- outer ""
+            { '(e', 'i(' }, -- inner ()
+            { '(u', 'a(' }, -- outer ()
+            { '[e', 'i[' }, -- inner []
+            { '[u', 'a[' }, -- outer []
+            { '{e', 'i{' }, -- inner {}
+            { '{u', 'a{' }, -- outer {}
+            { "'e", "i'" }, -- inner ''
+            { "'u", "a'" }, -- outer ''
+            { '"e', 'i"' }, -- inner ""
+            { '"u', 'a"' }, -- outer ""
             { '.', 'l' }, -- one character
             { 'y', 'e' }, -- to end of word
             { 'Y', 'E' }, -- to end of Word
@@ -173,7 +173,7 @@ function M.get_maps()
 
     maps['marks'] = {
         nv = {
-            { '/', "'^^" }, -- jump to last insert exit
+            { '/', "'^^zz" }, -- jump to last insert exit
         },
     }
 

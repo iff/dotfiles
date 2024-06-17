@@ -111,16 +111,17 @@ in
     };
 
     aliases = {
-      s = "status";
-      b = "branch";
-      ba = "branch -a -v -v";
-      bs = "!git-branch-status";
-      bsi = "!git-branch-status -i";
-
-      sw = "!git checkout $(git branch -a --format '%(refname:short)' | sed 's~origin/~~' | sort | uniq | fzf)";
-
-      ci = "commit";
+      b = "branch -vv";
+      ba = "branch -avv";
+      c = "commit";
+      cm = "commit -m";
       co = "checkout";
+      coo = "!git checkout $(git branch -a --format '%(refname:short)' | sed 's~origin/~~' | sort | uniq | fzf)";
+      f = "fetch --all --tags --prune --force";
+      m = "merge";
+      p = "push";
+      pu = "push -u origin HEAD";
+      s = "-c advice.statusHints=false status --show-stash";
 
       d = "diff -C";
       ds = "diff -C --stat";
@@ -137,25 +138,23 @@ in
       lga = "log --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all";
       l19 = "log --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all -19";
       lsd = "log --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --all --simplify-by-decoration";
-      lgr = "log --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --first-parent";
-
-      ru = "remote update";
+      lfp = "log --graph '--pretty=tformat:%Cblue%h%Creset %Cgreen%ar%Creset %Cblue%d%Creset %s' --first-parent";
 
       # "show-branch -g=N" can't be aliased for N easily, so we stop here:
       sb = "show-branch --sha1-name";
+
+      ru = "remote update";
+      rbi = "rebase -i";
+      rbc = "rebase --continue";
+      rbim = "rebase -i main";
 
       ls-del = "ls-files -d";
       ls-mod = "ls-files -m";
       ls-new = "ls-files --exclude-standard -o ";
       ls-ign = "ls-files --exclude-standard -o -i";
 
-      whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -";
-      whatis = "show -s --pretty='tformat:%h (%s, %ad)' --date=short";
-
-      # locate = "!sh -c 'git ls-files "\\ * $1 "' -";
-
-      # edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; vim `f`";
-      # add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`";
+      # whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -";
+      # whatis = "show -s --pretty='tformat:%h (%s, %ad)' --date=short";
 
       edit-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; v `f`";
       add-unmerged = "!f() { git diff --name-status --diff-filter=U | cut -f2 ; }; git add `f`";

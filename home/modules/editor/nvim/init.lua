@@ -27,24 +27,13 @@ end
 local options = function()
     local set = vim.opt
 
-    set.termguicolors = true
-    set.modeline = false
-    set.autoindent = true
-    set.backspace = 'indent,eol,start'
-    set.complete:remove('i')
-    set.smarttab = true
+    set.backspace = 'indent,eol,start,nostop'
     set.incsearch = true
     set.autoread = true
-    set.encoding = 'utf-8'
-    set.compatible = false
-    set.gdefault = true
     set.showcmd = true
-    set.scrolloff = 5
-
+    set.scrolloff = 8
     set.writebackup = false
     set.swapfile = false
-
-    set.inccommand = 'nosplit'
 
     set.tabstop = 4
     set.softtabstop = 4
@@ -53,17 +42,18 @@ local options = function()
     set.smarttab = true
     set.autoindent = true
     set.copyindent = true
+    set.textwidth = 0
+    set.indentexpr = ''
+    set.indentkeys = ''
+    set.cinkeys = ''
+    set.formatoptions = ''
 
     set.modeline = false
     set.modelines = 0
     set.wildmode = 'longest:full'
+    set.smoothscroll = true
+    set.mouse = ''
 
-    -- Better completion?
-    -- menuone: popup even when there's only one match
-    -- noinsert: Do not insert text until a selection is made
-    -- noselect: Do not select, force user to select one from the menu
-    set.completeopt = 'menuone,noinsert,noselect'
-    -- diagnostic messages defaults to 4000
     set.updatetime = 300
 
     vim.api.nvim_create_autocmd({ 'VimResized' }, {

@@ -15,7 +15,7 @@ local function lsp_jumper(method, before)
         local function handler(_, result, ctx, _)
             -- full signature: err, result, ctx, config
             local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
-            if vim.tbl_islist(result) then
+            if vim.islist(result) then
                 -- TODO we only use the first result
                 -- like the original, it would be better to open quickfix with options?
                 result = result[1]
@@ -108,7 +108,7 @@ function M.setup_completion()
         view = { entries = { name = 'wildmenu', separator = ' | ' }, docs = { auto_open = true } },
         completion = {
             autocomplete = false,
-            completeopt = 'menu,menuone',
+            -- completeopt = 'menu,menuone',
         },
         snippet = {
             expand = function(args)
@@ -122,10 +122,11 @@ function M.setup_completion()
                 }),
                 { 'i', 'c' }
             ),
+            -- TODO try c-t?
             ['<enter>'] = cmp.mapping.confirm({ select = true }),
-            ['<c-i>'] = cmp.mapping.select_next_item(),
-            ['<c-n>'] = cmp.mapping.select_prev_item(),
-            -- ['<c-u>'] = cmp.mapping.open_docs(),
+            ['<c-e>'] = cmp.mapping.select_next_item(),
+            ['<c-u>'] = cmp.mapping.select_prev_item(),
+            -- ['<c-y>'] = cmp.mapping.open_docs(),
         },
         experimental = {
             ghost_text = true,
@@ -133,6 +134,7 @@ function M.setup_completion()
         sources = cmp.config.sources({
             { name = 'nvim_lsp' },
             { name = 'nvim_lua' },
+            { name = 'luasnip' },
         }),
         formatting = {
             format = require('lspkind').cmp_format({
@@ -189,7 +191,7 @@ function M.on_attach(client, bufnr)
     )
 
     nmap('t.', b.hover, 'hover symbol')
-    imap('<c-k>', b.signature_help, 'signature help')
+    -- imap('<c-k>', b.signature_help, 'signature help')
     nmap('tl', b.references, 'find references')
     nmap('t;', b.code_action, 'code action')
     nmap('to', b.rename, 'rename symbol')
@@ -214,12 +216,9 @@ function M.on_attach(client, bufnr)
     nmap('tK', D.setqflist, 'diagnostics global qflist')
     nmap('tH', D.setloclist, 'diagnostics buffer loclist')
 
-    -- get signatures (and _only_ signatures) when in argument lists
     require('lsp_signature').on_attach({
-        doc_lines = 0,
-        handler_opts = {
-            border = 'none',
-        },
+        floating_window = false,
+        toggle_key = "<c-k>",
     })
 end
 

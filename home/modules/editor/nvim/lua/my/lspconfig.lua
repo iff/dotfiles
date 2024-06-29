@@ -164,16 +164,8 @@ function M.on_attach(client, bufnr)
     local function nmap(lhs, rhs, desc)
         vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
     end
-    local function imap(lhs, rhs, desc)
-        vim.keymap.set('i', lhs, rhs, { buffer = bufnr, desc = desc })
-    end
 
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
     local b = vim.lsp.buf
-    -- TODO
-    -- nmap('gD', b.declaration)
-    -- nmap('gi', b.implementation)
-    -- nmap('gtd', b.type_definition)
 
     nmap('tt', lsp_jumper('textDocument/definition'), 'go to definition')
     nmap('ty', lsp_jumper('textDocument/definition', 'tab split'), 'go to definition in a new tab')
@@ -200,17 +192,18 @@ function M.on_attach(client, bufnr)
     local D = vim.diagnostic
     nmap('t,', function()
         D.open_float({
-            prefix = function(d, i, t)
-                return vim.diagnostic.severity[d.severity] .. ': '
+            prefix = function(d, _, _)
+                -- returns string and optional highlight group
+                return vim.diagnostic.severity[d.severity] .. ': ', ''
             end,
         })
     end, 'diagnostics float')
     nmap('tk', function()
-        D.goto_prev()
+        D.jump({ count = -1 })
         vim.cmd('normal! zz')
     end, 'diagnostics previous')
     nmap('th', function()
-        D.goto_next()
+        D.jump({ count = 1 })
         vim.cmd('normal! zz')
     end, 'diagnostics next')
     nmap('tK', D.setqflist, 'diagnostics global qflist')
@@ -218,7 +211,7 @@ function M.on_attach(client, bufnr)
 
     require('lsp_signature').on_attach({
         floating_window = false,
-        toggle_key = "<c-k>",
+        toggle_key = '<c-k>',
     })
 end
 

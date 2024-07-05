@@ -47,7 +47,7 @@ function M.setup()
         virtual_text = {
             -- TODO https://neovim.io/doc/user/diagnostic.html#diagnostic-severity
             severity = { min = vim.diagnostic.severity.WARN },
-            prefix = '', -- alternatives ﲑﲒﲕﲖ
+            prefix = '',
             format = function(diagnostic)
                 -- local icons = {"", "", "", ""}
                 local icons = { 'E', 'W', 'I', 'H' }
@@ -57,15 +57,6 @@ function M.setup()
                     return icons[diagnostic.severity] .. '/' .. diagnostic.code
                 end
             end,
-            -- TODO doesnt seem to disable, which signs are they? I want to change them
-            -- signs = false,
-            -- TODO doesnt seem to apply to open_float ...
-            -- float = {
-            --     prefix = function(diagnostics, i, total)
-            --         return "somee: "
-            --     end,
-            -- },
-            -- TODO not sure I see an effect either way, with false it was maybe flickery and out of date?
             update_in_insert = true,
             severity_sort = true,
             spacing = 0,

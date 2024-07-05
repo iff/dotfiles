@@ -31,9 +31,8 @@
       flake = true;
     };
 
-    # TODO darwin configuration.nix (system stuff?)
-    # darwin = {
-    #   url = "github:lnl7/nix-darwin/master";
+    # kmonad = {
+    #   url = "github:kmonad/kmonad?dir=nix?submodules=1";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
 

@@ -1,9 +1,20 @@
 { lib, pkgs, ... }:
 
+let
+  tm = pkgs.writeScriptBin "tm"
+    ''
+      #!/usr/bin/env zsh
+      set -eux -o pipefail
+
+      session=''${1:-$(basename `pwd`)}
+
+      tmux new-session -A -D -s $session
+    '';
+in
 {
   # FIXME alacritty and TMUX have issues with OSX native ncurses
   # see https://github.com/NixOS/nixpkgs/issues/204144
-  home.packages = [ ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
+  home.packages = [ tm ] ++ lib.optionals pkgs.stdenv.isDarwin [ pkgs.ncurses ];
 
   programs.tmux = {
     enable = true;

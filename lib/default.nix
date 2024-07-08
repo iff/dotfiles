@@ -96,6 +96,14 @@ rec {
             }
           )
           (
+            { pkgs, ... }: {
+              nix = {
+                package = pkgs.nixVersions.latest;
+                extraOptions = "experimental-features = nix-command flakes";
+              };
+            }
+          )
+          (
             { inputs, ... }: {
               # re-expose self and nixpkgs as flakes.
               nix.registry = {

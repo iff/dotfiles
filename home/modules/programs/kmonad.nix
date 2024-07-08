@@ -10,8 +10,9 @@ let
       #!/usr/bin/env zsh
       set -eu -o pipefail
 
-      sudo echo ${kmonad_agent} > /Library/LaunchDaemons/org.kmonad.agent.plist
+      echo '${kmonad_agent}' | sudo tee /Library/LaunchDaemons/org.kmonad.agent.plist
       sudo chown root:wheel /Library/LaunchDaemons/org.kmonad.agent.plist
+      # why do we get an input/output error but things are fine?
       sudo launchctl bootstrap system /Library/LaunchDaemons/org.kmonad.agent.plist
       echo 'add kmonad exec to Input Monitoring'
     '';

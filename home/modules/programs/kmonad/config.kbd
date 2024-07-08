@@ -26,8 +26,10 @@
 	;; so this has some issues in vim normal or fugitiv/browser
 	;; we can remap things in vim but a bit annoying to have dual use with voyager
 	;; and not so clear how to do it with other tools
-	spc (tap-macro spc (tap-hold-next 150 XX XX :timeout-button (tap-macro bspc (layer-toggle syms))))
+	;; spc (tap-macro spc (tap-hold-next 150 XX XX :timeout-button (tap-macro bspc (layer-toggle syms))))
 	num (layer-toggle numpad)
+	syms (layer-toggle syms)
+	spc (tap-macro spc (tap-next-release XX (tap-macro bspc @syms)))
 )
 
 ;; TODO add nav and numpad on fn
@@ -37,11 +39,11 @@
 	F1
 	F2
 	;; |____3____||____3____||____3+___||____2+___||____2____||____1____||____1____|           |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
-		XX	XX	XX	XX	`	XX	XX		XX	XX	XX	XX	-	=	bspc
+		XX	XX	XX	`	`	XX	XX		XX	XX	XX	XX	-	=	bspc
 	;; |____4____||____4____||____3____||____2____||____1____||____1____||____1____|           |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
 		tab	q	w	f	p	b			j	l	u	y	;	XX	XX         \
 		esc	a	r	s	t	g			m	n	e	i	o	XX         ret
-		lsft	z	x	c	d	v			k	h	,	.	/	rsft
+		lsft	z	x	c	d	v			k	h	,	.	@syms	rsft
         @num       lctl	          lmet				@spc			rmet		rctl
 )
 

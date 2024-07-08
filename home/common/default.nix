@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 
   # TODO: https://nix-community.github.io/home-manager/#sec-install-nixos-module
   # do we need to set?:

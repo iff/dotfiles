@@ -29,7 +29,7 @@ rec {
         "nixpkgs=$HOME/.nixpkgs\${NIX_PATH:+:}$NIX_PATH";
 
       # set in host? fallback
-      home.stateVersion = "23.05";
+      home.stateVersion = "24.05";
     };
 
   intoHomeManager = name: { config ? name, user ? "iff", system ? "x86_64-linux" }:
@@ -109,7 +109,7 @@ rec {
           )
           (
             { ... }: {
-              system.stateVersion = "23.05";
+              system.stateVersion = "24.05";
             }
           )
           (inputs.home-manager.nixosModules.home-manager)

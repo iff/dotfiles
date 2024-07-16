@@ -99,6 +99,7 @@ in
         (plug "rustacean-nvim")
 
         (plug "neodev-nvim")
+        (plug "kmonad-vim")
 
         # interesting navigation and term/tmux commands: https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 
@@ -154,10 +155,10 @@ in
   home.file.".config/nvim/after/ftplugin/kbd.vim".text =
     ''
       setlocal
-      \ tabstop=4 softtabstop=0 shiftwidth=0
-      \ vartabstop=4,4,11,11,11,11,11,18,12,11
-      \ noexpandtab nosmarttab autoindent copyindent
-      \ textwidth=0
+          \ tabstop=4 softtabstop=0 shiftwidth=0
+          \ vartabstop=4,4,11,11,11,11,11,18,12,11
+          \ noexpandtab nosmarttab autoindent copyindent
+          \ textwidth=0
     '';
   home.file.".config/nvim/after/ftplugin/gitcommit.vim".text =
     ''

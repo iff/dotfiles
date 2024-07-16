@@ -158,6 +158,11 @@
       flake = false;
     };
 
+    kmonad-vim = {
+      url = github:kmonad/kmonad-vim;
+      flake = false;
+    };
+
     # hugging face code completion
     # hfcc = {
     #   url = github:huggingface/hfcc.nvim;

@@ -634,6 +634,22 @@
         "type": "github"
       }
     },
+    "kmonad-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1647812451,
+        "narHash": "sha256-7PKVOsb3jvuGEnP/LsrDr96wFSQMou2dgnV+hRaI444=",
+        "owner": "kmonad",
+        "repo": "kmonad-vim",
+        "rev": "37978445197ab00edeb5b731e9ca90c2b141723f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kmonad",
+        "repo": "kmonad-vim",
+        "type": "github"
+      }
+    },
     "lsp-indicator-nvim": {
       "flake": false,
       "locked": {
@@ -1148,6 +1164,7 @@
         "hop-nvim": "hop-nvim",
         "hypr-contrib": "hypr-contrib",
         "iff-dwm": "iff-dwm",
+        "kmonad-vim": "kmonad-vim",
         "lsp-indicator-nvim": "lsp-indicator-nvim",
         "lsp-signature-nvim": "lsp-signature-nvim",
         "lspkind-nvim": "lspkind-nvim",

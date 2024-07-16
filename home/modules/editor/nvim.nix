@@ -129,12 +129,14 @@ in
 
   home.file.".config/nvim/init.lua".source = ./nvim/init.lua;
   home.file.".config/nvim/lua".source = ./nvim/lua;
-  home.file.".config/nvim/ftplugin/help.vim".text =
+
+  # ftplugin
+  home.file.".config/nvim/after/ftplugin/help.vim".text =
     ''
       " see also /usr/local/share/nvim/runtime/ftplugin/help.vim
       nmap <silent><buffer> go gO<c-w>c<cmd>lua require("telescope.builtin").loclist({fname_width=0})<enter>
     '';
-  home.file.".config/nvim/ftplugin/man.vim".text =
+  home.file.".config/nvim/after/ftplugin/man.vim".text =
     ''
       " use this to find an entry interactively
       " TODO could also do something with telescope if we parse it using some
@@ -148,5 +150,17 @@ in
       " TODO this mapping is not very well aligned yet
       " not bad, a bit hacky to "hide" the filename column
       nnoremap <silent> <buffer> go <cmd>lua require("man").show_toc()<enter><c-w>c<cmd>lua require("telescope.builtin").loclist({fname_width=0})<enter>
+    '';
+  home.file.".config/nvim/after/ftplugin/kbd.vim".text =
+    ''
+      setlocal
+      \ tabstop=4 softtabstop=0 shiftwidth=0
+      \ vartabstop=4,4,11,11,11,11,11,18,12,11
+      \ noexpandtab nosmarttab autoindent copyindent
+      \ textwidth=0
+    '';
+  home.file.".config/nvim/after/ftplugin/gitcommit.vim".text =
+    ''
+      nmap <buffer> <esc> <cmd>x<enter>
     '';
 }

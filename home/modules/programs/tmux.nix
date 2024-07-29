@@ -18,7 +18,7 @@ in
 
   programs.tmux = {
     enable = true;
-    prefix = "`";
+    prefix = "F12";
     baseIndex = 1;
     historyLimit = 5000;
     escapeTime = 0;
@@ -92,7 +92,7 @@ in
       bind-key Space new-window zsh -c "tmux list-sessions -F '#{session_name}' | fzf --preview-window=down,30% --preview 'tmux list-windows -t {}' --bind 'enter:become(tmux switch -t {})+abort'"
 
       # pane selection
-      bind ` display-panes
+      bind F12 display-panes
 
       # windows
       bind-key 1 select-window -t :1

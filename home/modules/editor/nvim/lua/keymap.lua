@@ -233,8 +233,6 @@ function M.get_maps()
 
     maps['tabs'] = {
         n = {
-            -- { 'ftu', '<cmd>tab split<enter>' }, -- new tab
-            -- { 'ftU', '<c-w>T' }, -- explode into new tab
             { 'ftn', '<cmd>tabprevious<enter>' }, -- previous tab
             { 'fti', '<cmd>tabnext<enter>' }, -- next tab
             { 'ft,', '<cmd>tabclose<enter>' }, -- close tab
@@ -242,9 +240,10 @@ function M.get_maps()
             { 'fth', 'g<tab>' }, -- last tab
             { 'ftl', '<cmd>tabmove -1<enter>' }, -- move tab left
             { 'fty', '<cmd>tabmove +1<enter>' }, -- move tab right
-            -- TODO consider ft{digit} for go to
-            -- and ft{s-digit} for move tab to
-            -- or not needed often enough? keep it in the cmd line?
+            { 'zn', '1gt' }, -- tab #1
+            { 'ze', '2gt' }, -- tab #2
+            { 'zi', '3gt' }, -- tab #3
+            { 'zo', '4gt' }, -- tab #4
         },
     }
 
@@ -259,10 +258,10 @@ function M.get_maps()
             { 'st,', '<cmd>wincmd c | wincmd=<enter>' }, -- close split
             { 'st.', '<cmd>wincmd o | wincmd=<enter>' }, -- only split, close all other splits
             { 'sth', '<c-w>p' }, -- last split
-            { 'stt', '1<c-w>w' }, -- split #1
-            { 'sts', '2<c-w>w' }, -- split #2
-            { 'str', '3<c-w>w' }, -- split #3
-            { 'sta', '4<c-w>w' }, -- split #4
+            { "zh", "1<c-w>w" }, -- split #1
+            { "z,", "2<c-w>w" }, -- split #2
+            { "z.", "3<c-w>w" }, -- split #3
+            { "z/", "4<c-w>w" }, -- split #4
         },
     }
 

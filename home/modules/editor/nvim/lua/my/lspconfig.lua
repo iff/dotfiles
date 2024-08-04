@@ -12,22 +12,24 @@ local function lsp_jumper(method, before)
     --   textDocument/definition
     return function()
         local params = vim.lsp.util.make_position_params()
-        local function handler(_, result, ctx, _)
-            -- full signature: err, result, ctx, config
-            local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
-            if vim.islist(result) then
-                -- TODO we only use the first result
-                -- like the original, it would be better to open quickfix with options?
-                result = result[1]
-            end
-            if before then
-                vim.cmd(before)
-            end
-            vim.lsp.util.jump_to_location(result, offset_encoding, false)
-            vim.cmd('normal! zt')
+        local result, _err = vim.lsp.buf_request_sync(0, method, params)
+        if result == nil then
+            return
         end
-        -- TODO kinda works, but still async, user might get bored, switches buffer/windows, and then it gets weird
-        vim.lsp.buf_request(0, method, params, handler)
+        local client_id = vim.lsp.get_clients({ bufnr = 0 })[1].id
+        result = result[client_id].result
+        if vim.islist(result) then
+            -- TODO we only use the first result
+            -- like the original, it would be better to open quickfix with options?
+            -- or telescope if a certain option is passed
+            result = result[1]
+        end
+        local offset_encoding = vim.lsp.get_client_by_id(client_id).offset_encoding
+        if before then
+            vim.cmd(before)
+        end
+        vim.lsp.util.jump_to_location(result, offset_encoding, false)
+        vim.cmd('normal! zt')
     end
 end
 

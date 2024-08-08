@@ -28,6 +28,7 @@ in
     {
       # Enable zsh in order to add /run/current-system/sw/bin to $PATH
       programs.zsh.enable = true;
+      nix.settings.trusted-users = [ "${cfg.name}" ];
     }
   ];
 }

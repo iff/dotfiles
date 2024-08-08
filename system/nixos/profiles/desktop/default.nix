@@ -45,7 +45,7 @@ in
       xdg-utils
       glib
       dracula-theme
-      gnome3.adwaita-icon-theme
+      adwaita-icon-theme
       mako
       wl-clipboard
       wlr-randr

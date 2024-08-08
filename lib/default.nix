@@ -53,6 +53,10 @@ rec {
               [ home ];
 
             nix = {
+              settings = {
+                substituters = [ "https://iff-dotfiles.cachix.org" ];
+                trusted-public-keys = [ "iff-dotfiles.cachix.org-1:9PzCJ44z3MuyvrvjkbbMWCDl5Rrf9nt3OZHq446Wn58=" ];
+              };
               package = pkgs.nixVersions.stable;
               extraOptions = "experimental-features = nix-command flakes";
             };

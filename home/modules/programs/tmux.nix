@@ -92,29 +92,33 @@ in
       bind-key Space new-window zsh -c "tmux list-sessions -F '#{session_name}' | fzf --preview-window=down,30% --preview 'tmux list-windows -t {}' --bind 'enter:become(tmux switch -t {})+abort'"
 
       # pane selection
-      bind F12 display-panes
+      # bind F12 display-panes
+      bind-key F12 switch-client -T direct
 
       # windows
-      bind-key 1 select-window -t :1
-      bind-key 2 select-window -t :2
-      bind-key 3 select-window -t :3
-      bind-key 4 select-window -t :4
-      bind-key 5 select-window -t :5
-      bind-key 6 select-window -t :6
-      bind-key 7 select-window -t :7
-      bind-key 8 select-window -t :8
-      bind-key 9 select-window -t :9
+      bind-key -T direct n select-window -t :1
+	  bind-key -T direct e select-window -t :2
+  	  bind-key -T direct i select-window -t :3
+	  bind-key -T direct o select-window -t :4
+      
+      # pane selection
+      bind-key -T direct h select-pane -t 1
+      bind-key -T direct , select-pane -t 2
+      bind-key -T direct . select-pane -t 3
+      bind-key -T direct / select-pane -t 4
 
       # some movement
-      bind-key h last-window
-      bind-key k last-pane
-      bind -r m select-window -t :-
-      bind -r o select-window -t :+
+      # bind-key h last-window
+      # bind-key k last-pane
+      # bind -r m select-window -t :-
+      # bind -r o select-window -t :+
 
       # fullscreen pane
       bind-key . resize-pane -Z
       # move to new window
-      bind-key , break-pane
+      bind-key Y break-pane
+      # rename
+      bind-key , command-prompt 'rename-window %%'
 
       bind a copy-mode
       bind -T copy-mode-vi u send-keys -X cursor-up
@@ -130,9 +134,6 @@ in
       bind -T copy-mode-vi C-u send-keys -X previous-prompt
       bind -T copy-mode-vi C-e send-keys -X next-prompt
       bind -T copy-mode-vi Escape send-keys -X cancel
-
-      # bind-key g switch-client -Trunners
-      # bind-key -Trunners g split-window -h zsh -i .tmux/g
     '';
   };
 

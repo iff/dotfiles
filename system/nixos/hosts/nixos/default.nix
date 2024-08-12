@@ -14,7 +14,7 @@
     profiles = {
       desktop = {
         enable = true;
-        wm = "sway";
+        wm = "dwm";
       };
     };
   };

@@ -13,11 +13,11 @@
 
   dots = {
     profiles = {
-      sway.enable = true;
+      dwm.enable = true;
     };
     alacritty = {
       enable = true;
-      font_size = 10.0;
+      font_size = 12.0;
       font_normal = "Zed Mono Nerd Font";
     };
     osh.enable = true;

@@ -54,6 +54,8 @@ in
       wayland-utils
       # egl-wayland
       wayland-protocols
+    ] ++ lib.optionals (cfg.wm == "dwm") [
+      xorg.xinit
     ];
 
     # fonts.fontconfig = {
@@ -78,10 +80,11 @@ in
 
     hardware.nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = true;
+      powerManagement.enable = false;
       powerManagement.finegrained = false;
 
       # todo at some point try open source kernel modules
+      # but need a new gpu for that
       open = false;
 
       package = config.boot.kernelPackages.nvidiaPackages.stable;

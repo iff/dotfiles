@@ -90,6 +90,8 @@ in
       package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
+    # TODO also neede for sway but actually super instable at the moment
+    # services.xserver.videoDrivers = [ "nvidia" ];
 
     # xorg and dwm
 

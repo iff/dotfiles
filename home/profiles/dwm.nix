@@ -2,6 +2,22 @@
 
 with lib;
 let
+  dwm-status = pkgs.writeScriptBin "dwm-status"
+    ''
+      #!/usr/bin/env zsh
+      set -eux -o pipefail
+      
+      status () {
+        echo -n "$(date '+%d/%m %H:%M')"
+      }
+      
+      while true
+      do
+        xsetroot -name "$(status)";
+        sleep 1m;
+      done
+    '';
+
   cfg = config.dots.profiles.dwm;
 in
 {
@@ -15,6 +31,7 @@ in
       feh
       gthumb
       scrot
+      dwm-status
     ];
 
     home.file.".xinitrc".text = ''
@@ -24,6 +41,7 @@ in
       feh --bg-scale $HOME/Downloads/mountains.jpg
       redshift -r -v & # |& ts '%F %T' >& $HOME/.log-redshift &
 
+      dwm-status &
       dwm
     '';
   };

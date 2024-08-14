@@ -38,10 +38,15 @@ in
       #!/usr/bin/env zsh
       set -eux -o pipefail
 
+      # monitor never off
+      xset -dpms
+      xset s off
+      setterm --blank 0 --powerdown 0
+
       feh --bg-scale $HOME/Downloads/mountains.jpg
       redshift -r -v & # |& ts '%F %T' >& $HOME/.log-redshift &
-
       dwm-status &
+
       dwm
     '';
   };

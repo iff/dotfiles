@@ -80,7 +80,7 @@ in
 
     hardware.nvidia = {
       modesetting.enable = true;
-      powerManagement.enable = false;
+      powerManagement.enable = true;
       powerManagement.finegrained = false;
 
       # todo at some point try open source kernel modules
@@ -97,7 +97,7 @@ in
 
     services.xserver = mkIf (cfg.wm == "dwm") {
       enable = true;
-      layout = "us";
+      xkb.layout = "us";
       videoDrivers = [ "nvidia" ];
       # no display manager (https://nixos.wiki/wiki/Using_X_without_a_Display_Manager)
       displayManager.startx.enable = true;

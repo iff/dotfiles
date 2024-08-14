@@ -14,6 +14,7 @@
   dots = {
     profiles = {
       dwm.enable = true;
+      linux.enable = true;
     };
     alacritty = {
       enable = true;

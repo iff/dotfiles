@@ -13,12 +13,15 @@ let
       sleep 0.2s
       scrot ~/sshots/'%Y-%m-%d--%H:%M:%S.png' --silent --exec 'gthumb $f'
     '';
+
   susp = pkgs.writeScriptBin "susp"
     ''
       #!/usr/bin/env zsh
+
       slock &
       systemctl suspend
     '';
+
   lvm-overview = pkgs.writeScriptBin "lvm-overview"
     ''
       #!/usr/bin/python3
@@ -50,6 +53,7 @@ let
                           continue
                       print(f"      {pv_by_uuid[pvseg['pv_uuid']]['pv_name']}")
     '';
+
   loop = pkgs.writeScriptBin "loop"
     ''
       #!/usr/bin/env zsh

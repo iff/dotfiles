@@ -25,45 +25,42 @@ in
     terminal = "tmux-256color";
 
     extraConfig = ''
-      # forward focus events
+      set -g status on
       set -g focus-events on
-
-      set-option -g renumber-windows on
-
-      set -g status-position top
-      set -g status-left-length 32
-      set -g status-right-length 150
-
-      set-option -g status-bg "#3c3836"
-      set-option -g status-fg "#d5c4a1"
-      # set-option -g status-attr default
-
-      # default window title colors
-      set-option -g window-status-style 'fg=#d5c4a1,bg=default'
-
-      # active window title colors
-      set-option -g window-status-current-style 'fg=#fbf17c,bg=#504945'
-
-      # pane border
-      set-option -g pane-border-style 'fg=#d65d0e'
-      set-option -g pane-active-border-style 'fg=#d65d0e'
-
-      # pane number display
-      set-option -g display-panes-active-colour "#a3be8c"
-      set-option -g display-panes-colour "#ebcb8b"
-
-      # clock
-      set-window-option -g clock-mode-colour "#fbf17c"
-
-      # bell
-      set-window-option -g window-status-bell-style fg="#2b303b",bg="#bf616a"
+      set -g renumber-windows on
 
       # status bar
-      set -g status-left ' #S |'
-      set -g window-status-format " #I #W "
-      set -g window-status-current-format " #I *#W "
-      set -g status-right "" # '%A %m/%d %l:%M %p'
+      set -g status-position top
+      set -g status-left-length 100
+      set -g status-right-length 50
+      set -g status-justify "left"
 
+      set -g mode-style "fg=#232831,bg=#abb1bb"
+      set -g message-style "fg=#232831,bg=#abb1bb"
+      set -g message-command-style "fg=#232831,bg=#abb1bb"
+
+      set -g pane-border-style "fg=#abb1bb"
+      set -g pane-active-border-style "fg=#81a1c1"
+      set-option -g pane-border-lines heavy
+
+      set -g status-style "fg=#abb1bb,bg=#232831"
+      set -g status-left-style NONE
+
+      set -g status-left "#[fg=#232831,bg=#81a1c1,bold] #S #[fg=#81a1c1,bg=#232831,nobold,nounderscore,noitalics]"
+
+      set -g status-right-style NONE
+      set -g status-right "#[fg=#232831,bg=#232831,nobold,nounderscore,noitalics]fg=#81a1c1,bg=#232831] #{prefix_highlight} #[fg=#abb1bb,bg=#232831,nobold,nounderscore,noitalics]#[fg=#232831,bg=#abb1bb] %H:%M #[fg=#81a1c1,bg=#abb1bb,nobold,nounderscore,noitalics]#[fg=#232831,bg=#81a1c1,bold] #h "
+
+      setw -g window-status-activity-style "underscore,fg=#7e8188,bg=#232831"
+      setw -g window-status-separator ""
+      setw -g window-status-style "NONE,fg=#7e8188,bg=#232831"
+      setw -g window-status-format "#[fg=#232831,bg=#232831,nobold,nounderscore,noitalics]#[default] #I  #W #[fg=#232831,bg=#232831,nobold,nounderscore,noitalics]"
+      setw -g window-status-current-format "#[fg=#232831,bg=#abb1bb,nobold,nounderscore,noitalics]#[fg=#232831,bg=#abb1bb,bold] #I  #W #[fg=#abb1bb,bg=#232831,nobold,nounderscore,noitalics]"
+
+      # only show pane bare if more than one
+      set-hook -g -w pane-focus-in { set-option -Fw pane-border-status '#{?#{e|>:#{window_panes},1},top,off}' }
+
+      # set term caps
       set-option -sa terminal-features 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
       set-option -sa terminal-overrides 'alacritty:256:clipboard:ccolour:cstyle:focus:mouse:RGB:strikethrough:title:usstyle'
 

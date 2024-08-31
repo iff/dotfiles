@@ -794,15 +794,15 @@
     "hop-nvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1694283445,
-        "narHash": "sha256-SnuFeD/lrMxKtpBRPgIwdG0kVF7BWe02PiV7URVDASI=",
-        "owner": "phaazon",
+        "lastModified": 1723130452,
+        "narHash": "sha256-hNo4iqssFjvaWN65cqo/NyuwYzgKiIjwsqFzk2EG/h4=",
+        "owner": "smoka7",
         "repo": "hop.nvim",
-        "rev": "1a1eceafe54b5081eae4cb91c723abd1d450f34b",
+        "rev": "8f51ef02700bb3cdcce94e92eff16170a6343c4f",
         "type": "github"
       },
       "original": {
-        "owner": "phaazon",
+        "owner": "smoka7",
         "repo": "hop.nvim",
         "type": "github"
       }

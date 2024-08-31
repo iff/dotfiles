@@ -4,19 +4,19 @@ function mod.setup()
     local hop = require('hop')
     hop.setup({
         multi_windows = true, -- this means more targets, potentially longer sequence to reach
-        -- multi_windows is broken https://github.com/phaazon/hop.nvim/issues/244
-        -- because they use signs (arguably better than easymotion)
-        -- but signs are attached to a buffer, not to a window
-        -- commented there with a possible solution
         char2_fallback_key = '<enter>',
-        jump_on_sole_occurrence = false,
+        jump_on_sole_occurrence = true,
         -- based on https://colemakmods.github.io/mod-dh/model.html
         keys = 'ntseriufhdywoa',
     })
 
-    -- vim.keymap.set('n', 'r', hop.hint_char1, { desc = 'hop 1char' })
-    -- vim.keymap.set('n', 'R', hop.hint_char2, { desc = 'hop 2char' })
-    vim.keymap.set('n', ' ', hop.hint_char2, { desc = 'hop 2char' })
+    vim.keymap.set({'n', 'v'}, ' ', hop.hint_char2, { desc = 'hop 2char' })
+    vim.keymap.set('i', '<F11> ', function()
+        hop.hint_char1({
+            direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+            current_line_only = true,
+        })
+    end, { desc = 'insert jump on line' })
 end
 
 return mod

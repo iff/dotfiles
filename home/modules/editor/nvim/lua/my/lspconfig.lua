@@ -265,7 +265,7 @@ function M.setup_python(capabilities)
 end
 
 function M.setup_typescript(capabilities)
-    require('lspconfig').tsserver.setup({
+    require('lspconfig').ts_ls.setup({
         capabilities = capabilities,
     })
 end

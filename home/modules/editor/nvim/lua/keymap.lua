@@ -173,7 +173,10 @@ function M.get_maps()
 
     maps['marks'] = {
         nv = {
-            { '/', "'^^zz" }, -- jump to last insert exit
+            { '-', "'^^zz" }, -- jump to last insert exit
+        },
+        n = {
+            { '<', '<c-o>'}, -- jump to previous jump location
         },
     }
 

@@ -41,15 +41,16 @@ in
 
       set -g pane-border-style "fg=#abb1bb"
       set -g pane-active-border-style "fg=#81a1c1"
-      set-option -g pane-border-lines heavy
+      set -g pane-border-lines heavy
+      set -g pane-border-format " #{pane_index} "
 
       set -g status-style "fg=#abb1bb,bg=#232831"
-      set -g status-left-style NONE
 
+      set -g status-left-style NONE
       set -g status-left "#[fg=#232831,bg=#81a1c1,bold] #S #[fg=#81a1c1,bg=#232831,nobold,nounderscore,noitalics]"
 
       set -g status-right-style NONE
-      set -g status-right "#[fg=#232831,bg=#232831,nobold,nounderscore,noitalics]fg=#81a1c1,bg=#232831] #{prefix_highlight} #[fg=#abb1bb,bg=#232831,nobold,nounderscore,noitalics]#[fg=#232831,bg=#abb1bb] %H:%M #[fg=#81a1c1,bg=#abb1bb,nobold,nounderscore,noitalics]#[fg=#232831,bg=#81a1c1,bold] #h "
+      set -g status-right "#[fg=#232831,bg=#232831,nobold,nounderscore,noitalics][fg=#81a1c1,bg=#232831] #{prefix_highlight} #[fg=#abb1bb,bg=#232831,nobold,nounderscore,noitalics]#[fg=#232831,bg=#abb1bb] %H:%M #[fg=#81a1c1,bg=#abb1bb,nobold,nounderscore,noitalics]#[fg=#232831,bg=#81a1c1,bold] #h "
 
       setw -g window-status-activity-style "underscore,fg=#7e8188,bg=#232831"
       setw -g window-status-separator ""

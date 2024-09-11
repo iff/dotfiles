@@ -57,10 +57,18 @@ function mod.setup()
     map('n', 'gc', mod.git_diff_files, {})
 
     map('n', 'gu', function()
-        bi.diagnostics({ bufnr = 0 })
+        bi.diagnostics({ initial_mode = 'normal', bufnr = -1, severity_limit = vim.diagnostic.severity.ERROR })
+    end, { desc = 'lsp diagnostic buffer messages' })
+    map('n', 'gU', function()
+        bi.diagnostics({ initial_mode = 'normal', bufnr = -1, severity_limit = vim.diagnostic.severity.WARN })
     end, { desc = 'lsp diagnostic buffer messages' })
     map('n', 'g,', function()
-        bi.diagnostics({ bufnr = nil })
+        bi.diagnostics({
+            initial_mode = 'normal',
+            bufnr = nil,
+            no_unlisted = false,
+            severity_limit = vim.diagnostic.severity.ERROR,
+        })
     end, { desc = 'lsp diagnostic all messages' })
 end
 

@@ -176,7 +176,7 @@ function M.get_maps()
             { '-', "'^^zz" }, -- jump to last insert exit
         },
         n = {
-            { '<', '<c-o>'}, -- jump to previous jump location
+            { '<', '<c-o>' }, -- jump to previous jump location
         },
     }
 
@@ -200,7 +200,7 @@ function M.get_maps()
             { 'pn', '"zP' },
             { 'pe', '"zp' },
             { 'pi', '"zp' },
-            { 'pv', '`[v`]' }, -- select last pasted lines
+            { 'pv', "'[[v']]" }, -- select last pasted lines
             -- { 'wa', '[["+Y]]' }, -- put into system clipboard
         },
         v = {
@@ -261,10 +261,10 @@ function M.get_maps()
             { 'st,', '<cmd>wincmd c | wincmd=<enter>' }, -- close split
             { 'st.', '<cmd>wincmd o | wincmd=<enter>' }, -- only split, close all other splits
             { 'sth', '<c-w>p' }, -- last split
-            { "zh", "1<c-w>w" }, -- split #1
-            { "z,", "2<c-w>w" }, -- split #2
-            { "z.", "3<c-w>w" }, -- split #3
-            { "z/", "4<c-w>w" }, -- split #4
+            { 'zh', '1<c-w>w' }, -- split #1
+            { 'z,', '2<c-w>w' }, -- split #2
+            { 'z.', '3<c-w>w' }, -- split #3
+            { 'z/', '4<c-w>w' }, -- split #4
         },
     }
 

@@ -7,29 +7,56 @@ local M = {}
 -- all the lsp jumps are done async, but I need it sync
 -- and there is no option to control this
 -- I want: sync, optional splits or tabs before, move target line to the top (like "zt")
+-- local function lsp_jumper(method, before)
+--     -- methods (lua vim.print(vim.tbl_keys(vim.lsp.handlers)))
+--     --   textDocument/definition
+--     return function()
+--         local params = vim.lsp.util.make_position_params()
+--         local client_id = vim.lsp.get_clients({ bufnr = 0 })[1].id
+--         local result, _err = vim.lsp.buf_request_sync(0, method, params)
+--         if result == nil then
+--             return
+--         end
+--         print(#result)
+--         print(client_id)
+--         print(result[client_id])
+--         result = result[client_id].result
+--         if vim.islist(result) then
+--             -- TODO we only use the first result
+--             -- like the original, it would be better to open quickfix with options?
+--             -- or telescope if a certain option is passed
+--             result = result[1]
+--         end
+--         local offset_encoding = vim.lsp.get_client_by_id(client_id).offset_encoding
+--         if before then
+--             vim.cmd(before)
+--         end
+--         vim.lsp.util.jump_to_location(result, offset_encoding, false)
+--         vim.cmd('normal! zt')
+--     end
+-- end
 local function lsp_jumper(method, before)
     -- methods
     --   textDocument/definition
     return function()
         local params = vim.lsp.util.make_position_params()
-        local result, _err = vim.lsp.buf_request_sync(0, method, params)
-        if result == nil then
-            return
+        local function handler(_, result, ctx, _)
+            -- full signature: err, result, ctx, config
+            local offset_encoding = vim.lsp.get_client_by_id(ctx.client_id).offset_encoding
+            if vim.islist(result) then
+                -- TODO we only use the first result
+                -- like the original, it would be better to open quickfix with options?
+                result = result[1]
+            end
+            if before then
+                vim.cmd(before)
+            end
+            vim.lsp.util.jump_to_location(result, offset_encoding, false)
+            vim.cmd('normal! zt')
         end
-        local client_id = vim.lsp.get_clients({ bufnr = 0 })[1].id
-        result = result[client_id].result
-        if vim.islist(result) then
-            -- TODO we only use the first result
-            -- like the original, it would be better to open quickfix with options?
-            -- or telescope if a certain option is passed
-            result = result[1]
-        end
-        local offset_encoding = vim.lsp.get_client_by_id(client_id).offset_encoding
-        if before then
-            vim.cmd(before)
-        end
-        vim.lsp.util.jump_to_location(result, offset_encoding, false)
-        vim.cmd('normal! zt')
+        -- TODO kinda works, but still async, user might get bored, switches buffer/windows, and then it gets weird
+        -- TODO there is now buf_request_sync to make this easier?
+        vim.lsp.buf_request(0, method, params, handler)
     end
 end
 
@@ -183,14 +210,14 @@ function M.on_attach(client, bufnr)
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
-    nmap('t,', function()
-        D.open_float({
-            prefix = function(d, _, _)
-                -- returns string and optional highlight group
-                return vim.diagnostic.severity[d.severity] .. ': ', ''
-            end,
-        })
-    end, 'diagnostics float')
+    -- nmap('t,', function()
+    --     D.open_float({
+    --         prefix = function(d, _, _)
+    --             -- returns string and optional highlight group
+    --             return vim.diagnostic.severity[d.severity] .. ': ', ''
+    --         end,
+    --     })
+    -- end, 'diagnostics float')
     nmap('tk', function()
         D.jump({ count = -1 })
         vim.cmd('normal! zz')
@@ -199,8 +226,8 @@ function M.on_attach(client, bufnr)
         D.jump({ count = 1 })
         vim.cmd('normal! zz')
     end, 'diagnostics next')
-    nmap('tK', D.setqflist, 'diagnostics global qflist')
-    nmap('tH', D.setloclist, 'diagnostics buffer loclist')
+    -- nmap('tK', D.setqflist, 'diagnostics global qflist')
+    -- nmap('tH', D.setloclist, 'diagnostics buffer loclist')
 
     require('lsp_signature').on_attach({
         floating_window = false,

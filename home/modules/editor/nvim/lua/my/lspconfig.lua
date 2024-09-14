@@ -1,12 +1,6 @@
 local M = {}
 
--- from looking at
---   nvim/runtime/lua/vim/lsp/buf.lua
---   nvim/runtime/lua/vim/lsp/handlers.lua
---   nvim/runtime/lua/vim/lsp/util.lua
--- all the lsp jumps are done async, but I need it sync
--- and there is no option to control this
--- I want: sync, optional splits or tabs before, move target line to the top (like "zt")
+-- sync jumper seems to have issues when multiple lsps are running? (switched back to async version for now)
 -- local function lsp_jumper(method, before)
 --     -- methods (lua vim.print(vim.tbl_keys(vim.lsp.handlers)))
 --     --   textDocument/definition
@@ -35,8 +29,9 @@ local M = {}
 --         vim.cmd('normal! zt')
 --     end
 -- end
+
 local function lsp_jumper(method, before)
-    -- methods
+    -- methods (lua vim.print(vim.tbl_keys(vim.lsp.handlers)))
     --   textDocument/definition
     return function()
         local params = vim.lsp.util.make_position_params()

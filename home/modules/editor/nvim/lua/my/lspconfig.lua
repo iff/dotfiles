@@ -198,21 +198,12 @@ function M.on_attach(client, bufnr)
     )
 
     nmap('t.', b.hover, 'hover symbol')
-    -- imap('<c-k>', b.signature_help, 'signature help')
     nmap('tl', b.references, 'find references')
     nmap('t;', b.code_action, 'code action')
     nmap('to', b.rename, 'rename symbol')
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local D = vim.diagnostic
-    -- nmap('t,', function()
-    --     D.open_float({
-    --         prefix = function(d, _, _)
-    --             -- returns string and optional highlight group
-    --             return vim.diagnostic.severity[d.severity] .. ': ', ''
-    --         end,
-    --     })
-    -- end, 'diagnostics float')
     nmap('tk', function()
         D.jump({ count = -1 })
         vim.cmd('normal! zz')
@@ -221,12 +212,15 @@ function M.on_attach(client, bufnr)
         D.jump({ count = 1 })
         vim.cmd('normal! zz')
     end, 'diagnostics next')
+
+    -- TODO new keybindings
     -- nmap('tK', D.setqflist, 'diagnostics global qflist')
     -- nmap('tH', D.setloclist, 'diagnostics buffer loclist')
 
+    -- vim.keymap.set('i', '<F11>t', b.signature_help, { buffer = bufnr, desc = 'signature help' })
     require('lsp_signature').on_attach({
         floating_window = false,
-        toggle_key = '<c-k>',
+        toggle_key = '<F11>t',
     })
 end
 

@@ -197,6 +197,15 @@ function M.on_attach(client, bufnr)
         'go to definition in split up'
     )
 
+    local D = vim.diagnostic
+    nmap('t,', function()
+        D.open_float({
+            prefix = function(d, _, _)
+                -- returns string and optional highlight group
+                return vim.diagnostic.severity[d.severity] .. ': ', ''
+            end,
+        })
+    end, 'diagnostics float')
     nmap('t.', b.hover, 'hover symbol')
     nmap('tl', b.references, 'find references')
     nmap('t;', b.code_action, 'code action')

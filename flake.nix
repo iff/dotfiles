@@ -163,6 +163,11 @@
       flake = false;
     };
 
+    resty-vim = {
+      url = github:lima1909/resty.nvim;
+      flake = false;
+    };
+
     # hugging face code completion
     # hfcc = {
     #   url = github:huggingface/hfcc.nvim;

@@ -1516,6 +1516,22 @@
         "type": "github"
       }
     },
+    "resty-vim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1728240593,
+        "narHash": "sha256-SNDtNVlh4NuyyNkepP2JmOhToyQ06zQfbgJij5wGWKs=",
+        "owner": "lima1909",
+        "repo": "resty.nvim",
+        "rev": "f3991244259c8005ae1aeff71937ce88f8f949d7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lima1909",
+        "repo": "resty.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "cmp-buffer-nvim": "cmp-buffer-nvim",
@@ -1546,6 +1562,7 @@
         "nvim-lspconfig": "nvim-lspconfig",
         "osh-oxy": "osh-oxy",
         "plenary-nvim": "plenary-nvim",
+        "resty-vim": "resty-vim",
         "rustacean-nvim": "rustacean-nvim",
         "telescope-fzf-native-nvim": "telescope-fzf-native-nvim",
         "telescope-nvim": "telescope-nvim",

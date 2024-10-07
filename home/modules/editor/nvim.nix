@@ -100,6 +100,7 @@ in
 
         (plug "neodev-nvim")
         (plug "kmonad-vim")
+        (plug "resty-vim")
 
         # interesting navigation and term/tmux commands: https://github.com/ThePrimeagen/harpoon/tree/harpoon2
 

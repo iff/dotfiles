@@ -3,19 +3,21 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>org.kmonad.agent</string>
+    <string>org.kanata.agent</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/iff/src/kmonad/result/bin/kmonad</string>
-        <string>/Users/iff/.config/kmonad/config.kbd</string>
+        <string>/Users/iff/bin/kanata</string>
+        <string>-c</string>
+        <string>/Users/iff/.config/kanata/config.kbd</string>
+        <string>--nodelay</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardErrorPath</key>
-    <string>/tmp/kmonad.err</string>
+    <string>/tmp/kanata.err</string>
     <key>StandardOutPath</key>
-    <string>/tmp/kmonad.out</string>
+    <string>/tmp/kanata.out</string>
 </dict>
 </plist>

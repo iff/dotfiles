@@ -1,0 +1,109 @@
+(defcfg
+	danger-enable-cmd no
+	process-unmapped-keys yes
+)
+
+(platform (macos) (deflocalkeys-macos
+	coffee 152  ;; in https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs but no name registered (?)
+	fn 464  ;; in https://github.com/jtroo/kanata/blob/main/parser/src/keys/mod.rs but only on macos (does that make sense?)
+))
+
+(platform (macos) (defsrc
+		esc	F1	F2	F3	F4	F5	F6		F7	F8	F9	F10	F11	F12	coffee
+	;; |____3____||____3____||____3+___||____2+___||____2____||____2____|                              |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
+		grv	1	2	3	4	5	6		7	8	9	0	-	=	bspc
+	;; |____4____||____4____||____3____||____2____||____1____||____1____|                   |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
+		tab	q	w	e	r	t		y	u	i	o	p	[	]	\
+		caps	a	s	d	f	g		h	j	k	l	;	'	enter
+		lsft	z	x	c	v	b		n	m	,	.	/	rsft
+		fn	lctl	lalt	lmet			spc			rmet	ralt	left	up	down	right
+))
+
+(defalias  ;; symbols
+	s& S-7
+	s* S-8
+	spo S-9
+	spc S-0
+	s% S-5
+	s@ S-2
+	s! S-1
+	s~ S-grv
+	s: S-;
+	s| S-\
+	s$ S-4
+	s# S-3
+	s_ S--
+	s< S-,
+	s> S-.
+	s? S-/
+	s^ S-6
+	s{ S-[
+	s} S-]
+)
+
+(platform (macos) (defalias
+	reset (layer-switch colemak)
+	;; so this has some issues in vim normal or fugitiv/browser
+	;; we can remap things in vim but a bit annoying to have dual use with voyager
+	;; and not so clear how to do it with other tools
+	num (layer-toggle numpad)
+	syms (layer-toggle syms)
+	;; spc (tap-macro spc (tap-next-release XX (tap-macro bspc @syms)))
+
+	;; rsft (one-shot-press 10000 rsft)
+	;; xcut (tap-hold 0 200 C-x (macro C-a C-x))
+	;; xcopy (tap-hold 0 200 C-c (macro C-a C-c))
+	;; xpaste (tap-hold 0 200 C-v (macro C-S-v))
+	light M-F1  ;; redshift
+	mdprev M-r  ;; previous song
+	mdpp M-s  ;; play/pause
+	mdnext M-t  ;; next song
+	mute M-f
+	unmute M-p
+	lock (multi @reset M-l)
+))
+
+(deflayer colemak
+		@reset	F1	F2	XX	XX	XX	@light		@mdprev	@mdpp	@mdnext	@mute	@unmute	XX	@lock
+	;; |____3____||____3____||____3+___||____2+___||____2____||____2____|                              |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
+		XX	XX	XX	F12	F12	XX	XX		XX	XX	XX	XX	-	=	bspc
+	;; |____4____||____4____||____3____||____2____||____1____||____1____|                   |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
+		tab	q	w	f	p	b		j	l	u	y	F11	del	XX	\
+		esc	a	r	s	t	g		m	n	e	i	o	bspc	ret	
+		lsft	z	x	c	d	v		k	h	,	.	@syms	rsft
+		@num	lctl	lalt	lmet			spc			rmet	ralt	left	up	down	right
+)
+
+;; TODO
+(deflayer syms
+		@reset	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____3____||____3____||____3+___||____2+___||____2____||____2____|                              |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
+		XX	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____4____||____4____||____3____||____2____||____1____||____1____|                   |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
+		XX	@s!	@s#	@s{	@s}	XX		`	\	/	@s&	@s*	XX	XX	XX
+		XX	@s:	@s$	@spo	@spc	@s_		@s~	S-'	@s>	-	=	tab	ret
+		'	@s%	@s^	[	]	@s@		@s?	;	@s<	@s|	+	rsft
+		XX	XX	XX	XX			XX			XX	XX	XX	XX	XX	XX
+)
+
+(deflayer numpad
+		@reset	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____3____||____3____||____3+___||____2+___||____2____||____2____|                              |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
+		XX	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____4____||____4____||____3____||____2____||____1____||____1____|                   |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
+		XX	XX	XX	XX	XX	XX		XX	7	8	9	XX	XX	XX	XX
+		XX	XX	XX	XX	XX	XX		XX	4	5	6	0	XX	XX
+		XX	XX	XX	XX	XX	XX		XX	1	2	3	XX	XX
+		XX	XX	XX	XX			XX			XX	XX	XX	XX	XX	XX
+)
+
+(deflayer nothing-burger
+		@reset	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____3____||____3____||____3+___||____2+___||____2____||____2____|                              |____2____||____2____||____2+___||____3+___||____3____||____3____||____3____|
+		XX	XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+	;; |____4____||____4____||____3____||____2____||____1____||____1____|                   |____1____||____1____||____2____||____3____||____4____||____4____||____4____||____4____|
+		XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX	XX
+		XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX	XX
+		XX	XX	XX	XX	XX	XX		XX	XX	XX	XX	XX	XX
+		XX	XX	XX	XX			XX			XX	XX	XX	XX	XX	XX
+)

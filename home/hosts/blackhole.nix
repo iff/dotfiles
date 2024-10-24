@@ -10,5 +10,6 @@
     };
     alacritty.font_size = 13.0;
     osh.enable = true;
+    zen.enable = true;
   };
 }

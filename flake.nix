@@ -31,10 +31,14 @@
       flake = true;
     };
 
-    # kmonad = {
-    #   url = "github:kmonad/kmonad?dir=nix?submodules=1";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    # TODO fix arch?? or only use on linux
+    zen = {
+      flake = false;
+      # see https://github.com/zen-browser/desktop/releases
+      # TODO eventually https://github.com/NixOS/nixpkgs/issues/327982
+      url = "tarball+https://github.com/zen-browser/desktop/releases/download/1.0.1-a.12/zen.linux-specific.tar.bz2";
+    };
+
 
     # nvim plugins
 

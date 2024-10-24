@@ -13,6 +13,6 @@
       font_normal = "ZedMono Nerd Font";
     };
     osh.enable = true;
-    kmonad.enable = true;
+    kanata.enable = true;
   };
 }

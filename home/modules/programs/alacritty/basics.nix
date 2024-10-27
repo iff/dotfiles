@@ -25,5 +25,5 @@
     }];
 
   # Live config reload (changes require restart)
-  live_config_reload = true;
+  general.live_config_reload = true;
 }

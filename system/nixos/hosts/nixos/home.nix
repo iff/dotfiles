@@ -22,5 +22,6 @@
       font_normal = "Zed Mono Nerd Font";
     };
     osh.enable = true;
+    zen.enable = true;
   };
 }

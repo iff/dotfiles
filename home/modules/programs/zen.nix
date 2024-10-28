@@ -7,6 +7,11 @@ let
   cfg = config.dots.zen;
   src = inputs.zen;
 
+  zen-unscaled = pkgs.writeScriptBin "zen-unscaled"
+    ''
+      GDK_SCALE= GDK_DPI_SCALE= zen
+    '';
+
   runtimeLibs = with pkgs; [
     libGL
     libGLU
@@ -102,6 +107,6 @@ in
 
   config = mkIf cfg.enable
     {
-      home.packages = [ zen ];
+      home.packages = [ zen zen-unscaled ];
     };
 }

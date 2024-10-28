@@ -893,11 +893,11 @@
     "iff-dwm": {
       "flake": false,
       "locked": {
-        "lastModified": 1723486671,
-        "narHash": "sha256-BdwznivtchzuskRXbuJfuJUm5Ve5Ntbspw8dQxSHpPQ=",
+        "lastModified": 1730104252,
+        "narHash": "sha256-yXtXMkfhZWJy8v5Vz2bPcaOL4nMXUtyxPH6kt9oL67w=",
         "owner": "iff",
         "repo": "dwm",
-        "rev": "a6ded3c0dbb36d17b12001885dbef403748a7485",
+        "rev": "72b922cec17566d85c63d2aa405f14bd813fea41",
         "type": "github"
       },
       "original": {

@@ -8,25 +8,15 @@ function M.setup()
 end
 
 function M.general()
-    local map = vim.api.nvim_set_keymap
+    local map = vim.keymap.set
 
-    map('', ';', ':', {}) -- no shift for cmd mode
-
-    -- TODO configure new keybinding
     -- disable some original mappings
     for _, k in pairs({ 'q', 'a', 'Q' }) do
-        vim.keymap.set('', k, '<nop>')
-    end
-
-    -- window navigation
-    -- ',#' goes to window #
-    -- alternatives ',w#', or just '<c-w>', or just 'w' like tabs go with 't'?
-    for i = 1, 9 do
-        vim.keymap.set('n', ',' .. i, i .. '<c-w>w')
+        map('', k, '<nop>')
     end
 
     -- FIXME not sure why I need to rebind this?
-    vim.keymap.set('n', '<CR>', function()
+    map('n', '<CR>', function()
         if vim.o.buftype == 'quickfix' then
             return ':.cc<CR>'
         else
@@ -34,6 +24,37 @@ function M.general()
             return '<CR>'
         end
     end, { expr = true, replace_keycodes = true })
+
+    -- TODO make : this, and ; jump to the last on, but not in insert mode?
+    vim.api.nvim_create_autocmd('CmdwinEnter', {
+        callback = function()
+            map({ 'n', 'v' }, '<esc>', '<c-w>c', { buffer = true })
+        end,
+    })
+    map({ 'n', 'v' }, ':', function()
+        local old = vim.opt.splitkeep
+        vim.opt.splitkeep = 'topline'
+        vim.api.nvim_create_autocmd('CmdwinLeave', {
+            callback = function()
+                vim.opt.splitkeep = old -- NOTE to prevent the main view from jumping
+                return true
+            end,
+            once = true,
+        })
+        return 'q:i'
+    end, { expr = true, desc = 'super command line in insert mode' })
+    map({ 'n', 'v' }, ';', function()
+        local old = vim.opt.splitkeep
+        vim.opt.splitkeep = 'topline'
+        vim.api.nvim_create_autocmd('CmdwinLeave', {
+            callback = function()
+                vim.opt.splitkeep = old -- NOTE to prevent the main view from jumping
+                return true
+            end,
+            once = true,
+        })
+        return 'q:k'
+    end, { expr = true, desc = 'super command line in normal mode' })
 
     -- search for selected text
     -- xnoremap({ "*", '"xy/<c-r><cr>' })

@@ -55,6 +55,7 @@ local options = function()
     set.mouse = ''
 
     set.updatetime = 300
+    set.cmdwinheight = 10
 
     vim.api.nvim_create_autocmd({ 'VimResized' }, {
         desc = 'relayout on resize',

@@ -270,9 +270,42 @@ function M.setup_lua(capabilities)
     })
 end
 
+function M.on_attach_python(client, bufnr)
+    M.on_attach(client, bufnr)
+
+    local function nmap(lhs, rhs, desc)
+        vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = desc })
+    end
+
+    nmap('tI', function()
+        local lnum = vim.api.nvim_win_get_cursor(0)[1] - 1
+        local issues = vim.diagnostic.get(0, { lnum = lnum })
+        local codes = {}
+        for _, issue in ipairs(issues) do
+            if issue['source'] == 'Pyright' or issue['source'] == 'basedpyright' then
+                if issue['code'] ~= nil then
+                    codes[issue['code']] = true
+                end
+            end
+        end
+        for code, _ in pairs(codes) do
+            local text = vim.api.nvim_buf_get_lines(0, lnum, lnum + 1, true)
+            local has, _ = string.find(text[1], '# pyright: ignore')
+            if has == nil then
+                text[1] = text[1] .. '  # pyright: ignore[' .. code .. ']'
+            else
+                text[1] = string.sub(text[1], 1, -2) .. ', ' .. code .. ']'
+            end
+            vim.api.nvim_buf_set_lines(0, lnum, lnum + 1, true, text)
+        end
+        -- TODO remove those issues right away instead of waiting for lsp to update?
+        -- there was a way to remove or hide
+    end, 'pyright ignore on current line')
+end
+
 function M.setup_python(capabilities)
     require('lspconfig').pyright.setup({
-        on_attach = M.on_attach,
+        on_attach = M.on_attach_python,
         capabilities = capabilities,
         settings = {
             pyright = {

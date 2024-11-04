@@ -152,6 +152,16 @@
       flake = false;
     };
 
+    telescope-hop-nvim = {
+      url = github:nvim-telescope/telescope-hop.nvim;
+      flake = false;
+    };
+
+    telescope-ui-select-nvim = {
+      url = github:nvim-telescope/telescope-ui-select.nvim;
+      flake = false;
+    };
+
     rustacean-nvim = {
       url = github:mrcjkb/rustaceanvim;
       flake = true;

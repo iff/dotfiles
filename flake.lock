@@ -1565,7 +1565,9 @@
         "resty-vim": "resty-vim",
         "rustacean-nvim": "rustacean-nvim",
         "telescope-fzf-native-nvim": "telescope-fzf-native-nvim",
+        "telescope-hop-nvim": "telescope-hop-nvim",
         "telescope-nvim": "telescope-nvim",
+        "telescope-ui-select-nvim": "telescope-ui-select-nvim",
         "web-devicons-nvim": "web-devicons-nvim",
         "zen": "zen"
       }
@@ -1673,6 +1675,22 @@
         "type": "github"
       }
     },
+    "telescope-hop-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1636109078,
+        "narHash": "sha256-OtCSjglHdXKj9EqnaTzw+4/L+op/lJ82CxlvxPLsee8=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-hop.nvim",
+        "rev": "337a1e9f08f972ebf7a7d26251577812ebaadc78",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-hop.nvim",
+        "type": "github"
+      }
+    },
     "telescope-nvim": {
       "flake": false,
       "locked": {
@@ -1686,6 +1704,22 @@
       "original": {
         "owner": "nvim-telescope",
         "repo": "telescope.nvim",
+        "type": "github"
+      }
+    },
+    "telescope-ui-select-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701723223,
+        "narHash": "sha256-YRhNmmG4gx9Ht8JwjQfbTjJyTHEuZmtP6lqnhOsk8bE=",
+        "owner": "nvim-telescope",
+        "repo": "telescope-ui-select.nvim",
+        "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-telescope",
+        "repo": "telescope-ui-select.nvim",
         "type": "github"
       }
     },

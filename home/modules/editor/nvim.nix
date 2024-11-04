@@ -95,6 +95,8 @@ in
         (plug "plenary-nvim")
         (plug "telescope-nvim")
         (plug "telescope-fzf-native-nvim")
+        (plug "telescope-hop-nvim")
+        (plug "telescope-ui-select-nvim")
 
         (plug "rustacean-nvim")
 

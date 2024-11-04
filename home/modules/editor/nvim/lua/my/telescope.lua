@@ -18,6 +18,9 @@ function mod.setup()
             ['<c-t>'] = actions.select_tab,
             ['<tab>'] = actions.toggle_selection + actions.move_selection_next,
             ['<s-tab>'] = actions.toggle_all,
+            ['<c-f>'] = function(prompt_bufnr)
+                telescope.extensions.hop._hop(prompt_bufnr, { callback = actions.select_default })
+            end,
         },
         n = {
             ['q'] = actions.close,
@@ -36,11 +39,14 @@ function mod.setup()
     telescope.setup({
         defaults = defaults,
         extensions = {
-            -- https://github.com/nvim-telescope/telescope-fzf-native.nvim#telescope-setup-and-configuration
             fzf = {},
+            hop = {},
+            ['ui-select'] = {},
         },
     })
     telescope.load_extension('fzf')
+    telescope.load_extension('hop')
+    telescope.load_extension('ui-select')
 
     map('', 'gg', ':Telescope git_files<cr>', { desc = 'find git files' })
     map('n', 'ge', bi.lsp_document_symbols, { desc = 'document symbols' })

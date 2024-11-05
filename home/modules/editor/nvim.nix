@@ -117,6 +117,7 @@ in
 
   home = {
     packages = with pkgs; [
+      basedpyright
       pyformat
       clang-tools
       pyright

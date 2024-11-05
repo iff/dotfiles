@@ -60,7 +60,8 @@ function M.setup()
     M.setup_completion()
 
     M.setup_lua(capabilities)
-    M.setup_python(capabilities)
+    M.setup_basedpyright(capabilities)
+    -- M.setup_python(capabilities)
     M.setup_typescript(capabilities)
     M.setup_clangd(capabilities)
     M.setup_yaml(capabilities)
@@ -209,6 +210,9 @@ function M.on_attach(client, bufnr)
     nmap('t.', b.hover, 'hover symbol')
     nmap('tl', b.references, 'find references')
     nmap('t;', b.code_action, 'code action')
+    nmap('_', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled(), nil)
+    end, 'toggle inlay hints')
     nmap('to', b.rename, 'rename symbol')
 
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -316,6 +320,41 @@ function M.setup_python(capabilities)
                     autoImportCompletions = true,
                     diagnosticMode = 'workspace',
                     useLibraryCodeForTypes = true,
+                },
+            },
+        },
+    })
+end
+
+function M.setup_basedpyright(capabilities)
+    require('lspconfig').basedpyright.setup({
+        on_attach = function(client, bufnr)
+            -- what is this?
+            client.server_capabilities.semanticTokensProvider = false
+            vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
+            M.on_attach_python(client, bufnr)
+        end,
+        capabilities = capabilities,
+        root_dir = function(filename, buffnr)
+            return vim.fn.getcwd()
+        end,
+        settings = {
+            basedpyright = {
+                disableOrganizeImports = true,
+                disableTaggedHints = false,
+                anaysis = {
+                    autoImportCompletions = true,
+                    -- TODO what marks a workspace?
+                    diagnosticMode = 'workspace',
+                    useLibraryCodeForTypes = true,
+                    -- only basedpyright
+                    inlayHints = {
+                        -- TODO setting to false doesnt seem to change anything. wrong setting path?
+                        variableTypes = true,
+                        callArgumentNames = true,
+                        functionReturnTypes = true,
+                        genericTypes = true,
+                    },
                 },
             },
         },

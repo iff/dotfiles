@@ -27,13 +27,13 @@ end
 local options = function()
     local set = vim.opt
 
-    set.backspace = 'indent,eol,start,nostop'
-    set.incsearch = true
-    set.autoread = true
-    set.showcmd = true
-    set.scrolloff = 8
     set.writebackup = false
     set.swapfile = false
+
+    set.backspace = { 'indent', 'eol', 'start', 'nostop' }
+    set.scrolloff = 9999
+    set.jumpoptions = { 'view' }
+    set.wildmode = 'longest:full'
 
     set.tabstop = 4
     set.softtabstop = 4
@@ -50,11 +50,13 @@ local options = function()
 
     set.modeline = false
     set.modelines = 0
-    set.wildmode = 'longest:full'
+
     set.smoothscroll = true
     set.mouse = ''
 
-    set.updatetime = 300
+    set.timeout = false
+    set.ttimeout = true
+
     set.cmdwinheight = 10
 
     vim.api.nvim_create_autocmd({ 'VimResized' }, {

@@ -9,6 +9,16 @@ function M.setup()
     require('nvim-web-devicons').setup({})
     local lsp_indicator = require('lsp-indicator')
 
+    vim.cmd([[
+        " hi CursorLine cterm=NONE ctermbg=1 ctermfg=NONE
+        set cursorline nocursorcolumn
+        augroup CursorLineOnlyInActiveWindow
+          autocmd!
+          autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline nocursorcolumn
+          autocmd WinLeave * setlocal nocursorline nocursorcolumn
+        augroup END
+    ]])
+
     local function window_nr()
         return '%#AlwaysOnWindowNumber#󰐤' .. vim.api.nvim_win_get_number(0)
     end

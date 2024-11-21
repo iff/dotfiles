@@ -122,11 +122,6 @@
       flake = false;
     };
 
-    lsp-signature-nvim = {
-      url = github:ray-x/lsp_signature.nvim;
-      flake = false;
-    };
-
     cmp-luasnip-nvim = {
       url = github:saadparwaiz1/cmp_luasnip;
       flake = false;

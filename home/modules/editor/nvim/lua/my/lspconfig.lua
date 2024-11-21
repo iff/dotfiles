@@ -230,11 +230,8 @@ function M.on_attach(client, bufnr)
     -- nmap('tK', D.setqflist, 'diagnostics global qflist')
     -- nmap('tH', D.setloclist, 'diagnostics buffer loclist')
 
-    -- vim.keymap.set('i', '<F11>t', b.signature_help, { buffer = bufnr, desc = 'signature help' })
-    require('lsp_signature').on_attach({
-        floating_window = false,
-        toggle_key = '<F11>t',
-    })
+    vim.keymap.set('n', '<F11>t', b.signature_help, { buffer = bufnr, desc = 'signature help' })
+    vim.keymap.set('i', '<F11>t', b.signature_help, { buffer = bufnr, desc = 'signature help' })
 end
 
 function M.setup_lua(capabilities)

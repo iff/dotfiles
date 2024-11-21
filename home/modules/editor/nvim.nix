@@ -88,7 +88,6 @@ in
         (plug "cmp-buffer-nvim")
         (plug "cmp-path-nvim")
         (plug "cmp-luasnip-nvim")
-        (plug "lsp-signature-nvim")
         (plug "lspkind-nvim")
 
         # telescope

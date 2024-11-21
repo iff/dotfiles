@@ -939,22 +939,6 @@
         "type": "github"
       }
     },
-    "lsp-signature-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1726445971,
-        "narHash": "sha256-W6bN3R10B84noK7MOzvUOIc82WwyojIS97iFL/dO5yk=",
-        "owner": "ray-x",
-        "repo": "lsp_signature.nvim",
-        "rev": "fc38521ea4d9ec8dbd4c2819ba8126cea743943b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ray-x",
-        "repo": "lsp_signature.nvim",
-        "type": "github"
-      }
-    },
     "lspkind-nvim": {
       "flake": false,
       "locked": {
@@ -1550,7 +1534,6 @@
         "iff-dwm": "iff-dwm",
         "kmonad-vim": "kmonad-vim",
         "lsp-indicator-nvim": "lsp-indicator-nvim",
-        "lsp-signature-nvim": "lsp-signature-nvim",
         "lspkind-nvim": "lspkind-nvim",
         "lualine-nvim": "lualine-nvim",
         "luasnip-nvim": "luasnip-nvim",

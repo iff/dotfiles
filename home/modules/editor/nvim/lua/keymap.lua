@@ -5,6 +5,7 @@ function M.setup()
     M.setup_term_runners()
 
     M.colemak()
+    M.ftplugins()
 end
 
 function M.general()
@@ -319,6 +320,14 @@ function M.colemak()
         " noremap p r
         " noremap ss ciw
         " noremap cc cc
+    ]])
+end
+
+function M.ftplugins()
+    vim.cmd([[
+        autocmd FileType python imap <buffer> <F11>b breakpoint()
+        autocmd FileType python imap <buffer> <F11>a # TODO
+        autocmd FileType rust imap <buffer> <F11>a todo!()
     ]])
 end
 

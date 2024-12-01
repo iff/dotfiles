@@ -131,7 +131,7 @@ function M.get_maps()
             { 'sL', 'lBi' }, -- insert at beginning of Word
             { 'sy', 'hea' }, -- append at end of word
             { 'sY', 'hEa' }, -- append at end of Word
-            { 's/', 'gi' }, -- insert where insert mode was last stopped
+            { 's"', 'gi' }, -- insert where insert mode was last stopped
         },
 
         v = {
@@ -145,6 +145,8 @@ function M.get_maps()
             { 'rr', 'r' },
             { '<c-n>', '<<' },
             { '<c-i>', '>>' },
+            { 'p<c-n>', "'[V']<" }, -- de-indent last paste
+            { 'p<c-i>', "'[V']>" }, -- indent last paste
         },
         v = {
             { 'r', 'c' },
@@ -158,24 +160,24 @@ function M.get_maps()
             { 'e', 'iw' }, -- inner word
             { 'E', 'iW' }, -- inner Word
             { 'u', 'aw' }, -- inner word with connecting whitespace
-            { 'U', 'aW' }, -- inner word with connecting whitespace
+            { 'U', 'aW' }, -- inner Word with connecting whitespace
+            { 'l', 'b' }, -- to start of word
+            { 'L', 'B' }, -- to start of Word
+            { 'y', 'e' }, -- to end of word
+            { 'Y', 'E' }, -- to end of Word
             { 'i', '$' }, -- to end of line
             { 'n', 'Vl' }, -- line
-            { '(e', 'i(' }, -- inner ()
-            { '(u', 'a(' }, -- outer ()
-            { '[e', 'i[' }, -- inner []
-            { '[u', 'a[' }, -- outer []
-            { '{e', 'i{' }, -- inner {}
-            { '{u', 'a{' }, -- outer {}
+            { '(', 'i(' }, -- inner ()
+            { ')', 'a(' }, -- outer ()
+            { '[', 'i[' }, -- inner []
+            { ']', 'a[' }, -- outer []
+            { '{', 'i{' }, -- inner {}
+            { '}', 'a{' }, -- outer {}
             { "'e", "i'" }, -- inner ''
             { "'u", "a'" }, -- outer ''
             { '"e', 'i"' }, -- inner ""
             { '"u', 'a"' }, -- outer ""
             { '.', 'l' }, -- one character
-            { 'y', 'e' }, -- to end of word
-            { 'Y', 'E' }, -- to end of Word
-            { 'l', 'b' }, -- to start of word
-            { 'L', 'B' }, -- to start of Word
         },
     }
 
@@ -287,6 +289,17 @@ function M.get_maps()
             { 'z,', '2<c-w>w' }, -- split #2
             { 'z.', '3<c-w>w' }, -- split #3
             { 'z/', '4<c-w>w' }, -- split #4
+        },
+    }
+
+    maps['quit'] = {
+        n = {
+            { '<c-x>', '<cmd>xa!<enter>' }, -- save all and exit
+            { '<c-q>', '<cmd>qa!<enter>' }, -- exit without saving
+        },
+        i = {
+            { '<c-x>', '<esc><cmd>xa!<enter>' }, -- save all and exit
+            { '<c-q>', '<esc><cmd>qa!<enter>' }, -- exit without saving
         },
     }
 

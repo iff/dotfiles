@@ -26,7 +26,6 @@
       };
 
       initExtraBeforeCompInit = ''
-        eval "$(direnv hook zsh)"
         path+="$HOME/.nix-profile/bin"
       ''
       + builtins.readFile ./zsh/config.zsh

@@ -128,6 +128,7 @@ in
       nodePackages.prettier
       nodePackages.typescript-language-server
       stylua
+      taplo
     ];
   };
 

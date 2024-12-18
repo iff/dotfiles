@@ -236,6 +236,7 @@
 
       nixosConfigurations = mapAttrs' intoNixOs {
         nixos = { };
+        shadesmar = { user = "yineichen"; };
       };
 
       # CI build helper

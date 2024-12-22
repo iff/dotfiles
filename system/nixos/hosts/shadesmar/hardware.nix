@@ -28,6 +28,7 @@
         efiSupport = true;
         # efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
         device = "nodev";
+        # useOSProber = true;
       };
     };
 
@@ -44,6 +45,16 @@
     {
       device = "/dev/disk/by-uuid/54EC-62DC";
       fsType = "vfat";
+    };
+  fileSystems."/scratch" =
+    {
+      device = "/dev/disk/by-uuid/923aa534-f79d-43fa-8532-fc6a5f0cfd6a";
+      fsType = "btrfs";
+    };
+  fileSystems."/data" =
+    {
+      device = "/dev/disk/by-uuid/dd44e584-a85b-481e-9772-339b1c6ecb7b";
+      fsType = "ext4";
     };
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

@@ -1,4 +1,4 @@
-{ config, inputs, lib, pkgs, ... }:
+{ config, inputs, lib, pkgs, user, ... }:
 
 {
   config = {
@@ -16,7 +16,8 @@
 
     # TODO move
     programs.zsh.enable = true;
-    users.users.iff = {
+    # FIXME: user
+    users.users.yineichen = {
       isNormalUser = true;
       extraGroups = [ "wheel" "systemd-journal" "audio" "video" "input" "networkmanager" "docker" ];
       shell = pkgs.zsh;
@@ -61,3 +62,4 @@
     };
   };
 }
+

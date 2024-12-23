@@ -26,9 +26,8 @@
       };
       grub = {
         efiSupport = true;
-        # efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
         device = "nodev";
-        # useOSProber = true;
+        useOSProber = true;
       };
     };
 
@@ -55,6 +54,12 @@
     {
       device = "/dev/disk/by-uuid/dd44e584-a85b-481e-9772-339b1c6ecb7b";
       fsType = "ext4";
+    };
+  fileSystems."/uhome" =
+    {
+      device = "/dev/disk/by-uuid/7c79a22d-2996-4638-9106-08e957c1d722";
+      fsType = "ext4";
+      options = [ "ro" ];
     };
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

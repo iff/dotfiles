@@ -43,7 +43,7 @@ in
       xset s off
       setterm --blank 0 --powerdown 0
 
-      feh --bg-scale $HOME/Downloads/mountains.jpg
+      feh --bg-scale $HOME/Downloads/mountains.jpg || true
       redshift -r -v & # |& ts '%F %T' >& $HOME/.log-redshift &
       dwm-status &
 

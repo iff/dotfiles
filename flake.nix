@@ -31,6 +31,11 @@
       flake = true;
     };
 
+    zsh-syntax-highlighting = {
+      url = github:zsh-users/zsh-syntax-highlighting;
+      flake = false;
+    };
+
     # TODO fix arch?? or only use on linux
     zen = {
       flake = false;

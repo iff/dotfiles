@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }: {
+{ config, inputs, pkgs, lib, ... }: {
 
   programs.zsh = lib.mkMerge [
     ({
@@ -54,12 +54,7 @@
         {
           name = "zsh-syntax-highlighting";
           file = "zsh-syntax-highlighting.zsh";
-          src = pkgs.fetchFromGitHub {
-            owner = "zsh-users";
-            repo = "zsh-syntax-highlighting";
-            rev = "b2c910a85ed84cb7e5108e7cb3406a2e825a858f";
-            sha256 = "lxwkVq9Ysvl2ZosD+riQ8dsCQIB5X4kqP+ix7XTDkKw=";
-          };
+          src = inputs.zsh-syntax-highlighting;
         }
         # nix run uses $SHELL
         # {

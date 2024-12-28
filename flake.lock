@@ -1792,14 +1792,14 @@
     "zen": {
       "flake": false,
       "locked": {
-        "lastModified": 1734645803,
-        "narHash": "sha256-zAo93sHeB8cTW2JBAqxx0wo3CANcxCgjEcTQgbDeWT4=",
+        "lastModified": 1735049411,
+        "narHash": "sha256-sS9phyr97WawxB2AZAwcXkvO3xAmv8k4C8b8Qw364PY=",
         "type": "tarball",
-        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.3/zen.linux-specific.tar.bz2"
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.5/zen.linux-x86_64.tar.bz2"
       },
       "original": {
         "type": "tarball",
-        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.3/zen.linux-specific.tar.bz2"
+        "url": "https://github.com/zen-browser/desktop/releases/download/1.0.2-b.5/zen.linux-x86_64.tar.bz2"
       }
     },
     "zsh-syntax-highlighting": {
